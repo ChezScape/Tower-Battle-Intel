@@ -11,9 +11,12 @@ export function buildConfirmModal({
 
     return `
         <div
-            class="confirm-modal"
+            class="confirm-modal hidden"
             id="${escapeAttr(id)}"
+            role="alertdialog"
+            aria-modal="true"
             aria-hidden="true"
+            inert
         >
 
             <div class="confirm-card">

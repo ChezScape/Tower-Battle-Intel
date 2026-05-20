@@ -1585,6 +1585,54 @@ function closeHistoryEditModal() {
    HISTORY CONFIRM MODAL
 -------------------------------------------------- */
 
+let historyConfirmReturnFocus = null;
+
+function safeFocusAfterHistoryConfirmClose(modal) {
+
+    const activeElement =
+        document.activeElement;
+
+    if (!modal || !activeElement || !modal.contains(activeElement)) {
+        return;
+    }
+
+    if (typeof activeElement.blur === "function") {
+        activeElement.blur();
+    }
+
+    const preferredTarget =
+        historyConfirmReturnFocus &&
+        historyConfirmReturnFocus.isConnected &&
+        !modal.contains(historyConfirmReturnFocus)
+            ? historyConfirmReturnFocus
+            : document.querySelector("[data-history-panel]") ||
+              document.getElementById("dashboard") ||
+              document.body;
+
+    if (!preferredTarget || typeof preferredTarget.focus !== "function") {
+        return;
+    }
+
+    const hadTabIndex =
+        preferredTarget.hasAttribute("tabindex");
+
+    if (!hadTabIndex) {
+        preferredTarget.setAttribute("tabindex", "-1");
+    }
+
+    try {
+        preferredTarget.focus({
+            preventScroll: true
+        });
+    } catch (error) {
+        preferredTarget.focus();
+    }
+
+    if (!hadTabIndex) {
+        preferredTarget.removeAttribute("tabindex");
+    }
+}
+
 function bindHistoryConfirmModal() {
 
     const modal =
@@ -1687,8 +1735,14 @@ function openHistoryConfirmModal({
     setModalText(modal, "[data-confirm-final-message]", finalMessage);
     setModalText(modal, "[data-confirm-accept]", buttonText);
 
+    historyConfirmReturnFocus =
+        document.activeElement;
+
+    modal.classList.remove("hidden");
     modal.classList.add("active");
+    modal.removeAttribute("inert");
     modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("history-confirm-open");
 
     showHistoryConfirmTypeStep();
 
@@ -1696,7 +1750,13 @@ function openHistoryConfirmModal({
         input.value = "";
 
         setTimeout(() => {
-            input.focus();
+            try {
+                input.focus({
+                    preventScroll: true
+                });
+            } catch (error) {
+                input.focus();
+            }
         }, 50);
     }
 }
@@ -1716,8 +1776,13 @@ function closeHistoryConfirmModal() {
         return;
     }
 
+    safeFocusAfterHistoryConfirmClose(modal);
+
     modal.classList.remove("active");
+    modal.classList.add("hidden");
     modal.setAttribute("aria-hidden", "true");
+    modal.setAttribute("inert", "");
+    document.body.classList.remove("history-confirm-open");
 
     modal.dataset.confirmAction = "";
     modal.dataset.confirmIndex = "";
@@ -1731,6 +1796,8 @@ function closeHistoryConfirmModal() {
     }
 
     showHistoryConfirmTypeStep();
+
+    historyConfirmReturnFocus = null;
 }
 
 function showHistoryConfirmTypeStep() {
