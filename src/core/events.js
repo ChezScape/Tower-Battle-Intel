@@ -345,20 +345,13 @@ function bindDebugKeyboardShortcut() {
 
 function bindMobileDebugGesture() {
 
-    const target =
-        document.getElementById("debugHoldZone") ||
-        document.querySelector(".topbar-banner-brand") ||
-        document.querySelector(".topbar");
-
-    if (!target) {
+    if (document.body?.dataset?.debugHoldDelegatesBound === "true") {
         return;
     }
 
-    if (target.dataset.debugHoldBound === "true") {
-        return;
+    if (document.body?.dataset) {
+        document.body.dataset.debugHoldDelegatesBound = "true";
     }
-
-    target.dataset.debugHoldBound = "true";
 
     const HOLD_TIME_MS = 2600;
     const MOVE_CANCEL_PX = 14;
@@ -367,92 +360,86 @@ function bindMobileDebugGesture() {
     let startX = 0;
     let startY = 0;
     let holdActive = false;
-
+    let activeTarget = null;
     let tapCount = 0;
     let tapTimer = null;
+
+    function getHoldTarget(event) {
+        return event?.target?.closest?.("[data-debug-hold-zone], #debugHoldZone, .topbar-banner-brand, .topbar");
+    }
 
     function clearPressTimer() {
         clearTimeout(pressTimer);
         pressTimer = null;
         holdActive = false;
+        activeTarget = null;
     }
 
     function getPoint(event) {
-
-        const point =
-            event?.touches?.[0] ||
-            event?.changedTouches?.[0] ||
-            event;
-
+        const point = event?.touches?.[0] || event?.changedTouches?.[0] || event;
         return {
             x: Number(point?.clientX || 0),
             y: Number(point?.clientY || 0)
         };
     }
 
-    function startHold(event) {
+    document.addEventListener("pointerdown", event => {
+        const target = getHoldTarget(event);
 
-        const point =
-            getPoint(event);
+        if (!target) {
+            return;
+        }
+
+        const point = getPoint(event);
 
         startX = point.x;
         startY = point.y;
         holdActive = true;
+        activeTarget = target;
 
         clearTimeout(pressTimer);
 
         pressTimer = setTimeout(() => {
-
             if (!holdActive) {
                 return;
             }
 
             vibrate();
-
             toggleDebug(true);
-
             clearPressTimer();
-
         }, HOLD_TIME_MS);
-    }
+    }, true);
 
-    function moveHold(event) {
-
-        if (!holdActive) {
+    document.addEventListener("pointermove", event => {
+        if (!holdActive || !activeTarget) {
             return;
         }
 
-        const point =
-            getPoint(event);
-
-        const movedX =
-            Math.abs(point.x - startX);
-
-        const movedY =
-            Math.abs(point.y - startY);
+        const point = getPoint(event);
+        const movedX = Math.abs(point.x - startX);
+        const movedY = Math.abs(point.y - startY);
 
         if (movedX > MOVE_CANCEL_PX || movedY > MOVE_CANCEL_PX) {
             clearPressTimer();
         }
-    }
+    }, true);
 
-    target.addEventListener("pointerdown", startHold);
-    target.addEventListener("pointermove", moveHold);
-    target.addEventListener("pointerup", clearPressTimer);
-    target.addEventListener("pointerleave", clearPressTimer);
-    target.addEventListener("pointercancel", clearPressTimer);
+    document.addEventListener("pointerup", clearPressTimer, true);
+    document.addEventListener("pointerleave", clearPressTimer, true);
+    document.addEventListener("pointercancel", clearPressTimer, true);
 
-    target.addEventListener("contextmenu", event => {
-
-        if (holdActive) {
+    document.addEventListener("contextmenu", event => {
+        if (holdActive && getHoldTarget(event)) {
             event.preventDefault();
         }
-    });
+    }, true);
 
-    target.addEventListener("click", () => {
+    document.addEventListener("click", event => {
+        if (!getHoldTarget(event)) {
+            return;
+        }
 
         tapCount++;
-
         clearTimeout(tapTimer);
 
         tapTimer = setTimeout(() => {
@@ -460,16 +447,12 @@ function bindMobileDebugGesture() {
         }, 1600);
 
         if (tapCount >= 5) {
-
             tapCount = 0;
-
             clearTimeout(tapTimer);
-
             vibrate();
-
             toggleDebug(true);
         }
-    });
+    }, true);
 }
 
 

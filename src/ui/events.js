@@ -133,6 +133,9 @@ function activateDashboardTab(dashboardTab = "overview") {
     const currentTab =
         state.ui?.dashboardTab || "overview";
 
+    document.body.dataset.dashboardTab = dashboardTab;
+    document.documentElement.dataset.dashboardTab = dashboardTab;
+
     if (dashboardTab === currentTab) {
         scrollMobileDashboardToTop({ smooth: true });
         return;
@@ -180,9 +183,9 @@ function scrollMobileDashboardToTop({ smooth = false } = {}) {
         return;
     }
 
-    scrollMobileElementIntoView("[data-mobile-quick-strip]", {
+    scrollMobileElementIntoView(".tbi-header", {
         fallbackSelector: "[data-dashboard-shell]",
-        offset: 8,
+        offset: 0,
         smooth
     });
 }
@@ -265,10 +268,12 @@ function bindHeatmapEvents() {
         const state =
             getState();
 
+        const currentSection = state.ui?.selectedSection || null;
+
         setState({
             ui: {
                 ...(state.ui || {}),
-                selectedSection: section
+                selectedSection: currentSection === section ? null : section
             }
         });
 

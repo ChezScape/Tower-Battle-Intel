@@ -1,3 +1,7 @@
+# Tower Battle Intel v4.9a Dashboard Rebuild
+
+This build replaces the old dashboard UI with the locked neon desktop/mobile concept direction.
+
 # Tower Battle Intel v4.8w1
 
 Full rebuild from the working dev-5 / v4.8u Game Brain Integration base.

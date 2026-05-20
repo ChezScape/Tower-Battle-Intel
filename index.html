@@ -54,76 +54,6 @@
 
     <div id="app">
 
-        <header
-            class="topbar desktop-topbar"
-            data-device-only="desktop"
-            hidden
-        >
-
-            <div class="brand-wrap">
-
-                <div class="brand">
-                    Tower Battle Intel
-                </div>
-
-                <div class="version">
-                    Battle Report Intelligence Dashboard
-                </div>
-
-            </div>
-
-            <div class="topbar-actions" aria-hidden="true"></div>
-
-        </header>
-
-        <div
-            id="debugHoldZone"
-            class="banner-debug-hold-zone"
-            aria-label="Tower Battle Intel banner. Hold for diagnostics."
-        >
-
-            <section
-                class="hero-banner desktop-hero-banner"
-                aria-label="Tower Battle Intel banner"
-                data-device-only="desktop"
-                hidden
-            >
-
-                <img
-                    id="topbarBannerImage"
-                    src="./assets/tower-battle-intel-banner-desktop.png"
-                    data-desktop-src="./assets/tower-battle-intel-banner-desktop.png"
-                    data-mobile-src="./assets/tower-battle-intel-banner-mobile.png"
-                    alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
-                    draggable="false"
-                >
-
-            </section>
-
-            <header
-                class="topbar topbar-banner-mode mobile-topbar"
-                data-device-only="mobile"
-                hidden
-            >
-
-                <div
-                    class="topbar-banner-brand"
-                    aria-label="Tower Battle Intel"
-                >
-
-                    <img
-                        class="topbar-banner-img"
-                        src="./assets/tower-battle-intel-banner-mobile.png"
-                        alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
-                        draggable="false"
-                    >
-
-                </div>
-
-            </header>
-
-        </div>
-
         <button
             id="toggleDebug"
             type="button"
@@ -133,6 +63,20 @@
         >
             Debug
         </button>
+
+        <main class="layout">
+
+            <section
+                id="dashboard"
+                aria-live="polite"
+            >
+                <div class="tbi-card">
+                    <h2>System</h2>
+                    <p>Waiting for battle reports...</p>
+                </div>
+            </section>
+
+        </main>
 
         <section class="input-section" id="mobileReportSheet">
 
@@ -165,7 +109,7 @@
                 </div>
 
                 <div class="section-subtitle">
-                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace. Choose A as the baseline and B as the run to compare against it. Deltas show B - A.
+                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace. Choose A as the baseline and B as the run to compare against it. Deltas show A - B.
                 </div>
 
             </div>
@@ -305,41 +249,13 @@
             data-device-only="mobile"
             hidden
         >
-            + Report
+            Open Deck
         </button>
-
-        <main class="layout">
-
-            <section
-                id="dashboard"
-                aria-live="polite"
-            >
-
-                <div class="wa-empty-shell">
-
-                    <div class="wa-panel wa-empty">
-
-                        <div class="wa-title">
-                            System
-                        </div>
-
-                        <div class="wa-sub">
-                            Waiting for battle reports...
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
 
         <section
             id="debugPanel"
             aria-live="polite"
         ></section>
-
 
     </div>
 
@@ -352,14 +268,6 @@
             document.querySelectorAll("[data-device-only]").forEach(function (element) {
                 element.hidden = element.getAttribute("data-device-only") !== mode;
             });
-
-            var banner = document.getElementById("topbarBannerImage");
-
-            if (banner) {
-                banner.src = mode === "mobile"
-                    ? banner.getAttribute("data-mobile-src")
-                    : banner.getAttribute("data-desktop-src");
-            }
         }());
     </script>
 
