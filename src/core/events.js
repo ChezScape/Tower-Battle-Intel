@@ -498,7 +498,43 @@ function bindMobileCommandDeck(input = null) {
         );
     }
 
+    function setBackdropVisible(value = false) {
+        if (!backdrop) {
+            return;
+        }
+
+        backdrop.hidden = !value;
+        backdrop.setAttribute("aria-hidden", value ? "false" : "true");
+    }
+
+    function setRailVisible(value = false) {
+        if (!commandRail) {
+            return;
+        }
+
+        commandRail.hidden = !value;
+        commandRail.setAttribute("aria-hidden", value ? "false" : "true");
+    }
+
+    function clearMobileDeckState() {
+        document.body.classList.remove("mobile-report-open");
+        document.body.classList.remove("mobile-command-rail-open");
+        setBackdropVisible(false);
+        setRailVisible(false);
+        setExpanded(false);
+
+        if (!document.body.classList.contains("debug-open")) {
+            document.documentElement.classList.remove("mobile-scroll-locked");
+            document.body.classList.remove("mobile-scroll-locked");
+        }
+    }
+
+    clearMobileDeckState();
+
     function openSheet() {
+
+        setRailVisible(false);
+        setBackdropVisible(true);
 
         document.body.classList.remove("mobile-command-rail-open");
         document.body.classList.add("mobile-report-open");
@@ -516,7 +552,12 @@ function bindMobileCommandDeck(input = null) {
 
         document.body.classList.remove("mobile-report-open");
 
-        if (!document.body.classList.contains("debug-open")) {
+        if (!document.body.classList.contains("mobile-command-rail-open")) {
+            setBackdropVisible(false);
+        }
+
+        if (!document.body.classList.contains("debug-open") &&
+            !document.body.classList.contains("mobile-command-rail-open")) {
             document.documentElement.classList.remove("mobile-scroll-locked");
             document.body.classList.remove("mobile-scroll-locked");
         }
@@ -535,6 +576,9 @@ function bindMobileCommandDeck(input = null) {
             "mobile-command-rail-open",
             shouldOpen
         );
+
+        setRailVisible(shouldOpen);
+        setBackdropVisible(shouldOpen);
 
         if (shouldOpen) {
             document.body.classList.remove("mobile-report-open");
@@ -648,6 +692,23 @@ function bindMobileCommandDeck(input = null) {
 function closeMobileReportSheet() {
 
     document.body.classList.remove("mobile-report-open");
+    document.body.classList.remove("mobile-command-rail-open");
+
+    const backdrop =
+        document.getElementById("mobileSheetBackdrop");
+
+    const commandRail =
+        document.getElementById("mobileCommandRail");
+
+    if (backdrop) {
+        backdrop.hidden = true;
+        backdrop.setAttribute("aria-hidden", "true");
+    }
+
+    if (commandRail) {
+        commandRail.hidden = true;
+        commandRail.setAttribute("aria-hidden", "true");
+    }
 
     if (!document.body.classList.contains("debug-open")) {
         document.documentElement.classList.remove("mobile-scroll-locked");

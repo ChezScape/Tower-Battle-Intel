@@ -198,6 +198,7 @@
             id="mobileSheetBackdrop"
             class="mobile-sheet-backdrop"
             data-device-only="mobile"
+            data-start-hidden="true"
             hidden
             aria-hidden="true"
         ></div>
@@ -206,6 +207,7 @@
             id="mobileCommandRail"
             class="mobile-command-rail"
             data-device-only="mobile"
+            data-start-hidden="true"
             hidden
             aria-hidden="true"
         >
@@ -266,8 +268,18 @@
                 "desktop";
 
             document.querySelectorAll("[data-device-only]").forEach(function (element) {
-                element.hidden = element.getAttribute("data-device-only") !== mode;
+                var matchesMode = element.getAttribute("data-device-only") === mode;
+                var startsHidden = element.getAttribute("data-start-hidden") === "true";
+
+                element.hidden = !matchesMode || startsHidden;
+
+                if (startsHidden) {
+                    element.setAttribute("aria-hidden", "true");
+                }
             });
+
+            document.body.classList.remove("mobile-report-open", "mobile-command-rail-open", "mobile-scroll-locked");
+            document.documentElement.classList.remove("mobile-scroll-locked");
         }());
     </script>
 

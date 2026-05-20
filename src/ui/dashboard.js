@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * TOWER BATTLE INTEL DASHBOARD v4.9a
+ * TOWER BATTLE INTEL DASHBOARD v4.9b
  * Clean workspace renderer.
  *
  * Keeps runtime/data systems intact and replaces the old dashboard UI stack.
@@ -169,7 +169,7 @@ function buildHeader(activeTab = "overview") {
             </nav>
 
             <div class="tbi-header-actions">
-                <span class="tbi-version-pill">TBI: v4.9a</span>
+                <span class="tbi-version-pill">TBI: v4.9b</span>
                 <button type="button" class="tbi-icon-button" data-dashboard-tab="command" aria-label="Open command deck">▣</button>
             </div>
         </header>
@@ -330,26 +330,34 @@ function buildRunCard(title, run, side = "a") {
     return `
         <article class="tbi-run-card run-${escapeAttr(side)}">
             <div class="tbi-run-card-top">
-                <h2>${escapeHTML(title)}</h2>
-                <span>${escapeHTML(core.battleDate || "No battle loaded")}</span>
+                <div>
+                    <h2>${escapeHTML(title)}</h2>
+                    <span>${escapeHTML(core.battleDate || "No battle loaded")}</span>
+                </div>
+                <div class="tbi-run-time-stack">
+                    <span>${escapeHTML(formatTime(core.time || 0))}</span>
+                    <span>${escapeHTML(formatNumber(stats.coinsPerHour || 0))} / hour</span>
+                </div>
             </div>
             <div class="tbi-run-metrics">
-                ${runMetric("Wave", core.wave ?? "-")}
-                ${runMetric("Killed By", core.killedBy || "-")}
-                ${runMetric("Coins Earned", formatNumber(core.coins || 0))}
-                ${runMetric("Cells Earned", formatNumber(core.cells || 0))}
-                ${runMetric("Coins / Hour", formatNumber(stats.coinsPerHour || 0))}
-                ${runMetric("Cells / Hour", formatNumber(stats.cellsPerHour || 0))}
-                ${runMetric("Real Time", formatTime(core.time || 0))}
+                ${runMetric("Wave", core.wave ?? "-", "primary")}
+                ${runMetric("Killed By", core.killedBy || "-", "danger")}
+                ${runMetric("Coins Earned", formatNumber(core.coins || 0), "gold")}
+                ${runMetric("Cells Earned", formatNumber(core.cells || 0), "green")}
+            </div>
+            <div class="tbi-run-footer">
+                <span>Coins / Hour <strong>${escapeHTML(formatNumber(stats.coinsPerHour || 0))}</strong></span>
+                <span>Cells / Hour <strong>${escapeHTML(formatNumber(stats.cellsPerHour || 0))}</strong></span>
+                <span>Real Time <strong>${escapeHTML(formatTime(core.time || 0))}</strong></span>
             </div>
         </article>
     `;
 }
 
-function runMetric(label, value) {
+function runMetric(label, value, tone = "neutral") {
 
     return `
-        <div class="tbi-run-metric">
+        <div class="tbi-run-metric ${escapeAttr(tone)}">
             <span>${escapeHTML(label)}</span>
             <strong>${escapeHTML(value)}</strong>
         </div>
