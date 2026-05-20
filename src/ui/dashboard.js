@@ -154,7 +154,7 @@ function normaliseState(state = {}) {
 
 function buildHeader(activeTab = "overview") {
 
-    const version = appConfig?.app?.version || "v4.9e";
+    const version = appConfig?.app?.version || "v4.9f";
 
     return `
         <header class="tbi-header tbi-top-command-bar" data-debug-hold-zone="true" aria-label="Tower Battle Intel header. Hold for diagnostics.">
