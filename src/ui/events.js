@@ -72,7 +72,7 @@ export function bindUIEvents() {
 
 
 /* --------------------------------------------------
-   MOBILE DASHBOARD TABS
+   DASHBOARD TABS + SUBSYSTEM MATRIX
 -------------------------------------------------- */
 
 function bindDashboardTabEvents() {
@@ -85,36 +85,44 @@ function bindDashboardTabEvents() {
         document.body.dataset.dashboardTabDelegatesBound = "true";
     }
 
-    let lastHandledStamp = 0;
+    let lastHandled = 0;
 
-    function handleDashboardTabEvent(event) {
+    document.addEventListener("pointerup", event => {
+        handleDashboardTabEvent(event, lastHandledStamp => {
+            lastHandled = lastHandledStamp;
+        }, lastHandled);
+    }, true);
 
-        const tab =
-            event.target?.closest?.("[data-dashboard-tab]");
+    document.addEventListener("click", event => {
+        handleDashboardTabEvent(event, lastHandledStamp => {
+            lastHandled = lastHandledStamp;
+        }, lastHandled);
+    }, true);
+}
 
-        if (!tab) {
-            return;
-        }
+function handleDashboardTabEvent(event, setLastHandled, lastHandled = 0) {
 
-        const stamp =
-            Number(event.timeStamp || Date.now());
+    const tab =
+        event.target?.closest?.("[data-dashboard-tab]");
 
-        if (Math.abs(stamp - lastHandledStamp) < 80) {
-            event.preventDefault();
-            return;
-        }
-
-        lastHandledStamp = stamp;
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        activateDashboardTab(tab.dataset.dashboardTab || "overview");
+    if (!tab) {
+        return;
     }
 
-    document.addEventListener("pointerup", handleDashboardTabEvent, true);
-    document.addEventListener("touchend", handleDashboardTabEvent, true);
-    document.addEventListener("click", handleDashboardTabEvent, true);
+    const stamp =
+        Number(event.timeStamp || Date.now());
+
+    if (Math.abs(stamp - lastHandled) < 120) {
+        event.preventDefault();
+        return;
+    }
+
+    setLastHandled?.(stamp);
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    activateDashboardTab(tab.dataset.dashboardTab || "overview");
 }
 
 function activateDashboardTab(dashboardTab = "overview") {
@@ -145,11 +153,6 @@ function activateDashboardTab(dashboardTab = "overview") {
 
     scrollMobileDashboardToTop();
 }
-
-
-/* --------------------------------------------------
-   MOBILE SCROLL / PANEL STABILISATION
--------------------------------------------------- */
 
 function withMobileTabSwitch(callback) {
 
@@ -227,10 +230,6 @@ function lockMobilePageScroll(force = true) {
     document.body.classList.toggle("mobile-scroll-locked", Boolean(force));
 }
 
-/* --------------------------------------------------
-   HEATMAP / DRILLDOWN
--------------------------------------------------- */
-
 function bindHeatmapEvents() {
 
     if (document.body?.dataset?.heatmapDelegatesBound === "true") {
@@ -251,6 +250,7 @@ function bindHeatmapEvents() {
         }
 
         event.preventDefault();
+        event.stopPropagation();
 
         const section =
             tile.dataset.section;
@@ -259,19 +259,16 @@ function bindHeatmapEvents() {
             return;
         }
 
+        const before =
+            captureViewport();
+
         const state =
             getState();
-
-        const selectedSection =
-            section;
-
-        const scrollPosition =
-            captureScrollPosition();
 
         setState({
             ui: {
                 ...(state.ui || {}),
-                selectedSection
+                selectedSection: section
             }
         });
 
@@ -281,36 +278,9 @@ function bindHeatmapEvents() {
             render();
         });
 
-        // Do not auto-scroll after selecting a subsystem tile.
-        // The old behaviour jumped the page down to the drill grid,
-        // which felt like the UI was fighting the user on desktop and mobile.
-        restoreScrollPosition(scrollPosition);
-    });
+        restoreViewport(before);
+    }, true);
 }
-
-function scrollElementIntoView(selector, { offset = 12 } = {}) {
-
-    window.requestAnimationFrame(() => {
-        const target =
-            document.querySelector(selector);
-
-        if (!target) {
-            return;
-        }
-
-        const rect =
-            target.getBoundingClientRect();
-
-        const top =
-            Math.max(0, window.scrollY + rect.top - offset);
-
-        window.scrollTo({
-            top,
-            behavior: "smooth"
-        });
-    });
-}
-
 
 /* --------------------------------------------------
    HISTORY LOAD BUTTONS
@@ -361,18 +331,13 @@ function bindHistoryLoadEvents() {
 
 /* --------------------------------------------------
    HISTORY FILTERS
+   Single delegated filter system. No legacy filter fighting.
 -------------------------------------------------- */
 
 let historySearchTimer = null;
+let pendingHistorySearch = null;
 
 function bindHistoryFilterEvents() {
-
-    bindHistoryFilterDelegates();
-
-    bindHistoryFilterElementEvents();
-}
-
-function bindHistoryFilterDelegates() {
 
     if (document.body?.dataset?.historyFilterDelegatesBound === "true") {
         return;
@@ -382,117 +347,10 @@ function bindHistoryFilterDelegates() {
         document.body.dataset.historyFilterDelegatesBound = "true";
     }
 
-    document.addEventListener(
-        "input",
-        handleHistoryFilterInput,
-        true
-    );
-
-    document.addEventListener(
-        "change",
-        handleHistoryFilterChange,
-        true
-    );
-
-    document.addEventListener(
-        "click",
-        handleHistoryFilterClick,
-        true
-    );
-}
-
-function bindHistoryFilterElementEvents() {
-
-    const queryInputs =
-        document.querySelectorAll("[data-history-filter-query]");
-
-    queryInputs.forEach(input => {
-
-        if (input.dataset.historyQueryBound === "true") {
-            return;
-        }
-
-        input.dataset.historyQueryBound = "true";
-
-        input.addEventListener("input", event => {
-            queueHistorySearchUpdate(event.target?.value || "");
-        });
-
-        input.addEventListener("search", event => {
-            applyHistoryFilterPatch({
-                query: event.target?.value || ""
-            });
-        });
-    });
-
-    const choiceButtons =
-        document.querySelectorAll("[data-history-filter-value]");
-
-    choiceButtons.forEach(button => {
-
-        if (button.dataset.historyChoiceBound === "true") {
-            return;
-        }
-
-        button.dataset.historyChoiceBound = "true";
-
-        button.addEventListener("click", event => {
-            handleHistoryChoiceElement(event, button);
-        });
-
-        button.addEventListener("pointerup", event => {
-            handleHistoryChoiceElement(event, button);
-        });
-    });
-
-    const resetButtons =
-        document.querySelectorAll("[data-history-filter-reset]");
-
-    resetButtons.forEach(button => {
-
-        if (button.dataset.historyResetBound === "true") {
-            return;
-        }
-
-        button.dataset.historyResetBound = "true";
-
-        button.addEventListener("click", event => {
-            event.preventDefault();
-            resetHistoryFilters();
-        });
-    });
-
-    bindLegacyHistoryFilterControls();
-}
-
-function bindLegacyHistoryFilterControls() {
-
-    const legacyControls =
-        document.querySelectorAll(`
-            [data-history-filter-sort],
-            [data-history-filter-build],
-            [data-history-filter-tag],
-            [data-history-filter-archived]
-        `);
-
-    legacyControls.forEach(control => {
-
-        if (control.dataset.historyLegacyFilterBound === "true") {
-            return;
-        }
-
-        control.dataset.historyLegacyFilterBound = "true";
-
-        control.addEventListener("change", event => {
-            applyHistoryLegacyFilterPatch(event.target);
-        });
-
-        control.addEventListener("click", event => {
-            if (event.target?.matches?.("[data-history-filter-archived]")) {
-                applyHistoryLegacyFilterPatch(event.target);
-            }
-        });
-    });
+    document.addEventListener("input", handleHistoryFilterInput, true);
+    document.addEventListener("search", handleHistoryFilterInput, true);
+    document.addEventListener("click", handleHistoryFilterClick, true);
+    document.addEventListener("toggle", handleHistoryChoiceToggle, true);
 }
 
 function handleHistoryFilterInput(event) {
@@ -500,34 +358,11 @@ function handleHistoryFilterInput(event) {
     const target =
         event?.target;
 
-    if (!target || typeof target.matches !== "function") {
-        return;
-    }
-
-    if (!target.matches("[data-history-filter-query]")) {
+    if (!target?.matches?.("[data-history-filter-query]")) {
         return;
     }
 
     queueHistorySearchUpdate(target.value || "");
-}
-
-function handleHistoryFilterChange(event) {
-
-    const target =
-        event?.target;
-
-    if (!target || typeof target.matches !== "function") {
-        return;
-    }
-
-    if (
-        target.matches("[data-history-filter-sort]") ||
-        target.matches("[data-history-filter-build]") ||
-        target.matches("[data-history-filter-tag]") ||
-        target.matches("[data-history-filter-archived]")
-    ) {
-        applyHistoryLegacyFilterPatch(target);
-    }
 }
 
 function handleHistoryFilterClick(event) {
@@ -535,7 +370,7 @@ function handleHistoryFilterClick(event) {
     const target =
         event?.target;
 
-    if (!target || typeof target.closest !== "function") {
+    if (!target?.closest) {
         return;
     }
 
@@ -543,44 +378,46 @@ function handleHistoryFilterClick(event) {
         target.closest("[data-history-filter-reset]");
 
     if (reset) {
-
         event.preventDefault();
-
+        event.stopPropagation();
         resetHistoryFilters();
-
         return;
     }
 
     const choice =
         target.closest("[data-history-filter-value]");
 
-    if (!choice) {
-        return;
+    if (choice) {
+        event.preventDefault();
+        event.stopPropagation();
+        applyHistoryChoice(choice);
     }
-
-    handleHistoryChoiceElement(event, choice);
 }
 
-function handleHistoryChoiceElement(event, choice) {
+function handleHistoryChoiceToggle(event) {
 
-    if (!choice) {
+    const menu =
+        event.target?.matches?.("[data-history-choice-menu]")
+            ? event.target
+            : null;
+
+    if (!menu || !menu.open) {
         return;
     }
 
-    const stamp =
-        Date.now();
+    const menuName =
+        menu.dataset.historyChoiceMenu;
 
-    const lastStamp =
-        Number(choice.dataset.historyLastTap || 0);
+    document
+        .querySelectorAll("[data-history-choice-menu][open]")
+        .forEach(other => {
+            if (other !== menu && other.dataset.historyChoiceMenu !== menuName) {
+                other.removeAttribute("open");
+            }
+        });
+}
 
-    if (stamp - lastStamp < 120) {
-        return;
-    }
-
-    choice.dataset.historyLastTap =
-        String(stamp);
-
-    event?.preventDefault?.();
+function applyHistoryChoice(choice) {
 
     const kind =
         choice.dataset.historyFilterKind ||
@@ -598,7 +435,10 @@ function handleHistoryChoiceElement(event, choice) {
         return;
     }
 
-    applyHistoryFilterPatch(patch);
+    applyHistoryFilterPatch(patch, {
+        preserveFocus: false,
+        closeChoiceMenus: true
+    });
 }
 
 function buildHistoryFilterPatchFromChoice(kind = "", option = "") {
@@ -631,48 +471,28 @@ function buildHistoryFilterPatchFromChoice(kind = "", option = "") {
     }
 }
 
-function applyHistoryLegacyFilterPatch(target) {
-
-    if (!target || typeof target.matches !== "function") {
-        return;
-    }
-
-    if (target.matches("[data-history-filter-sort]")) {
-        applyHistoryFilterPatch({
-            sort: target.value || "newest"
-        });
-        return;
-    }
-
-    if (target.matches("[data-history-filter-build]")) {
-        applyHistoryFilterPatch({
-            build: target.value || "all"
-        });
-        return;
-    }
-
-    if (target.matches("[data-history-filter-tag]")) {
-        applyHistoryFilterPatch({
-            tag: target.value || "all"
-        });
-        return;
-    }
-
-    if (target.matches("[data-history-filter-archived]")) {
-        applyHistoryFilterPatch({
-            showArchived: Boolean(target.checked)
-        });
-    }
-}
-
 function queueHistorySearchUpdate(query = "") {
 
     clearTimeout(historySearchTimer);
 
+    pendingHistorySearch = {
+        query,
+        viewport: captureViewport(),
+        openDrawers: captureOpenHistoryDrawers(),
+        caret: getActiveSearchCaret()
+    };
+
     historySearchTimer =
         setTimeout(() => {
             applyHistoryFilterPatch({
-                query
+                query:
+                    pendingHistorySearch?.query || ""
+            }, {
+                preserveFocus: true,
+                viewport: pendingHistorySearch?.viewport || null,
+                openDrawers: pendingHistorySearch?.openDrawers || [],
+                caret: pendingHistorySearch?.caret || null,
+                closeChoiceMenus: false
             });
         }, 180);
 }
@@ -685,32 +505,34 @@ function resetHistoryFilters() {
         build: "all",
         tag: "all",
         showArchived: false
+    }, {
+        preserveFocus: false,
+        closeChoiceMenus: true
     });
 }
 
-function applyHistoryFilterPatch(patch = {}) {
+function applyHistoryFilterPatch(patch = {}, {
+    preserveFocus = false,
+    viewport = null,
+    openDrawers = null,
+    caret = null,
+    closeChoiceMenus = true
+} = {}) {
 
-    const shouldRestoreSearchFocus =
-        Object.prototype.hasOwnProperty.call(patch, "query") &&
-        document?.activeElement?.matches?.("[data-history-filter-query]");
-
-    const searchValue =
-        String(patch?.query ?? "");
-
-    const restoreScroll =
-        shouldRestoreSearchFocus
-            ? captureScrollPosition()
-            : null;
-
-    const searchAnchorTop =
-        shouldRestoreSearchFocus
-            ? document.activeElement.getBoundingClientRect().top
-            : null;
-
-    const activeMenus =
-        shouldRestoreSearchFocus
-            ? captureOpenHistoryMenus()
-            : captureOpenHistoryMenus();
+    const uiSnapshot = {
+        viewport:
+            viewport || captureViewport(),
+        openDrawers:
+            Array.isArray(openDrawers)
+                ? openDrawers
+                : captureOpenHistoryDrawers(),
+        searchFocused:
+            preserveFocus && document.activeElement?.matches?.("[data-history-filter-query]"),
+        query:
+            String(patch.query ?? document.querySelector("[data-history-filter-query]")?.value ?? ""),
+        caret:
+            caret || getActiveSearchCaret()
+    };
 
     setHistoryFilters(patch);
 
@@ -718,83 +540,128 @@ function applyHistoryFilterPatch(patch = {}) {
 
     render();
 
-    restoreOpenHistoryMenus(activeMenus);
-
-    if (shouldRestoreSearchFocus) {
-        restoreHistorySearchFocus(searchValue, restoreScroll, searchAnchorTop);
-    }
+    restoreHistoryFilterUi(uiSnapshot, {
+        closeChoiceMenus
+    });
 }
 
-function restoreHistorySearchFocus(value = "", scrollPosition = null, anchorTop = null) {
+function captureOpenHistoryDrawers() {
+
+    return Array.from(
+        document.querySelectorAll(".history-collapsible[open], [data-history-choice-menu][open]")
+    ).map(element => ({
+        selector:
+            element.dataset.historyChoiceMenu
+                ? `[data-history-choice-menu=\"${cssEscape(element.dataset.historyChoiceMenu)}\"]`
+                : classSelector(element)
+    })).filter(item => item.selector);
+}
+
+function restoreHistoryFilterUi(snapshot = {}, {
+    closeChoiceMenus = true
+} = {}) {
 
     requestAnimationFrame(() => {
+
+        (snapshot.openDrawers || []).forEach(item => {
+            if (closeChoiceMenus && item.selector?.includes("data-history-choice-menu")) {
+                return;
+            }
+
+            document.querySelector(item.selector)?.setAttribute("open", "");
+        });
 
         const input =
             document.querySelector("[data-history-filter-query]");
 
-        if (!input) {
-            restoreScrollPosition(scrollPosition);
-            return;
-        }
+        if (input && snapshot.searchFocused) {
+            input.focus({
+                preventScroll: true
+            });
 
-        input.focus({
-            preventScroll: true
-        });
+            const position =
+                Number.isInteger(snapshot.caret?.start)
+                    ? snapshot.caret.start
+                    : String(snapshot.query || "").length;
 
-        const caret =
-            String(value || "").length;
-
-        try {
-            input.setSelectionRange(caret, caret);
-        } catch {
-            // Some input types do not support selection ranges.
-        }
-
-        if (Number.isFinite(anchorTop)) {
-            const nextTop =
-                input.getBoundingClientRect().top;
-
-            const delta =
-                nextTop - anchorTop;
-
-            if (Math.abs(delta) > 1) {
-                window.scrollBy({
-                    top: delta,
-                    left: 0,
-                    behavior: "auto"
-                });
+            try {
+                input.setSelectionRange(position, position);
+            } catch {
+                // Ignore search input implementations without range support.
             }
-        } else {
-            restoreScrollPosition(scrollPosition);
         }
+
+        restoreViewport(snapshot.viewport);
 
         requestAnimationFrame(() => {
-            if (!Number.isFinite(anchorTop)) {
-                restoreScrollPosition(scrollPosition);
-            }
+            restoreViewport(snapshot.viewport);
         });
     });
 }
 
-function captureOpenHistoryMenus() {
+function getActiveSearchCaret() {
 
-    return Array.from(
-        document.querySelectorAll("[data-history-choice-menu][open]")
-    ).map(menu => menu.dataset.historyChoiceMenu).filter(Boolean);
+    const input =
+        document.activeElement?.matches?.("[data-history-filter-query]")
+            ? document.activeElement
+            : null;
+
+    if (!input) {
+        return null;
+    }
+
+    return {
+        start:
+            Number.isInteger(input.selectionStart)
+                ? input.selectionStart
+                : String(input.value || "").length,
+        end:
+            Number.isInteger(input.selectionEnd)
+                ? input.selectionEnd
+                : String(input.value || "").length
+    };
 }
 
-function restoreOpenHistoryMenus(openMenus = []) {
+function classSelector(element) {
 
-    if (!openMenus.length) {
+    if (!element?.classList?.length) {
+        return "";
+    }
+
+    return Array.from(element.classList)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(className => `.${cssEscape(className)}`)
+        .join("");
+}
+
+function cssEscape(value = "") {
+
+    if (typeof CSS !== "undefined" && typeof CSS.escape === "function") {
+        return CSS.escape(String(value));
+    }
+
+    return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
+}
+
+function captureViewport() {
+
+    return {
+        x: window.scrollX || 0,
+        y: window.scrollY || 0
+    };
+}
+
+function restoreViewport(viewport = null) {
+
+    if (!viewport) {
         return;
     }
 
-    requestAnimationFrame(() => {
-        openMenus.forEach(name => {
-            document
-                .querySelector(`[data-history-choice-menu="${CSS.escape(name)}"]`)
-                ?.setAttribute("open", "");
-        });
+    window.scrollTo({
+        left: viewport.x || 0,
+        top: viewport.y || 0,
+        behavior: "auto"
     });
 }
 
@@ -1955,40 +1822,6 @@ function setModalText(modal, selector, value = "") {
         element.textContent =
             String(value || "");
     }
-}
-
-/* --------------------------------------------------
-   SCROLL PRESERVATION HELPERS
--------------------------------------------------- */
-
-function captureScrollPosition() {
-
-    if (typeof window === "undefined") {
-        return null;
-    }
-
-    return {
-        x: window.scrollX || 0,
-        y: window.scrollY || 0
-    };
-}
-
-function restoreScrollPosition(position = null) {
-
-    if (
-        !position ||
-        typeof window === "undefined"
-    ) {
-        return;
-    }
-
-    window.requestAnimationFrame(() => {
-        window.scrollTo({
-            left: position.x || 0,
-            top: position.y || 0,
-            behavior: "auto"
-        });
-    });
 }
 
 /* --------------------------------------------------

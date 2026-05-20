@@ -279,10 +279,9 @@ function normaliseLoadedState(saved = {}) {
             normaliseHistoryRuns(saved.history),
 
         ui: {
-            // Do not restore a saved subsystem detail panel on page load.
-            // It should only appear after the user clicks a Subsystem Matrix tile.
-            selectedSection:
-                null,
+            // Subsystem details are intentionally session-only.
+            // Reloading the app should not reopen a drilldown and jump the page.
+            selectedSection: null,
 
             debug:
                 Boolean(saved.ui?.debug),
@@ -292,6 +291,9 @@ function normaliseLoadedState(saved = {}) {
 
             buildStyle:
                 saved.ui?.buildStyle || "unknown",
+
+            dashboardTab:
+                saved.ui?.dashboardTab || "overview",
 
             historyFilters:
                 normaliseHistoryFilters(saved.ui?.historyFilters)
@@ -369,9 +371,8 @@ function normaliseStoredState(state = {}) {
             ),
 
         ui: {
-            // Do not persist a selected subsystem as an initial open detail panel.
-            selectedSection:
-                null,
+            // Do not persist selectedSection. It is a live interaction, not a saved preference.
+            selectedSection: null,
 
             debug:
                 Boolean(safe.ui?.debug),
@@ -381,6 +382,9 @@ function normaliseStoredState(state = {}) {
 
             buildStyle:
                 safe.ui?.buildStyle || "unknown",
+
+            dashboardTab:
+                safe.ui?.dashboardTab || "overview",
 
             historyFilters:
                 normaliseHistoryFilters(safe.ui?.historyFilters)

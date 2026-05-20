@@ -19,7 +19,7 @@ export const appConfig = {
 
         name: "Tower Battle Intel",
 
-        version: "v4.8v",
+        version: "v4.8w",
 
         environment: "production"
     },
@@ -155,7 +155,7 @@ export const appConfig = {
 
     storage: {
 
-        localStorageKey: "battle_analyser_state",
+        localStorageKey: "towerBattleIntel.state.v1",
 
         autoSave: true,
 
