@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Tower Battle Intel - Battle Report Intelligence Dashboard"
+    >
+
+    <title>
+        Tower Battle Intel
+    </title>
+
+    <script>
+        (function () {
+            var width = window.innerWidth || document.documentElement.clientWidth || 1024;
+            var coarse = false;
+
+            try {
+                coarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+            } catch (error) {
+                coarse = false;
+            }
+
+            var ua = navigator.userAgent || "";
+            var mobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+            var mode = (width <= 760 || (coarse && width <= 1024) || mobileUA)
+                ? "mobile"
+                : "desktop";
+
+            window.TowerBattleIntelDeviceMode = mode;
+
+            document.documentElement.setAttribute("data-device-mode", mode);
+            document.documentElement.classList.add("device-" + mode);
+
+            document.write(
+                '<link rel="stylesheet" href="./' +
+                (mode === "mobile" ? "mobile.css" : "desktop.css") +
+                '">'
+            );
+        }());
+    </script>
+
+</head>
+
+<body>
+
+    <div id="app">
+
+        <header
+            class="topbar desktop-topbar"
+            data-device-only="desktop"
+            hidden
+        >
+
+            <div class="brand-wrap">
+
+                <div class="brand">
+                    Tower Battle Intel
+                </div>
+
+                <div class="version">
+                    Battle Report Intelligence Dashboard
+                </div>
+
+            </div>
+
+            <div class="topbar-actions" aria-hidden="true"></div>
+
+        </header>
+
+        <div
+            id="debugHoldZone"
+            class="banner-debug-hold-zone"
+            aria-label="Tower Battle Intel banner. Hold for diagnostics."
+        >
+
+            <section
+                class="hero-banner desktop-hero-banner"
+                aria-label="Tower Battle Intel banner"
+                data-device-only="desktop"
+                hidden
+            >
+
+                <img
+                    id="topbarBannerImage"
+                    src="./assets/tower-battle-intel-banner-desktop.png"
+                    data-desktop-src="./assets/tower-battle-intel-banner-desktop.png"
+                    data-mobile-src="./assets/tower-battle-intel-banner-mobile.png"
+                    alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
+                    draggable="false"
+                >
+
+            </section>
+
+            <header
+                class="topbar topbar-banner-mode mobile-topbar"
+                data-device-only="mobile"
+                hidden
+            >
+
+                <div
+                    class="topbar-banner-brand"
+                    aria-label="Tower Battle Intel"
+                >
+
+                    <img
+                        class="topbar-banner-img"
+                        src="./assets/tower-battle-intel-banner-mobile.png"
+                        alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
+                        draggable="false"
+                    >
+
+                </div>
+
+            </header>
+
+        </div>
+
+        <button
+            id="toggleDebug"
+            type="button"
+            hidden
+            aria-hidden="true"
+            tabindex="-1"
+        >
+            Debug
+        </button>
+
+        <section class="input-section" id="mobileReportSheet">
+
+            <div
+                class="mobile-input-sheet-handle"
+                data-device-only="mobile"
+                hidden
+                aria-hidden="true"
+            >
+
+                <div>
+                    <span class="mobile-sheet-kicker">Command Deck</span>
+                    <strong>Report Console</strong>
+                </div>
+
+                <button
+                    id="mobileInputClose"
+                    type="button"
+                    aria-label="Close report console"
+                >
+                    Close
+                </button>
+
+            </div>
+
+            <div class="input-header">
+
+                <div class="section-title">
+                    Battle Report Input
+                </div>
+
+                <div class="section-subtitle">
+                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace. Choose A as the baseline and B as the run to compare against it. Deltas show B - A.
+                </div>
+
+            </div>
+
+            <textarea
+                id="input"
+                spellcheck="false"
+                placeholder="Paste Battle Report Here..."
+                aria-label="Battle report input"
+            ></textarea>
+
+            <div class="input-actions">
+
+                <button
+                    id="saveReport"
+                    type="button"
+                >
+                    Save Report
+                </button>
+
+                <label
+                    class="build-style-wrap build-style-inline"
+                    for="buildStyleSelect"
+                >
+
+                    <span>
+                        Build
+                    </span>
+
+                    <select
+                        id="buildStyleSelect"
+                        aria-label="Select build style"
+                    >
+
+                        <option value="unknown">
+                            Unknown
+                        </option>
+
+                        <option value="health_ehp">
+                            Health / EHP
+                        </option>
+
+                        <option value="blender">
+                            Blender
+                        </option>
+
+                        <option value="devo">
+                            Devo
+                        </option>
+
+                        <option value="orb_devo">
+                            Orb Devo
+                        </option>
+
+                        <option value="glass_cannon">
+                            Glass Cannon
+                        </option>
+
+                        <option value="hybrid">
+                            Hybrid
+                        </option>
+
+                    </select>
+
+                </label>
+
+                <button
+                    id="clearInput"
+                    type="button"
+                >
+                    Clear Input
+                </button>
+
+                <button
+                    id="clearRuns"
+                    type="button"
+                >
+                    Clear Runs
+                </button>
+
+            </div>
+
+        </section>
+
+        <div
+            id="mobileSheetBackdrop"
+            class="mobile-sheet-backdrop"
+            data-device-only="mobile"
+            hidden
+            aria-hidden="true"
+        ></div>
+
+        <div
+            id="mobileCommandRail"
+            class="mobile-command-rail"
+            data-device-only="mobile"
+            hidden
+            aria-hidden="true"
+        >
+
+            <button
+                type="button"
+                data-mobile-command="open-report"
+            >
+                Paste
+            </button>
+
+            <button
+                type="button"
+                data-mobile-command="save-report"
+            >
+                Save
+            </button>
+
+            <button
+                type="button"
+                data-mobile-command="clear-input"
+            >
+                Clear
+            </button>
+
+            <button
+                type="button"
+                data-mobile-command="history-tab"
+            >
+                History
+            </button>
+
+        </div>
+
+        <button
+            id="mobileReportFab"
+            class="mobile-report-fab"
+            type="button"
+            aria-controls="mobileReportSheet"
+            aria-expanded="false"
+            data-device-only="mobile"
+            hidden
+        >
+            + Report
+        </button>
+
+        <main class="layout">
+
+            <section
+                id="dashboard"
+                aria-live="polite"
+            >
+
+                <div class="wa-empty-shell">
+
+                    <div class="wa-panel wa-empty">
+
+                        <div class="wa-title">
+                            System
+                        </div>
+
+                        <div class="wa-sub">
+                            Waiting for battle reports...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <section
+            id="debugPanel"
+            aria-live="polite"
+        ></section>
+
+        <section
+            id="debug"
+            aria-live="polite"
+        ></section>
+
+    </div>
+
+    <script>
+        (function () {
+            var mode = window.TowerBattleIntelDeviceMode ||
+                document.documentElement.getAttribute("data-device-mode") ||
+                "desktop";
+
+            document.querySelectorAll("[data-device-only]").forEach(function (element) {
+                element.hidden = element.getAttribute("data-device-only") !== mode;
+            });
+
+            var banner = document.getElementById("topbarBannerImage");
+
+            if (banner) {
+                banner.src = mode === "mobile"
+                    ? banner.getAttribute("data-mobile-src")
+                    : banner.getAttribute("data-desktop-src");
+            }
+        }());
+    </script>
+
+    <script
+        type="module"
+        src="./app.js"
+    ></script>
+
+</body>
+</html>
