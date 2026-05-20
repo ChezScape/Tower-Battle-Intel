@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * TOWER BATTLE INTEL DASHBOARD v4.9d
+ * TOWER BATTLE INTEL DASHBOARD v4.9e
  * Clean workspace renderer.
  *
  * Keeps runtime/data systems intact and replaces the old dashboard UI stack.
@@ -40,6 +40,10 @@ import {
     formatDelta,
     formatPercentDelta
 } from "./utils/deltaFormat.js";
+
+import {
+    appConfig
+} from "../../config/appConfig.js";
 
 /* --------------------------------------------------
    TAB DEFINITIONS
@@ -150,11 +154,23 @@ function normaliseState(state = {}) {
 
 function buildHeader(activeTab = "overview") {
 
+    const version = appConfig?.app?.version || "v4.9e";
+
     return `
-        <header class="tbi-header" data-debug-hold-zone="true" aria-label="Tower Battle Intel header. Hold for diagnostics.">
+        <header class="tbi-header tbi-top-command-bar" data-debug-hold-zone="true" aria-label="Tower Battle Intel header. Hold for diagnostics.">
             <div class="tbi-brand-block">
-                <div class="tbi-logo" aria-hidden="true">⌂</div>
-                <div>
+                <div class="tbi-logo" aria-hidden="true">
+                    <svg class="tbi-logo-svg" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
+                        <path class="tbi-logo-stroke" d="M32 5 L32 55"/>
+                        <path class="tbi-logo-stroke" d="M22 21 L32 9 L42 21"/>
+                        <path class="tbi-logo-stroke" d="M18 56 H46"/>
+                        <path class="tbi-logo-stroke" d="M14 46 H50"/>
+                        <path class="tbi-logo-stroke" d="M24 28 H40 V46 H24 Z"/>
+                        <path class="tbi-logo-stroke tbi-logo-pulse" d="M8 58 C16 50 20 42 20 32"/>
+                        <path class="tbi-logo-stroke tbi-logo-pulse" d="M56 58 C48 50 44 42 44 32"/>
+                    </svg>
+                </div>
+                <div class="tbi-brand-copy">
                     <div class="tbi-brand-title">Tower Battle Intel</div>
                     <div class="tbi-brand-subtitle">Battle Report Intelligence Dashboard</div>
                 </div>
@@ -168,9 +184,13 @@ function buildHeader(activeTab = "overview") {
                 ${MOBILE_TOP_TABS.map(([key, label, icon]) => navButton(key, label, mobileTopActive(activeTab), icon)).join("")}
             </nav>
 
-            <div class="tbi-header-actions">
-                <span class="tbi-version-pill">TBI: v4.9d</span>
-                <button type="button" class="tbi-icon-button" data-dashboard-tab="command" aria-label="Open command deck">▣</button>
+            <div class="tbi-header-actions" aria-label="Dashboard actions">
+                <span class="tbi-version-pill">${escapeHTML(version)}</span>
+                <button type="button" class="tbi-icon-button tbi-settings-button" data-dashboard-tab="settings" aria-label="Open settings">⚙</button>
+                <button type="button" class="tbi-theme-button" data-dashboard-tab="settings" aria-label="Open display settings">
+                    <span aria-hidden="true" class="tbi-theme-sun">☼</span>
+                    <span aria-hidden="true" class="tbi-theme-knob">◐</span>
+                </button>
             </div>
         </header>
     `;

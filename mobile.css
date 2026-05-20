@@ -81,12 +81,16 @@ button.danger, .danger { border-color: rgba(255,77,99,.38); color: #ffd5dc; back
 .tbi-shell { padding-top: 6px; }
 .tbi-header { position: sticky; top: 0; z-index: 80; padding: 10px 10px 8px; background: linear-gradient(180deg, rgba(3,8,18,.96), rgba(3,8,18,.84)); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(25,214,255,.16); }
 .tbi-brand-block { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: center; margin-bottom: 10px; }
-.tbi-logo { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid rgba(25,214,255,.34); border-radius: 10px; color: var(--cyan); box-shadow: var(--glow-cyan); }
+.tbi-logo { width: 36px; height: 36px; display: grid; place-items: center; border: 0; border-radius: 0; color: var(--cyan); box-shadow: none; background: transparent; }
+.tbi-logo-svg { width: 36px; height: 36px; overflow: visible; filter: drop-shadow(0 0 8px rgba(25,214,255,.62)); }
+.tbi-logo-stroke { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.tbi-logo-pulse { opacity: .62; stroke-width: 1.8; }
+.tbi-brand-copy { min-width: 0; }
 .tbi-brand-title { color: #fff; font-size: 18px; font-weight: 1000; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tbi-brand-subtitle { color: var(--cyan); font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: .16em; }
 .tbi-header-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; align-items: center; }
 .tbi-version-pill { border: 1px solid rgba(169,93,255,.36); border-radius: 9px; color: #d7c2ff; background: rgba(80,28,130,.16); padding: 7px 9px; font-size: 10px; font-weight: 900; }
-.tbi-icon-button { width: 34px; height: 34px; display: none; }
+.tbi-icon-button, .tbi-theme-button { display: none; }
 .tbi-mobile-top-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
 .tbi-nav-button { min-height: 58px; display: grid; place-items: center; gap: 4px; padding: 6px 3px; border-color: rgba(25,214,255,.16); background: rgba(2,8,18,.74); color: #c7d6e4; font-size: 9px; }
 .tbi-nav-icon { font-size: 18px; line-height: 1; }
