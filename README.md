@@ -1,4 +1,4 @@
-# Tower Battle Intel v4.8w
+# Tower Battle Intel v4.8w1
 
 Full rebuild from the working dev-5 / v4.8u Game Brain Integration base.
 
@@ -17,7 +17,7 @@ Full rebuild from the working dev-5 / v4.8u Game Brain Integration base.
 
 ## Current debug
 
-Hold the banner for diagnostics. The visible version pill should read `TBI: v4.8w`.
+Hold the banner for diagnostics. The visible version pill should read `TBI: v4.8w1`.
 
 ## Removed unused files
 
