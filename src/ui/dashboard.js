@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * TOWER BATTLE INTEL DASHBOARD v4.9c
+ * TOWER BATTLE INTEL DASHBOARD v4.9d
  * Clean workspace renderer.
  *
  * Keeps runtime/data systems intact and replaces the old dashboard UI stack.
@@ -169,7 +169,7 @@ function buildHeader(activeTab = "overview") {
             </nav>
 
             <div class="tbi-header-actions">
-                <span class="tbi-version-pill">TBI: v4.9c</span>
+                <span class="tbi-version-pill">TBI: v4.9d</span>
                 <button type="button" class="tbi-icon-button" data-dashboard-tab="command" aria-label="Open command deck">▣</button>
             </div>
         </header>
@@ -802,90 +802,117 @@ function metricRow(row) {
 
 function buildGapPanel(state) {
 
-    const cats = [
-        ["damage", "Damage", "damage"],
-        ["economy", "Economy", "coins"],
-        ["survivability", "Survivability", "defense"],
-        ["utility", "Utility", "utility"]
+    const axes = [
+        {
+            key: "damage",
+            label: "Damage Output",
+            shortLabel: "Damage",
+            sourceKeys: ["damage"]
+        },
+        {
+            key: "economy",
+            label: "Economy",
+            shortLabel: "Economy",
+            sourceKeys: ["economy", "farming", "cells"]
+        },
+        {
+            key: "survivability",
+            label: "Survivability",
+            shortLabel: "Survival",
+            sourceKeys: ["survivability", "progression"]
+        },
+        {
+            key: "utility",
+            label: "Utility",
+            shortLabel: "Utility",
+            sourceKeys: ["utility", "other"]
+        }
     ];
 
-    const gap = buildGapModel(state, cats);
+    const gap = buildGapModel(state, axes);
     const svg = buildGapRadarSVG(gap);
 
     return `
-        <section class="tbi-card tbi-gap-panel">
-            <div class="tbi-card-heading">
+        <section class="tbi-card tbi-gap-panel tbi-radar-card">
+            <div class="tbi-card-heading tbi-radar-heading">
                 <h3>The Gap In Numbers</h3>
-                <span>A vs B shape</span>
             </div>
 
-            <div class="tbi-gap-layout">
-                <div class="tbi-gap-bars">
-                    ${gap.map(item => `
-                        <div class="tbi-gap-bar ${escapeAttr(item.tone)}">
-                            <span>${escapeHTML(item.label)}</span>
-                            <i>
-                                <b class="a" style="width:${item.aWidth}%"></b>
-                                <b class="b" style="width:${item.bWidth}%"></b>
-                            </i>
-                            <strong>${escapeHTML(item.verdict)}</strong>
-                        </div>
-                    `).join("")}
-                </div>
+            <div class="tbi-radar-stage" aria-label="Run A versus Run B category radar">
+                ${svg}
+            </div>
 
-                <div class="tbi-gap-radar" aria-label="A versus B category radar">
-                    ${svg}
-                    <div class="tbi-gap-legend">
-                        <span><i class="a"></i>A</span>
-                        <span><i class="b"></i>B</span>
-                    </div>
-                </div>
+            <div class="tbi-gap-legend" aria-label="Radar legend">
+                <span><i class="a"></i>Run A</span>
+                <span><i class="b"></i>Run B</span>
             </div>
         </section>
     `;
 }
 
-function buildGapModel(state, cats) {
+function buildGapModel(state, axes) {
 
     const scores = state.summary?.categoryScores || {};
-    const sectionTotals = {
+    const fallbackTotals = {
         damage: sectionTotal(state.sections?.damage),
-        economy: sectionTotal(state.sections?.coins) + sectionTotal(state.sections?.cash) + Number(state.core?.coins?.diff || 0),
-        survivability: sectionTotal(mergeSections(state.sections, ["damage_taken", "health_regenerated", "damage_blocked"])),
-        utility: sectionTotal(state.sections?.utility)
+        economy:
+            sectionTotal(state.sections?.coins) +
+            sectionTotal(state.sections?.cash) +
+            sectionTotal(state.sections?.currencies) +
+            Number(state.core?.coins?.diff || 0) +
+            Number(state.core?.cells?.diff || 0),
+        survivability:
+            Number(state.core?.wave?.diff || 0) +
+            sectionTotal(mergeSections(state.sections, [
+                "damage_taken",
+                "health_regenerated",
+                "damage_blocked",
+                "total_enemies"
+            ])),
+        utility: sectionTotal(mergeSections(state.sections, [
+            "utility",
+            "counts",
+            "enemies_hit_by",
+            "killed_with_effect_active"
+        ]))
     };
 
-    const raw = cats.map(([key, label, fallback]) => {
-        const score = scores?.[key] || scores?.[fallback] || {};
-        const netFromScore = Number(score.net ?? score.score ?? score.value);
-        const netFromSections = Number(sectionTotals[key] || 0);
-        const net = Number.isFinite(netFromScore) ? netFromScore : netFromSections;
+    const raw = axes.map(axis => {
+        const categoryData = axis.sourceKeys
+            .map(key => scores?.[key])
+            .filter(Boolean);
+
+        const good = categoryData.reduce((sum, item) => sum + Number(item.good || 0), 0);
+        const bad = categoryData.reduce((sum, item) => sum + Number(item.bad || 0), 0);
+        const netFromScores = categoryData.reduce((sum, item) => sum + Number(item.net ?? 0), 0);
+        const netFromFallback = Number(fallbackTotals[axis.key] || 0);
+        const net = categoryData.length ? netFromScores : netFromFallback;
 
         return {
-            key,
-            label,
+            ...axis,
+            good,
+            bad,
             net: Number.isFinite(net) ? net : 0
         };
     });
 
-    const maxAbs = Math.max(
-        1,
-        ...raw.map(item => Math.abs(item.net))
-    );
+    const maxAbs = Math.max(1, ...raw.map(item => Math.abs(item.net)));
 
     return raw.map(item => {
         const norm = clamp(item.net / maxAbs, -1, 1);
-        const a = clamp(52 - norm * 34, 16, 90);
-        const b = clamp(52 + norm * 34, 16, 90);
+        const spread = Math.abs(norm);
+        const sharedBase = 57;
+        const split = 30 * spread;
+
+        const a = clamp(sharedBase - (norm * split), 22, 94);
+        const b = clamp(sharedBase + (norm * split), 22, 94);
         const tone = norm > 0.08 ? "good" : norm < -0.08 ? "bad" : "neutral";
-        const verdict = norm > 0.08 ? "B better" : norm < -0.08 ? "A better" : "Mixed";
+        const verdict = norm > 0.08 ? "B stronger" : norm < -0.08 ? "A stronger" : "Close";
 
         return {
             ...item,
             a,
             b,
-            aWidth: Math.round(a),
-            bWidth: Math.round(b),
             tone,
             verdict
         };
@@ -894,47 +921,81 @@ function buildGapModel(state, cats) {
 
 function buildGapRadarSVG(items = []) {
 
-    const size = 240;
-    const cx = 120;
-    const cy = 120;
-    const minRadius = 22;
-    const maxRadius = 94;
+    const size = 360;
+    const cx = 180;
+    const cy = 170;
+    const radius = 112;
 
-    const angles = [-90, 0, 90, 180];
+    const axisMeta = [
+        { angle: -90, label: "Damage Output", x: 180, y: 34, anchor: "middle" },
+        { angle: 0, label: "Economy", x: 323, y: 176, anchor: "start" },
+        { angle: 90, label: "Survivability", x: 180, y: 325, anchor: "middle" },
+        { angle: 180, label: "Utility", x: 37, y: 176, anchor: "end" }
+    ];
 
-    const point = (value, index) => {
-        const radius = minRadius + (clamp(value, 0, 100) / 100) * (maxRadius - minRadius);
-        const rad = angles[index] * Math.PI / 180;
-        return [
-            Math.round((cx + Math.cos(rad) * radius) * 10) / 10,
-            Math.round((cy + Math.sin(rad) * radius) * 10) / 10
-        ];
+    const point = (angleDeg, value) => {
+        const safe = clamp(Number(value) || 0, 0, 100) / 100;
+        const rad = angleDeg * Math.PI / 180;
+        return {
+            x: Math.round((cx + Math.cos(rad) * radius * safe) * 10) / 10,
+            y: Math.round((cy + Math.sin(rad) * radius * safe) * 10) / 10
+        };
     };
 
-    const poly = key => items.map((item, index) => point(item[key], index).join(",")).join(" ");
+    const diamond = value => axisMeta
+        .map(axis => point(axis.angle, value))
+        .map(p => `${p.x},${p.y}`)
+        .join(" ");
 
-    const axis = angles.map(angle => {
-        const rad = angle * Math.PI / 180;
-        const x = Math.round((cx + Math.cos(rad) * maxRadius) * 10) / 10;
-        const y = Math.round((cy + Math.sin(rad) * maxRadius) * 10) / 10;
-        return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" />`;
-    }).join("");
+    const polygon = key => axisMeta
+        .map((axis, index) => point(axis.angle, items[index]?.[key] || 0))
+        .map(p => `${p.x},${p.y}`)
+        .join(" ");
 
-    const rings = [28, 48, 68, 88].map(radius => `
-        <polygon points="${cx},${cy-radius} ${cx+radius},${cy} ${cx},${cy+radius} ${cx-radius},${cy}" />
-    `).join("");
+    const rings = [25, 50, 75, 100]
+        .map(value => `<polygon class="radar-ring ${value === 100 ? "outer" : ""}" points="${diamond(value)}" />`)
+        .join("");
+
+    const axisLines = axisMeta
+        .map(axis => {
+            const end = point(axis.angle, 100);
+            return `<line class="radar-axis" x1="${cx}" y1="${cy}" x2="${end.x}" y2="${end.y}" />`;
+        })
+        .join("");
+
+    const labels = axisMeta
+        .map(axis => `<text class="radar-label" x="${axis.x}" y="${axis.y}" text-anchor="${axis.anchor}">${escapeHTML(axis.label)}</text>`)
+        .join("");
 
     return `
-        <svg class="tbi-gap-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Category shape comparison">
-            <g class="grid">${rings}${axis}</g>
-            <polygon class="radar-a" points="${poly("a")}" />
-            <polygon class="radar-b" points="${poly("b")}" />
-            <g class="labels">
-                <text x="120" y="16">Damage</text>
-                <text x="224" y="124">Economy</text>
-                <text x="120" y="236">Survival</text>
-                <text x="16" y="124">Utility</text>
+        <svg class="tbi-gap-svg tbi-radar-diamond" viewBox="0 0 ${size} ${size}" role="img" aria-label="Run A and Run B category strength radar chart">
+            <defs>
+                <filter id="tbiRadarGlow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <radialGradient id="tbiRadarCore" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="rgba(25,214,255,0.22)" />
+                    <stop offset="68%" stop-color="rgba(25,214,255,0.04)" />
+                    <stop offset="100%" stop-color="rgba(25,214,255,0)" />
+                </radialGradient>
+            </defs>
+
+            <circle class="radar-core-glow" cx="${cx}" cy="${cy}" r="104" />
+            <g class="radar-grid">${rings}${axisLines}</g>
+            <polygon class="radar-shape radar-run-a" points="${polygon("a")}" />
+            <polygon class="radar-shape radar-run-b" points="${polygon("b")}" />
+            <g class="radar-points">
+                ${axisMeta.map((axis, index) => {
+                    const a = point(axis.angle, items[index]?.a || 0);
+                    const b = point(axis.angle, items[index]?.b || 0);
+                    return `<circle class="radar-dot a" cx="${a.x}" cy="${a.y}" r="2.4" /><circle class="radar-dot b" cx="${b.x}" cy="${b.y}" r="2.4" />`;
+                }).join("")}
             </g>
+            <g class="radar-labels">${labels}</g>
         </svg>
     `;
 }

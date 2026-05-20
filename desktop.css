@@ -187,13 +187,150 @@ button.danger, .danger { border-color: rgba(255,77,99,.38); color: #ffd5dc; back
 .tbi-metric-row span:not(:first-child) { color: #9ab3c8; text-align: right; }
 .tbi-metric-row strong { text-align: right; }
 
-.tbi-gap-panel { min-height: 100%; }
-.tbi-gap-bars { display: grid; gap: 11px; margin: 8px 0 14px; }
-.tbi-gap-bar { display: grid; grid-template-columns: 112px 1fr 44px; align-items: center; gap: 10px; color: #cde2f2; font-size: 12px; }
-.tbi-gap-bar i { height: 10px; border-radius: 999px; background: rgba(25,214,255,.13); overflow: hidden; box-shadow: inset 0 0 10px rgba(0,0,0,.45); }
-.tbi-gap-bar b { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--gold)); box-shadow: 0 0 18px rgba(25,214,255,.5); }
-.tbi-radar-fake { height: 120px; display: grid; place-items: center; }
-.tbi-radar-fake span { width: 118px; height: 118px; border: 1px solid rgba(25,214,255,.28); background: linear-gradient(135deg, rgba(25,214,255,.32), rgba(255,215,72,.24)); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); box-shadow: var(--glow-cyan); }
+/* Gap radar */
+.tbi-gap-panel,
+.tbi-radar-card {
+    min-height: 100%;
+}
+
+.tbi-radar-card {
+    border-color: rgba(255, 67, 209, .42);
+    background:
+        radial-gradient(circle at 50% 48%, rgba(25, 214, 255, .10), transparent 42%),
+        radial-gradient(circle at 68% 45%, rgba(255, 215, 72, .08), transparent 34%),
+        linear-gradient(180deg, rgba(7, 16, 32, .94), rgba(2, 7, 16, .98));
+    box-shadow:
+        0 0 26px rgba(255, 67, 209, .14),
+        inset 0 0 24px rgba(25, 214, 255, .045);
+}
+
+.tbi-radar-heading {
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid rgba(25, 214, 255, .12);
+    padding-bottom: 10px;
+    margin-bottom: 8px;
+}
+
+.tbi-radar-heading h3 {
+    color: var(--cyan);
+    text-shadow: 0 0 14px rgba(25, 214, 255, .45);
+    letter-spacing: .22em;
+}
+
+.tbi-radar-stage {
+    min-height: 315px;
+    display: grid;
+    place-items: center;
+    padding: 4px 4px 0;
+}
+
+.tbi-gap-svg {
+    width: min(100%, 390px);
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+    filter:
+        drop-shadow(0 0 18px rgba(25, 214, 255, .18))
+        drop-shadow(0 0 22px rgba(255, 67, 209, .10));
+}
+
+.tbi-gap-svg .radar-core-glow {
+    fill: url(#tbiRadarCore);
+}
+
+.tbi-gap-svg .radar-ring {
+    fill: rgba(25, 214, 255, .022);
+    stroke: rgba(80, 190, 255, .20);
+    stroke-width: 1;
+}
+
+.tbi-gap-svg .radar-ring.outer {
+    stroke: rgba(80, 190, 255, .42);
+}
+
+.tbi-gap-svg .radar-axis {
+    stroke: rgba(220, 244, 255, .24);
+    stroke-width: 1;
+}
+
+.tbi-gap-svg .radar-shape {
+    filter: url(#tbiRadarGlow);
+    stroke-width: 3;
+    vector-effect: non-scaling-stroke;
+}
+
+.tbi-gap-svg .radar-run-a {
+    fill: rgba(25, 214, 255, .22);
+    stroke: var(--cyan);
+}
+
+.tbi-gap-svg .radar-run-b {
+    fill: rgba(255, 215, 72, .20);
+    stroke: var(--gold);
+}
+
+.tbi-gap-svg .radar-dot.a {
+    fill: var(--cyan);
+    filter: url(#tbiRadarGlow);
+}
+
+.tbi-gap-svg .radar-dot.b {
+    fill: var(--gold);
+    filter: url(#tbiRadarGlow);
+}
+
+.tbi-gap-svg .radar-label {
+    fill: rgba(235, 246, 255, .92);
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: .055em;
+    paint-order: stroke;
+    stroke: rgba(2, 7, 16, .72);
+    stroke-width: 3px;
+}
+
+.tbi-gap-legend {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    color: #dceeff;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    margin-top: 6px;
+    text-transform: none;
+}
+
+.tbi-gap-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tbi-gap-legend i {
+    width: 42px;
+    height: 6px;
+    border-radius: 99px;
+    display: inline-block;
+}
+
+.tbi-gap-legend i.a {
+    background: var(--cyan);
+    box-shadow: 0 0 13px rgba(25, 214, 255, .75);
+}
+
+.tbi-gap-legend i.b {
+    background: var(--gold);
+    box-shadow: 0 0 13px rgba(255, 215, 72, .68);
+}
+
+.tbi-radar-fake,
+.tbi-gap-bars,
+.tbi-gap-bar {
+    display: none !important;
+}
 
 .tbi-mini-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .tbi-mini-stat { padding: 10px; border: 1px solid rgba(25,214,255,.18); border-radius: 12px; background: rgba(2,8,18,.75); display: grid; gap: 5px; }
@@ -443,7 +580,7 @@ body.debug-open #debugPanel { pointer-events: auto; }
 }
 
 /* --------------------------------------------------
-   v4.9c desktop UI repair / concept alignment
+   v4.9d desktop UI repair / radar alignment
    - Hide mobile navigation on desktop
    - Restore debug as a proper modal
    - Repair history card styling
@@ -466,148 +603,7 @@ body.debug-open #debugPanel { pointer-events: auto; }
     justify-content: flex-end;
 }
 
-/* Gap panel */
-.tbi-gap-layout {
-    display: grid;
-    grid-template-columns: minmax(220px, 1fr) minmax(220px, 320px);
-    gap: 14px;
-    align-items: center;
-}
-
-.tbi-gap-bars {
-    display: grid;
-    gap: 10px;
-}
-
-.tbi-gap-bar {
-    display: grid;
-    grid-template-columns: 112px minmax(120px, 1fr) 82px;
-    gap: 10px;
-    align-items: center;
-    color: #cfe4f2;
-    font-size: 12px;
-}
-
-.tbi-gap-bar span {
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .10em;
-    font-weight: 900;
-    font-size: 10px;
-}
-
-.tbi-gap-bar i {
-    position: relative;
-    display: block;
-    height: 14px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.045);
-    overflow: hidden;
-    border: 1px solid rgba(25,214,255,.16);
-}
-
-.tbi-gap-bar b {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-}
-
-.tbi-gap-bar b.a {
-    left: 0;
-    background: linear-gradient(90deg, rgba(25,214,255,.95), rgba(25,214,255,.25));
-    box-shadow: 0 0 14px rgba(25,214,255,.50);
-}
-
-.tbi-gap-bar b.b {
-    right: 0;
-    background: linear-gradient(90deg, rgba(255,215,72,.20), rgba(255,215,72,.95));
-    box-shadow: 0 0 14px rgba(255,215,72,.44);
-}
-
-.tbi-gap-bar strong {
-    justify-self: end;
-    color: #dff8ff;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-}
-
-.tbi-gap-bar.good strong { color: var(--green); }
-.tbi-gap-bar.bad strong { color: var(--red); }
-
-.tbi-gap-radar {
-    display: grid;
-    place-items: center;
-    gap: 8px;
-    min-height: 260px;
-}
-
-.tbi-gap-svg {
-    width: min(100%, 280px);
-    height: auto;
-    overflow: visible;
-    filter: drop-shadow(0 0 16px rgba(25,214,255,.18));
-}
-
-.tbi-gap-svg .grid polygon,
-.tbi-gap-svg .grid line {
-    fill: none;
-    stroke: rgba(25,214,255,.18);
-    stroke-width: 1;
-}
-
-.tbi-gap-svg .radar-a {
-    fill: rgba(25,214,255,.25);
-    stroke: var(--cyan);
-    stroke-width: 2;
-}
-
-.tbi-gap-svg .radar-b {
-    fill: rgba(255,215,72,.22);
-    stroke: var(--gold);
-    stroke-width: 2;
-}
-
-.tbi-gap-svg .labels text {
-    fill: #95afc2;
-    font-size: 10px;
-    text-anchor: middle;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
-
-.tbi-gap-svg .labels text:nth-child(2) { text-anchor: end; }
-.tbi-gap-svg .labels text:nth-child(4) { text-anchor: start; }
-
-.tbi-gap-legend {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    font-size: 11px;
-    font-weight: 900;
-}
-
-.tbi-gap-legend span {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.tbi-gap-legend i {
-    width: 28px;
-    height: 4px;
-    border-radius: 99px;
-    display: inline-block;
-}
-
-.tbi-gap-legend i.a { background: var(--cyan); box-shadow: 0 0 10px rgba(25,214,255,.62); }
-.tbi-gap-legend i.b { background: var(--gold); box-shadow: 0 0 10px rgba(255,215,72,.52); }
-
-.tbi-radar-fake { display: none !important; }
+/* Gap radar uses the single canonical block above. */
 
 /* Debug overlay repaired */
 #debugPanel {

@@ -134,13 +134,6 @@ button.danger, .danger { border-color: rgba(255,77,99,.38); color: #ffd5dc; back
 .tbi-accordion-row strong { color: var(--cyan); letter-spacing: .11em; text-transform: uppercase; font-size: 12px; }
 .tbi-accordion-row em { color: var(--gold); font-style: normal; font-weight: 900; }
 
-.tbi-gap-bars { display: grid; gap: 10px; margin: 10px 0; }
-.tbi-gap-bar { display: grid; grid-template-columns: 84px 1fr 38px; gap: 8px; align-items: center; color: #cfe4f2; font-size: 11px; }
-.tbi-gap-bar i { height: 8px; border-radius: 999px; background: rgba(25,214,255,.14); overflow: hidden; }
-.tbi-gap-bar b { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--gold)); box-shadow: 0 0 14px rgba(25,214,255,.5); }
-.tbi-radar-fake { height: 140px; display: grid; place-items: center; }
-.tbi-radar-fake span { width: 136px; height: 136px; border: 1px solid rgba(25,214,255,.28); background: linear-gradient(135deg, rgba(25,214,255,.32), rgba(255,215,72,.24)); clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%); box-shadow: var(--glow-cyan); }
-
 .tbi-grid { display: grid; gap: 10px; }
 .tbi-grid-1, .tbi-grid-2, .tbi-grid-4 { grid-template-columns: 1fr; }
 .tbi-metric-table { display: grid; gap: 1px; border-radius: 10px; overflow: hidden; background: rgba(255,255,255,.06); }
@@ -200,89 +193,147 @@ body.debug-open #debugPanel { pointer-events: auto; }
 .confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
 
 /* --------------------------------------------------
-   v4.9c mobile UI repair / concept alignment
+   v4.9d mobile UI repair / radar alignment
 -------------------------------------------------- */
 
 .tbi-desktop-nav {
     display: none !important;
 }
 
-/* Gap panel */
-.tbi-gap-layout {
-    display: grid;
-    gap: 12px;
+/* Gap radar */
+.tbi-radar-card {
+    border-color: rgba(255, 67, 209, .42);
+    background:
+        radial-gradient(circle at 50% 50%, rgba(25, 214, 255, .10), transparent 44%),
+        linear-gradient(180deg, rgba(7, 16, 32, .94), rgba(2, 7, 16, .98));
 }
 
-.tbi-gap-radar {
+.tbi-radar-heading {
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid rgba(25, 214, 255, .12);
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+}
+
+.tbi-radar-heading h3 {
+    color: var(--cyan);
+    text-shadow: 0 0 12px rgba(25, 214, 255, .48);
+    letter-spacing: .17em;
+    font-size: 14px;
+}
+
+.tbi-radar-stage {
+    min-height: 252px;
     display: grid;
     place-items: center;
-    gap: 8px;
-    min-height: 190px;
+    padding: 0;
 }
 
 .tbi-gap-svg {
-    width: min(100%, 240px);
+    width: min(100%, 310px);
     height: auto;
     overflow: visible;
-    filter: drop-shadow(0 0 14px rgba(25,214,255,.18));
+    filter:
+        drop-shadow(0 0 14px rgba(25, 214, 255, .18))
+        drop-shadow(0 0 18px rgba(255, 67, 209, .10));
 }
 
-.tbi-gap-svg .grid polygon,
-.tbi-gap-svg .grid line {
-    fill: none;
-    stroke: rgba(25,214,255,.18);
+.tbi-gap-svg .radar-core-glow {
+    fill: url(#tbiRadarCore);
+}
+
+.tbi-gap-svg .radar-ring {
+    fill: rgba(25, 214, 255, .022);
+    stroke: rgba(80, 190, 255, .20);
     stroke-width: 1;
 }
 
-.tbi-gap-svg .radar-a {
-    fill: rgba(25,214,255,.25);
+.tbi-gap-svg .radar-ring.outer {
+    stroke: rgba(80, 190, 255, .42);
+}
+
+.tbi-gap-svg .radar-axis {
+    stroke: rgba(220, 244, 255, .24);
+    stroke-width: 1;
+}
+
+.tbi-gap-svg .radar-shape {
+    filter: url(#tbiRadarGlow);
+    stroke-width: 3;
+    vector-effect: non-scaling-stroke;
+}
+
+.tbi-gap-svg .radar-run-a {
+    fill: rgba(25, 214, 255, .22);
     stroke: var(--cyan);
-    stroke-width: 2;
 }
 
-.tbi-gap-svg .radar-b {
-    fill: rgba(255,215,72,.22);
+.tbi-gap-svg .radar-run-b {
+    fill: rgba(255, 215, 72, .20);
     stroke: var(--gold);
-    stroke-width: 2;
 }
 
-.tbi-gap-svg .labels text {
-    fill: #95afc2;
-    font-size: 10px;
-    text-anchor: middle;
-    letter-spacing: .08em;
+.tbi-gap-svg .radar-dot.a {
+    fill: var(--cyan);
+    filter: url(#tbiRadarGlow);
 }
 
-.tbi-gap-svg .labels text:nth-child(2) { text-anchor: end; }
-.tbi-gap-svg .labels text:nth-child(4) { text-anchor: start; }
+.tbi-gap-svg .radar-dot.b {
+    fill: var(--gold);
+    filter: url(#tbiRadarGlow);
+}
+
+.tbi-gap-svg .radar-label {
+    fill: rgba(235, 246, 255, .92);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .045em;
+    paint-order: stroke;
+    stroke: rgba(2, 7, 16, .78);
+    stroke-width: 3px;
+}
 
 .tbi-gap-legend {
     display: flex;
     justify-content: center;
-    gap: 18px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    font-size: 11px;
+    gap: 30px;
+    color: #dceeff;
+    font-size: 13px;
     font-weight: 900;
+    letter-spacing: .08em;
+    margin-top: 2px;
+    text-transform: none;
 }
 
 .tbi-gap-legend span {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 }
 
 .tbi-gap-legend i {
-    width: 28px;
-    height: 4px;
+    width: 34px;
+    height: 5px;
     border-radius: 99px;
     display: inline-block;
 }
 
-.tbi-gap-legend i.a { background: var(--cyan); box-shadow: 0 0 10px rgba(25,214,255,.62); }
-.tbi-gap-legend i.b { background: var(--gold); box-shadow: 0 0 10px rgba(255,215,72,.52); }
-.tbi-radar-fake { display: none !important; }
+.tbi-gap-legend i.a {
+    background: var(--cyan);
+    box-shadow: 0 0 12px rgba(25, 214, 255, .72);
+}
+
+.tbi-gap-legend i.b {
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(255, 215, 72, .66);
+}
+
+.tbi-radar-fake,
+.tbi-gap-bars,
+.tbi-gap-bar {
+    display: none !important;
+}
 
 /* Debug overlay repaired */
 #debugPanel {
