@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * TOWER BATTLE INTEL DASHBOARD v4.9b
+ * TOWER BATTLE INTEL DASHBOARD v4.9c
  * Clean workspace renderer.
  *
  * Keeps runtime/data systems intact and replaces the old dashboard UI stack.
@@ -169,7 +169,7 @@ function buildHeader(activeTab = "overview") {
             </nav>
 
             <div class="tbi-header-actions">
-                <span class="tbi-version-pill">TBI: v4.9b</span>
+                <span class="tbi-version-pill">TBI: v4.9c</span>
                 <button type="button" class="tbi-icon-button" data-dashboard-tab="command" aria-label="Open command deck">▣</button>
             </div>
         </header>
@@ -802,8 +802,15 @@ function metricRow(row) {
 
 function buildGapPanel(state) {
 
-    const scores = state.summary?.categoryScores || {};
-    const cats = ["damage", "economy", "survivability", "utility"];
+    const cats = [
+        ["damage", "Damage", "damage"],
+        ["economy", "Economy", "coins"],
+        ["survivability", "Survivability", "defense"],
+        ["utility", "Utility", "utility"]
+    ];
+
+    const gap = buildGapModel(state, cats);
+    const svg = buildGapRadarSVG(gap);
 
     return `
         <section class="tbi-card tbi-gap-panel">
@@ -811,23 +818,124 @@ function buildGapPanel(state) {
                 <h3>The Gap In Numbers</h3>
                 <span>A vs B shape</span>
             </div>
-            <div class="tbi-gap-bars">
-                ${cats.map(cat => {
-                    const score = Math.abs(Number(scores?.[cat]?.score || scores?.[cat]?.value || 50));
-                    const width = clamp(score % 100, 18, 92);
-                    return `
-                        <div class="tbi-gap-bar">
-                            <span>${escapeHTML(formatLabel(cat))}</span>
-                            <i><b style="width:${width}%"></b></i>
-                            <strong>${Math.round(width)}%</strong>
+
+            <div class="tbi-gap-layout">
+                <div class="tbi-gap-bars">
+                    ${gap.map(item => `
+                        <div class="tbi-gap-bar ${escapeAttr(item.tone)}">
+                            <span>${escapeHTML(item.label)}</span>
+                            <i>
+                                <b class="a" style="width:${item.aWidth}%"></b>
+                                <b class="b" style="width:${item.bWidth}%"></b>
+                            </i>
+                            <strong>${escapeHTML(item.verdict)}</strong>
                         </div>
-                    `;
-                }).join("")}
-            </div>
-            <div class="tbi-radar-fake" aria-hidden="true">
-                <span></span>
+                    `).join("")}
+                </div>
+
+                <div class="tbi-gap-radar" aria-label="A versus B category radar">
+                    ${svg}
+                    <div class="tbi-gap-legend">
+                        <span><i class="a"></i>A</span>
+                        <span><i class="b"></i>B</span>
+                    </div>
+                </div>
             </div>
         </section>
+    `;
+}
+
+function buildGapModel(state, cats) {
+
+    const scores = state.summary?.categoryScores || {};
+    const sectionTotals = {
+        damage: sectionTotal(state.sections?.damage),
+        economy: sectionTotal(state.sections?.coins) + sectionTotal(state.sections?.cash) + Number(state.core?.coins?.diff || 0),
+        survivability: sectionTotal(mergeSections(state.sections, ["damage_taken", "health_regenerated", "damage_blocked"])),
+        utility: sectionTotal(state.sections?.utility)
+    };
+
+    const raw = cats.map(([key, label, fallback]) => {
+        const score = scores?.[key] || scores?.[fallback] || {};
+        const netFromScore = Number(score.net ?? score.score ?? score.value);
+        const netFromSections = Number(sectionTotals[key] || 0);
+        const net = Number.isFinite(netFromScore) ? netFromScore : netFromSections;
+
+        return {
+            key,
+            label,
+            net: Number.isFinite(net) ? net : 0
+        };
+    });
+
+    const maxAbs = Math.max(
+        1,
+        ...raw.map(item => Math.abs(item.net))
+    );
+
+    return raw.map(item => {
+        const norm = clamp(item.net / maxAbs, -1, 1);
+        const a = clamp(52 - norm * 34, 16, 90);
+        const b = clamp(52 + norm * 34, 16, 90);
+        const tone = norm > 0.08 ? "good" : norm < -0.08 ? "bad" : "neutral";
+        const verdict = norm > 0.08 ? "B better" : norm < -0.08 ? "A better" : "Mixed";
+
+        return {
+            ...item,
+            a,
+            b,
+            aWidth: Math.round(a),
+            bWidth: Math.round(b),
+            tone,
+            verdict
+        };
+    });
+}
+
+function buildGapRadarSVG(items = []) {
+
+    const size = 240;
+    const cx = 120;
+    const cy = 120;
+    const minRadius = 22;
+    const maxRadius = 94;
+
+    const angles = [-90, 0, 90, 180];
+
+    const point = (value, index) => {
+        const radius = minRadius + (clamp(value, 0, 100) / 100) * (maxRadius - minRadius);
+        const rad = angles[index] * Math.PI / 180;
+        return [
+            Math.round((cx + Math.cos(rad) * radius) * 10) / 10,
+            Math.round((cy + Math.sin(rad) * radius) * 10) / 10
+        ];
+    };
+
+    const poly = key => items.map((item, index) => point(item[key], index).join(",")).join(" ");
+
+    const axis = angles.map(angle => {
+        const rad = angle * Math.PI / 180;
+        const x = Math.round((cx + Math.cos(rad) * maxRadius) * 10) / 10;
+        const y = Math.round((cy + Math.sin(rad) * maxRadius) * 10) / 10;
+        return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" />`;
+    }).join("");
+
+    const rings = [28, 48, 68, 88].map(radius => `
+        <polygon points="${cx},${cy-radius} ${cx+radius},${cy} ${cx},${cy+radius} ${cx-radius},${cy}" />
+    `).join("");
+
+    return `
+        <svg class="tbi-gap-svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Category shape comparison">
+            <g class="grid">${rings}${axis}</g>
+            <polygon class="radar-a" points="${poly("a")}" />
+            <polygon class="radar-b" points="${poly("b")}" />
+            <g class="labels">
+                <text x="120" y="16">Damage</text>
+                <text x="224" y="124">Economy</text>
+                <text x="120" y="236">Survival</text>
+                <text x="16" y="124">Utility</text>
+            </g>
+        </svg>
     `;
 }
 
