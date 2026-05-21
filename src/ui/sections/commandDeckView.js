@@ -9,9 +9,9 @@ export function buildCommandDeckView(state = {}) {
                 <h2>Command Deck</h2>
                 <p>Paste, save, import, export, scan, and manage run data.</p>
                 <div class="tbi-command-actions">
-                    <button type="button" onclick="document.getElementById('saveReport')?.click()">Save Report</button>
-                    <button type="button" onclick="document.getElementById('clearInput')?.click()">Clear Input</button>
-                    <button type="button" onclick="document.getElementById('clearRuns')?.click()">Clear Runs</button>
+                    <button type="button" data-ui-action="save-report">Save Report</button>
+                    <button type="button" data-ui-action="clear-input">Clear Input</button>
+                    <button type="button" data-ui-action="clear-runs">Clear Runs</button>
                     <button type="button" data-dashboard-tab="history">Open History</button>
                 </div>
                 <p class="tbi-muted">The report console opens below on desktop. On mobile, use the Open Deck button.</p>

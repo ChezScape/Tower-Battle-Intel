@@ -91,10 +91,10 @@ export function buildQuickActionsPanel() {
         <section class="tbi-card tbi-quick-actions">
             <h3>Quick Actions</h3>
             <div class="tbi-action-grid">
-                <button type="button" data-dashboard-tab="command">Paste Report</button>
-                <button type="button" onclick="document.getElementById('saveReport')?.click()">Save Report</button>
+                <button type="button" data-ui-action="open-command">Paste Report</button>
+                <button type="button" data-ui-action="save-report">Save Report</button>
                 <button type="button" data-dashboard-tab="history">History</button>
-                <button type="button" onclick="document.getElementById('clearRuns')?.click()">Clear Runs</button>
+                <button type="button" data-ui-action="clear-runs">Clear Runs</button>
             </div>
         </section>
     `;

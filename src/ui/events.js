@@ -51,7 +51,11 @@ import {
 
 export function bindUIEvents() {
 
+    applyDisplayModeFromState();
+
     bindDashboardTabEvents();
+
+    bindUniversalActionEvents();
 
     bindHistoryActionDelegates();
 
@@ -75,6 +79,306 @@ export function bindUIEvents() {
 }
 
 
+
+/* --------------------------------------------------
+   UNIVERSAL ACTION DELEGATE
+   Covers all rebuilt mock-up buttons that should do something.
+-------------------------------------------------- */
+
+function bindUniversalActionEvents() {
+
+    if (document.body?.dataset?.universalActionDelegatesBound === "true") {
+        return;
+    }
+
+    if (document.body?.dataset) {
+        document.body.dataset.universalActionDelegatesBound = "true";
+    }
+
+    document.addEventListener("click", handleUniversalActionClick, true);
+    document.addEventListener("keydown", handleUniversalActionKeydown, true);
+}
+
+function handleUniversalActionKeydown(event) {
+
+    const target =
+        event?.target;
+
+    if (!target || typeof target.closest !== "function") {
+        return;
+    }
+
+    const actionTarget =
+        target.closest("[data-ui-action], .history-import-label");
+
+    if (!actionTarget) {
+        return;
+    }
+
+    if (event.key !== "Enter" && event.key !== " ") {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (actionTarget.matches?.(".history-import-label")) {
+        openHistoryImportPicker();
+        return;
+    }
+
+    runUniversalAction(actionTarget);
+}
+
+function handleUniversalActionClick(event) {
+
+    const target =
+        event?.target;
+
+    if (!target || typeof target.closest !== "function") {
+        return;
+    }
+
+    const actionTarget =
+        target.closest("[data-ui-action]");
+
+    if (!actionTarget || actionTarget.disabled) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation?.();
+
+    runUniversalAction(actionTarget);
+}
+
+function runUniversalAction(actionTarget) {
+
+    const action =
+        actionTarget?.dataset?.uiAction || "";
+
+    switch (action) {
+
+        case "open-command":
+        case "paste-report":
+        case "open-report-console":
+            activateDashboardTab("command");
+            focusReportInput({ select: false });
+            return;
+
+        case "save-report":
+            document.getElementById("saveReport")?.click();
+            return;
+
+        case "clear-input":
+            document.getElementById("clearInput")?.click();
+            focusReportInput({ select: false });
+            return;
+
+        case "clear-runs":
+            document.getElementById("clearRuns")?.click();
+            return;
+
+        case "open-history":
+            activateDashboardTab("history");
+            return;
+
+        case "open-settings":
+            activateDashboardTab("settings");
+            return;
+
+        case "open-anomalies":
+            activateDashboardTab("anomalies");
+            return;
+
+        case "open-compare-section":
+            openCompareSection(actionTarget.dataset.sectionTarget || "damage");
+            return;
+
+        case "open-system-section":
+            openSystemSection(actionTarget.dataset.sectionTarget || actionTarget.dataset.section || "core");
+            return;
+
+        case "toggle-debug":
+            document.getElementById("toggleDebug")?.click();
+            return;
+
+        case "toggle-display-mode":
+            toggleDisplayMode();
+            return;
+
+        default:
+            return;
+    }
+}
+
+function openCompareSection(sectionTarget = "damage") {
+
+    const state =
+        getState();
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            dashboardTab: "compare",
+            selectedSection: normaliseActionSection(sectionTarget)
+        }
+    });
+
+    saveStorage(getState());
+
+    withMobileTabSwitch(() => {
+        render();
+    });
+
+    scrollToStatPanel(sectionTarget);
+}
+
+function openSystemSection(sectionTarget = "core") {
+
+    const state =
+        getState();
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            dashboardTab: "systems",
+            selectedSection: normaliseActionSection(sectionTarget)
+        }
+    });
+
+    saveStorage(getState());
+
+    withMobileTabSwitch(() => {
+        render();
+    });
+
+    if (isMobileMode()) {
+        scrollMobileElementIntoView(".tbi-system-detail", {
+            fallbackSelector: '[data-dashboard-panel="systems"]',
+            offset: 14
+        });
+    } else {
+        scrollToStatPanel(sectionTarget);
+    }
+}
+
+function scrollToStatPanel(sectionTarget = "") {
+
+    const selector =
+        `[data-stat-panel-section="${cssEscape(normaliseActionSection(sectionTarget))}"]`;
+
+    window.requestAnimationFrame(() => {
+        const target =
+            document.querySelector(selector);
+
+        if (!target) {
+            return;
+        }
+
+        const rect =
+            target.getBoundingClientRect();
+
+        const top =
+            Math.max(0, window.scrollY + rect.top - 18);
+
+        window.scrollTo({
+            top,
+            behavior: "smooth"
+        });
+    });
+}
+
+function focusReportInput({ select = false } = {}) {
+
+    window.requestAnimationFrame(() => {
+        const input =
+            document.getElementById("input");
+
+        if (!input) {
+            return;
+        }
+
+        try {
+            input.focus({ preventScroll: false });
+
+            if (select) {
+                input.select?.();
+            }
+        } catch {
+            input.focus?.();
+        }
+    });
+}
+
+function toggleDisplayMode() {
+
+    const state =
+        getState();
+
+    const current =
+        state.ui?.displayMode || "normal";
+
+    const next =
+        current === "normal"
+            ? "quiet"
+            : "normal";
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            displayMode: next
+        }
+    });
+
+    saveStorage(getState());
+
+    applyDisplayModeFromState();
+}
+
+function applyDisplayModeFromState() {
+
+    const state =
+        getState();
+
+    const mode =
+        state.ui?.displayMode || "normal";
+
+    document.documentElement.classList.toggle("tbi-display-quiet", mode === "quiet");
+    document.body?.classList?.toggle("tbi-display-quiet", mode === "quiet");
+}
+
+function normaliseActionSection(value = "") {
+
+    const key =
+        String(value || "")
+            .trim()
+            .toLowerCase()
+            .replace(/[%:/()]/g, "")
+            .replace(/\s*\/\s*/g, "_")
+            .replace(/\s+/g, "_")
+            .replace(/__+/g, "_")
+            .replace(/^_+|_+$/g, "");
+
+    const aliases = {
+        defense: "damage_taken",
+        survival: "damage_taken",
+        economy: "coins",
+        effects: "killed_with_effect_active",
+        enemies: "enemies_hit_by"
+    };
+
+    return aliases[key] || key || "damage";
+}
+
+function cssEscape(value = "") {
+
+    if (typeof CSS !== "undefined" && typeof CSS.escape === "function") {
+        return CSS.escape(String(value || ""));
+    }
+
+    return String(value || "").replace(/"/g, "\\\"");
+}
 
 /* --------------------------------------------------
    HISTORY ACTION DELEGATES
@@ -115,7 +419,6 @@ function handleHistoryActionClick(event) {
             [data-clear-history-selection],
             [data-export-history],
             [data-import-history-button],
-            [data-import-history-label],
             [data-delete-last-history],
             [data-delete-all-history]
         `);
@@ -224,8 +527,7 @@ function handleHistoryActionClick(event) {
     }
 
     if (
-        button.matches("[data-import-history-button]") ||
-        button.matches("[data-import-history-label]")
+        button.matches("[data-import-history-button]")
     ) {
         openHistoryImportPicker();
         return;
@@ -449,7 +751,9 @@ function bindHeatmapEvents() {
             getState();
 
         const selectedSection =
-            section;
+            state.ui?.selectedSection === section
+                ? null
+                : section;
 
         setState({
             ui: {
@@ -464,14 +768,10 @@ function bindHeatmapEvents() {
             render();
         });
 
-        if (isMobileMode()) {
-            scrollMobileElementIntoView(".wa-drillgrid", {
+        if (isMobileMode() && selectedSection) {
+            scrollMobileElementIntoView(".tbi-system-detail", {
                 fallbackSelector: '[data-dashboard-panel="systems"]',
                 offset: 14
-            });
-        } else {
-            scrollElementIntoView(".wa-drillgrid", {
-                offset: 18
             });
         }
     });
@@ -1191,6 +1491,16 @@ function bindHistoryImportExportButtons() {
 }
 
 function openHistoryImportPicker() {
+
+    const existingInput =
+        document.getElementById("historyImportFile") ||
+        document.querySelector("[data-import-history-input]");
+
+    if (existingInput) {
+        existingInput.value = "";
+        existingInput.click();
+        return;
+    }
 
     const input =
         document.createElement("input");

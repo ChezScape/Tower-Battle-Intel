@@ -7421,3 +7421,25 @@ html[data-device-mode="mobile"] .confirm-warning strong[data-confirm-required-ph
     text-shadow: 0 0 12px rgba(255, 214, 80, 0.34);
     letter-spacing: 0.08em;
 }
+
+/* --------------------------------------------------
+   v4.9s BUTTON WIRING AUDIT POLISH
+-------------------------------------------------- */
+
+html.tbi-display-quiet body,
+body.tbi-display-quiet {
+    --glow-cyan: 0 0 10px rgba(25, 214, 255, 0.18), inset 0 0 12px rgba(25, 214, 255, 0.025);
+    --glow-gold: 0 0 10px rgba(255, 215, 72, 0.16), inset 0 0 12px rgba(255, 215, 72, 0.025);
+    --glow-pink: 0 0 10px rgba(255, 67, 209, 0.14), inset 0 0 12px rgba(255, 67, 209, 0.025);
+}
+
+.tbi-mode-toggle[data-ui-action="toggle-display-mode"],
+.history-import-label {
+    cursor: pointer;
+}
+
+.tbi-card-footer-action[data-ui-action="open-compare-section"]:focus-visible,
+.history-import-label:focus-visible {
+    outline: 2px solid rgba(25, 214, 255, 0.75);
+    outline-offset: 2px;
+}

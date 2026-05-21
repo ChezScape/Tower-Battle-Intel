@@ -12,9 +12,9 @@ import {
 export function buildPrimaryStatGrid(state = {}) {
     return `
         <div class="tbi-grid tbi-grid-4 tbi-primary-matrix">
-            ${buildMetricTableCard("Damage Dealt", state.sections.damage, { icon: "✹", accent: "cyan", limit: 7, footer: "View Full Damage Breakdown" })}
-            ${buildMetricTableCard("Defense & Survival", mergeSections(state.sections, ["damage_taken", "health_regenerated", "damage_blocked"]), { icon: "⬡", accent: "blue", limit: 6, footer: "View Full Defense Breakdown" })}
-            ${buildMetricTableCard("Utility", state.sections.utility, { icon: "⚒", accent: "violet", limit: 6, footer: "View Full Utility Breakdown" })}
+            ${buildMetricTableCard("Damage Dealt", state.sections.damage, { icon: "✹", accent: "cyan", limit: 7, footer: "View Full Damage Breakdown", target: "damage" })}
+            ${buildMetricTableCard("Defense & Survival", mergeSections(state.sections, ["damage_taken", "health_regenerated", "damage_blocked"]), { icon: "⬡", accent: "blue", limit: 6, footer: "View Full Defense Breakdown", target: "damage_taken" })}
+            ${buildMetricTableCard("Utility", state.sections.utility, { icon: "⚒", accent: "violet", limit: 6, footer: "View Full Utility Breakdown", target: "utility" })}
             ${state.gapPanel || ""}
         </div>
     `;
@@ -23,23 +23,39 @@ export function buildPrimaryStatGrid(state = {}) {
 export function buildSecondaryStatGrid(state = {}) {
     return `
         <div class="tbi-grid tbi-grid-4 tbi-secondary-matrix">
-            ${buildMetricTableCard("Enemies Hit By", state.sections.enemies_hit_by, { icon: "◎", accent: "violet", limit: 5, footer: "View All Enemy Stats" })}
-            ${buildMetricTableCard("Counts", state.sections.counts, { icon: "#", accent: "cyan", limit: 5, footer: "View All Counts" })}
-            ${buildMetricTableCard("Coins Breakdown", state.sections.coins, { icon: "$", accent: "gold", limit: 6, footer: "View Full Economy Breakdown" })}
-            ${buildMetricTableCard("Effects Active", state.sections.killed_with_effect_active, { icon: "✦", accent: "pink", limit: 5, footer: "View Effect Breakdown" })}
+            ${buildMetricTableCard("Enemies Hit By", state.sections.enemies_hit_by, { icon: "◎", accent: "violet", limit: 5, footer: "View All Enemy Stats", target: "enemies_hit_by" })}
+            ${buildMetricTableCard("Counts", state.sections.counts, { icon: "#", accent: "cyan", limit: 5, footer: "View All Counts", target: "counts" })}
+            ${buildMetricTableCard("Coins Breakdown", state.sections.coins, { icon: "$", accent: "gold", limit: 6, footer: "View Full Economy Breakdown", target: "coins" })}
+            ${buildMetricTableCard("Effects Active", state.sections.killed_with_effect_active, { icon: "✦", accent: "pink", limit: 5, footer: "View Effect Breakdown", target: "killed_with_effect_active" })}
         </div>
     `;
 }
 
-export function buildMetricTableCard(title, section, { icon = "◇", accent = "cyan", limit = 8, footer = "View Details" } = {}) {
+export function buildMetricTableCard(title, section, { icon = "◇", accent = "cyan", limit = 8, footer = "View Details", target = "" } = {}) {
     return `
-        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)}">
+        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)}" data-stat-panel-section="${escapeAttr(target || normaliseFooterTarget(title))}">
             <div class="tbi-card-heading">
                 <h3><span>${escapeHTML(icon)}</span> ${escapeHTML(title)}</h3>
                 <strong>${escapeHTML(formatDelta(sectionTotal(section), { compact: true }))}</strong>
             </div>
             ${buildMetricRows(section, { limit })}
-            <button type="button" class="tbi-card-footer-action" data-dashboard-tab="compare">${escapeHTML(footer)}</button>
+            <button type="button" class="tbi-card-footer-action" data-ui-action="open-compare-section" data-section-target="${escapeAttr(target || normaliseFooterTarget(title))}">${escapeHTML(footer)}</button>
         </section>
     `;
+}
+
+
+function normaliseFooterTarget(title = "") {
+    const value = String(title || "").toLowerCase();
+
+    if (value.includes("damage")) { return "damage"; }
+    if (value.includes("defense")) { return "defense"; }
+    if (value.includes("utility")) { return "utility"; }
+    if (value.includes("coin")) { return "coins"; }
+    if (value.includes("enemy")) { return "enemies_hit_by"; }
+    if (value.includes("count")) { return "counts"; }
+    if (value.includes("record")) { return "records"; }
+    if (value.includes("effect")) { return "killed_with_effect_active"; }
+
+    return "damage";
 }

@@ -130,12 +130,22 @@ export function buildHistory(state = {}) {
                             Export History
                         </button>
 
-                        <button
-                            type="button"
-                            data-import-history-button="true"
+                        <label
+                            class="history-import-label"
+                            for="historyImportFile"
+                            role="button"
+                            tabindex="0"
                         >
                             Import History
-                        </button>
+                        </label>
+
+                        <input
+                            id="historyImportFile"
+                            class="history-import-input"
+                            type="file"
+                            accept="application/json,.json"
+                            data-import-history-input="true"
+                        >
 
                         <button
                             type="button"
