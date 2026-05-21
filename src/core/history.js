@@ -1,150 +1,73 @@
 "use strict";
 
 /**
- * HISTORY ENGINE
- * Stores completed battle runs.
- *
- * Features:
- * - duplicate protection using meta.reportId
- * - fallback duplicate check using battle date / wave / coins / cells
- * - safe clone so history does not mutate live Run A / Run B
- * - helper for checking if a history run already matches a loaded slot
- * - safe deletion that clears A/B slots if deleted run was loaded
- * - swap and clear A/B helpers for History Trace controls
- * - edit notes, tags, and build metadata per saved run
+ * CORE HISTORY ENGINE
+ * Pure history mutations. No DOM, no file picker, no direct rendering.
  */
 
 import {
     getState,
-    setState
+    setState,
+    normaliseBuildStyle,
+    normaliseHistoryFilters
 } from "./state.js";
 
-/* --------------------------------------------------
-   PUSH HISTORY
--------------------------------------------------- */
-
 export function pushHistory(run) {
-
     if (!run) {
-        return getState().history || [];
+        return getHistory();
     }
 
-    const state =
-        getState();
+    const history = getHistory();
+    const normalised = normaliseHistoryRun(run);
 
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
-
-    const exists =
-        history.some(item =>
-            sameHistoryRun(item, run)
-        );
-
-    if (exists) {
-
-        console.warn(
-            "[Tower Battle Intel] Duplicate report ignored. Already exists in history."
-        );
-
+    if (history.some(item => sameHistoryRun(item, normalised))) {
         return history;
     }
 
-    const nextHistory = [
-        ...history,
-        normaliseHistoryRun(run)
-    ];
-
-    setState({
-        history: nextHistory
-    });
-
+    const nextHistory = [...history, normalised];
+    setState({ history: nextHistory });
     return nextHistory;
 }
 
-/* --------------------------------------------------
-   PUSH MANY HISTORY RUNS
--------------------------------------------------- */
-
 export function pushHistoryMany(runs = []) {
+    const list = Array.isArray(runs) ? runs.filter(Boolean) : [];
+    let output = getHistory();
 
-    const validRuns =
-        Array.isArray(runs)
-            ? runs.filter(Boolean)
-            : [];
+    list.forEach(run => {
+        output = pushHistory(run);
+    });
 
-    let latestHistory =
-        getState().history || [];
-
-    for (const run of validRuns) {
-        latestHistory = pushHistory(run);
-    }
-
-    return latestHistory;
+    return output;
 }
 
-/* --------------------------------------------------
-   DELETE HISTORY ITEM
--------------------------------------------------- */
-
 export function deleteHistoryRun(index = -1) {
+    const safeIndex = toIndex(index);
+    const history = getHistory();
 
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
-
-    const safeIndex =
-        Number(index);
-
-    if (
-        !Number.isInteger(safeIndex) ||
-        safeIndex < 0 ||
-        safeIndex >= history.length
-    ) {
+    if (safeIndex < 0 || safeIndex >= history.length) {
         return history;
     }
 
-    const removed =
-        history.splice(safeIndex, 1)[0] || null;
-
-    applyHistoryDeletionPatch(history, removed);
-
-    return history;
+    const nextHistory = [...history];
+    const [removed] = nextHistory.splice(safeIndex, 1);
+    applyHistoryPatchAfterRemoval(nextHistory, removed);
+    return nextHistory;
 }
-
-/* --------------------------------------------------
-   DELETE LAST HISTORY ITEM
--------------------------------------------------- */
 
 export function deleteLastHistory() {
+    const history = getHistory();
 
-    const state =
-        getState();
+    if (!history.length) {
+        return history;
+    }
 
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
-
-    const removed =
-        history.pop() || null;
-
-    applyHistoryDeletionPatch(history, removed);
-
-    return history;
+    const nextHistory = [...history];
+    const removed = nextHistory.pop();
+    applyHistoryPatchAfterRemoval(nextHistory, removed);
+    return nextHistory;
 }
 
-/* --------------------------------------------------
-   CLEAR HISTORY
--------------------------------------------------- */
-
 export function clearHistory() {
-
     setState({
         history: [],
         runA: null,
@@ -153,11 +76,9 @@ export function clearHistory() {
         compareData: null,
         insights: [],
         ai: [],
-        trend: [],
         anomalies: [],
         inspection: null,
         ui: {
-            ...(getState().ui || {}),
             selectedSection: null
         }
     });
@@ -165,37 +86,21 @@ export function clearHistory() {
     return [];
 }
 
-/* --------------------------------------------------
-   SWAP / CLEAR A-B SELECTION
--------------------------------------------------- */
-
 export function swapHistorySlots() {
-
-    const state =
-        getState();
-
-    const nextRunA =
-        state.runB
-            ? safeClone(state.runB)
-            : null;
-
-    const nextRunB =
-        state.runA
-            ? safeClone(state.runA)
-            : null;
+    const state = getState();
+    const runA = clone(state.runB);
+    const runB = clone(state.runA);
 
     setState({
-        runA:
-            nextRunA,
-
-        runB:
-            nextRunB,
-
-        currentRun:
-            nextRunB || nextRunA || null,
-
+        runA,
+        runB,
+        currentRun: runB || runA || null,
+        compareData: null,
+        insights: [],
+        ai: [],
+        anomalies: [],
+        inspection: null,
         ui: {
-            ...(state.ui || {}),
             selectedSection: null
         }
     });
@@ -204,10 +109,6 @@ export function swapHistorySlots() {
 }
 
 export function clearHistorySelection() {
-
-    const state =
-        getState();
-
     setState({
         runA: null,
         runB: null,
@@ -218,7 +119,6 @@ export function clearHistorySelection() {
         anomalies: [],
         inspection: null,
         ui: {
-            ...(state.ui || {}),
             selectedSection: null
         }
     });
@@ -226,241 +126,221 @@ export function clearHistorySelection() {
     return getState();
 }
 
-/* --------------------------------------------------
-   ARCHIVE / RESTORE HISTORY RUN
--------------------------------------------------- */
-
 export function archiveHistoryRun(index = -1) {
-
     return setHistoryArchivedState(index, true);
 }
 
 export function restoreHistoryRun(index = -1) {
-
     return setHistoryArchivedState(index, false);
 }
 
-function setHistoryArchivedState(index = -1, archived = false) {
-
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
-
-    const safeIndex =
-        Number(index);
-
-    if (
-        !Number.isInteger(safeIndex) ||
-        safeIndex < 0 ||
-        safeIndex >= history.length
-    ) {
-        return history;
-    }
-
-    const updated =
-        normaliseHistoryRun({
-            ...history[safeIndex],
-            meta: {
-                ...(history[safeIndex]?.meta || {}),
-                archived: Boolean(archived)
-            }
-        });
-
-    history[safeIndex] = updated;
-
-    const patch = {
-        history,
-        ui: {
-            ...(state.ui || {}),
-            selectedSection: null
-        }
-    };
-
-    if (archived) {
-
-        if (state.runA && sameHistoryRun(state.runA, updated)) {
-            patch.runA = null;
-        }
-
-        if (state.runB && sameHistoryRun(state.runB, updated)) {
-            patch.runB = null;
-        }
-
-        if (
-            patch.runA === null ||
-            patch.runB === null
-        ) {
-            patch.currentRun = patch.runB ?? patch.runA ?? state.runB ?? state.runA ?? null;
-            patch.compareData = null;
-            patch.insights = [];
-            patch.ai = [];
-            patch.anomalies = [];
-            patch.inspection = null;
-        }
-    }
-
-    setState(patch);
-
-    return history;
-}
-
-/* --------------------------------------------------
-   UPDATE HISTORY METADATA
--------------------------------------------------- */
-
 export function updateHistoryRunMeta(index = -1, metaPatch = {}) {
+    const safeIndex = toIndex(index);
+    const history = getHistory();
 
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
-
-    const safeIndex =
-        Number(index);
-
-    if (
-        !Number.isInteger(safeIndex) ||
-        safeIndex < 0 ||
-        safeIndex >= history.length
-    ) {
+    if (safeIndex < 0 || safeIndex >= history.length) {
         return null;
     }
 
-    const previous =
-        history[safeIndex];
+    const previous = history[safeIndex];
+    const updated = normaliseHistoryRun({
+        ...previous,
+        meta: {
+            ...(previous?.meta || {}),
+            ...(metaPatch || {})
+        }
+    });
 
-    const updated =
-        normaliseHistoryRun({
-            ...previous,
-            meta: {
-                ...(previous?.meta || {}),
-                ...(metaPatch || {})
-            }
-        });
+    const nextHistory = [...history];
+    nextHistory[safeIndex] = updated;
 
-    history[safeIndex] =
-        updated;
-
+    const state = getState();
     const patch = {
-        history,
+        history: nextHistory,
         ui: {
-            ...(state.ui || {}),
             selectedSection: null
         }
     };
 
-    if (state.runA && sameHistoryRun(state.runA, previous)) {
-        patch.runA = safeClone(updated);
-    }
-
-    if (state.runB && sameHistoryRun(state.runB, previous)) {
-        patch.runB = safeClone(updated);
-    }
-
-    if (state.currentRun && sameHistoryRun(state.currentRun, previous)) {
-        patch.currentRun = safeClone(updated);
-    }
+    if (sameHistoryRun(state.runA, previous)) patch.runA = clone(updated);
+    if (sameHistoryRun(state.runB, previous)) patch.runB = clone(updated);
+    if (sameHistoryRun(state.currentRun, previous)) patch.currentRun = clone(updated);
 
     setState(patch);
-
     return updated;
 }
 
-/* --------------------------------------------------
-   HISTORY FILTERS
--------------------------------------------------- */
-
 export function setHistoryFilters(filters = {}) {
-
-    const state =
-        getState();
+    const state = getState();
+    const nextFilters = normaliseHistoryFilters({
+        ...(state.ui?.historyFilters || {}),
+        ...(filters || {})
+    });
 
     setState({
         ui: {
-            ...(state.ui || {}),
-            historyFilters: {
-                ...(state.ui?.historyFilters || {}),
-                ...(filters || {})
-            }
+            historyFilters: nextFilters
         }
     });
 
-    return getState().ui?.historyFilters || {};
+    return nextFilters;
 }
 
-/* --------------------------------------------------
-   EXPORT / IMPORT HISTORY ONLY
--------------------------------------------------- */
-
 export function exportHistoryJSON() {
+    const state = getState();
 
-    const state =
-        getState();
-
-    return JSON.stringify(
-        {
-            app: "Tower Battle Intel",
-            exportType: "history-export",
-            exportedAt: new Date().toISOString(),
-            history: Array.isArray(state.history) ? state.history : []
-        },
-        null,
-        2
-    );
+    return JSON.stringify({
+        app: "Tower Battle Intel",
+        exportType: "history-export",
+        version: "v4.9w",
+        exportedAt: new Date().toISOString(),
+        history: getHistory(state)
+    }, null, 2);
 }
 
 export function importHistoryRuns(input = null) {
+    const imported = normaliseImportedHistory(input);
 
-    const runs =
-        normaliseImportedHistory(input);
-
-    if (!runs.length) {
-        return getState().history || [];
+    if (!imported.length) {
+        return getHistory();
     }
 
-    const state =
-        getState();
+    const current = getHistory();
+    const nextHistory = [...current];
 
-    const history =
-        Array.isArray(state.history)
-            ? [...state.history]
-            : [];
+    imported.forEach(run => {
+        const normalised = normaliseHistoryRun(run);
 
-    for (const run of runs) {
-
-        const normalised =
-            normaliseHistoryRun(run);
-
-        const exists =
-            history.some(item => sameHistoryRun(item, normalised));
-
-        if (!exists) {
-            history.push(normalised);
+        if (!nextHistory.some(item => sameHistoryRun(item, normalised))) {
+            nextHistory.push(normalised);
         }
-    }
-
-    setState({
-        history
     });
 
-    return history;
+    setState({ history: nextHistory });
+    return nextHistory;
+}
+
+export function hasHistoryRun(run) {
+    if (!run) return false;
+    return getHistory().some(item => sameHistoryRun(item, run));
+}
+
+export function loadHistoryRun(index, slot = "runA") {
+    const safeIndex = toIndex(index);
+    const history = getHistory();
+    const run = history[safeIndex];
+
+    if (!run) {
+        return null;
+    }
+
+    const targetSlot = normaliseSlot(slot);
+    const loaded = clone(run);
+
+    setState({
+        [targetSlot]: loaded,
+        currentRun: loaded,
+        compareData: null,
+        insights: [],
+        ai: [],
+        anomalies: [],
+        inspection: null,
+        ui: {
+            selectedSection: null
+        }
+    });
+
+    return loaded;
+}
+
+export function sameHistoryRun(a, b) {
+    if (!a || !b) return false;
+
+    const idA = a?.meta?.reportId || a?.meta?.id || a?.id;
+    const idB = b?.meta?.reportId || b?.meta?.id || b?.id;
+
+    if (idA && idB) {
+        return String(idA) === String(idB);
+    }
+
+    return getFallbackRunKey(a) === getFallbackRunKey(b);
+}
+
+export function runMatchesSlot(run, slot = "runA") {
+    const state = getState();
+    return sameHistoryRun(run, state[normaliseSlot(slot)]);
+}
+
+export function getHistorySummary() {
+    const history = getHistory();
+
+    return {
+        count: history.length,
+        latest: history.at(-1) || null,
+        archived: history.filter(run => Boolean(run?.meta?.archived)).length,
+        visible: history.filter(run => !run?.meta?.archived).length
+    };
+}
+
+export function normaliseHistoryRun(run = null) {
+    const copy = clone(run || {});
+
+    copy.meta = {
+        ...(copy.meta || {}),
+        savedAt: copy.meta?.savedAt || copy.meta?.saved_at || new Date().toISOString(),
+        archived: Boolean(copy.meta?.archived),
+        notes: String(copy.meta?.notes || ""),
+        tags: normaliseTags(copy.meta?.tags),
+        buildStyle: normaliseBuildStyle(copy.meta?.buildStyle || copy.meta?.build || getState().ui?.buildStyle || "unknown")
+    };
+
+    return copy;
+}
+
+function setHistoryArchivedState(index = -1, archived = false) {
+    const safeIndex = toIndex(index);
+    const history = getHistory();
+
+    if (safeIndex < 0 || safeIndex >= history.length) {
+        return history;
+    }
+
+    return updateHistoryRunMeta(safeIndex, { archived: Boolean(archived) })
+        ? getHistory()
+        : history;
+}
+
+function applyHistoryPatchAfterRemoval(history = [], removed = null) {
+    const state = getState();
+    const patch = {
+        history,
+        ui: {
+            selectedSection: null
+        }
+    };
+
+    if (removed && sameHistoryRun(state.runA, removed)) patch.runA = null;
+    if (removed && sameHistoryRun(state.runB, removed)) patch.runB = null;
+    if (removed && sameHistoryRun(state.currentRun, removed)) patch.currentRun = null;
+
+    if ("runA" in patch || "runB" in patch || "currentRun" in patch) {
+        const nextRunA = "runA" in patch ? patch.runA : state.runA;
+        const nextRunB = "runB" in patch ? patch.runB : state.runB;
+        patch.currentRun = nextRunB || nextRunA || null;
+        patch.compareData = null;
+        patch.insights = [];
+        patch.ai = [];
+        patch.anomalies = [];
+        patch.inspection = null;
+    }
+
+    setState(patch);
 }
 
 function normaliseImportedHistory(input = null) {
+    if (!input) return [];
 
-    if (!input) {
-        return [];
-    }
-
-    let value =
-        input;
+    let value = input;
 
     if (typeof input === "string") {
         try {
@@ -478,361 +358,74 @@ function normaliseImportedHistory(input = null) {
         return value.history.filter(Boolean);
     }
 
+    if (Array.isArray(value?.runs)) {
+        return value.runs.filter(Boolean);
+    }
+
     return [];
 }
 
-/* --------------------------------------------------
-   HAS HISTORY RUN
--------------------------------------------------- */
-
-export function hasHistoryRun(run) {
-
-    if (!run) {
-        return false;
-    }
-
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? state.history
-            : [];
-
-    return history.some(item =>
-        sameHistoryRun(item, run)
-    );
-}
-
-/* --------------------------------------------------
-   LOAD HISTORY RUN INTO SLOT
--------------------------------------------------- */
-
-export function loadHistoryRun(index, slot = "runA") {
-
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? state.history
-            : [];
-
-    const run =
-        history[index];
-
-    if (!run) {
-
-        console.warn(
-            "[Tower Battle Intel] History load failed. Run not found."
-        );
-
-        return null;
-    }
-
-    const targetSlot =
-        normaliseSlot(slot);
-
-    const currentSlotRun =
-        state[targetSlot];
-
-    if (
-        currentSlotRun &&
-        sameHistoryRun(currentSlotRun, run)
-    ) {
-
-        console.warn(
-            `[Tower Battle Intel] History load ignored. Same report is already loaded in ${targetSlot}.`
-        );
-
-        return null;
-    }
-
-    setState({
-        [targetSlot]:
-            safeClone(run),
-
-        currentRun:
-            safeClone(run),
-
-        ui: {
-            ...(state.ui || {}),
-            selectedSection: null
-        }
-    });
-
-    return run;
-}
-
-/* --------------------------------------------------
-   SAME HISTORY RUN CHECK
--------------------------------------------------- */
-
-export function sameHistoryRun(a, b) {
-
-    if (!a || !b) {
-        return false;
-    }
-
-    const idA =
-        a?.meta?.reportId;
-
-    const idB =
-        b?.meta?.reportId;
-
-    if (idA && idB) {
-        return idA === idB;
-    }
-
-    return getFallbackRunKey(a) === getFallbackRunKey(b);
-}
-
-/* --------------------------------------------------
-   SLOT MATCH CHECK
--------------------------------------------------- */
-
-export function runMatchesSlot(run, slot = "runA") {
-
-    const state =
-        getState();
-
-    const targetSlot =
-        normaliseSlot(slot);
-
-    const slotRun =
-        state[targetSlot];
-
-    return sameHistoryRun(run, slotRun);
-}
-
-/* --------------------------------------------------
-   HISTORY SUMMARY
--------------------------------------------------- */
-
-export function getHistorySummary() {
-
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? state.history
-            : [];
-
-    return {
-        count:
-            history.length,
-
-        latest:
-            history.length
-                ? history[history.length - 1]
-                : null
-    };
-}
-
-/* --------------------------------------------------
-   INTERNAL PATCH HELPERS
--------------------------------------------------- */
-
-function applyHistoryDeletionPatch(history = [], removed = null) {
-
-    const state =
-        getState();
-
-    const patch = {
-        history,
-        ui: {
-            ...(state.ui || {}),
-            selectedSection: null
-        }
-    };
-
-    if (
-        removed &&
-        state.runA &&
-        sameHistoryRun(state.runA, removed)
-    ) {
-        patch.runA = null;
-    }
-
-    if (
-        removed &&
-        state.runB &&
-        sameHistoryRun(state.runB, removed)
-    ) {
-        patch.runB = null;
-    }
-
-    if (
-        removed &&
-        state.currentRun &&
-        sameHistoryRun(state.currentRun, removed)
-    ) {
-        patch.currentRun =
-            patch.runB ??
-            patch.runA ??
-            state.runB ??
-            state.runA ??
-            null;
-    }
-
-    if (
-        patch.runA === null ||
-        patch.runB === null
-    ) {
-        patch.compareData = null;
-        patch.insights = [];
-        patch.ai = [];
-        patch.anomalies = [];
-        patch.inspection = null;
-    }
-
-    setState(patch);
-}
-
-function normaliseHistoryRun(run) {
-
-    const clone =
-        safeClone(run);
-
-    clone.meta = {
-        ...(clone.meta || {}),
-
-        savedAt:
-            clone.meta?.savedAt || new Date().toISOString(),
-
-        archived:
-            Boolean(clone.meta?.archived),
-
-        notes:
-            clone.meta?.notes || "",
-
-        tags:
-            normaliseTags(clone.meta?.tags),
-
-        buildStyle:
-            normaliseBuildStyle(clone.meta?.buildStyle || clone.meta?.build || getState().ui?.buildStyle || "unknown")
-    };
-
-    return clone;
+function getHistory(state = getState()) {
+    return Array.isArray(state.history) ? state.history : [];
 }
 
 function normaliseTags(tags = []) {
+    const source = typeof tags === "string"
+        ? tags.split(/[,#\n]/g)
+        : Array.isArray(tags)
+        ? tags
+        : [];
 
-    const source =
-        typeof tags === "string"
-            ? tags
-                .split(/[,#\n]/g)
-            : Array.isArray(tags)
-                ? tags
-                : [];
-
-    const seen =
-        new Set();
+    const seen = new Set();
 
     return source
-        .map(tag => String(tag || "").trim())
-        .map(tag => tag.replace(/^#+/, ""))
-        .map(tag => tag.toLowerCase())
-        .map(tag => tag.replace(/\s+/g, "-"))
+        .map(tag => String(tag || "").trim().replace(/^#+/, ""))
+        .map(tag => tag.toLowerCase().replace(/\s+/g, "-"))
         .map(tag => tag.replace(/[^a-z0-9_-]/g, ""))
         .filter(Boolean)
         .filter(tag => {
-            if (seen.has(tag)) {
-                return false;
-            }
-
+            if (seen.has(tag)) return false;
             seen.add(tag);
             return true;
         })
         .slice(0, 12);
 }
 
-function normaliseBuildStyle(value = "unknown") {
-
-    const key =
-        String(value || "unknown")
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, "_")
-            .replace(/\//g, "_")
-            .replace(/__+/g, "_");
-
-    const allowed = new Set([
-        "unknown",
-        "health_ehp",
-        "blender",
-        "devo",
-        "orb_devo",
-        "glass_cannon",
-        "hybrid"
-    ]);
-
-    return allowed.has(key)
-        ? key
-        : "unknown";
-}
-
-/* --------------------------------------------------
-   SLOT NORMALISER
--------------------------------------------------- */
-
 function normaliseSlot(slot = "runA") {
+    const value = String(slot || "runA").trim().toLowerCase().replace(/[\s-]+/g, "_");
 
-    const value =
-        String(slot || "runA")
-            .trim()
-            .toLowerCase();
-
-    if (
-        value === "a" ||
-        value === "runa" ||
-        value === "run_a"
-    ) {
-        return "runA";
-    }
-
-    return "runB";
+    if (["a", "runa", "run_a"].includes(value)) return "runA";
+    if (["b", "runb", "run_b"].includes(value)) return "runB";
+    return "runA";
 }
 
-/* --------------------------------------------------
-   FALLBACK DUPLICATE KEY
--------------------------------------------------- */
-
-function getFallbackRunKey(run) {
-
-    const core =
-        run?.core || {};
+function getFallbackRunKey(run = {}) {
+    const core = run?.core || {};
 
     return [
-        core.battleDate || "",
+        core.battleDate || core.battle_date || "",
         core.tier || 0,
         core.wave || 0,
         core.coins || 0,
         core.cells || 0,
         core.time || 0,
-        core.killedBy || ""
+        core.killedBy || core.killed_by || ""
     ].join("|");
 }
 
-/* --------------------------------------------------
-   SAFE CLONE
--------------------------------------------------- */
+function toIndex(value) {
+    const num = Number(value);
+    return Number.isInteger(num) ? num : -1;
+}
 
-function safeClone(value) {
+function clone(value) {
+    if (value == null) return null;
 
     try {
-
-        if (typeof structuredClone === "function") {
-            return structuredClone(value);
-        }
-
-        return JSON.parse(
-            JSON.stringify(value)
-        );
-
+        return typeof structuredClone === "function"
+            ? structuredClone(value)
+            : JSON.parse(JSON.stringify(value));
     } catch {
-
         return value;
     }
 }

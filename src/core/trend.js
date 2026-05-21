@@ -1,589 +1,135 @@
 "use strict";
 
 /**
- * TREND ENGINE
- * Builds history intelligence from saved runs.
- *
- * Output is compatible with:
- * - aiCoach.js
- * - insightEngine.js
- * - pipelineInspector.js
- * - future summary UI
+ * CORE TREND ENGINE
+ * Safe local-history trend summary.
  */
 
 import {
-    parseNumber
+    safeDiv,
+    percentChange
 } from "../utils/math.js";
 
-/* --------------------------------------------------
-   MAIN TREND BUILDER
--------------------------------------------------- */
-
 export function buildTrend(history = [], options = {}) {
-
-    const windowSize =
-        options.windowSize || 50;
-
-    const runs =
-        Array.isArray(history)
-            ? history.filter(Boolean).slice(-windowSize)
-            : [];
+    const windowSize = Number(options.windowSize || 50);
+    const runs = Array.isArray(history)
+        ? history.filter(Boolean).slice(-windowSize)
+        : [];
 
     if (!runs.length) {
         return emptyTrend(windowSize);
     }
 
-    const waves =
-        runs.map(run => getCore(run, "wave"));
+    const waves = runs.map(run => number(run?.core?.wave));
+    const coins = runs.map(run => number(run?.core?.coins));
+    const cells = runs.map(run => number(run?.core?.cells));
+    const cph = runs.map(run => number(run?.stats?.coinsPerHour));
+    const cellsHour = runs.map(run => number(run?.stats?.cellsPerHour));
 
-    const coins =
-        runs.map(run => getCore(run, "coins"));
-
-    const cells =
-        runs.map(run => getCore(run, "cells"));
-
-    const coinsPerHour =
-        runs.map(run => getStat(run, "coinsPerHour"));
-
-    const cellsPerHour =
-        runs.map(run => getStat(run, "cellsPerHour"));
-
-    const efficiency =
-        runs.map(run => getStat(run, "efficiency"));
-
-    const latest =
-        runs.at(-1) || null;
-
-    const previous =
-        runs.length > 1
-            ? runs.at(-2)
-            : null;
-
-    const change =
-        buildChange(previous, latest);
-
-    const signals =
-        buildSignals({
-            runs,
-            waves,
-            coins,
-            cells,
-            coinsPerHour,
-            cellsPerHour,
-            efficiency,
-            change
-        });
+    const previous = runs.length > 1 ? runs[runs.length - 2] : null;
+    const latest = runs.at(-1) || null;
 
     return {
-
-        count:
-            runs.length,
-
-        // compatibility with pipelineInspector.js
-        length:
-            signals.length,
-
-        window:
-            windowSize,
-
-        latest: {
-            wave:
-                getCore(latest, "wave"),
-
-            coins:
-                getCore(latest, "coins"),
-
-            cells:
-                getCore(latest, "cells"),
-
-            coinsPerHour:
-                getStat(latest, "coinsPerHour"),
-
-            cellsPerHour:
-                getStat(latest, "cellsPerHour"),
-
-            efficiency:
-                getStat(latest, "efficiency")
+        windowSize,
+        count: runs.length,
+        latest,
+        previous,
+        averages: {
+            wave: avg(waves),
+            coins: avg(coins),
+            cells: avg(cells),
+            coinsPerHour: avg(cph),
+            cellsPerHour: avg(cellsHour)
         },
-
-        previous: previous
-            ? {
-                wave:
-                    getCore(previous, "wave"),
-
-                coins:
-                    getCore(previous, "coins"),
-
-                cells:
-                    getCore(previous, "cells"),
-
-                coinsPerHour:
-                    getStat(previous, "coinsPerHour"),
-
-                cellsPerHour:
-                    getStat(previous, "cellsPerHour"),
-
-                efficiency:
-                    getStat(previous, "efficiency")
-            }
-            : null,
-
-        avgCoins:
-            avg(coins),
-
-        avgWave:
-            avg(waves),
-
-        avgCells:
-            avg(cells),
-
-        avgCoinsPerHour:
-            avg(coinsPerHour),
-
-        avgCellsPerHour:
-            avg(cellsPerHour),
-
-        avgEfficiency:
-            avg(efficiency),
-
-        maxWave:
-            max(waves),
-
-        minWave:
-            min(waves),
-
-        maxCoins:
-            max(coins),
-
-        maxCells:
-            max(cells),
-
-        change,
-
-        momentum: {
-            wave:
-                momentum(waves),
-
-            coins:
-                momentum(coins),
-
-            cells:
-                momentum(cells),
-
-            coinsPerHour:
-                momentum(coinsPerHour),
-
-            cellsPerHour:
-                momentum(cellsPerHour)
+        best: {
+            wave: max(waves),
+            coins: max(coins),
+            cells: max(cells),
+            coinsPerHour: max(cph),
+            cellsPerHour: max(cellsHour)
         },
-
-        volatility: {
-            wave:
-                stdDev(waves),
-
-            coins:
-                stdDev(coins),
-
-            cells:
-                stdDev(cells),
-
-            coinsPerHour:
-                stdDev(coinsPerHour),
-
-            cellsPerHour:
-                stdDev(cellsPerHour)
-        },
-
-        stabilityScore:
-            stabilityScore(coins, waves),
-
-        signals
+        changes: buildChange(previous, latest),
+        signals: buildSignals(runs)
     };
 }
 
-/* --------------------------------------------------
-   SIGNALS
--------------------------------------------------- */
-
-function buildSignals({
-    runs,
-    change,
-    coins,
-    waves,
-    cells
-}) {
-
-    const signals = [];
-
-    if (runs.length < 2) {
-
-        signals.push({
-            type: "trend",
-            severity: "info",
-            title: "Trend Warming Up",
-            message: "Add more runs to improve trend accuracy."
-        });
-
-        return signals;
-    }
-
-    if (change.wave.diff > 0) {
-
-        signals.push({
-            type: "trend",
-            severity: "good",
-            title: "Wave Progression Up",
-            message: `Wave increased by ${change.wave.diff}.`
-        });
-
-    } else if (change.wave.diff < 0) {
-
-        signals.push({
-            type: "trend",
-            severity: "bad",
-            title: "Wave Progression Down",
-            message: `Wave decreased by ${Math.abs(change.wave.diff)}.`
-        });
-    }
-
-    if (change.coins.pct > 15) {
-
-        signals.push({
-            type: "trend",
-            severity: "good",
-            title: "Coin Momentum",
-            message: `Coins are up ${change.coins.pct.toFixed(1)}%.`
-        });
-
-    } else if (change.coins.pct < -15) {
-
-        signals.push({
-            type: "trend",
-            severity: "bad",
-            title: "Coin Regression",
-            message: `Coins are down ${Math.abs(change.coins.pct).toFixed(1)}%.`
-        });
-    }
-
-    if (momentum(coins) === "up" && momentum(waves) === "up") {
-
-        signals.push({
-            type: "trend",
-            severity: "good",
-            title: "Positive Momentum",
-            message: "Economy and progression are moving upward together."
-        });
-    }
-
-    if (momentum(coins) === "down" && momentum(waves) === "down") {
-
-        signals.push({
-            type: "trend",
-            severity: "bad",
-            title: "Negative Momentum",
-            message: "Economy and progression are both declining."
-        });
-    }
-
-    if (stdDev(cells) > avg(cells) * 0.25) {
-
-        signals.push({
-            type: "trend",
-            severity: "neutral",
-            title: "Cell Variance",
-            message: "Cell output is fluctuating noticeably between runs."
-        });
-    }
-
-    return signals;
-}
-
-/* --------------------------------------------------
-   CHANGE MODEL
--------------------------------------------------- */
-
-function buildChange(previous, latest) {
-
+function buildChange(previous = null, latest = null) {
     if (!previous || !latest) {
-
         return {
-            wave: zeroChange(),
-            coins: zeroChange(),
-            cells: zeroChange(),
-            coinsPerHour: zeroChange(),
-            cellsPerHour: zeroChange(),
-            efficiency: zeroChange()
-        };
-    }
-
-    return {
-        wave:
-            diffModel(
-                getCore(previous, "wave"),
-                getCore(latest, "wave")
-            ),
-
-        coins:
-            diffModel(
-                getCore(previous, "coins"),
-                getCore(latest, "coins")
-            ),
-
-        cells:
-            diffModel(
-                getCore(previous, "cells"),
-                getCore(latest, "cells")
-            ),
-
-        coinsPerHour:
-            diffModel(
-                getStat(previous, "coinsPerHour"),
-                getStat(latest, "coinsPerHour")
-            ),
-
-        cellsPerHour:
-            diffModel(
-                getStat(previous, "cellsPerHour"),
-                getStat(latest, "cellsPerHour")
-            ),
-
-        efficiency:
-            diffModel(
-                getStat(previous, "efficiency"),
-                getStat(latest, "efficiency")
-            )
-    };
-}
-
-function diffModel(a, b) {
-
-    const diff =
-        b - a;
-
-    return {
-        a,
-        b,
-        diff,
-        pct:
-            percentChange(a, b),
-        direction:
-            diff > 0
-                ? "up"
-                : diff < 0
-                ? "down"
-                : "flat"
-    };
-}
-
-function zeroChange() {
-
-    return {
-        a: 0,
-        b: 0,
-        diff: 0,
-        pct: 0,
-        direction: "flat"
-    };
-}
-
-/* --------------------------------------------------
-   DATA ACCESS
--------------------------------------------------- */
-
-function getCore(run, key) {
-
-    return parseNumber(
-        run?.core?.[key]
-    );
-}
-
-function getStat(run, key) {
-
-    return parseNumber(
-        run?.stats?.[key]
-    );
-}
-
-/* --------------------------------------------------
-   MATH HELPERS
--------------------------------------------------- */
-
-function avg(values = []) {
-
-    const clean =
-        values.filter(Number.isFinite);
-
-    if (!clean.length) {
-        return 0;
-    }
-
-    return clean.reduce((a, b) => a + b, 0) / clean.length;
-}
-
-function max(values = []) {
-
-    const clean =
-        values.filter(Number.isFinite);
-
-    return clean.length
-        ? Math.max(...clean)
-        : 0;
-}
-
-function min(values = []) {
-
-    const clean =
-        values.filter(Number.isFinite);
-
-    return clean.length
-        ? Math.min(...clean)
-        : 0;
-}
-
-function stdDev(values = []) {
-
-    const clean =
-        values.filter(Number.isFinite);
-
-    if (!clean.length) {
-        return 0;
-    }
-
-    const mean =
-        avg(clean);
-
-    const variance =
-        clean.reduce(
-            (sum, value) =>
-                sum + Math.pow(value - mean, 2),
-            0
-        ) / clean.length;
-
-    return Math.sqrt(variance);
-}
-
-function percentChange(a, b) {
-
-    if (!a) {
-        return b ? 100 : 0;
-    }
-
-    return ((b - a) / Math.abs(a)) * 100;
-}
-
-function momentum(values = []) {
-
-    const clean =
-        values.filter(Number.isFinite);
-
-    if (clean.length < 2) {
-        return "flat";
-    }
-
-    const recent =
-        clean.slice(-5);
-
-    const first =
-        recent[0] || 0;
-
-    const last =
-        recent.at(-1) || 0;
-
-    const pct =
-        percentChange(first, last);
-
-    if (pct > 5) {
-        return "up";
-    }
-
-    if (pct < -5) {
-        return "down";
-    }
-
-    return "flat";
-}
-
-function stabilityScore(coins = [], waves = []) {
-
-    if (!coins.length || !waves.length) {
-        return 0;
-    }
-
-    const coinAvg =
-        avg(coins);
-
-    const waveAvg =
-        avg(waves);
-
-    const coinVol =
-        coinAvg
-            ? stdDev(coins) / Math.abs(coinAvg)
-            : 0;
-
-    const waveVol =
-        waveAvg
-            ? stdDev(waves) / Math.abs(waveAvg)
-            : 0;
-
-    const score =
-        100 - Math.min((coinVol + waveVol) * 50, 100);
-
-    return Math.max(0, score);
-}
-
-/* --------------------------------------------------
-   EMPTY TREND
--------------------------------------------------- */
-
-function emptyTrend(windowSize = 50) {
-
-    return {
-        count: 0,
-        length: 0,
-        window: windowSize,
-
-        latest: null,
-        previous: null,
-
-        avgCoins: 0,
-        avgWave: 0,
-        avgCells: 0,
-        avgCoinsPerHour: 0,
-        avgCellsPerHour: 0,
-        avgEfficiency: 0,
-
-        maxWave: 0,
-        minWave: 0,
-        maxCoins: 0,
-        maxCells: 0,
-
-        change: {
-            wave: zeroChange(),
-            coins: zeroChange(),
-            cells: zeroChange(),
-            coinsPerHour: zeroChange(),
-            cellsPerHour: zeroChange(),
-            efficiency: zeroChange()
-        },
-
-        momentum: {
-            wave: "flat",
-            coins: "flat",
-            cells: "flat",
-            coinsPerHour: "flat",
-            cellsPerHour: "flat"
-        },
-
-        volatility: {
             wave: 0,
             coins: 0,
             cells: 0,
             coinsPerHour: 0,
             cellsPerHour: 0
-        },
+        };
+    }
 
-        stabilityScore: 0,
+    return {
+        wave: number(latest.core?.wave) - number(previous.core?.wave),
+        coins: number(latest.core?.coins) - number(previous.core?.coins),
+        cells: number(latest.core?.cells) - number(previous.core?.cells),
+        coinsPerHour: number(latest.stats?.coinsPerHour) - number(previous.stats?.coinsPerHour),
+        cellsPerHour: number(latest.stats?.cellsPerHour) - number(previous.stats?.cellsPerHour),
+        wavePct: percentChange(previous.core?.wave, latest.core?.wave),
+        coinsPct: percentChange(previous.core?.coins, latest.core?.coins),
+        cellsPct: percentChange(previous.core?.cells, latest.core?.cells)
+    };
+}
 
+function buildSignals(runs = []) {
+    const latest = runs.at(-1) || null;
+    const previous = runs.length > 1 ? runs.at(-2) : null;
+
+    if (!latest || !previous) {
+        return [];
+    }
+
+    const signals = [];
+    const waveDiff = number(latest.core?.wave) - number(previous.core?.wave);
+    const coinsHourDiff = number(latest.stats?.coinsPerHour) - number(previous.stats?.coinsPerHour);
+    const cellsHourDiff = number(latest.stats?.cellsPerHour) - number(previous.stats?.cellsPerHour);
+
+    if (coinsHourDiff > 0 && waveDiff < 0) {
+        signals.push({ type: "mixed", label: "Economy improved while wave dropped" });
+    }
+
+    if (cellsHourDiff > 0) {
+        signals.push({ type: "good", label: "Cell farming speed improved" });
+    }
+
+    if (waveDiff > 0) {
+        signals.push({ type: "good", label: "Progression wave improved" });
+    }
+
+    return signals;
+}
+
+function emptyTrend(windowSize = 50) {
+    return {
+        windowSize,
+        count: 0,
+        latest: null,
+        previous: null,
+        averages: {},
+        best: {},
+        changes: {},
         signals: []
     };
+}
+
+function number(value = 0) {
+    const n = Number(value || 0);
+    return Number.isFinite(n) ? n : 0;
+}
+
+function avg(values = []) {
+    return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+}
+
+function max(values = []) {
+    return values.length ? Math.max(...values) : 0;
+}
+
+function min(values = []) {
+    return values.length ? Math.min(...values) : 0;
 }

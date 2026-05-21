@@ -1,149 +1,64 @@
 "use strict";
 
 /**
- * COMPUTE ENGINE
- * Finalises parsed battle report data into a stable run object.
- *
- * Important:
- * - keeps full sections alive
- * - prevents NaN pollution
- * - computes safe derived stats
- * - preserves raw/parser data for diagnostics
+ * CORE COMPUTE ENGINE
+ * Turns validated parser output into a stable run object.
  */
 
 import {
     parseNumber,
-    safeDiv
+    safeDiv,
+    clamp
 } from "../utils/math.js";
 
-/* --------------------------------------------------
-   MAIN COMPUTE
--------------------------------------------------- */
-
 export function compute(parsed) {
-
     if (!parsed || typeof parsed !== "object") {
-        return empty();
+        return createEmptyRun(0);
     }
 
-    const coreInput =
-        parsed.core || {};
+    const coreInput = parsed.core || {};
+    const statsInput = parsed.stats || {};
+    const sections = parsed.sections || {};
+    const flat = parsed.flat || {};
+    const meta = parsed.meta || {};
 
-    const statsInput =
-        parsed.stats || {};
+    const wave = parseNumber(coreInput.wave ?? flat.wave);
+    const tier = parseNumber(coreInput.tier ?? flat.tier);
+    const coins = parseNumber(coreInput.coins ?? flat.coins_earned ?? flat.coins);
+    const cells = parseNumber(coreInput.cells ?? flat.cells_earned ?? flat.cells);
+    const time = parseNumber(coreInput.time ?? flat.real_time ?? flat.game_time ?? flat.time);
 
-    const sections =
-        parsed.sections || {};
+    const hours = time > 0 ? time / 3600 : 0;
 
-    const flat =
-        parsed.flat || {};
+    const coinsPerHour = positiveOr(
+        statsInput.coinsPerHour ?? statsInput.coins_per_hour ?? flat.coins_per_hour,
+        safeDiv(coins, hours)
+    );
 
-    const meta =
-        parsed.meta || {};
+    const cellsPerHour = positiveOr(
+        statsInput.cellsPerHour ?? statsInput.cells_per_hour ?? flat.cells_per_hour,
+        safeDiv(cells, hours)
+    );
 
-    /* --------------------------------------------------
-       CORE
-    -------------------------------------------------- */
+    const coinsPerWave = positiveOr(
+        statsInput.coinsPerWave ?? statsInput.coins_per_wave ?? flat.coins_per_wave,
+        safeDiv(coins, wave)
+    );
 
-    const wave =
-        parseNumber(coreInput.wave);
-
-    const tier =
-        parseNumber(coreInput.tier);
-
-    const coins =
-        parseNumber(coreInput.coins);
-
-    const cells =
-        parseNumber(coreInput.cells);
-
-    const time =
-        parseNumber(coreInput.time);
-
-    const killedBy =
-        coreInput.killedBy ||
-        coreInput.killed_by ||
-        flat.killed_by ||
-        "";
-
-    const battleDate =
-        coreInput.battleDate ||
-        coreInput.battle_date ||
-        flat.battle_date ||
-        "";
-
-    /* --------------------------------------------------
-       HOURS
-    -------------------------------------------------- */
-
-    const hours =
-        time > 0
-            ? time / 3600
-            : 0;
-
-    /* --------------------------------------------------
-       RAW / IMPORTED STATS
-    -------------------------------------------------- */
-
-    const rawCoinsPerHour =
-        parseNumber(statsInput.coinsPerHour);
-
-    const rawCellsPerHour =
-        parseNumber(statsInput.cellsPerHour);
-
-    const rawCoinsPerWave =
-        parseNumber(statsInput.coinsPerWave);
-
-    const rawCellsPerWave =
-        parseNumber(statsInput.cellsPerWave);
-
-    /* --------------------------------------------------
-       DERIVED STATS
-    -------------------------------------------------- */
-
-    const coinsPerHour =
-        rawCoinsPerHour > 0
-            ? rawCoinsPerHour
-            : safeDiv(coins, hours);
-
-    const cellsPerHour =
-        rawCellsPerHour > 0
-            ? rawCellsPerHour
-            : safeDiv(cells, hours);
-
-    const coinsPerWave =
-        rawCoinsPerWave > 0
-            ? rawCoinsPerWave
-            : safeDiv(coins, wave);
-
-    const cellsPerWave =
-        rawCellsPerWave > 0
-            ? rawCellsPerWave
-            : safeDiv(cells, wave);
-
-    const efficiency =
-        buildEfficiency({
-            coinsPerHour,
-            cellsPerHour,
-            coinsPerWave,
-            cellsPerWave,
-            wave
-        });
-
-    /* --------------------------------------------------
-       FINAL RUN OBJECT
-    -------------------------------------------------- */
+    const cellsPerWave = positiveOr(
+        statsInput.cellsPerWave ?? statsInput.cells_per_wave ?? flat.cells_per_wave,
+        safeDiv(cells, wave)
+    );
 
     return {
-
         core: {
             wave,
             tier,
             coins,
             cells,
             time,
-            killedBy,
-            battleDate
+            killedBy: coreInput.killedBy || coreInput.killed_by || flat.killed_by || "",
+            battleDate: coreInput.battleDate || coreInput.battle_date || flat.battle_date || ""
         },
 
         stats: {
@@ -151,22 +66,21 @@ export function compute(parsed) {
             cellsPerHour,
             coinsPerWave,
             cellsPerWave,
-            efficiency
+            efficiency: buildEfficiency({
+                coinsPerHour,
+                cellsPerHour,
+                coinsPerWave,
+                cellsPerWave,
+                wave
+            })
         },
 
-        // CRITICAL: this is what compare.js needs
         sections,
-
-        // useful for debug/search/future UI
         flat,
 
         meta: {
-            confidence:
-                clamp(
-                    parseNumber(meta.confidence) || 100,
-                    0,
-                    100
-                )
+            ...meta,
+            confidence: clamp(parseNumber(meta.confidence) || 0, 0, 100)
         },
 
         raw: {
@@ -175,47 +89,8 @@ export function compute(parsed) {
     };
 }
 
-/* --------------------------------------------------
-   EFFICIENCY MODEL
--------------------------------------------------- */
-
-function buildEfficiency({
-    coinsPerHour = 0,
-    cellsPerHour = 0,
-    coinsPerWave = 0,
-    cellsPerWave = 0,
-    wave = 0
-} = {}) {
-
-    const economyScore =
-        safeDiv(coinsPerHour, 1e12);
-
-    const cellScore =
-        safeDiv(cellsPerHour, 1e3);
-
-    const waveScore =
-        safeDiv(wave, 1000);
-
-    const perWaveScore =
-        safeDiv(coinsPerWave, 1e9) +
-        safeDiv(cellsPerWave, 100);
-
-    return (
-        economyScore * 0.45 +
-        cellScore * 0.25 +
-        waveScore * 0.20 +
-        perWaveScore * 0.10
-    );
-}
-
-/* --------------------------------------------------
-   EMPTY FALLBACK
--------------------------------------------------- */
-
-function empty() {
-
+export function createEmptyRun(confidence = 0) {
     return {
-
         core: {
             wave: 0,
             tier: 0,
@@ -225,7 +100,6 @@ function empty() {
             killedBy: "",
             battleDate: ""
         },
-
         stats: {
             coinsPerHour: 0,
             cellsPerHour: 0,
@@ -233,27 +107,23 @@ function empty() {
             cellsPerWave: 0,
             efficiency: 0
         },
-
         sections: {},
-
         flat: {},
-
-        meta: {
-            confidence: 0
-        },
-
+        meta: { confidence },
         raw: null
     };
 }
 
-/* --------------------------------------------------
-   HELPERS
--------------------------------------------------- */
-
-function clamp(value, min, max) {
-
-    return Math.max(
-        min,
-        Math.min(max, value)
+function buildEfficiency({ coinsPerHour = 0, cellsPerHour = 0, coinsPerWave = 0, cellsPerWave = 0, wave = 0 } = {}) {
+    return (
+        safeDiv(coinsPerHour, 1e12) * 0.45 +
+        safeDiv(cellsPerHour, 1000) * 0.25 +
+        safeDiv(wave, 1000) * 0.20 +
+        (safeDiv(coinsPerWave, 1e9) + safeDiv(cellsPerWave, 100)) * 0.10
     );
+}
+
+function positiveOr(value, fallback = 0) {
+    const parsed = parseNumber(value);
+    return parsed > 0 ? parsed : fallback;
 }
