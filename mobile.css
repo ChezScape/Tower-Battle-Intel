@@ -7422,7 +7422,7 @@ html[data-device-mode="mobile"] .confirm-warning strong[data-confirm-required-ph
     letter-spacing: 0.08em;
 }
 
-/* v4.10e display action state */
+/* v4.9y display action state */
 html.tbi-quiet-display,
 body.tbi-quiet-display {
     --glow-cyan: 0 0 8px rgba(91, 215, 255, 0.16), inset 0 0 10px rgba(91, 215, 255, 0.025);
@@ -7434,7 +7434,7 @@ html.tbi-quiet-display * {
 
 
 /* --------------------------------------------------
-   v4.10e ROOT SHELL REBUILD SUPPORT
+   v4.10c ROOT SHELL REBUILD SUPPORT
 -------------------------------------------------- */
 
 .startup-shell {
@@ -7503,19 +7503,73 @@ body[data-app-version]::before {
     content: "";
 }
 
-
 /* --------------------------------------------------
-   v4.10f ROOT ACTION STYLE SYNC SUPPORT
-   Keeps the current root shell, action buttons and theme
-   controls aligned after the v4.10d pipeline rebuild.
+   v4.10h Browser Interaction Bridge hardening
 -------------------------------------------------- */
-
-html[data-app-version="v4.10e"] .startup-error-panel {
-    border-color: rgba(255, 64, 90, 0.46);
+button,
+a[role="button"],
+label[for],
+select,
+summary,
+[data-ui-action],
+[data-dashboard-tab],
+[data-history-stats-index],
+[data-history-edit-index],
+[data-history-import-trigger],
+.history-action-button {
+    pointer-events: auto !important;
 }
 
-.tbi-action-disabled,
-button[aria-disabled="true"] {
-    opacity: 0.48;
-    pointer-events: none;
+summary {
+    cursor: pointer;
+    user-select: none;
 }
+
+#debugPanel.active {
+    pointer-events: auto !important;
+    z-index: 1000000 !important;
+}
+
+#debugPanel .debug-overlay,
+#debugPanel .debug-modal,
+#debugPanel button,
+#debugPanel pre {
+    pointer-events: auto !important;
+}
+
+.debug-health-summary {
+    width: 100%;
+    margin: 8px 0 10px;
+}
+
+.debug-health-pill {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 7px;
+    border: 1px solid rgba(91,215,255,.24);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(5,18,33,.92), rgba(1,7,17,.94));
+}
+
+.debug-health-pill span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    min-height: 28px;
+    padding: 5px 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.07);
+    background: rgba(255,255,255,.035);
+    color: var(--text-soft, #a9c6df);
+    font-size: 10px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.debug-health-pill strong { color: #fff; }
+.debug-health-pill .health-tone-good strong { color: var(--good, #49ff9f); }
+.debug-health-pill .health-tone-warn strong { color: var(--gold, #ffc857); }
+.debug-health-pill .health-tone-bad strong { color: var(--bad, #ff5f78); }
+.debug-health-pill .health-tone-info strong { color: var(--cyan, #5bd7ff); }

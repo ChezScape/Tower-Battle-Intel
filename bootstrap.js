@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * BOOTSTRAP v4.10f
+ * BOOTSTRAP v4.10h
  * Root startup flow for Tower Battle Intel.
  *
  * Owns only application startup:
@@ -29,6 +29,10 @@ import {
 import {
     render
 } from "./src/ui/render.js";
+
+import {
+    bindLiveInteractionBridge
+} from "./src/ui/liveInteractionBridge.js";
 
 import {
     loadStorage,
@@ -60,6 +64,7 @@ export function bootstrap() {
     render();
 
     bindCoreEvents();
+    bindLiveInteractionBridge(() => render());
     bindInputAutosave(shell.input);
     bindExitAutosave(shell.input);
     exposeConsoleHelpers(shell.input);
