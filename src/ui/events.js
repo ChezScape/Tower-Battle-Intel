@@ -227,14 +227,7 @@ function handleHistoryActionClick(event) {
         button.matches("[data-import-history-button]") ||
         button.matches("[data-import-history-label]")
     ) {
-        const input =
-            document.querySelector("[data-import-history-input]");
-
-        if (input) {
-            input.value = "";
-            input.click();
-        }
-
+        openHistoryImportPicker();
         return;
     }
 
@@ -1223,9 +1216,9 @@ function openHistoryImportPicker() {
 
     document.body.appendChild(input);
 
-    window.setTimeout(() => {
-        input.click();
-    }, 0);
+    // Must be synchronous inside the user's click/pointer gesture.
+    // Browsers can block file pickers if input.click() runs after setTimeout.
+    input.click();
 
     window.addEventListener(
         "focus",
