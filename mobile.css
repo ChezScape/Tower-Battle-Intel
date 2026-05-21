@@ -7422,24 +7422,53 @@ html[data-device-mode="mobile"] .confirm-warning strong[data-confirm-required-ph
     letter-spacing: 0.08em;
 }
 
-/* --------------------------------------------------
-   v4.9t ACTIONS LAYER WIRING POLISH
--------------------------------------------------- */
-
-html.tbi-display-quiet body,
-body.tbi-display-quiet {
-    --glow-cyan: 0 0 10px rgba(25, 214, 255, 0.18), inset 0 0 12px rgba(25, 214, 255, 0.025);
-    --glow-gold: 0 0 10px rgba(255, 215, 72, 0.16), inset 0 0 12px rgba(255, 215, 72, 0.025);
-    --glow-pink: 0 0 10px rgba(255, 67, 209, 0.14), inset 0 0 12px rgba(255, 67, 209, 0.025);
+/* v4.9v full action audit support */
+.history-import-input {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    opacity: 0.001 !important;
+    pointer-events: none !important;
 }
 
-.tbi-mode-toggle[data-ui-action="toggle-display-mode"],
+.history-action-label,
 .history-import-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 12px;
+    border: 1px solid rgba(39, 229, 255, 0.34);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(39, 229, 255, 0.12), rgba(39, 229, 255, 0.035));
+    color: #ecfbff;
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     cursor: pointer;
+    user-select: none;
 }
 
-.tbi-card-footer-action[data-ui-action="open-compare-section"]:focus-visible,
+.history-action-label:hover,
+.history-import-label:hover,
+.history-action-label:focus-visible,
 .history-import-label:focus-visible {
-    outline: 2px solid rgba(25, 214, 255, 0.75);
-    outline-offset: 2px;
+    outline: none;
+    border-color: rgba(39, 229, 255, 0.72);
+    box-shadow: 0 0 18px rgba(39, 229, 255, 0.20);
+}
+
+.tbi-quiet-display .tbi-card,
+.tbi-quiet-display .wa-panel,
+.tbi-quiet-display .tbi-header {
+    box-shadow: none !important;
+}
+
+[data-compare-section] {
+    scroll-margin-top: 76px;
 }

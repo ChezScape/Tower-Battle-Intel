@@ -991,24 +991,59 @@ button.danger, .danger { border-color: rgba(255,64,90,.42); color: #ffd6dd; back
     letter-spacing: 0.08em;
 }
 
-/* --------------------------------------------------
-   v4.9t ACTIONS LAYER WIRING POLISH
-   Display-mode toggle and imported-history label remain themed.
--------------------------------------------------- */
-
-html.tbi-display-quiet body,
-body.tbi-display-quiet {
-    --glow-cyan: 0 0 10px rgba(29, 231, 255, 0.18), inset 0 0 12px rgba(29, 231, 255, 0.025);
-    --glow-gold: 0 0 10px rgba(255, 211, 41, 0.16), inset 0 0 12px rgba(255, 211, 41, 0.025);
-    --glow-magenta: 0 0 10px rgba(255, 75, 226, 0.14), inset 0 0 12px rgba(255, 75, 226, 0.025);
+/* v4.9v full action audit support */
+.history-import-input {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    opacity: 0.001 !important;
+    pointer-events: none !important;
 }
 
-.tbi-mode-toggle[data-ui-action="toggle-display-mode"] {
+.history-action-label,
+.history-import-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid rgba(39, 229, 255, 0.34);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(39, 229, 255, 0.12), rgba(39, 229, 255, 0.035));
+    color: #ecfbff;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     cursor: pointer;
+    user-select: none;
 }
 
-.tbi-card-footer-action[data-ui-action="open-compare-section"]:focus-visible,
+.history-action-label:hover,
+.history-import-label:hover,
+.history-action-label:focus-visible,
 .history-import-label:focus-visible {
-    outline: 2px solid rgba(29, 231, 255, 0.75);
-    outline-offset: 2px;
+    outline: none;
+    border-color: rgba(39, 229, 255, 0.72);
+    box-shadow: 0 0 20px rgba(39, 229, 255, 0.22);
+}
+
+.tbi-quiet-display .tbi-card,
+.tbi-quiet-display .wa-panel,
+.tbi-quiet-display .tbi-header {
+    box-shadow: none !important;
+}
+
+.tbi-quiet-display .tbi-target-reticle,
+.tbi-quiet-display .tbi-chart-icon,
+.tbi-quiet-display body::after {
+    opacity: 0.35;
+}
+
+[data-compare-section] {
+    scroll-margin-top: 86px;
 }

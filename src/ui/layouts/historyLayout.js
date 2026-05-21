@@ -130,22 +130,23 @@ export function buildHistory(state = {}) {
                             Export History
                         </button>
 
-                        <label
-                            class="history-import-label"
-                            for="historyImportFile"
-                            role="button"
-                            tabindex="0"
-                        >
-                            Import History
-                        </label>
-
                         <input
-                            id="historyImportFile"
+                            id="historyImportInput"
                             class="history-import-input"
                             type="file"
                             accept="application/json,.json"
                             data-import-history-input="true"
                         >
+
+                        <label
+                            class="history-import-label history-action-label"
+                            for="historyImportInput"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Import Battle History JSON"
+                        >
+                            Import History
+                        </label>
 
                         <button
                             type="button"

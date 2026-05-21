@@ -52,7 +52,7 @@ export function buildTopNav(activeTab = "overview") {
             <div class="tbi-header-actions">
                 <span class="tbi-version-pill">${escapeHTML(version)}</span>
                 <button type="button" class="tbi-icon-button" data-dashboard-tab="settings" aria-label="Open settings">⚙</button>
-                <button type="button" class="tbi-mode-toggle" data-ui-action="toggle-display-mode" aria-label="Toggle display glow mode">
+                <button type="button" class="tbi-mode-toggle" data-ui-action="toggle-display-mode" aria-label="Toggle quiet display mode">
                     <span aria-hidden="true">☼</span><span aria-hidden="true">◐</span>
                 </button>
             </div>

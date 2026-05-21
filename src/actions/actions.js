@@ -2,17 +2,16 @@
 
 /**
  * ACTION LAYER
- * High-level state commands for Tower Battle Intel.
+ * Single command bus for Tower Battle Intel UI actions.
  *
- * v4.9t: this file is now the actual UI command bus.
- * UI buttons should call actions here instead of each section inventing
- * its own save/delete/import/tab logic.
+ * All visible UI buttons should route through here instead of directly
+ * calling random core modules or inline onclick handlers.
  */
 
 import {
     update,
-    refreshAnalysis,
-    saveReportToHistory
+    saveReportToHistory,
+    refreshAnalysis
 } from "../core/update.js";
 
 import {
@@ -44,377 +43,332 @@ import {
 } from "../storage/localStore.js";
 
 /* --------------------------------------------------
-   LOW-LEVEL PERSIST / REFRESH
+   INPUT / REPORT ACTIONS
 -------------------------------------------------- */
 
-function persistAndRefresh(reason = "action", extra = {}) {
+export function actionSaveReportFromInput(input = null) {
+    const target = input || document.getElementById("input");
+    const text = target?.value || "";
 
-    refreshAnalysis({
-        reason,
-        ...extra
+    if (!text.trim()) {
+        if (target) {
+            target.placeholder = "Paste a battle report first...";
+            target.focus?.({ preventScroll: true });
+        }
+        return null;
+    }
+
+    const result = saveReportToHistory(text);
+
+    if (!result) {
+        if (target) {
+            target.placeholder = "Could not read that report. Check the paste format...";
+        }
+        return null;
+    }
+
+    if (target) {
+        target.value = "";
+        target.placeholder = "Saved to Battle History. Paste another report here...";
+    }
+
+    saveStorage({
+        ...getState(),
+        lastInput: ""
     });
 
-    saveStorage(getState());
-
-    return getState();
+    return result;
 }
-
-function persistOnly() {
-    saveStorage(getState());
-    return getState();
-}
-
-/* --------------------------------------------------
-   PARSE INPUT / SAVE REPORT
--------------------------------------------------- */
 
 export function actionParseInput(rawText, slot = "runA") {
-
-    const result =
-        update(
-            rawText,
-            normaliseSlot(slot)
-        );
+    const result = update(rawText, normaliseSlot(slot));
 
     if (!result) {
         return null;
     }
 
     saveStorage(getState());
-
     return result;
 }
 
-export function actionSaveReport(rawText = "") {
+export function actionClearInput(input = null) {
+    const target = input || document.getElementById("input");
 
-    const text =
-        String(rawText || "").trim();
-
-    if (!text) {
-        return null;
+    if (target) {
+        target.value = "";
+        target.placeholder = "Paste Battle Report Here...";
+        target.focus?.({ preventScroll: true });
     }
 
-    const run =
-        saveReportToHistory(text);
-
-    persistAndRefresh("save_report_to_history");
-
-    return run;
-}
-
-/* --------------------------------------------------
-   DASHBOARD / VIEW COMMANDS
--------------------------------------------------- */
-
-export function actionSetDashboardTab(dashboardTab = "overview") {
-
-    const state =
-        getState();
-
-    const nextTab =
-        normaliseDashboardTab(dashboardTab);
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab: nextTab
-        }
+    saveStorage({
+        ...getState(),
+        lastInput: ""
     });
 
-    saveStorage(getState());
-
-    return nextTab;
-}
-
-export function actionOpenCompareSection(section = "damage") {
-
-    const state =
-        getState();
-
-    const selectedSection =
-        normaliseSection(section);
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab: "compare",
-            selectedSection
-        }
-    });
-
-    saveStorage(getState());
-
-    return selectedSection;
-}
-
-export function actionOpenSystemSection(section = "core") {
-
-    const state =
-        getState();
-
-    const selectedSection =
-        normaliseSection(section);
-
-    const alreadyOpen =
-        state.ui?.dashboardTab === "systems" &&
-        state.ui?.selectedSection === selectedSection;
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab: "systems",
-            selectedSection:
-                alreadyOpen
-                    ? null
-                    : selectedSection
-        }
-    });
-
-    saveStorage(getState());
-
-    return getState().ui?.selectedSection || null;
-}
-
-export function actionSelectSection(section) {
-
-    const state =
-        getState();
-
-    const nextSection =
-        normaliseSection(section);
-
-    const selectedSection =
-        state.ui?.selectedSection === nextSection
-            ? null
-            : nextSection;
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            selectedSection
-        }
-    });
-
-    saveStorage(getState());
-
-    return selectedSection;
-}
-
-export function actionToggleDisplayMode() {
-
-    const state =
-        getState();
-
-    const current =
-        state.ui?.displayMode || "normal";
-
-    const next =
-        current === "normal"
-            ? "quiet"
-            : "normal";
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            displayMode: next
-        }
-    });
-
-    saveStorage(getState());
-
-    return next;
-}
-
-/* --------------------------------------------------
-   RESET / CLEAR COMMANDS
--------------------------------------------------- */
-
-export function actionReset() {
-
-    resetState();
-
-    clearStorage();
-
-    return getState();
+    return true;
 }
 
 export function actionClearRuns() {
-
     clearRuns();
 
-    return persistAndRefresh("clear_runs");
+    refreshAnalysis({
+        reason: "clear_runs"
+    });
+
+    saveStorage(getState());
+    return getState();
+}
+
+export function actionReset() {
+    resetState();
+    clearStorage();
+    return getState();
 }
 
 /* --------------------------------------------------
-   HISTORY COMMANDS
+   HISTORY ACTIONS
 -------------------------------------------------- */
 
 export function actionLoadHistoryRun(index, slot = "runA") {
+    const safeIndex = Number(index);
 
-    const targetSlot =
-        normaliseSlot(slot);
+    if (!Number.isInteger(safeIndex)) {
+        return null;
+    }
 
-    const historyIndex =
-        Number(index);
-
-    const run =
-        loadHistoryRun(
-            historyIndex,
-            targetSlot
-        );
+    const targetSlot = normaliseSlot(slot);
+    const run = loadHistoryRun(safeIndex, targetSlot);
 
     if (!run) {
         return null;
     }
 
-    persistAndRefresh("load_history_run", {
+    refreshAnalysis({
+        reason: "load_history_run",
         targetSlot,
-        historyIndex
+        historyIndex: safeIndex
     });
 
+    saveStorage(getState());
     return run;
 }
 
-export function actionDeleteHistoryRun(index = -1) {
+export function actionSwapHistorySlots() {
+    swapHistorySlots();
 
-    const historyIndex =
-        Number(index);
-
-    const history =
-        deleteHistoryRun(historyIndex);
-
-    persistAndRefresh("delete_history_run", {
-        historyIndex
+    refreshAnalysis({
+        reason: "swap_history_slots"
     });
 
-    return history;
-}
-
-export function actionDeleteLastRun() {
-
-    const history =
-        deleteLastHistory();
-
-    persistAndRefresh("delete_last_history");
-
-    return history;
-}
-
-export function actionClearHistory() {
-
-    const history =
-        clearHistory();
-
-    persistAndRefresh("clear_history");
-
-    return history;
-}
-
-export function actionSwapHistorySlots() {
-
-    const state =
-        swapHistorySlots();
-
-    persistAndRefresh("swap_history_slots");
-
-    return state;
+    saveStorage(getState());
+    return getState();
 }
 
 export function actionClearHistorySelection() {
+    clearHistorySelection();
 
-    const state =
-        clearHistorySelection();
-
-    persistAndRefresh("clear_history_selection");
-
-    return state;
-}
-
-export function actionArchiveHistoryRun(index = -1) {
-
-    const historyIndex =
-        Number(index);
-
-    const history =
-        archiveHistoryRun(historyIndex);
-
-    persistAndRefresh("archive_history_run", {
-        historyIndex
+    refreshAnalysis({
+        reason: "clear_history_selection"
     });
-
-    return history;
-}
-
-export function actionRestoreHistoryRun(index = -1) {
-
-    const historyIndex =
-        Number(index);
-
-    const history =
-        restoreHistoryRun(historyIndex);
-
-    persistAndRefresh("restore_history_run", {
-        historyIndex
-    });
-
-    return history;
-}
-
-export function actionUpdateHistoryRunMeta(index = -1, metaPatch = {}) {
-
-    const historyIndex =
-        Number(index);
-
-    const updated =
-        updateHistoryRunMeta(historyIndex, metaPatch);
-
-    persistAndRefresh("update_history_run_meta", {
-        historyIndex
-    });
-
-    return updated;
-}
-
-export function actionSetHistoryFilters(filters = {}) {
-
-    const next =
-        setHistoryFilters(filters);
 
     saveStorage(getState());
+    return getState();
+}
 
-    return next;
+export function actionArchiveHistoryRun(index) {
+    const safeIndex = Number(index);
+
+    if (!Number.isInteger(safeIndex)) {
+        return null;
+    }
+
+    const result = archiveHistoryRun(safeIndex);
+
+    refreshAnalysis({
+        reason: "archive_history_run",
+        historyIndex: safeIndex
+    });
+
+    saveStorage(getState());
+    return result;
+}
+
+export function actionRestoreHistoryRun(index) {
+    const safeIndex = Number(index);
+
+    if (!Number.isInteger(safeIndex)) {
+        return null;
+    }
+
+    const result = restoreHistoryRun(safeIndex);
+
+    refreshAnalysis({
+        reason: "restore_history_run",
+        historyIndex: safeIndex
+    });
+
+    saveStorage(getState());
+    return result;
+}
+
+export function actionDeleteHistoryRun(index) {
+    const safeIndex = Number(index);
+
+    if (!Number.isInteger(safeIndex)) {
+        return null;
+    }
+
+    const result = deleteHistoryRun(safeIndex);
+
+    refreshAnalysis({
+        reason: "delete_history_run",
+        historyIndex: safeIndex
+    });
+
+    saveStorage(getState());
+    return result;
+}
+
+export function actionDeleteLastRun() {
+    const result = deleteLastHistory();
+
+    refreshAnalysis({
+        reason: "delete_last_history"
+    });
+
+    saveStorage(getState());
+    return result;
+}
+
+export function actionClearHistory() {
+    const result = clearHistory();
+
+    refreshAnalysis({
+        reason: "clear_history"
+    });
+
+    saveStorage(getState());
+    return result;
+}
+
+export function actionSetHistoryFilters(patch = {}) {
+    const filters = setHistoryFilters(patch);
+    saveStorage(getState());
+    return filters;
+}
+
+export function actionResetHistoryFilters() {
+    return actionSetHistoryFilters({
+        query: "",
+        sort: "newest",
+        build: "all",
+        tag: "all",
+        showArchived: false
+    });
 }
 
 export function actionExportHistoryJSON() {
     return exportHistoryJSON();
 }
 
-export function actionImportHistoryRuns(input = null) {
+export function actionImportHistoryText(text = "") {
+    const result = importHistoryRuns(text);
 
-    const history =
-        importHistoryRuns(input);
+    refreshAnalysis({
+        reason: "import_history"
+    });
 
-    persistAndRefresh("import_history_runs");
+    saveStorage(getState());
+    return result;
+}
 
-    return history;
+export function actionUpdateHistoryRunMeta(index, metaPatch = {}) {
+    const updated = updateHistoryRunMeta(Number(index), metaPatch);
+
+    if (!updated) {
+        return null;
+    }
+
+    refreshAnalysis({
+        reason: "update_history_meta",
+        historyIndex: Number(index)
+    });
+
+    saveStorage(getState());
+    return updated;
 }
 
 /* --------------------------------------------------
-   DEBUG / BUILD STYLE
+   UI ACTIONS
 -------------------------------------------------- */
 
+export function actionSelectDashboardTab(tab = "overview") {
+    const state = getState();
+    const dashboardTab = normaliseDashboardTab(tab);
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            dashboardTab
+        }
+    });
+
+    saveStorage(getState());
+    return dashboardTab;
+}
+
+export function actionOpenCompareSection(section = "") {
+    const state = getState();
+    const compareSection = String(section || "").trim();
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            dashboardTab: "compare",
+            compareSection
+        }
+    });
+
+    saveStorage(getState());
+    return compareSection;
+}
+
+export function actionSelectSection(section = "") {
+    const state = getState();
+    const value = String(section || "").trim();
+
+    const selectedSection =
+        state.ui?.selectedSection === value
+            ? null
+            : value;
+
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            selectedSection
+        }
+    });
+
+    saveStorage(getState());
+    return selectedSection;
+}
+
+export function actionSetBuildStyle(buildStyle = "unknown") {
+    const selected = setBuildStyle(buildStyle);
+
+    refreshAnalysis({
+        reason: "build_style_changed",
+        buildStyle: selected
+    });
+
+    saveStorage(getState());
+    return selected;
+}
+
 export function actionToggleDebug(force = null) {
-
-    const state =
-        getState();
-
-    const current =
-        Boolean(state?.ui?.debug);
-
-    const next =
-        typeof force === "boolean"
-            ? force
-            : !current;
+    const state = getState();
+    const current = Boolean(state?.ui?.debug);
+    const next = typeof force === "boolean" ? force : !current;
 
     setState({
         ui: {
@@ -424,47 +378,39 @@ export function actionToggleDebug(force = null) {
     });
 
     saveStorage(getState());
-
     return next;
 }
 
-export function actionSetBuildStyle(buildStyle = "unknown") {
+export function actionToggleDisplayMode() {
+    const state = getState();
+    const current = Boolean(state?.ui?.quietDisplay);
+    const quietDisplay = !current;
 
-    const selected =
-        setBuildStyle(buildStyle);
-
-    persistAndRefresh("build_style_changed", {
-        buildStyle: selected
+    setState({
+        ui: {
+            ...(state.ui || {}),
+            quietDisplay
+        }
     });
 
-    return selected;
+    saveStorage(getState());
+    return quietDisplay;
 }
-
-/* --------------------------------------------------
-   GET STATE SNAPSHOT
--------------------------------------------------- */
 
 export function actionGetState() {
     return getState();
 }
 
 /* --------------------------------------------------
-   NORMALISERS
+   HELPERS
 -------------------------------------------------- */
 
 function normaliseSlot(slot = "runA") {
+    const value = String(slot || "runA")
+        .trim()
+        .toLowerCase();
 
-    const value =
-        String(slot || "runA")
-            .trim()
-            .toLowerCase();
-
-    if (
-        value === "a" ||
-        value === "runa" ||
-        value === "run_a" ||
-        value === "run-a"
-    ) {
+    if (value === "a" || value === "runa" || value === "run_a") {
         return "runA";
     }
 
@@ -472,21 +418,19 @@ function normaliseSlot(slot = "runA") {
 }
 
 function normaliseDashboardTab(tab = "overview") {
-
-    const key =
-        String(tab || "overview")
-            .trim()
-            .toLowerCase();
+    const value = String(tab || "overview")
+        .trim()
+        .toLowerCase();
 
     const aliases = {
         dashboard: "overview",
-        intel: "compare",
-        gains: "compare",
-        losses: "compare"
+        deck: "command",
+        command_deck: "command",
+        settings_panel: "settings",
+        more_menu: "more"
     };
 
-    const normalised =
-        aliases[key] || key;
+    const normalised = aliases[value] || value;
 
     const valid = new Set([
         "overview",
@@ -500,30 +444,5 @@ function normaliseDashboardTab(tab = "overview") {
         "settings"
     ]);
 
-    return valid.has(normalised)
-        ? normalised
-        : "overview";
-}
-
-function normaliseSection(value = "") {
-
-    const key =
-        String(value || "")
-            .trim()
-            .toLowerCase()
-            .replace(/[%:/()]/g, "")
-            .replace(/\s*\/\s*/g, "_")
-            .replace(/\s+/g, "_")
-            .replace(/__+/g, "_")
-            .replace(/^_+|_+$/g, "");
-
-    const aliases = {
-        defense: "damage_taken",
-        survival: "damage_taken",
-        economy: "coins",
-        effects: "killed_with_effect_active",
-        enemies: "enemies_hit_by"
-    };
-
-    return aliases[key] || key || "damage";
+    return valid.has(normalised) ? normalised : "overview";
 }

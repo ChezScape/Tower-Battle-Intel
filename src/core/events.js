@@ -347,6 +347,7 @@ function bindMobileDebugGesture() {
 
     const target =
         document.getElementById("debugHoldZone") ||
+        document.querySelector("[data-debug-hold-zone]") ||
         document.querySelector(".topbar-banner-brand") ||
         document.querySelector(".topbar");
 
