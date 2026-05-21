@@ -53,6 +53,8 @@ export function bindUIEvents() {
 
     bindDashboardTabEvents();
 
+    bindHistoryActionDelegates();
+
     bindHeatmapEvents();
 
     bindHistoryLoadEvents();
@@ -70,6 +72,181 @@ export function bindUIEvents() {
     bindViewEvents();
 }
 
+
+
+/* --------------------------------------------------
+   HISTORY ACTION DELEGATES
+   Stable handler for buttons inside rebuilt History cards.
+   This avoids actions failing after rerender or inside details/menus.
+-------------------------------------------------- */
+
+function bindHistoryActionDelegates() {
+
+    if (document.body?.dataset?.historyActionDelegatesBound === "true") {
+        return;
+    }
+
+    if (document.body?.dataset) {
+        document.body.dataset.historyActionDelegatesBound = "true";
+    }
+
+    document.addEventListener("click", handleHistoryActionClick, true);
+}
+
+function handleHistoryActionClick(event) {
+
+    const target =
+        event?.target;
+
+    if (!target || typeof target.closest !== "function") {
+        return;
+    }
+
+    const button =
+        target.closest(`
+            [data-history-stats-index],
+            [data-history-edit-index],
+            [data-archive-history-index],
+            [data-restore-history-index],
+            [data-delete-history-index],
+            [data-swap-history-slots],
+            [data-clear-history-selection],
+            [data-export-history],
+            [data-import-history-button],
+            [data-delete-last-history],
+            [data-delete-all-history]
+        `);
+
+    if (!button || button.disabled) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation?.();
+
+    if (button.matches("[data-history-stats-index]")) {
+        openHistoryStatsModalFromButton(button);
+        return;
+    }
+
+    if (button.matches("[data-history-edit-index]")) {
+        openHistoryEditModalFromButton(button);
+        return;
+    }
+
+    if (button.matches("[data-archive-history-index]")) {
+        const index = Number(button.dataset.archiveHistoryIndex);
+
+        if (!Number.isInteger(index)) {
+            return;
+        }
+
+        archiveHistoryRun(index);
+
+        refreshAnalysis({
+            reason: "archive_history_run",
+            historyIndex: index
+        });
+
+        saveStorage(getState());
+        render();
+        return;
+    }
+
+    if (button.matches("[data-restore-history-index]")) {
+        const index = Number(button.dataset.restoreHistoryIndex);
+
+        if (!Number.isInteger(index)) {
+            return;
+        }
+
+        restoreHistoryRun(index);
+        saveStorage(getState());
+        render();
+        return;
+    }
+
+    if (button.matches("[data-delete-history-index]")) {
+        const index = Number(button.dataset.deleteHistoryIndex);
+
+        if (!Number.isInteger(index)) {
+            return;
+        }
+
+        openHistoryConfirmModal({
+            action: "delete-run",
+            index,
+            title: `Delete Run ${index + 1}?`,
+            message: "This will permanently remove this saved run from Battle History Trace.",
+            finalTitle: `Delete Run ${index + 1}`,
+            finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete This Run"
+        });
+        return;
+    }
+
+    if (button.matches("[data-swap-history-slots]")) {
+        swapHistorySlots();
+
+        refreshAnalysis({
+            reason: "swap_history_slots"
+        });
+
+        saveStorage(getState());
+        render();
+        return;
+    }
+
+    if (button.matches("[data-clear-history-selection]")) {
+        clearHistorySelection();
+
+        refreshAnalysis({
+            reason: "clear_history_selection"
+        });
+
+        saveStorage(getState());
+        render();
+        return;
+    }
+
+    if (button.matches("[data-export-history]")) {
+        downloadTextFile(
+            exportHistoryJSON(),
+            buildHistoryExportFilename(),
+            "application/json;charset=utf-8"
+        );
+        return;
+    }
+
+    if (button.matches("[data-import-history-button]")) {
+        document.querySelector("[data-import-history-input]")?.click();
+        return;
+    }
+
+    if (button.matches("[data-delete-last-history]")) {
+        openHistoryConfirmModal({
+            action: "delete-last",
+            title: "Delete Latest Saved Run?",
+            message: "This will permanently remove the latest saved run from Battle History Trace.",
+            finalTitle: "Delete Latest Run",
+            finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete Latest Run"
+        });
+        return;
+    }
+
+    if (button.matches("[data-delete-all-history]")) {
+        openHistoryConfirmModal({
+            action: "delete-all",
+            title: "Delete All Battle History?",
+            message: "This will permanently remove all saved battle reports from this browser. It will also clear Run A and Run B.",
+            finalTitle: "Final Warning",
+            finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
+            buttonText: "Yes, Delete Everything"
+        });
+    }
+}
 
 /* --------------------------------------------------
    MOBILE DASHBOARD TABS

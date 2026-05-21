@@ -98,11 +98,11 @@ export function buildHistory(state = {}) {
 
                 </div>
 
-                <details class="history-collapsible history-tools-drawer">
-                    <summary>
+                <section class="history-tools-bar" aria-label="History tools">
+                    <div class="history-tools-title">
                         <span>History Tools</span>
                         <em>Swap, import, export, delete</em>
-                    </summary>
+                    </div>
 
                     <div class="history-panel-actions">
 
@@ -164,7 +164,7 @@ export function buildHistory(state = {}) {
                         </button>
 
                     </div>
-                </details>
+                </section>
 
             </div>
 
@@ -176,7 +176,7 @@ export function buildHistory(state = {}) {
                 archiveCount
             })}
 
-            <details class="history-collapsible history-summary-drawer">
+            <details class="history-collapsible history-summary-drawer" open>
                 <summary>
                     <span>History Summary</span>
                     <em>${escapeHTML(visibleEntries.length)} visible · ${escapeHTML(history.length)} saved</em>
@@ -246,9 +246,7 @@ function buildHistoryFilters({
         getOptionLabel(tagOptions, filters.tag, "All Tags");
 
     const filterOpen =
-        hasActiveFilters(filters)
-            ? " open"
-            : "";
+        " open";
 
     return `
         <details class="history-collapsible history-filter-panel history-filter-drawer"${filterOpen}>

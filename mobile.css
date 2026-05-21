@@ -7150,3 +7150,188 @@ html[data-device-mode="mobile"] .wa-drill-details-panel .wa-sub {
 .tbi-more-button { display: grid; gap: 5px; text-align: left; }
 .tbi-more-button span { color: var(--text-muted, #6f87a3); }
 .debug-json, .debug-output { max-height: 50vh; overflow: auto; }
+
+/* --------------------------------------------------
+   v4.9o MOBILE HISTORY TRACE UI OVERHAUL
+-------------------------------------------------- */
+
+html[data-device-mode="mobile"] .history-panel {
+    display: grid;
+    gap: 12px;
+}
+
+html[data-device-mode="mobile"] .history-panel-header,
+html[data-device-mode="mobile"] .history-entry-controls,
+html[data-device-mode="mobile"] .history-entry-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+html[data-device-mode="mobile"] .history-tools-bar,
+html[data-device-mode="mobile"] .history-collapsible,
+html[data-device-mode="mobile"] .history-entry-card {
+    border: 1px solid rgba(25, 214, 255, 0.24);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(25, 214, 255, 0.10), transparent 34%),
+        linear-gradient(180deg, rgba(6, 18, 34, 0.96), rgba(2, 7, 18, 0.98));
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+}
+
+html[data-device-mode="mobile"] .history-tools-bar {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+}
+
+html[data-device-mode="mobile"] .history-tools-title,
+html[data-device-mode="mobile"] .history-collapsible > summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    font-weight: 1000;
+}
+
+html[data-device-mode="mobile"] .history-tools-title em,
+html[data-device-mode="mobile"] .history-collapsible > summary em {
+    color: var(--muted);
+    font-size: 9px;
+    font-style: normal;
+}
+
+html[data-device-mode="mobile"] .history-panel-actions,
+html[data-device-mode="mobile"] .history-choice-groups,
+html[data-device-mode="mobile"] .history-summary-grid,
+html[data-device-mode="mobile"] .history-entry-metrics,
+html[data-device-mode="mobile"] .history-more-intel-grid,
+html[data-device-mode="mobile"] .history-filter-row.compact {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+html[data-device-mode="mobile"] .history-filter-body,
+html[data-device-mode="mobile"] .history-summary-grid {
+    padding: 10px;
+}
+
+html[data-device-mode="mobile"] .history-entry-card {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    overflow: hidden;
+}
+
+html[data-device-mode="mobile"] .history-entry-side-light {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    border-radius: 99px;
+    background: var(--cyan);
+    box-shadow: 0 0 14px rgba(25, 214, 255, 0.56);
+}
+
+html[data-device-mode="mobile"] .history-entry-title-block {
+    display: grid;
+    gap: 3px;
+}
+
+html[data-device-mode="mobile"] .history-entry-kicker,
+html[data-device-mode="mobile"] .history-metric-tile span,
+html[data-device-mode="mobile"] .history-slot-actions > span,
+html[data-device-mode="mobile"] .history-card-actions > span {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    font-size: 9px;
+    font-weight: 1000;
+}
+
+html[data-device-mode="mobile"] .history-entry-title-block strong {
+    color: #fff;
+    font-size: 15px;
+}
+
+html[data-device-mode="mobile"] .history-entry-title-block em {
+    color: var(--muted);
+    font-size: 11px;
+    font-style: normal;
+}
+
+html[data-device-mode="mobile"] .history-entry-score,
+html[data-device-mode="mobile"] .history-metric-tile,
+html[data-device-mode="mobile"] .history-slot-actions,
+html[data-device-mode="mobile"] .history-card-actions,
+html[data-device-mode="mobile"] .history-more-intel,
+html[data-device-mode="mobile"] .history-summary-tile {
+    border: 1px solid rgba(25, 214, 255, 0.16);
+    border-radius: 12px;
+    background: rgba(1, 7, 18, 0.62);
+    padding: 10px;
+}
+
+html[data-device-mode="mobile"] .history-entry-score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+html[data-device-mode="mobile"] .history-entry-score span {
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.10em;
+}
+
+html[data-device-mode="mobile"] .history-entry-score strong,
+html[data-device-mode="mobile"] .history-metric-tile.cyan strong,
+html[data-device-mode="mobile"] .history-summary-tile strong {
+    color: var(--cyan);
+}
+
+html[data-device-mode="mobile"] .history-metric-tile.gold strong { color: var(--gold); }
+html[data-device-mode="mobile"] .history-metric-tile.green strong { color: var(--green); }
+html[data-device-mode="mobile"] .history-metric-tile.danger strong { color: var(--red); }
+
+html[data-device-mode="mobile"] .history-slot-actions,
+html[data-device-mode="mobile"] .history-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+html[data-device-mode="mobile"] .history-slot-actions > span,
+html[data-device-mode="mobile"] .history-card-actions > span {
+    width: 100%;
+}
+
+html[data-device-mode="mobile"] .history-card-actions .icon-btn,
+html[data-device-mode="mobile"] .history-slot-actions .icon-btn {
+    min-height: 40px;
+    flex: 1 1 72px;
+}
+
+html[data-device-mode="mobile"] .history-more-intel > summary {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    font-size: 11px;
+    font-weight: 1000;
+}
+
+html[data-device-mode="mobile"] .history-more-intel > summary em {
+    display: none;
+}
