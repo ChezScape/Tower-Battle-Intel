@@ -61,6 +61,8 @@ export function bindUIEvents() {
 
     bindHistoryFilterEvents();
 
+    bindHistoryDrawerStateEvents();
+
     bindHistoryControlEvents();
 
     bindHistoryStatsEvents();
@@ -113,6 +115,7 @@ function handleHistoryActionClick(event) {
             [data-clear-history-selection],
             [data-export-history],
             [data-import-history-button],
+            [data-import-history-label],
             [data-delete-last-history],
             [data-delete-all-history]
         `);
@@ -181,7 +184,8 @@ function handleHistoryActionClick(event) {
             message: "This will permanently remove this saved run from Battle History Trace.",
             finalTitle: `Delete Run ${index + 1}`,
             finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-            buttonText: "Delete This Run"
+            buttonText: "Delete This Run",
+            requiredPhrase: "DELETE"
         });
         return;
     }
@@ -219,8 +223,18 @@ function handleHistoryActionClick(event) {
         return;
     }
 
-    if (button.matches("[data-import-history-button]")) {
-        document.querySelector("[data-import-history-input]")?.click();
+    if (
+        button.matches("[data-import-history-button]") ||
+        button.matches("[data-import-history-label]")
+    ) {
+        const input =
+            document.querySelector("[data-import-history-input]");
+
+        if (input) {
+            input.value = "";
+            input.click();
+        }
+
         return;
     }
 
@@ -231,7 +245,8 @@ function handleHistoryActionClick(event) {
             message: "This will permanently remove the latest saved run from Battle History Trace.",
             finalTitle: "Delete Latest Run",
             finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-            buttonText: "Delete Latest Run"
+            buttonText: "Delete Latest Run",
+            requiredPhrase: "LAST"
         });
         return;
     }
@@ -243,7 +258,8 @@ function handleHistoryActionClick(event) {
             message: "This will permanently remove all saved battle reports from this browser. It will also clear Run A and Run B.",
             finalTitle: "Final Warning",
             finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
-            buttonText: "Yes, Delete Everything"
+            buttonText: "Yes, Delete Everything",
+            requiredPhrase: "DELETE ALL"
         });
     }
 }
@@ -961,6 +977,44 @@ function restoreOpenHistoryMenus(openMenus = []) {
     });
 }
 
+
+/* --------------------------------------------------
+   HISTORY DRAWER STATE
+-------------------------------------------------- */
+
+function bindHistoryDrawerStateEvents() {
+
+    if (document.body?.dataset?.historyDrawerStateBound === "true") {
+        return;
+    }
+
+    if (document.body?.dataset) {
+        document.body.dataset.historyDrawerStateBound = "true";
+    }
+
+    document.addEventListener("toggle", event => {
+
+        const drawer =
+            event.target;
+
+        if (!drawer?.matches?.("[data-history-drawer]")) {
+            return;
+        }
+
+        const name =
+            drawer.dataset.historyDrawer || "drawer";
+
+        try {
+            window.sessionStorage?.setItem(
+                `tbi.history.drawer.${name}`,
+                drawer.open ? "open" : "closed"
+            );
+        } catch {
+            // Ignore unavailable sessionStorage.
+        }
+    }, true);
+}
+
 /* --------------------------------------------------
    HISTORY CONTROLS
 -------------------------------------------------- */
@@ -1102,7 +1156,7 @@ function bindHistoryImportExportButtons() {
     }
 
     const importButton =
-        document.querySelector("[data-import-history-button]");
+        document.querySelector("[data-import-history-button], [data-import-history-label]");
 
     const importInput =
         document.querySelector("[data-import-history-input]");
@@ -1111,8 +1165,25 @@ function bindHistoryImportExportButtons() {
 
         importButton.dataset.bound = "true";
 
-        importButton.addEventListener("click", () => {
-            importInput?.click();
+        importButton.addEventListener("click", event => {
+            event.preventDefault();
+            if (importInput) {
+                importInput.value = "";
+                importInput.click();
+            }
+        });
+
+        importButton.addEventListener("keydown", event => {
+            if (event.key !== "Enter" && event.key !== " ") {
+                return;
+            }
+
+            event.preventDefault();
+
+            if (importInput) {
+                importInput.value = "";
+                importInput.click();
+            }
         });
     }
 
@@ -1173,7 +1244,8 @@ function bindConfirmOpenButtons() {
                 message: "This will permanently remove the latest saved run from Battle History Trace.",
                 finalTitle: "Delete Latest Run",
                 finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-                buttonText: "Delete Latest Run"
+                buttonText: "Delete Latest Run",
+                requiredPhrase: "LAST"
             });
         });
     }
@@ -1195,7 +1267,8 @@ function bindConfirmOpenButtons() {
                 message: "This will permanently remove all saved battle reports from this browser. It will also clear Run A and Run B.",
                 finalTitle: "Final Warning",
                 finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
-                buttonText: "Yes, Delete Everything"
+                buttonText: "Yes, Delete Everything",
+                requiredPhrase: "DELETE ALL"
             });
         });
     }
@@ -1227,7 +1300,8 @@ function bindConfirmOpenButtons() {
                 message: "This will permanently remove this saved run from Battle History Trace.",
                 finalTitle: `Delete Run ${index + 1}`,
                 finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-                buttonText: "Delete This Run"
+                buttonText: "Delete This Run",
+                requiredPhrase: "DELETE"
             });
         });
     });
@@ -1911,9 +1985,14 @@ function bindHistoryConfirmModal() {
                 .trim()
                 .toUpperCase();
 
+        const requiredPhrase =
+            String(modal.dataset.confirmPhrase || "DELETE")
+                .trim()
+                .toUpperCase();
+
         if (continueBtn) {
             continueBtn.disabled =
-                typed !== "DELETE";
+                typed !== requiredPhrase;
         }
     });
 
@@ -1924,7 +2003,12 @@ function bindHistoryConfirmModal() {
                 .trim()
                 .toUpperCase();
 
-        if (typed !== "DELETE") {
+        const requiredPhrase =
+            String(modal.dataset.confirmPhrase || "DELETE")
+                .trim()
+                .toUpperCase();
+
+        if (typed !== requiredPhrase) {
             return;
         }
 
@@ -1963,7 +2047,8 @@ function openHistoryConfirmModal({
     message = "This action needs confirmation.",
     finalTitle = "Final Warning",
     finalMessage = "This action cannot be undone.",
-    buttonText = "Confirm"
+    buttonText = "Confirm",
+    requiredPhrase = "DELETE"
 } = {}) {
 
     const modal =
@@ -1984,11 +2069,22 @@ function openHistoryConfirmModal({
             ? ""
             : String(index);
 
+    modal.dataset.confirmPhrase =
+        String(requiredPhrase || "DELETE")
+            .trim()
+            .toUpperCase();
+
     setModalText(modal, "[data-confirm-title]", title);
     setModalText(modal, "[data-confirm-message]", message);
     setModalText(modal, "[data-confirm-final-title]", finalTitle);
     setModalText(modal, "[data-confirm-final-message]", finalMessage);
     setModalText(modal, "[data-confirm-accept]", buttonText);
+    setModalText(modal, "[data-confirm-required-phrase]", modal.dataset.confirmPhrase || "DELETE");
+
+    if (input) {
+        input.placeholder = `Type ${modal.dataset.confirmPhrase || "DELETE"}`;
+        input.setAttribute("aria-label", `Type ${modal.dataset.confirmPhrase || "DELETE"} to confirm`);
+    }
 
     modal.hidden = false;
     modal.inert = false;
@@ -2032,9 +2128,12 @@ function closeHistoryConfirmModal() {
 
     modal.dataset.confirmAction = "";
     modal.dataset.confirmIndex = "";
+    modal.dataset.confirmPhrase = "DELETE";
 
     if (input) {
         input.value = "";
+        input.placeholder = "Type DELETE";
+        input.setAttribute("aria-label", "Type DELETE to confirm");
     }
 
     if (continueBtn) {

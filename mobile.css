@@ -7335,3 +7335,89 @@ html[data-device-mode="mobile"] .history-more-intel > summary {
 html[data-device-mode="mobile"] .history-more-intel > summary em {
     display: none;
 }
+
+/* --------------------------------------------------
+   v4.9p HISTORY TRACE CONTROL FIXES
+-------------------------------------------------- */
+
+html[data-device-mode="mobile"] .history-import-input,
+.history-import-input {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+}
+
+html[data-device-mode="mobile"] .history-import-label,
+.history-import-label {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(39, 229, 255, 0.28);
+    border-radius: 10px;
+    padding: 9px 12px;
+    color: #dff8ff;
+    background: linear-gradient(180deg, rgba(39,229,255,.10), rgba(39,229,255,.025));
+    font-weight: 1000;
+    letter-spacing: .075em;
+    text-transform: uppercase;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+html[data-device-mode="mobile"] .history-native-select-group,
+.history-native-select-group {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 9px 10px;
+    border: 1px solid rgba(39, 229, 255, 0.25);
+    border-radius: 13px;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(39, 229, 255, 0.10), transparent 36%),
+        linear-gradient(180deg, rgba(6, 18, 36, 0.94), rgba(2, 8, 20, 0.97));
+}
+
+html[data-device-mode="mobile"] .history-native-select-group .history-choice-title,
+.history-native-select-group .history-choice-title {
+    min-width: 58px;
+    color: rgba(229, 244, 255, 0.76);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+html[data-device-mode="mobile"] .history-choice-select,
+.history-choice-select {
+    width: 100%;
+    min-height: 36px;
+    border: 0;
+    border-left: 1px solid rgba(39, 229, 255, 0.14);
+    border-radius: 0;
+    padding: 0 34px 0 12px;
+    color: var(--cyan);
+    background-color: transparent;
+    font-size: 13px;
+    font-weight: 1000;
+    text-align-last: right;
+}
+
+html[data-device-mode="mobile"] .history-choice-select option,
+.history-choice-select option {
+    background: #061326;
+    color: #ecfbff;
+}
+
+html[data-device-mode="mobile"] .confirm-warning strong[data-confirm-required-phrase],
+.confirm-warning strong[data-confirm-required-phrase] {
+    color: var(--gold);
+    text-shadow: 0 0 12px rgba(255, 214, 80, 0.34);
+    letter-spacing: 0.08em;
+}

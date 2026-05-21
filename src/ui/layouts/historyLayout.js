@@ -130,19 +130,23 @@ export function buildHistory(state = {}) {
                             Export History
                         </button>
 
-                        <button
-                            type="button"
-                            data-import-history-button="true"
+                        <label
+                            class="history-import-label"
+                            for="historyImportInput"
+                            role="button"
+                            tabindex="0"
+                            data-import-history-label="true"
                         >
                             Import History
-                        </button>
+                        </label>
 
                         <input
                             id="historyImportInput"
+                            class="history-import-input"
                             type="file"
                             accept="application/json,.json"
                             data-import-history-input="true"
-                            hidden
+                            aria-label="Import Battle History JSON"
                         >
 
                         <button
@@ -176,7 +180,11 @@ export function buildHistory(state = {}) {
                 archiveCount
             })}
 
-            <details class="history-collapsible history-summary-drawer" open>
+            <details
+                class="history-collapsible history-summary-drawer"
+                data-history-drawer="summary"
+                ${historyDrawerOpenAttribute("summary", true)}
+            >
                 <summary>
                     <span>History Summary</span>
                     <em>${escapeHTML(visibleEntries.length)} visible · ${escapeHTML(history.length)} saved</em>
@@ -246,10 +254,14 @@ function buildHistoryFilters({
         getOptionLabel(tagOptions, filters.tag, "All Tags");
 
     const filterOpen =
-        " open";
+        historyDrawerOpenAttribute("filter", true);
 
     return `
-        <details class="history-collapsible history-filter-panel history-filter-drawer"${filterOpen}>
+        <details
+            class="history-collapsible history-filter-panel history-filter-drawer"
+            data-history-drawer="filter"
+            ${filterOpen}
+        >
 
             <summary>
                 <span>Filter Console</span>
@@ -340,9 +352,6 @@ function buildChoiceSelect({
     options = []
 } = {}) {
 
-    const currentLabel =
-        getOptionLabel(options, current, "Select");
-
     const safeFilter =
         String(filter || "choice");
 
@@ -354,47 +363,52 @@ function buildChoiceSelect({
                 : "data-history-filter-tag=\"true\"";
 
     return `
-        <details
-            class="history-choice-group history-select-group history-choice-menu"
-            data-history-choice-menu="${escapeAttr(safeFilter)}"
-        >
-            <summary
-                class="history-choice-trigger"
+        <label class="history-native-select-group history-choice-group history-select-group">
+            <span class="history-choice-title">
+                ${escapeHTML(title)}
+            </span>
+
+            <select
+                class="history-choice-select"
                 ${controlAttr}
-                role="button"
-                aria-label="${escapeAttr(title)} menu"
+                data-history-filter-kind="${escapeAttr(safeFilter)}"
+                aria-label="${escapeAttr(title)} filter"
             >
-                <span class="history-choice-title">
-                    ${escapeHTML(title)}
-                </span>
-
-                <strong class="history-choice-current">
-                    ${escapeHTML(currentLabel)}
-                </strong>
-            </summary>
-
-            <div class="history-choice-options" role="listbox" aria-label="${escapeAttr(title)} options">
-                ${options.map(option => {
-                    const selected =
-                        String(option.value) === String(current);
-
-                    return `
-                        <button
-                            type="button"
-                            class="history-choice-option ${selected ? "active" : ""}"
-                            data-history-filter-value="${escapeAttr(safeFilter)}"
-                            data-history-filter-kind="${escapeAttr(safeFilter)}"
-                            data-history-filter-option="${escapeAttr(option.value)}"
-                            aria-pressed="${selected ? "true" : "false"}"
-                            role="option"
-                        >
-                            ${escapeHTML(option.label)}
-                        </button>
-                    `;
-                }).join("")}
-            </div>
-        </details>
+                ${options.map(option => `
+                    <option
+                        value="${escapeAttr(option.value)}"
+                        ${String(option.value) === String(current) ? "selected" : ""}
+                    >
+                        ${escapeHTML(option.label)}
+                    </option>
+                `).join("")}
+            </select>
+        </label>
     `;
+}
+
+function historyDrawerOpenAttribute(name = "", defaultOpen = true) {
+
+    if (typeof window === "undefined" || !window.sessionStorage) {
+        return defaultOpen ? "open" : "";
+    }
+
+    try {
+        const key = `tbi.history.drawer.${String(name || "drawer")}`;
+        const stored = window.sessionStorage.getItem(key);
+
+        if (stored === "open") {
+            return "open";
+        }
+
+        if (stored === "closed") {
+            return "";
+        }
+    } catch {
+        // sessionStorage may be unavailable in some privacy modes.
+    }
+
+    return defaultOpen ? "open" : "";
 }
 
 function getOptionLabel(options = [], value = "", fallback = "") {

@@ -888,3 +888,105 @@ button.danger, .danger { border-color: rgba(255,64,90,.42); color: #ffd6dd; back
         justify-self: start;
     }
 }
+
+/* --------------------------------------------------
+   v4.9p HISTORY TRACE CONTROL FIXES
+   - native themed dropdowns for Filter Console
+   - import label opens file picker reliably
+   - drawer collapse state is respected by JS
+-------------------------------------------------- */
+
+.history-import-input {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+}
+
+.history-import-label {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(36, 231, 255, 0.25);
+    border-radius: 9px;
+    padding: 9px 13px;
+    color: #dff8ff;
+    background: linear-gradient(180deg, rgba(29,231,255,.10), rgba(29,231,255,.025));
+    font-weight: 1000;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.history-import-label:hover,
+.history-import-label:focus-visible {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+.history-native-select-group {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    min-height: 58px;
+    padding: 10px 12px;
+    border: 1px solid rgba(36, 231, 255, 0.24);
+    border-radius: 13px;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(36, 231, 255, 0.10), transparent 36%),
+        linear-gradient(180deg, rgba(6, 18, 36, 0.92), rgba(2, 8, 20, 0.96));
+    box-shadow: inset 0 0 16px rgba(36, 231, 255, 0.035);
+}
+
+.history-native-select-group .history-choice-title {
+    min-width: 78px;
+    color: rgba(229, 244, 255, 0.76);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    font-weight: 1000;
+}
+
+.history-choice-select {
+    width: 100%;
+    min-height: 38px;
+    border: 0;
+    border-left: 1px solid rgba(36, 231, 255, 0.14);
+    border-radius: 0;
+    padding: 0 36px 0 16px;
+    color: var(--cyan);
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: 1000;
+    letter-spacing: 0.03em;
+    text-align-last: right;
+}
+
+.history-choice-select:focus {
+    outline: none;
+    color: #fff7d6;
+    text-shadow: 0 0 10px rgba(255, 211, 41, 0.28);
+}
+
+.history-choice-select option {
+    background: #061326;
+    color: #ecfbff;
+}
+
+.confirm-card {
+    max-width: 640px;
+}
+
+.confirm-warning strong[data-confirm-required-phrase] {
+    color: var(--gold);
+    text-shadow: 0 0 12px rgba(255, 211, 41, 0.35);
+    letter-spacing: 0.08em;
+}
