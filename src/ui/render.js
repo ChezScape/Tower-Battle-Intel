@@ -1,38 +1,39 @@
 "use strict";
 
 /**
- * ROOT UI RENDERER
- * One render entry for dashboard + dev panel + UI events.
+ * ROOT UI RENDERER v4.10f
+ * One render entry for dashboard + debug panel + delegated UI events.
  */
 
-import {
-    getState
-} from "../core/state.js";
+import { getState } from "../core/state.js";
+import { renderDashboard } from "./dashboard.js";
+import { renderInspectionPanel } from "./dev/inspectionPanel.js";
+import { bindUIEvents } from "./events.js";
+import { applyDeviceMode } from "./deviceMode.js";
 
-import {
-    renderDashboard
-} from "./dashboard.js";
-
-import {
-    renderInspectionPanel
-} from "./dev/inspectionPanel.js";
-
-import {
-    bindUIEvents
-} from "./events.js";
-
-/* --------------------------------------------------
-   RENDER
--------------------------------------------------- */
+let renderDepth = 0;
 
 export function render(incomingState = null) {
+    const state = incomingState || getState();
 
-    const state =
-        incomingState || getState();
+    renderDepth += 1;
 
-    renderDashboard(state);
-
-    renderInspectionPanel(state);
-
-    bindUIEvents(() => render());
+    try {
+        applyDeviceMode();
+        renderDashboard(state);
+        renderInspectionPanel(state);
+        bindUIEvents(() => render());
+        return state;
+    } finally {
+        renderDepth = Math.max(0, renderDepth - 1);
+    }
 }
+
+export function isRendering() {
+    return renderDepth > 0;
+}
+
+export default {
+    render,
+    isRendering
+};

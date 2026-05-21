@@ -1,8 +1,8 @@
 "use strict";
 
 /**
- * UI NUMBER HELPERS
- * Thin wrapper around UI formatters.
+ * UI NUMBER HELPERS v4.10f
+ * Thin compatibility wrapper around ui/utils/format.js.
  */
 
 import {
@@ -24,10 +24,7 @@ export function compact(value, precision = 2) {
 }
 
 export function delta(value, precision = 2) {
-    return formatDelta(value, {
-        precision,
-        compact: true
-    });
+    return formatDelta(value, { precision, compact: true });
 }
 
 export function percent(value, precision = 1) {

@@ -1,4 +1,4 @@
-# Tower Battle Intel v4.10e
+# Tower Battle Intel v4.10f
 
 Current working line: **v4.10e Root / Action / Style Sync**.
 

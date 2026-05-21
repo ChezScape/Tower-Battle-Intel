@@ -1,25 +1,24 @@
 "use strict";
 
 /**
- * TOWER BATTLE INTEL v4.9m
- * Full UI overhaul renderer.
- *
- * dashboard.js is now a small orchestration layer only.
+ * TOWER BATTLE INTEL DASHBOARD v4.10f
+ * Small orchestration layer only.
  */
 
-import { getUIState, hydrateUIState } from "./uistate.js";
+import { getUIState, hydrateUIState, normaliseDashboardTab } from "./uistate.js";
 import { mountHTML } from "./mount.js";
 import { qs, clearElement } from "./dom.js";
 import { buildTopNav } from "./components/topNav.js";
 import { buildDesktopWorkspace } from "./views/desktopView.js";
 import { buildMobileWorkspace } from "./views/mobileView.js";
 import { normaliseViewState, escapeAttr } from "./sections/sectionUtils.js";
+import { getAppliedDeviceMode } from "./deviceMode.js";
 
 export function renderDashboard(state = {}) {
     const root = qs("#dashboard");
 
     if (!root) {
-        return;
+        return null;
     }
 
     hydrateUIState(state);
@@ -30,63 +29,45 @@ export function renderDashboard(state = {}) {
         ...state,
         ui: {
             ...(state.ui || {}),
-            ...ui
+            ...ui,
+            dashboardTab: activeTab
         }
     });
-    const mobileMode = isMobileMode();
 
-    document.body.dataset.dashboardTab = activeTab;
-    document.documentElement.dataset.dashboardTab = activeTab;
+    const mode = getAppliedDeviceMode();
+
+    stampDashboardRuntime(activeTab, mode);
 
     const html = `
         <div
             class="tbi-shell wa-dashboard-shell"
             data-dashboard-shell="true"
             data-dashboard-tab-active="${escapeAttr(activeTab)}"
+            data-dashboard-device-mode="${escapeAttr(mode)}"
         >
             ${buildTopNav(activeTab)}
-            ${mobileMode ? buildMobileWorkspace(activeTab, viewState) : buildDesktopWorkspace(activeTab, viewState)}
+            ${mode === "mobile" ? buildMobileWorkspace(activeTab, viewState) : buildDesktopWorkspace(activeTab, viewState)}
         </div>
     `;
 
     clearElement(root);
     mountHTML(root, html);
+
+    return root;
 }
 
-function isMobileMode() {
-    return (
-        typeof document !== "undefined" &&
-        document.documentElement?.getAttribute("data-device-mode") === "mobile"
-    );
+function stampDashboardRuntime(activeTab, mode) {
+    if (typeof document === "undefined") return;
+
+    document.body.dataset.dashboardTab = activeTab;
+    document.documentElement.dataset.dashboardTab = activeTab;
+    document.body.dataset.dashboardDeviceMode = mode;
+    document.documentElement.dataset.dashboardDeviceMode = mode;
 }
 
-function normaliseDashboardTab(tab = "overview") {
-    const value = String(tab || "overview");
-
-    const aliases = {
-        dashboard: "overview",
-        intel: "compare",
-        gains: "compare",
-        losses: "compare"
-    };
-
-    const normalised = aliases[value] || value;
-
-    const valid = new Set([
-        "overview",
-        "compare",
-        "systems",
-        "coach",
-        "history",
-        "anomalies",
-        "command",
-        "more",
-        "settings"
-    ]);
-
-    return valid.has(normalised) ? normalised : "overview";
-}
+export { normaliseDashboardTab };
 
 export default {
-    renderDashboard
+    renderDashboard,
+    normaliseDashboardTab
 };

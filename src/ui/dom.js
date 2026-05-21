@@ -1,138 +1,112 @@
 "use strict";
 
 /**
- * DOM ENGINE
- * Central DOM selectors + safe helpers
+ * DOM ENGINE v4.10f
+ * Safe selectors, mounting helpers and tiny DOM utilities.
  */
 
-/* --------------------------------------------------
-   SELECTORS
--------------------------------------------------- */
-
-export function qs(selector, parent = document) {
-
-    return parent.querySelector(selector);
+export function qs(selector, parent = getDocument()) {
+    return parent?.querySelector?.(selector) || null;
 }
 
-export function qsa(selector, parent = document) {
-
-    return Array.from(
-        parent.querySelectorAll(selector)
-    );
+export function qsa(selector, parent = getDocument()) {
+    return Array.from(parent?.querySelectorAll?.(selector) || []);
 }
 
 export function byId(id) {
-
-    return document.getElementById(id);
+    return getDocument()?.getElementById?.(id) || null;
 }
 
-/* --------------------------------------------------
-   HTML / TEXT
--------------------------------------------------- */
-
 export function setHTML(target, html = "") {
-
     const el = resolve(target);
-
-    if (!el) {
-        return;
-    }
-
-    el.innerHTML = html;
+    if (el) el.innerHTML = String(html ?? "");
+    return el;
 }
 
 export function setText(target, text = "") {
-
     const el = resolve(target);
-
-    if (!el) {
-        return;
-    }
-
-    el.textContent = text;
+    if (el) el.textContent = String(text ?? "");
+    return el;
 }
-
-/* --------------------------------------------------
-   CLEAR
--------------------------------------------------- */
 
 export function clearElement(target) {
-
     const el = resolve(target);
-
-    if (!el) {
-        return;
-    }
-
-    el.innerHTML = "";
+    if (el) el.replaceChildren?.() ?? (el.innerHTML = "");
+    return el;
 }
 
-/**
- * Backwards-compatible alias
- */
 export function clear(target) {
-
-    clearElement(target);
+    return clearElement(target);
 }
-
-/* --------------------------------------------------
-   CLASS HELPERS
--------------------------------------------------- */
 
 export function addClass(target, className) {
-
     const el = resolve(target);
-
-    if (!el || !className) {
-        return;
-    }
-
-    el.classList.add(className);
+    if (el && className) el.classList.add(className);
+    return el;
 }
 
 export function removeClass(target, className) {
-
     const el = resolve(target);
-
-    if (!el || !className) {
-        return;
-    }
-
-    el.classList.remove(className);
+    if (el && className) el.classList.remove(className);
+    return el;
 }
 
 export function toggleClass(target, className, force = undefined) {
-
     const el = resolve(target);
-
-    if (!el || !className) {
-        return;
-    }
-
-    el.classList.toggle(className, force);
+    if (el && className) el.classList.toggle(className, force);
+    return el;
 }
 
-/* --------------------------------------------------
-   RESOLVE TARGET
--------------------------------------------------- */
-
-function resolve(target) {
-
-    if (!target) {
-        return null;
-    }
-
-    if (typeof target !== "string") {
-        return target;
-    }
-
-    if (
-        target.startsWith("#") ||
-        target.startsWith(".") ||
-        target.includes("[")
-    ) {
-        return qs(target);
-    }
-
-    return byId(target);
+export function setHidden(target, hidden = true) {
+    const el = resolve(target);
+    if (el) el.hidden = Boolean(hidden);
+    return el;
 }
+
+export function setAttr(target, name, value = "") {
+    const el = resolve(target);
+    if (el && name) el.setAttribute(name, String(value));
+    return el;
+}
+
+export function removeAttr(target, name) {
+    const el = resolve(target);
+    if (el && name) el.removeAttribute(name);
+    return el;
+}
+
+export function on(target, type, handler, options = undefined) {
+    const el = resolve(target);
+    if (!el || typeof handler !== "function") return () => {};
+    el.addEventListener(type, handler, options);
+    return () => el.removeEventListener(type, handler, options);
+}
+
+export function resolve(target) {
+    if (!target) return null;
+    if (typeof target === "string") return qs(target);
+    if (target.nodeType === 1 || target.nodeType === 9 || target === window) return target;
+    return null;
+}
+
+export function getDocument() {
+    return typeof document !== "undefined" ? document : null;
+}
+
+export default {
+    qs,
+    qsa,
+    byId,
+    setHTML,
+    setText,
+    clearElement,
+    clear,
+    addClass,
+    removeClass,
+    toggleClass,
+    setHidden,
+    setAttr,
+    removeAttr,
+    on,
+    resolve
+};

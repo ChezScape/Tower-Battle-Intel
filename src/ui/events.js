@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * UI EVENTS v4.9y
+ * UI EVENTS v4.10f
  * One delegated UI bridge. No per-render rebinding for visible buttons.
  */
 
@@ -122,14 +122,7 @@ function handleUIActionButton(button) {
 
     const action = button.dataset.uiAction || "";
 
-    const payload = {
-        tab: button.dataset.dashboardTab,
-        section: button.dataset.section || button.dataset.compareSection,
-        compareSection: button.dataset.compareSection,
-        value: button.dataset.value,
-        buildStyle: button.dataset.buildStyle,
-        input: document.getElementById("input")
-    };
+    const payload = buildActionPayload(button);
 
     if (action === "import-history") {
         openHistoryImportPicker();
@@ -196,6 +189,48 @@ function handleUIActionButton(button) {
     }
 
     runAction(action, payload);
+}
+
+
+function buildActionPayload(button) {
+
+    const index = firstDefined(
+        button.dataset.index,
+        button.dataset.historyIndex,
+        button.dataset.deleteHistoryIndex,
+        button.dataset.archiveHistoryIndex,
+        button.dataset.restoreHistoryIndex,
+        button.dataset.historyStatsIndex,
+        button.dataset.historyEditIndex,
+        button.dataset.historyModalIndex
+    );
+
+    return {
+        tab: button.dataset.dashboardTab,
+        section: firstDefined(button.dataset.section, button.dataset.compareSection),
+        compareSection: button.dataset.compareSection,
+        value: button.dataset.value,
+        buildStyle: button.dataset.buildStyle,
+        slot: button.dataset.historySlot || button.dataset.historyModalSlot,
+        index,
+        filters: readFilterDataset(button),
+        input: document.getElementById("input")
+    };
+}
+
+function readFilterDataset(button) {
+    const kind = button.dataset.historyFilterKind || button.dataset.historyFilterValue;
+    const option = button.dataset.historyFilterOption;
+
+    if (!kind) {
+        return null;
+    }
+
+    return buildHistoryFilterPatch(kind, option) || null;
+}
+
+function firstDefined(...values) {
+    return values.find(value => value !== undefined && value !== null && String(value) !== "");
 }
 
 /* --------------------------------------------------
@@ -958,9 +993,19 @@ function bindEditKeydown() {
 
 function openHistoryImportPicker() {
 
+    const existing = document.getElementById("historyImportInput");
+
+    if (existing) {
+        existing.value = "";
+        existing.click();
+        return existing;
+    }
+
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "application/json,.json";
+    input.id = "historyImportInput";
+    input.dataset.importHistoryInput = "true";
     input.setAttribute("aria-label", "Import Battle History JSON");
 
     Object.assign(input.style, {
@@ -973,19 +1018,13 @@ function openHistoryImportPicker() {
     });
 
     input.addEventListener("change", () => {
-        handleHistoryImportInput(input, { removeAfter: true });
+        handleHistoryImportInput(input, { removeAfter: false });
     });
 
     document.body.appendChild(input);
     input.click();
 
-    window.addEventListener("focus", () => {
-        window.setTimeout(() => {
-            if (input.isConnected && !input.files?.length) {
-                input.remove();
-            }
-        }, 900);
-    }, { once: true });
+    return input;
 }
 
 async function handleHistoryImportInput(input, { removeAfter = false } = {}) {

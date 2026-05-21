@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * BOOTSTRAP v4.10e
+ * BOOTSTRAP v4.10f
  * Root startup flow for Tower Battle Intel.
  *
  * Owns only application startup:
