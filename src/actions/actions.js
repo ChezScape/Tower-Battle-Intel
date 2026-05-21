@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * ACTION LAYER v4.9y
+ * ACTION LAYER v4.10e
  * One command bus for visible UI actions.
+ * Root/action/style sync: supports current data-ui-action names and legacy aliases.
  *
  * UI path:
  * button/input/select -> src/ui/events.js -> here -> core/history/state/update -> render
@@ -138,10 +139,47 @@ export function performUIAction(action = "", payload = {}) {
             return actionUpdateHistoryRunMeta(payload.index, payload.meta || {});
 
         case "history-import-text":
+        case "history-import-json":
+        case "import-history-text":
+        case "import-history-json":
             return actionImportHistoryText(payload.text || payload.json || "");
 
         case "history-export-json":
+        case "history-export":
+        case "export-history":
+        case "export-history-json":
             return actionExportHistoryJSON();
+
+        case "delete-last-history":
+            return actionDeleteLastRun();
+
+        case "delete-all-history":
+        case "clear-all-history":
+            return actionClearHistory();
+
+        case "archive-history-run":
+            return actionArchiveHistoryRun(payload.index);
+
+        case "restore-history-run":
+            return actionRestoreHistoryRun(payload.index);
+
+        case "delete-history-run":
+            return actionDeleteHistoryRun(payload.index);
+
+        case "open-dashboard":
+            return actionSetDashboardTab("overview");
+
+        case "open-systems":
+            return actionSetDashboardTab("systems");
+
+        case "open-coach":
+            return actionSetDashboardTab("coach");
+
+        case "open-more":
+            return actionSetDashboardTab("more");
+
+        case "toggle-quiet-display":
+            return actionToggleDisplayMode();
 
         default:
             console.warn("[Tower Battle Intel] Unknown UI action:", action, payload);

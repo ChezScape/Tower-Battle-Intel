@@ -1,12 +1,10 @@
-# Tower Battle Intel v4.10c
+# Tower Battle Intel v4.10e
 
-Current working line: **v4.10c Root Shell Rebuild**.
+Current working line: **v4.10e Root / Action / Style Sync**.
 
 This project is a local, browser-based Battle Report Intelligence Dashboard for **The Tower - Idle Tower Defense**.
 
 ## Current architecture
-
-The project is now split into clear layers:
 
 ```text
 app.js / bootstrap.js        startup only
@@ -31,6 +29,7 @@ src/diagnostics/            health scan, trace, pipeline inspection
 - Visible buttons should route through `src/ui/events.js` then `src/actions/actions.js`.
 - Core files should not directly own visible UI button behaviour.
 - `src/game/` is the local game-brain catalogue and should stay separate from UI code.
+- `style.css` is intentionally not loaded unless the shell is deliberately changed.
 
 ## Running locally
 
@@ -39,9 +38,11 @@ Open `index.html` directly in a browser, or serve the folder with any simple loc
 For tests, run from the project root:
 
 ```powershell
+node .\tests\root-shell-foundation.test.mjs
 node .\tests\utils-foundation.test.mjs
 node .\tests\history-storage-ui-utils.test.mjs
 node .\tests\ui-action-foundation.test.mjs
+node .\tests\pipeline-foundation.test.mjs
 node .\tests\report-parser-game-brain.test.mjs
 ```
 
@@ -56,9 +57,9 @@ TowerBattleIntel.save()
 TowerBattleIntel.shell()
 ```
 
-## v4.10c root rebuild
+## v4.10e sync
 
-Rebuilt these root files:
+Updated these files together so the visible shell, action bus, theme files and documentation agree with the current rebuild line:
 
 ```text
 app.js
@@ -68,14 +69,15 @@ index.html
 mobile.css
 README.md
 style.css
+config/appConfig.js
+src/actions/actions.js
 ```
 
 Focus:
 
-- cleaner startup entry
-- safer bootstrap order
-- rendered header debug-hold binding now works because initial render happens before core event binding
-- no old topbar/banner shell competing with the rebuilt UI renderer
-- static HTML only contains the true report input, mobile deck, dashboard root and debug roots
-- updated README and inactive `style.css` note
-```
+- sync root shell versioning
+- keep startup guarded and bootstrapped once
+- keep the static HTML shell clean
+- keep desktop/mobile CSS split
+- expand action aliases so visible UI actions have a single command bus
+- keep style.css inactive

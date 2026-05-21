@@ -991,7 +991,7 @@ button.danger, .danger { border-color: rgba(255,64,90,.42); color: #ffd6dd; back
     letter-spacing: 0.08em;
 }
 
-/* v4.9y display action state */
+/* v4.10e display action state */
 html.tbi-quiet-display,
 body.tbi-quiet-display {
     --glow-cyan: 0 0 8px rgba(91, 215, 255, 0.16), inset 0 0 10px rgba(91, 215, 255, 0.025);
@@ -1008,7 +1008,7 @@ html.tbi-quiet-display .tbi-run-card {
 
 
 /* --------------------------------------------------
-   v4.10c ROOT SHELL REBUILD SUPPORT
+   v4.10e ROOT SHELL REBUILD SUPPORT
 -------------------------------------------------- */
 
 .startup-shell {
@@ -1075,4 +1075,21 @@ html.tbi-quiet-display .tbi-run-card {
 
 body[data-app-version]::before {
     content: "";
+}
+
+
+/* --------------------------------------------------
+   v4.10e ROOT ACTION STYLE SYNC SUPPORT
+   Keeps the current root shell, action buttons and theme
+   controls aligned after the v4.10d pipeline rebuild.
+-------------------------------------------------- */
+
+html[data-app-version="v4.10e"] .startup-error-panel {
+    border-color: rgba(255, 64, 90, 0.46);
+}
+
+.tbi-action-disabled,
+button[aria-disabled="true"] {
+    opacity: 0.48;
+    pointer-events: none;
 }
