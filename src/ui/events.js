@@ -72,7 +72,7 @@ export function bindUIEvents() {
 
 
 /* --------------------------------------------------
-   DASHBOARD TABS + SUBSYSTEM MATRIX
+   MOBILE DASHBOARD TABS
 -------------------------------------------------- */
 
 function bindDashboardTabEvents() {
@@ -85,44 +85,36 @@ function bindDashboardTabEvents() {
         document.body.dataset.dashboardTabDelegatesBound = "true";
     }
 
-    let lastHandled = 0;
+    let lastHandledStamp = 0;
 
-    document.addEventListener("pointerup", event => {
-        handleDashboardTabEvent(event, lastHandledStamp => {
-            lastHandled = lastHandledStamp;
-        }, lastHandled);
-    }, true);
+    function handleDashboardTabEvent(event) {
 
-    document.addEventListener("click", event => {
-        handleDashboardTabEvent(event, lastHandledStamp => {
-            lastHandled = lastHandledStamp;
-        }, lastHandled);
-    }, true);
-}
+        const tab =
+            event.target?.closest?.("[data-dashboard-tab]");
 
-function handleDashboardTabEvent(event, setLastHandled, lastHandled = 0) {
+        if (!tab) {
+            return;
+        }
 
-    const tab =
-        event.target?.closest?.("[data-dashboard-tab]");
+        const stamp =
+            Number(event.timeStamp || Date.now());
 
-    if (!tab) {
-        return;
-    }
+        if (Math.abs(stamp - lastHandledStamp) < 80) {
+            event.preventDefault();
+            return;
+        }
 
-    const stamp =
-        Number(event.timeStamp || Date.now());
+        lastHandledStamp = stamp;
 
-    if (Math.abs(stamp - lastHandled) < 120) {
         event.preventDefault();
-        return;
+        event.stopPropagation();
+
+        activateDashboardTab(tab.dataset.dashboardTab || "overview");
     }
 
-    setLastHandled?.(stamp);
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    activateDashboardTab(tab.dataset.dashboardTab || "overview");
+    document.addEventListener("pointerup", handleDashboardTabEvent, true);
+    document.addEventListener("touchend", handleDashboardTabEvent, true);
+    document.addEventListener("click", handleDashboardTabEvent, true);
 }
 
 function activateDashboardTab(dashboardTab = "overview") {
@@ -153,6 +145,11 @@ function activateDashboardTab(dashboardTab = "overview") {
 
     scrollMobileDashboardToTop();
 }
+
+
+/* --------------------------------------------------
+   MOBILE SCROLL / PANEL STABILISATION
+-------------------------------------------------- */
 
 function withMobileTabSwitch(callback) {
 
@@ -230,6 +227,10 @@ function lockMobilePageScroll(force = true) {
     document.body.classList.toggle("mobile-scroll-locked", Boolean(force));
 }
 
+/* --------------------------------------------------
+   HEATMAP / DRILLDOWN
+-------------------------------------------------- */
+
 function bindHeatmapEvents() {
 
     if (document.body?.dataset?.heatmapDelegatesBound === "true") {
@@ -250,7 +251,6 @@ function bindHeatmapEvents() {
         }
 
         event.preventDefault();
-        event.stopPropagation();
 
         const section =
             tile.dataset.section;
@@ -259,16 +259,16 @@ function bindHeatmapEvents() {
             return;
         }
 
-        const before =
-            captureViewport();
-
         const state =
             getState();
+
+        const selectedSection =
+            section;
 
         setState({
             ui: {
                 ...(state.ui || {}),
-                selectedSection: section
+                selectedSection
             }
         });
 
@@ -278,9 +278,42 @@ function bindHeatmapEvents() {
             render();
         });
 
-        restoreViewport(before);
-    }, true);
+        if (isMobileMode()) {
+            scrollMobileElementIntoView(".wa-drillgrid", {
+                fallbackSelector: '[data-dashboard-panel="systems"]',
+                offset: 14
+            });
+        } else {
+            scrollElementIntoView(".wa-drillgrid", {
+                offset: 18
+            });
+        }
+    });
 }
+
+function scrollElementIntoView(selector, { offset = 12 } = {}) {
+
+    window.requestAnimationFrame(() => {
+        const target =
+            document.querySelector(selector);
+
+        if (!target) {
+            return;
+        }
+
+        const rect =
+            target.getBoundingClientRect();
+
+        const top =
+            Math.max(0, window.scrollY + rect.top - offset);
+
+        window.scrollTo({
+            top,
+            behavior: "smooth"
+        });
+    });
+}
+
 
 /* --------------------------------------------------
    HISTORY LOAD BUTTONS
@@ -331,13 +364,18 @@ function bindHistoryLoadEvents() {
 
 /* --------------------------------------------------
    HISTORY FILTERS
-   Single delegated filter system. No legacy filter fighting.
 -------------------------------------------------- */
 
 let historySearchTimer = null;
-let pendingHistorySearch = null;
 
 function bindHistoryFilterEvents() {
+
+    bindHistoryFilterDelegates();
+
+    bindHistoryFilterElementEvents();
+}
+
+function bindHistoryFilterDelegates() {
 
     if (document.body?.dataset?.historyFilterDelegatesBound === "true") {
         return;
@@ -347,10 +385,117 @@ function bindHistoryFilterEvents() {
         document.body.dataset.historyFilterDelegatesBound = "true";
     }
 
-    document.addEventListener("input", handleHistoryFilterInput, true);
-    document.addEventListener("search", handleHistoryFilterInput, true);
-    document.addEventListener("click", handleHistoryFilterClick, true);
-    document.addEventListener("toggle", handleHistoryChoiceToggle, true);
+    document.addEventListener(
+        "input",
+        handleHistoryFilterInput,
+        true
+    );
+
+    document.addEventListener(
+        "change",
+        handleHistoryFilterChange,
+        true
+    );
+
+    document.addEventListener(
+        "click",
+        handleHistoryFilterClick,
+        true
+    );
+}
+
+function bindHistoryFilterElementEvents() {
+
+    const queryInputs =
+        document.querySelectorAll("[data-history-filter-query]");
+
+    queryInputs.forEach(input => {
+
+        if (input.dataset.historyQueryBound === "true") {
+            return;
+        }
+
+        input.dataset.historyQueryBound = "true";
+
+        input.addEventListener("input", event => {
+            queueHistorySearchUpdate(event.target?.value || "");
+        });
+
+        input.addEventListener("search", event => {
+            applyHistoryFilterPatch({
+                query: event.target?.value || ""
+            });
+        });
+    });
+
+    const choiceButtons =
+        document.querySelectorAll("[data-history-filter-value]");
+
+    choiceButtons.forEach(button => {
+
+        if (button.dataset.historyChoiceBound === "true") {
+            return;
+        }
+
+        button.dataset.historyChoiceBound = "true";
+
+        button.addEventListener("click", event => {
+            handleHistoryChoiceElement(event, button);
+        });
+
+        button.addEventListener("pointerup", event => {
+            handleHistoryChoiceElement(event, button);
+        });
+    });
+
+    const resetButtons =
+        document.querySelectorAll("[data-history-filter-reset]");
+
+    resetButtons.forEach(button => {
+
+        if (button.dataset.historyResetBound === "true") {
+            return;
+        }
+
+        button.dataset.historyResetBound = "true";
+
+        button.addEventListener("click", event => {
+            event.preventDefault();
+            resetHistoryFilters();
+        });
+    });
+
+    bindLegacyHistoryFilterControls();
+}
+
+function bindLegacyHistoryFilterControls() {
+
+    const legacyControls =
+        document.querySelectorAll(`
+            [data-history-filter-sort],
+            [data-history-filter-build],
+            [data-history-filter-tag],
+            [data-history-filter-archived]
+        `);
+
+    legacyControls.forEach(control => {
+
+        if (control.dataset.historyLegacyFilterBound === "true") {
+            return;
+        }
+
+        control.dataset.historyLegacyFilterBound = "true";
+
+        control.addEventListener("change", event => {
+            applyHistoryLegacyFilterPatch(event.target);
+        });
+
+        control.addEventListener("click", event => {
+            if (event.target?.matches?.("[data-history-filter-archived]")) {
+                applyHistoryLegacyFilterPatch(event.target);
+            }
+        });
+    });
 }
 
 function handleHistoryFilterInput(event) {
@@ -358,11 +503,34 @@ function handleHistoryFilterInput(event) {
     const target =
         event?.target;
 
-    if (!target?.matches?.("[data-history-filter-query]")) {
+    if (!target || typeof target.matches !== "function") {
+        return;
+    }
+
+    if (!target.matches("[data-history-filter-query]")) {
         return;
     }
 
     queueHistorySearchUpdate(target.value || "");
+}
+
+function handleHistoryFilterChange(event) {
+
+    const target =
+        event?.target;
+
+    if (!target || typeof target.matches !== "function") {
+        return;
+    }
+
+    if (
+        target.matches("[data-history-filter-sort]") ||
+        target.matches("[data-history-filter-build]") ||
+        target.matches("[data-history-filter-tag]") ||
+        target.matches("[data-history-filter-archived]")
+    ) {
+        applyHistoryLegacyFilterPatch(target);
+    }
 }
 
 function handleHistoryFilterClick(event) {
@@ -370,7 +538,7 @@ function handleHistoryFilterClick(event) {
     const target =
         event?.target;
 
-    if (!target?.closest) {
+    if (!target || typeof target.closest !== "function") {
         return;
     }
 
@@ -378,46 +546,44 @@ function handleHistoryFilterClick(event) {
         target.closest("[data-history-filter-reset]");
 
     if (reset) {
+
         event.preventDefault();
-        event.stopPropagation();
+
         resetHistoryFilters();
+
         return;
     }
 
     const choice =
         target.closest("[data-history-filter-value]");
 
-    if (choice) {
-        event.preventDefault();
-        event.stopPropagation();
-        applyHistoryChoice(choice);
-    }
-}
-
-function handleHistoryChoiceToggle(event) {
-
-    const menu =
-        event.target?.matches?.("[data-history-choice-menu]")
-            ? event.target
-            : null;
-
-    if (!menu || !menu.open) {
+    if (!choice) {
         return;
     }
 
-    const menuName =
-        menu.dataset.historyChoiceMenu;
-
-    document
-        .querySelectorAll("[data-history-choice-menu][open]")
-        .forEach(other => {
-            if (other !== menu && other.dataset.historyChoiceMenu !== menuName) {
-                other.removeAttribute("open");
-            }
-        });
+    handleHistoryChoiceElement(event, choice);
 }
 
-function applyHistoryChoice(choice) {
+function handleHistoryChoiceElement(event, choice) {
+
+    if (!choice) {
+        return;
+    }
+
+    const stamp =
+        Date.now();
+
+    const lastStamp =
+        Number(choice.dataset.historyLastTap || 0);
+
+    if (stamp - lastStamp < 120) {
+        return;
+    }
+
+    choice.dataset.historyLastTap =
+        String(stamp);
+
+    event?.preventDefault?.();
 
     const kind =
         choice.dataset.historyFilterKind ||
@@ -435,10 +601,7 @@ function applyHistoryChoice(choice) {
         return;
     }
 
-    applyHistoryFilterPatch(patch, {
-        preserveFocus: false,
-        closeChoiceMenus: true
-    });
+    applyHistoryFilterPatch(patch);
 }
 
 function buildHistoryFilterPatchFromChoice(kind = "", option = "") {
@@ -471,28 +634,48 @@ function buildHistoryFilterPatchFromChoice(kind = "", option = "") {
     }
 }
 
+function applyHistoryLegacyFilterPatch(target) {
+
+    if (!target || typeof target.matches !== "function") {
+        return;
+    }
+
+    if (target.matches("[data-history-filter-sort]")) {
+        applyHistoryFilterPatch({
+            sort: target.value || "newest"
+        });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-build]")) {
+        applyHistoryFilterPatch({
+            build: target.value || "all"
+        });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-tag]")) {
+        applyHistoryFilterPatch({
+            tag: target.value || "all"
+        });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-archived]")) {
+        applyHistoryFilterPatch({
+            showArchived: Boolean(target.checked)
+        });
+    }
+}
+
 function queueHistorySearchUpdate(query = "") {
 
     clearTimeout(historySearchTimer);
 
-    pendingHistorySearch = {
-        query,
-        viewport: captureViewport(),
-        openDrawers: captureOpenHistoryDrawers(),
-        caret: getActiveSearchCaret()
-    };
-
     historySearchTimer =
         setTimeout(() => {
             applyHistoryFilterPatch({
-                query:
-                    pendingHistorySearch?.query || ""
-            }, {
-                preserveFocus: true,
-                viewport: pendingHistorySearch?.viewport || null,
-                openDrawers: pendingHistorySearch?.openDrawers || [],
-                caret: pendingHistorySearch?.caret || null,
-                closeChoiceMenus: false
+                query
             });
         }, 180);
 }
@@ -505,34 +688,30 @@ function resetHistoryFilters() {
         build: "all",
         tag: "all",
         showArchived: false
-    }, {
-        preserveFocus: false,
-        closeChoiceMenus: true
     });
 }
 
-function applyHistoryFilterPatch(patch = {}, {
-    preserveFocus = false,
-    viewport = null,
-    openDrawers = null,
-    caret = null,
-    closeChoiceMenus = true
-} = {}) {
+function applyHistoryFilterPatch(patch = {}) {
 
-    const uiSnapshot = {
-        viewport:
-            viewport || captureViewport(),
-        openDrawers:
-            Array.isArray(openDrawers)
-                ? openDrawers
-                : captureOpenHistoryDrawers(),
-        searchFocused:
-            preserveFocus && document.activeElement?.matches?.("[data-history-filter-query]"),
-        query:
-            String(patch.query ?? document.querySelector("[data-history-filter-query]")?.value ?? ""),
-        caret:
-            caret || getActiveSearchCaret()
-    };
+    const shouldRestoreSearchFocus =
+        Object.prototype.hasOwnProperty.call(patch, "query") &&
+        document?.activeElement?.matches?.("[data-history-filter-query]");
+
+    const searchValue =
+        String(patch?.query ?? "");
+
+    const restoreScroll =
+        shouldRestoreSearchFocus
+            ? {
+                x: window.scrollX || 0,
+                y: window.scrollY || 0
+            }
+            : null;
+
+    const activeMenus =
+        shouldRestoreSearchFocus
+            ? captureOpenHistoryMenus()
+            : [];
 
     setHistoryFilters(patch);
 
@@ -540,128 +719,68 @@ function applyHistoryFilterPatch(patch = {}, {
 
     render();
 
-    restoreHistoryFilterUi(uiSnapshot, {
-        closeChoiceMenus
-    });
+    restoreOpenHistoryMenus(activeMenus);
+
+    if (shouldRestoreSearchFocus) {
+        restoreHistorySearchFocus(searchValue, restoreScroll);
+    }
 }
 
-function captureOpenHistoryDrawers() {
-
-    return Array.from(
-        document.querySelectorAll(".history-collapsible[open], [data-history-choice-menu][open]")
-    ).map(element => ({
-        selector:
-            element.dataset.historyChoiceMenu
-                ? `[data-history-choice-menu=\"${cssEscape(element.dataset.historyChoiceMenu)}\"]`
-                : classSelector(element)
-    })).filter(item => item.selector);
-}
-
-function restoreHistoryFilterUi(snapshot = {}, {
-    closeChoiceMenus = true
-} = {}) {
+function restoreHistorySearchFocus(value = "", scrollPosition = null) {
 
     requestAnimationFrame(() => {
 
-        (snapshot.openDrawers || []).forEach(item => {
-            if (closeChoiceMenus && item.selector?.includes("data-history-choice-menu")) {
-                return;
-            }
-
-            document.querySelector(item.selector)?.setAttribute("open", "");
-        });
+        if (scrollPosition) {
+            window.scrollTo(scrollPosition.x, scrollPosition.y);
+        }
 
         const input =
             document.querySelector("[data-history-filter-query]");
 
-        if (input && snapshot.searchFocused) {
-            input.focus({
-                preventScroll: true
-            });
-
-            const position =
-                Number.isInteger(snapshot.caret?.start)
-                    ? snapshot.caret.start
-                    : String(snapshot.query || "").length;
-
-            try {
-                input.setSelectionRange(position, position);
-            } catch {
-                // Ignore search input implementations without range support.
-            }
+        if (!input) {
+            return;
         }
 
-        restoreViewport(snapshot.viewport);
-
-        requestAnimationFrame(() => {
-            restoreViewport(snapshot.viewport);
+        input.focus({
+            preventScroll: true
         });
+
+        const caret =
+            String(value || "").length;
+
+        try {
+            input.setSelectionRange(caret, caret);
+        } catch {
+            // Some input types do not support selection ranges.
+        }
+
+        if (scrollPosition) {
+            requestAnimationFrame(() => {
+                window.scrollTo(scrollPosition.x, scrollPosition.y);
+            });
+        }
     });
 }
 
-function getActiveSearchCaret() {
+function captureOpenHistoryMenus() {
 
-    const input =
-        document.activeElement?.matches?.("[data-history-filter-query]")
-            ? document.activeElement
-            : null;
-
-    if (!input) {
-        return null;
-    }
-
-    return {
-        start:
-            Number.isInteger(input.selectionStart)
-                ? input.selectionStart
-                : String(input.value || "").length,
-        end:
-            Number.isInteger(input.selectionEnd)
-                ? input.selectionEnd
-                : String(input.value || "").length
-    };
+    return Array.from(
+        document.querySelectorAll("[data-history-choice-menu][open]")
+    ).map(menu => menu.dataset.historyChoiceMenu).filter(Boolean);
 }
 
-function classSelector(element) {
+function restoreOpenHistoryMenus(openMenus = []) {
 
-    if (!element?.classList?.length) {
-        return "";
-    }
-
-    return Array.from(element.classList)
-        .filter(Boolean)
-        .slice(0, 2)
-        .map(className => `.${cssEscape(className)}`)
-        .join("");
-}
-
-function cssEscape(value = "") {
-
-    if (typeof CSS !== "undefined" && typeof CSS.escape === "function") {
-        return CSS.escape(String(value));
-    }
-
-    return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
-}
-
-function captureViewport() {
-
-    return {
-        x: window.scrollX || 0,
-        y: window.scrollY || 0
-    };
-}
-
-function restoreViewport(viewport = null) {
-
-    if (!viewport) {
+    if (!openMenus.length) {
         return;
     }
 
-    window.scrollTo({
-        left: viewport.x || 0,
-        top: viewport.y || 0,
-        behavior: "auto"
+    requestAnimationFrame(() => {
+        openMenus.forEach(name => {
+            document
+                .querySelector(`[data-history-choice-menu="${CSS.escape(name)}"]`)
+                ?.setAttribute("open", "");
+        });
     });
 }
 

@@ -34,6 +34,16 @@ import {
     parseNumber
 } from "../utils/math.js";
 
+import {
+    normaliseReportKey,
+    getKnownBattleReportLabels as getKnownBattleReportLabelsImported
+} from "../game/battleReportAliases.js";
+
+import {
+    validateReportAgainstSchema,
+    findUnknownReportFields
+} from "../game/reportSchema.js";
+
 /* --------------------------------------------------
    MAIN PARSER
 -------------------------------------------------- */
@@ -154,7 +164,11 @@ export function parser(rawText) {
                     core,
                     sections,
                     flat
-                })
+                }),
+            reportSchema:
+                validateReportAgainstSchema(sections),
+            unknownReportFields:
+                findUnknownReportFields(sections)
         },
 
         raw: {
@@ -239,7 +253,7 @@ function buildFlatMap(lines = []) {
         }
 
         const key =
-            normalizeKey(parts.key);
+            normaliseReportKey(parts.key);
 
         const value =
             normalizeValue(parts.value);
@@ -349,117 +363,7 @@ function splitKeyValue(line = "") {
 
 function getKnownBattleReportLabels() {
 
-    return [
-        "Highest Coins / Minute",
-        "Most Coins From Golden Combo",
-        "Most Coins From Wave Skip",
-        "Most Cells From Wave Skip",
-        "Largest Inner Landmine Charge",
-        "Largest Smart Missile Stack",
-        "Enemy Attack Levels Skipped",
-        "Enemy Health Levels Skipped",
-        "Hits Absorbed By Energy Shield",
-        "Negative Mass Projector",
-        "Free Defense Upgrade",
-        "Free Utility Upgrade",
-        "Free Attack Upgrade",
-        "Reroll Shards Earned",
-        "Reroll Shards Fetched",
-        "Gem Blocks Tapped",
-        "Defense Absolute",
-        "Recovery Packages",
-        "Projectiles Count",
-        "Land Mines Spawned",
-        "Thunder Bot Stuns",
-        "Killed With Effect Active",
-        "Enemies Destroyed By",
-        "Summoned Enemies",
-        "Other Coin Bonuses",
-        "Coins Per Hour",
-        "Cells Per Hour",
-        "Coins Earned",
-        "Cells Earned",
-        "Coins / Kill",
-        "Coins / Wave",
-        "Coins Fetched",
-        "Bounty Coins",
-        "Cash Earned",
-        "Interest earned",
-        "Battle Date",
-        "Game Time",
-        "Real Time",
-        "Killed By",
-        "Damage Dealt",
-        "Rend Armor",
-        "Death Ray",
-        "Land Mines",
-        "Chain Lightning",
-        "Smart Missiles",
-        "Inner Land Mines",
-        "Poison Swamp",
-        "Death Wave",
-        "Black Hole",
-        "Flame Bot",
-        "Attack Chip",
-        "Damage Taken",
-        "Bonus Health Gained",
-        "From Death Wave",
-        "Health Regenerated",
-        "Tower Health Regen",
-        "Wall Health Regen",
-        "Damage Blocked",
-        "Defense %",
-        "Chrono Field",
-        "Chain Thunder",
-        "Primordial Collapse",
-        "Largest Wave Skip",
-        "Death Defy",
-        "Second Wind",
-        "Demon Mode",
-        "Enemies Hit By",
-        "Golden Tower",
-        "Golden Combo",
-        "Amplify Bot",
-        "Golden Bot",
-        "Death Penalty",
-        "Total Enemies",
-        "Critical Coin",
-        "Wave Skip",
-        "Ad Gems",
-        "Fetch Gems",
-        "Cannon Shards",
-        "Armor Shards",
-        "Generator Shards",
-        "Core Shards",
-        "Common Modules",
-        "Rare Modules",
-        "Projectiles",
-        "Lifesteal",
-        "Electrons",
-        "Thorns",
-        "Orbs",
-        "Tower",
-        "Wall",
-        "Basic",
-        "Fast",
-        "Tank",
-        "Ranged",
-        "Boss",
-        "Protector",
-        "Vampires",
-        "Rays",
-        "Scatters",
-        "Saboteur",
-        "Commander",
-        "Overcharge",
-        "Tier",
-        "Wave",
-        "Cash",
-        "Gems",
-        "Medals",
-        "Nuke",
-        "Other"
-    ].sort((a, b) => b.length - a.length);
+    return getKnownBattleReportLabelsImported();
 }
 
 /* --------------------------------------------------

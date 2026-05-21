@@ -14,8 +14,13 @@ export function normalizeKey(key = "") {
     return String(key)
         .trim()
         .toLowerCase()
-        .replace(/[%():]/g, "")
-        .replace(/\s+/g, "_");
+        .replace(/\$/g, "")
+        .replace(/%/g, "percent")
+        .replace(/\s*\/\s*/g, "_")
+        .replace(/[:()]/g, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/__+/g, "_")
+        .replace(/^_+|_+$/g, "");
 }
 
 /* --------------------------------------------------

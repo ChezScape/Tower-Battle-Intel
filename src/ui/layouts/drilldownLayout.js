@@ -19,10 +19,6 @@ import {
     getDeltaClass
 } from "../utils/colourScale.js";
 
-import {
-    interpretSubsystemSection
-} from "../../game/interpretationRules.js";
-
 /* --------------------------------------------------
    BUILD DRILLDOWN
 -------------------------------------------------- */
@@ -63,9 +59,6 @@ export function Drilldown(name, sectionData = {}) {
     const title =
         `${formatLabel(name)} Detail`;
 
-    const sectionIntel =
-        interpretSubsystemSection(name);
-
     if (!entries.length) {
 
         return `
@@ -75,10 +68,6 @@ export function Drilldown(name, sectionData = {}) {
                     <span>${escapeHTML(title)}</span>
                     <em>Tap to collapse</em>
                 </summary>
-
-                <div class="wa-sub">
-                    ${escapeHTML(sectionIntel.message)}
-                </div>
 
                 <div class="wa-sub">
                     No numeric detailed metrics available.
@@ -95,10 +84,6 @@ export function Drilldown(name, sectionData = {}) {
                 <span>${escapeHTML(title)}</span>
                 <em>Tap to collapse</em>
             </summary>
-
-            <div class="wa-sub wa-drill-intel-note">
-                ${escapeHTML(sectionIntel.message)}
-            </div>
 
             <div class="wa-drillgrid">
 
@@ -129,12 +114,6 @@ export function Drilldown(name, sectionData = {}) {
                             <div class="wa-muted">
                                 ${escapeHTML(formatPercentDelta(pct))}
                             </div>
-
-                            ${value?.note ? `
-                                <div class="wa-drill-note">
-                                    ${escapeHTML(value.note)}
-                                </div>
-                            ` : ""}
 
                         </div>
                     `;

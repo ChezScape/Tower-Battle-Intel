@@ -15,7 +15,6 @@ import {
     explainMetric,
     interpretMetricDelta,
     interpretDeathCause,
-    interpretRunTradeoff,
     getFarmingTierAdvice,
     getBuildStyleInfo
 } from "../game/interpretationRules.js";
@@ -29,10 +28,6 @@ import {
     formatNumber,
     formatPercent
 } from "../utils/format.js";
-
-import {
-    getSourceWarning
-} from "../game/sourceRegistry.js";
 
 /* --------------------------------------------------
    MAIN AI COACH
@@ -65,12 +60,6 @@ export function aiCoach(
             previousRun,
             compareData,
             buildStyle
-        })
-    );
-
-    cards.push(
-        buildTradeoffCard({
-            compareData
         })
     );
 
@@ -156,7 +145,7 @@ function buildOverviewCard({
         return card({
             severity: "neutral",
             title: "Waiting For Reports",
-            message: "Paste and save battle reports, then set one as A and another as B to unlock coaching.",
+            message: "Paste a battle report into Save A, then another into Save B to unlock coaching.",
             meta: `Build style: ${build.label}`
         });
     }
@@ -166,7 +155,7 @@ function buildOverviewCard({
         return card({
             severity: "info",
             title: "Run Loaded",
-            message: "One comparison slot is loaded. Add a second report to unlock comparison intelligence.",
+            message: "Save A is loaded. Add a second report to Save B for comparison intelligence.",
             meta: describeRun(currentRun)
         });
     }
@@ -198,26 +187,6 @@ function buildOverviewCard({
     });
 }
 
-
-/* --------------------------------------------------
-   TRADEOFF READ
--------------------------------------------------- */
-
-function buildTradeoffCard({
-    compareData
-}) {
-
-    const result =
-        interpretRunTradeoff(compareData);
-
-    return card({
-        severity: result.severity,
-        title: result.title,
-        message: result.message,
-        meta: result.knowledge || "Game-aware tradeoff read"
-    });
-}
-
 /* --------------------------------------------------
    DEATH CAUSE
 -------------------------------------------------- */
@@ -242,7 +211,7 @@ function buildDeathCauseCard({
         severity: result.severity,
         title: result.title,
         message: result.message,
-        meta: result.sourceNote || "Death cause intelligence"
+        meta: "Death cause intelligence"
     });
 }
 
@@ -573,7 +542,7 @@ function buildBuildStyleCard({
             buildStyle === "unknown"
                 ? "No build style selected yet. Advice is cautious because Health / EHP, Blender, Devo, Glass Cannon, and Hybrid builds should be judged differently."
                 : build.meaning,
-        meta: `Current build style: ${build.label} | ${getSourceWarning({ short: true })}`
+        meta: `Current build style: ${build.label}`
     });
 }
 

@@ -29,9 +29,13 @@ import {
 } from "../game/numberNotation.js";
 
 import {
-    getMetricCompareProfile,
-    getMetricInfo,
-    normaliseMetricKey
+    getMetricCompareRole,
+    getMetricPriorityInfo,
+    getMetricPriorityScore
+} from "../game/metricPriorityRules.js";
+
+import {
+    getMetricInfo
 } from "../game/metricCatalog.js";
 
 /* --------------------------------------------------
@@ -381,8 +385,7 @@ function buildSummary({ A, B, core, stats, sections }) {
         gameAwareNotes: [
             "Coins/hour and cells/hour are weighted higher than raw totals when judging farming.",
             "Coin-source rows can overlap through multipliers, so they are treated as signals rather than additive totals.",
-            "Damage taken and survival-cost fields can be marked lower-is-better.",
-            "Enemy and metric meanings are read from src/game/* so the UI, coach and compare engine share one knowledge brain."
+            "Damage taken and survival-cost fields can be marked lower-is-better."
         ]
     };
 }
@@ -765,37 +768,7 @@ function scoreSignal(key, item, weight = 1) {
 
 function roleForKey(key = "", section = "") {
 
-    const profile =
-        getMetricProfileForField(key, section);
-
-    if (profile?.role) {
-        return profile.role;
-    }
-
-    const normalKey =
-        normaliseKey(key);
-
-    const normalSection =
-        normaliseKey(section);
-
-    const combined =
-        normalSection
-            ? `${normalSection}_${normalKey}`
-            : normalKey;
-
-    if (
-        normalSection === "damage_taken" ||
-        LOWER_IS_BETTER_KEYS.has(normalKey) ||
-        LOWER_IS_BETTER_KEYS.has(combined)
-    ) {
-        return "lower_is_better";
-    }
-
-    if (NEUTRAL_SIGNAL_KEYS.has(normalKey)) {
-        return "neutral_signal";
-    }
-
-    return "higher_is_better";
+    return getMetricCompareRole(key, section);
 }
 
 function outcomeForDiff(diff = 0, role = "higher_is_better") {
@@ -852,74 +825,15 @@ function categoryForSection(section = "") {
 
 function categoryForKey(key = "", section = "") {
 
-    const profile =
-        getMetricProfileForField(key, section);
-
-    if (profile?.category && profile.category !== "unknown") {
-        return profile.category;
-    }
-
-    const normalKey =
-        normaliseKey(key);
-
-    if (FARMING_RATE_KEYS.has(normalKey)) {
-        return "farming";
-    }
-
-    if (["coins", "coins_earned"].includes(normalKey)) {
-        return "economy";
-    }
-
-    if (["cells", "cells_earned"].includes(normalKey)) {
-        return "cells";
-    }
-
-    if (["wave"].includes(normalKey)) {
-        return "progression";
-    }
-
-    return categoryForSection(section);
+    return getMetricPriorityInfo(key, section).category || categoryForSection(section);
 }
 
 function importanceForKey(key = "", section = "") {
 
-    const profile =
-        getMetricProfileForField(key, section);
-
-    if (profile?.importance && profile.importance !== 1) {
-        return profile.importance;
-    }
-
-    const normalKey =
-        normaliseKey(key);
-
-    if (FARMING_RATE_KEYS.has(normalKey)) {
-        return 3;
-    }
-
-    if (["wave", "coins", "cells", "coins_earned", "cells_earned"].includes(normalKey)) {
-        return 2.2;
-    }
-
-    if (IMPORTANT_COMPARE_KEYS.has(normalKey)) {
-        return 1.6;
-    }
-
-    if (normaliseKey(section) === "damage_taken") {
-        return 1.4;
-    }
-
-    return 1;
+    return getMetricPriorityScore(key, section);
 }
 
 function noteForKey(key = "", section = "") {
-
-    const profile =
-        getMetricProfileForField(key, section);
-
-    if (profile?.note) {
-        return profile.note;
-    }
 
     const normalKey =
         normaliseKey(key);
@@ -940,26 +854,6 @@ function noteForKey(key = "", section = "") {
     }
 
     return "";
-}
-
-function getMetricProfileForField(key = "", section = "") {
-
-    const candidates = [
-        key,
-        section ? `${section}_${key}` : "",
-        section ? `${section}.${key}` : ""
-    ].filter(Boolean);
-
-    for (const candidate of candidates) {
-        const normalised = normaliseMetricKey(candidate);
-        const info = getMetricInfo(normalised);
-
-        if (info?.category && info.category !== "unknown") {
-            return getMetricCompareProfile(normalised);
-        }
-    }
-
-    return null;
 }
 
 /* --------------------------------------------------

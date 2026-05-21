@@ -155,6 +155,7 @@ export function validateAndRepair(input) {
         flat,
 
         meta: {
+            ...meta,
             confidence:
                 clamp(
                     parseNumber(meta.confidence) || 100,

@@ -1,5 +1,12 @@
 "use strict";
 
+import {
+    getKnownSectionHeaders,
+    getKnownBattleReportLabels,
+    normaliseReportSection,
+    normaliseReportKey
+} from "../game/battleReportAliases.js";
+
 /**
  * SECTION ENGINE
  *
@@ -11,23 +18,7 @@
  * - Single-space copied reports
  */
 
-const SECTION_HEADERS = new Set([
-    "Records",
-    "Damage",
-    "Damage Taken",
-    "Bonus Health Gained",
-    "Health Regenerated",
-    "Damage Blocked",
-    "Utility",
-    "Counts",
-    "Enemies Hit By",
-    "Killed With Effect Active",
-    "Total Enemies",
-    "Coins",
-    "Cash",
-    "Currencies",
-    "Enemies Destroyed By"
-]);
+const SECTION_HEADERS = new Set(getKnownSectionHeaders());
 
 export function buildSections(lines = []) {
 
@@ -178,108 +169,7 @@ function splitSectionLine(line = "") {
 
 function getKnownSectionLabels() {
 
-    return [
-        "Highest Coins / Minute",
-        "Most Coins From Golden Combo",
-        "Most Coins From Wave Skip",
-        "Most Cells From Wave Skip",
-        "Largest Inner Landmine Charge",
-        "Largest Smart Missile Stack",
-        "Enemy Attack Levels Skipped",
-        "Enemy Health Levels Skipped",
-        "Hits Absorbed By Energy Shield",
-        "Negative Mass Projector",
-        "Free Defense Upgrade",
-        "Free Utility Upgrade",
-        "Free Attack Upgrade",
-        "Reroll Shards Earned",
-        "Reroll Shards Fetched",
-        "Gem Blocks Tapped",
-        "Defense Absolute",
-        "Recovery Packages",
-        "Projectiles Count",
-        "Land Mines Spawned",
-        "Thunder Bot Stuns",
-        "Other Coin Bonuses",
-        "Coins Per Hour",
-        "Cells Per Hour",
-        "Coins Earned",
-        "Cells Earned",
-        "Coins / Kill",
-        "Coins / Wave",
-        "Coins Fetched",
-        "Bounty Coins",
-        "Cash Earned",
-        "Interest earned",
-        "Battle Date",
-        "Game Time",
-        "Real Time",
-        "Killed By",
-        "Damage Dealt",
-        "Rend Armor",
-        "Death Ray",
-        "Land Mines",
-        "Chain Lightning",
-        "Smart Missiles",
-        "Inner Land Mines",
-        "Poison Swamp",
-        "Death Wave",
-        "Black Hole",
-        "Flame Bot",
-        "Attack Chip",
-        "From Death Wave",
-        "Tower Health Regen",
-        "Wall Health Regen",
-        "Defense %",
-        "Chrono Field",
-        "Chain Thunder",
-        "Primordial Collapse",
-        "Largest Wave Skip",
-        "Death Defy",
-        "Second Wind",
-        "Demon Mode",
-        "Golden Tower",
-        "Golden Combo",
-        "Amplify Bot",
-        "Golden Bot",
-        "Death Penalty",
-        "Total Enemies",
-        "Critical Coin",
-        "Wave Skip",
-        "Ad Gems",
-        "Fetch Gems",
-        "Cannon Shards",
-        "Armor Shards",
-        "Generator Shards",
-        "Core Shards",
-        "Common Modules",
-        "Rare Modules",
-        "Summoned Enemies",
-        "Projectiles",
-        "Lifesteal",
-        "Electrons",
-        "Thorns",
-        "Orbs",
-        "Tower",
-        "Wall",
-        "Basic",
-        "Fast",
-        "Tank",
-        "Ranged",
-        "Boss",
-        "Protector",
-        "Vampires",
-        "Rays",
-        "Scatters",
-        "Saboteur",
-        "Commander",
-        "Overcharge",
-        "Cash",
-        "Gems",
-        "Medals",
-        "Nuke",
-        "Other"
-    ].sort((a, b) => b.length - a.length);
+    return getKnownBattleReportLabels();
 }
 
 /* --------------------------------------------------
@@ -287,22 +177,9 @@ function getKnownSectionLabels() {
 -------------------------------------------------- */
 
 function normaliseSectionName(value = "") {
-
-    return String(value || "")
-        .trim()
-        .toLowerCase()
-        .replace(/%/g, "percent")
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+    return normaliseReportSection(value);
 }
 
 function normaliseKey(value = "") {
-
-    return String(value || "")
-        .trim()
-        .toLowerCase()
-        .replace(/%/g, "percent")
-        .replace(/\//g, " ")
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+    return normaliseReportKey(value);
 }

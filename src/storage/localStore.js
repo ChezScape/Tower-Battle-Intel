@@ -279,9 +279,8 @@ function normaliseLoadedState(saved = {}) {
             normaliseHistoryRuns(saved.history),
 
         ui: {
-            // Subsystem details are intentionally session-only.
-            // Reloading the app should not reopen a drilldown and jump the page.
-            selectedSection: null,
+            selectedSection:
+                saved.ui?.selectedSection ?? null,
 
             debug:
                 Boolean(saved.ui?.debug),
@@ -291,9 +290,6 @@ function normaliseLoadedState(saved = {}) {
 
             buildStyle:
                 saved.ui?.buildStyle || "unknown",
-
-            dashboardTab:
-                saved.ui?.dashboardTab || "overview",
 
             historyFilters:
                 normaliseHistoryFilters(saved.ui?.historyFilters)
@@ -371,8 +367,8 @@ function normaliseStoredState(state = {}) {
             ),
 
         ui: {
-            // Do not persist selectedSection. It is a live interaction, not a saved preference.
-            selectedSection: null,
+            selectedSection:
+                safe.ui?.selectedSection ?? null,
 
             debug:
                 Boolean(safe.ui?.debug),
@@ -382,9 +378,6 @@ function normaliseStoredState(state = {}) {
 
             buildStyle:
                 safe.ui?.buildStyle || "unknown",
-
-            dashboardTab:
-                safe.ui?.dashboardTab || "overview",
 
             historyFilters:
                 normaliseHistoryFilters(safe.ui?.historyFilters)

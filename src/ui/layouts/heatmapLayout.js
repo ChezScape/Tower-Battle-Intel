@@ -2,12 +2,7 @@
 
 /**
  * HEATMAP LAYOUT
- * Subsystem performance matrix.
- *
- * v4.8w rebuild:
- * - one clean collapsible matrix section
- * - no hidden scroll behaviour
- * - no duplicate old matrix render paths
+ * Subsystem performance matrix
  */
 
 import {
@@ -20,8 +15,7 @@ import {
 } from "../utils/colourScale.js";
 
 import {
-    formatLabel,
-    escapeHTML
+    formatLabel
 } from "../utils/format.js";
 
 /* --------------------------------------------------
@@ -36,42 +30,31 @@ export function buildHeatmap({
     const keys =
         Object.keys(sections || {});
 
-    const selectedLabel =
-        selectedSection
-            ? formatLabel(selectedSection)
-            : "Select a subsystem";
-
     if (!keys.length) {
 
         return `
-            <details class="wa-panel wa-collapsible-panel wa-subsystem-panel" open>
+            <div class="wa-panel">
 
-                <summary class="wa-collapsible-summary">
-                    <span>SUBSYSTEM MATRIX</span>
-                    <em>No comparison data yet</em>
-                </summary>
+                <div class="wa-title">
+                    SUBSYSTEM MATRIX
+                </div>
 
                 <div class="wa-sub">
                     No subsystem comparison data yet.
                 </div>
 
-            </details>
+            </div>
         `;
     }
 
     return `
-        <details class="wa-panel wa-collapsible-panel wa-subsystem-panel" open>
+        <div class="wa-panel">
 
-            <summary class="wa-collapsible-summary">
-                <span>SUBSYSTEM MATRIX</span>
-                <em>${escapeHTML(selectedLabel)}</em>
-            </summary>
-
-            <div class="wa-sub wa-subsystem-help">
-                Pick one tile to open its detail readout below. The page will stay where it is.
+            <div class="wa-title">
+                SUBSYSTEM MATRIX
             </div>
 
-            <div class="wa-heatmap" data-subsystem-matrix="true">
+            <div class="wa-heatmap">
 
                 ${keys.map(sectionName => {
 
@@ -97,6 +80,6 @@ export function buildHeatmap({
 
             </div>
 
-        </details>
+        </div>
     `;
 }

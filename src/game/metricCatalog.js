@@ -1,594 +1,309 @@
 "use strict";
 
-import {
-    getCurrencyInfo
-} from "./currencyCatalog.js";
-
-import {
-    getModuleInfo
-} from "./moduleCatalog.js";
-
-import {
-    getUltimateWeaponInfo
-} from "./ultimateWeaponCatalog.js";
+import { normaliseReportKey, formatReportLabel } from "./battleReportAliases.js";
+import { getReportMetricInfo } from "./reportSchema.js";
+import { getCurrencyInfo } from "./currencyCatalog.js";
+import { getModuleInfo } from "./moduleCatalog.js";
+import { getUltimateWeaponInfo } from "./ultimateWeaponCatalog.js";
 
 /**
  * METRIC CATALOG
- * Local meaning system for Battle Report metrics.
- *
- * The compare engine uses this file as its game-aware dictionary:
- * - label
- * - category
- * - compare role
- * - importance weighting
- * - advice note
+ * Meaning system for Battle Report metrics.
  */
-
-function metric(config = {}) {
-
-    return Object.freeze({
-        label: config.label || formatMetricLabel(config.key || "unknown"),
-        meaning: config.meaning || "No detailed meaning registered yet.",
-        category: config.category || "unknown",
-        higherIsBetter: config.higherIsBetter ?? null,
-        compareRole: config.compareRole || roleFromHigherIsBetter(config.higherIsBetter),
-        importance: Number(config.importance || 1),
-        note: config.note || "",
-        sourceIds: Object.freeze(config.sourceIds || ["local_history"]),
-        aliases: Object.freeze(config.aliases || [])
-    });
-}
 
 export const METRIC_CATALOG = Object.freeze({
 
-    battle_date: metric({
+    battle_date: {
         label: "Battle Date",
         meaning: "The date and time the run was recorded.",
         category: "core",
-        higherIsBetter: null,
-        compareRole: "neutral_signal",
-        importance: 0.2
-    }),
+        higherIsBetter: null
+    },
 
-    tier: metric({
+    tier: {
         label: "Tier",
-        meaning: "Difficulty tier. Different tiers can change what a fair comparison means.",
+        meaning: "The difficulty tier used for the run.",
         category: "core",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 1.2,
-        note: "Tier changes are context, not automatically better or worse."
-    }),
+        higherIsBetter: "context"
+    },
 
-    wave: metric({
+    wave: {
         label: "Wave",
         meaning: "The final wave reached before the run ended.",
         category: "progression",
-        higherIsBetter: true,
-        importance: 2.6,
-        aliases: ["waves", "final_wave"]
-    }),
+        higherIsBetter: true
+    },
 
-    killed_by: metric({
+    killed_by: {
         label: "Killed By",
         meaning: "The final pressure point or enemy type that ended the run.",
         category: "death",
-        higherIsBetter: null,
-        compareRole: "neutral_signal",
-        importance: 1.8,
-        aliases: ["killedby", "death_cause", "deathcause"]
-    }),
+        higherIsBetter: null
+    },
 
-    coins: metric({
-        label: "Coins",
-        meaning: "Total coin output from the run.",
-        category: "economy",
-        higherIsBetter: true,
-        importance: 2.2,
-        aliases: ["coins_earned", "coin", "cash_coins"],
-        sourceIds: ["official_google_play", "local_history"]
-    }),
-
-    coins_earned: metric({
+    coins_earned: {
         label: "Coins Earned",
-        meaning: "Total coin economy output from the run.",
+        meaning: "Total economy output from the run.",
         category: "economy",
-        higherIsBetter: true,
-        importance: 2.2,
-        aliases: ["coins", "coin_earned"]
-    }),
+        higherIsBetter: true
+    },
 
-    coins_per_hour: metric({
+    coins_per_hour: {
         label: "Coins Per Hour",
-        meaning: "Real coin farming speed. More useful than raw coins when run lengths differ.",
-        category: "farming",
-        higherIsBetter: true,
-        importance: 3.2,
-        aliases: ["coinsperhour", "coins_per_hr", "coinsperhr", "cph"],
-        note: "Rate metric; useful for comparing runs with different lengths."
-    }),
+        meaning: "Real farming efficiency for coin gain.",
+        category: "economy",
+        higherIsBetter: true
+    },
 
-    coins_per_wave: metric({
-        label: "Coins Per Wave",
-        meaning: "Coin farming output normalised by wave progress.",
-        category: "farming",
-        higherIsBetter: true,
-        importance: 2.7,
-        aliases: ["coinsperwave", "cpw"],
-        note: "Rate metric; helps separate farming quality from run length."
-    }),
-
-    cells: metric({
-        label: "Cells",
-        meaning: "Elite Cell income from the run.",
-        category: "cells",
-        higherIsBetter: true,
-        importance: 2.4,
-        aliases: ["cells_earned", "elite_cells", "elite_cells_earned"]
-    }),
-
-    cells_earned: metric({
+    cells_earned: {
         label: "Cells Earned",
         meaning: "Total Elite Cell income from the run.",
         category: "cells",
-        higherIsBetter: true,
-        importance: 2.4,
-        aliases: ["cells", "elite_cells"]
-    }),
+        higherIsBetter: true
+    },
 
-    cells_per_hour: metric({
+    cells_per_hour: {
         label: "Cells Per Hour",
-        meaning: "Real Elite Cell farming speed.",
+        meaning: "Real farming efficiency for Elite Cell gain.",
         category: "cells",
-        higherIsBetter: true,
-        importance: 3.15,
-        aliases: ["cellsperhour", "cells_per_hr", "cellsperhr", "cellph"],
-        note: "Rate metric; important when elite pressure and run duration change."
-    }),
+        higherIsBetter: true
+    },
 
-    cells_per_wave: metric({
-        label: "Cells Per Wave",
-        meaning: "Cell output normalised by wave progress.",
-        category: "cells",
-        higherIsBetter: true,
-        importance: 2.7,
-        aliases: ["cellsperwave"]
-    }),
-
-    efficiency: metric({
-        label: "Efficiency",
-        meaning: "General farming efficiency signal calculated from report output.",
-        category: "farming",
-        higherIsBetter: true,
-        importance: 2.7,
-        aliases: ["farm_efficiency"]
-    }),
-
-    game_time: metric({
-        label: "Game Time",
-        meaning: "Reported run time. Context for comparing raw totals.",
-        category: "core",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 1,
-        aliases: ["time", "real_time", "run_time"]
-    }),
-
-    waves_skipped: metric({
+    waves_skipped: {
         label: "Waves Skipped",
-        meaning: "Wave skip contribution. More skips can improve farming flow and run speed.",
+        meaning: "Wave skip contribution. More wave skips can improve run speed and farming flow.",
         category: "utility",
-        higherIsBetter: true,
-        importance: 1.8,
-        aliases: ["wave_skips"]
-    }),
+        higherIsBetter: true
+    },
 
-    enemy_attack_levels_skipped: metric({
+    enemy_attack_levels_skipped: {
         label: "Enemy Attack Levels Skipped",
         meaning: "EALS effectiveness. Helps reduce enemy damage pressure over the run.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 2,
-        aliases: ["eals"]
-    }),
+        category: "survival",
+        higherIsBetter: true
+    },
 
-    enemy_health_levels_skipped: metric({
+    enemy_health_levels_skipped: {
         label: "Enemy Health Levels Skipped",
         meaning: "EHLS effectiveness. Helps reduce enemy health scaling pressure over the run.",
         category: "damage",
-        higherIsBetter: true,
-        importance: 1.9,
-        aliases: ["ehls"]
-    }),
+        higherIsBetter: true
+    },
 
-    total_enemies: metric({
-        label: "Total Enemies",
-        meaning: "Total enemy volume. Useful for pressure and spawn-flow context.",
-        category: "progression",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 1.4,
-        aliases: ["enemies", "enemy_count"]
-    }),
-
-    damage_dealt: metric({
+    damage_dealt: {
         label: "Damage Dealt",
         meaning: "Total damage output across the run.",
         category: "damage",
-        higherIsBetter: true,
-        importance: 1.8,
-        aliases: ["damage", "total_damage"]
-    }),
+        higherIsBetter: true
+    },
 
-    projectiles: metric({
-        label: "Projectiles",
-        meaning: "Projectile contribution or count depending on report section.",
-        category: "damage",
-        higherIsBetter: true,
-        importance: 1.35,
-        aliases: ["projectiles_count"]
-    }),
-
-    critical_factor: metric({
-        label: "Critical Factor",
-        meaning: "Critical damage multiplier signal.",
-        category: "damage",
-        higherIsBetter: true,
-        importance: 1.3,
-        aliases: ["crit_factor"]
-    }),
-
-    critical_chance: metric({
-        label: "Critical Chance",
-        meaning: "Critical hit chance signal.",
-        category: "damage",
-        higherIsBetter: true,
-        importance: 1.25,
-        aliases: ["crit_chance"]
-    }),
-
-    damage_taken: metric({
-        label: "Damage Taken",
-        meaning: "Total damage absorbed by defensive layers. Lower is usually safer, but context matters for wall/EHP builds.",
-        category: "survivability",
-        higherIsBetter: false,
-        importance: 1.8,
-        aliases: ["damage_received"],
-        note: "Lower is generally better for damage taken."
-    }),
-
-    damage_taken_tower: metric({
+    damage_taken_tower: {
         label: "Tower Damage Taken",
-        meaning: "Damage received by the tower. Lower usually indicates better survival control.",
-        category: "survivability",
-        higherIsBetter: false,
-        importance: 2,
-        aliases: ["tower_damage_taken", "tower"]
-    }),
+        meaning: "Damage received by the tower. Lower can indicate better survival control.",
+        category: "survival",
+        higherIsBetter: false
+    },
 
-    damage_taken_wall: metric({
+    damage_taken_wall: {
         label: "Wall Damage Taken",
         meaning: "Damage received by the wall. Useful for wall or EHP-style builds.",
-        category: "survivability",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 1.4,
-        aliases: ["wall_damage_taken", "wall"]
-    }),
+        category: "survival",
+        higherIsBetter: "context"
+    },
 
-    health_regen: metric({
-        label: "Health Regen",
-        meaning: "Health regeneration contribution or stat.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 1.5,
-        aliases: ["tower_health_regen", "regen"]
-    }),
-
-    lifesteal: metric({
-        label: "Lifesteal",
-        meaning: "Sustain signal from lifesteal.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 1.45
-    }),
-
-    recovery_packages: metric({
+    recovery_packages: {
         label: "Recovery Packages",
-        meaning: "Recovery package contribution. Important for health and EHP sustain.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 1.4,
-        aliases: ["packages"]
-    }),
+        meaning: "Number of recovery packages collected. Important for health and EHP sustain.",
+        category: "survival",
+        higherIsBetter: true
+    },
 
-    defense_absolute: metric({
-        label: "Defense Absolute",
-        meaning: "Flat defense / blocked pressure signal.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 1.5,
-        aliases: ["defense_abs", "abs_def"]
-    }),
-
-    defense_percent: metric({
-        label: "Defense %",
-        meaning: "Percentage defense signal.",
-        category: "survivability",
-        higherIsBetter: true,
-        importance: 1.5,
-        aliases: ["defense", "defense_%"]
-    }),
-
-    death_defy: metric({
+    death_defy: {
         label: "Death Defy",
         meaning: "Times Death Defy prevented death. Shows emergency survival reliance.",
-        category: "survivability",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 1.1
-    }),
+        category: "survival",
+        higherIsBetter: "context"
+    },
 
-    nuke: metric({
+    nuke: {
         label: "Nuke",
-        meaning: "Nuke activations during the run.",
+        meaning: "Number of Nuke activations during the run.",
         category: "utility",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 0.9
-    }),
+        higherIsBetter: "context"
+    },
 
-    demon_mode: metric({
+    demon_mode: {
         label: "Demon Mode",
-        meaning: "Demon Mode activations during the run.",
-        category: "survivability",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 0.9
-    }),
+        meaning: "Number of Demon Mode activations during the run.",
+        category: "survival",
+        higherIsBetter: "context"
+    },
 
-    golden_tower: metric({
+    golden_tower: {
         label: "Golden Tower",
         meaning: "Golden Tower contribution to economy or kills depending on section.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.8,
-        sourceIds: ["official_google_play", "local_history"]
-    }),
+        higherIsBetter: true
+    },
 
-    black_hole: metric({
+    black_hole: {
         label: "Black Hole",
         meaning: "Black Hole contribution. Often relevant to coin generation and enemy control.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.7
-    }),
+        higherIsBetter: true
+    },
 
-    death_wave: metric({
+    death_wave: {
         label: "Death Wave",
-        meaning: "Death Wave contribution. Can affect damage, coins, cells and health bonuses depending on build.",
+        meaning: "Death Wave contribution. Can affect damage, coins, cells, and health bonuses depending on build.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.55
-    }),
+        higherIsBetter: true
+    },
 
-    spotlight: metric({
+    spotlight: {
         label: "Spotlight",
         meaning: "Spotlight contribution. Often tied to damage and coin multipliers.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.6
-    }),
+        higherIsBetter: true
+    },
 
-    smart_missiles: metric({
+    smart_missiles: {
         label: "Smart Missiles",
         meaning: "Smart Missiles contribution to damage or enemy hits.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.45,
-        aliases: ["sm"]
-    }),
+        higherIsBetter: true
+    },
 
-    chain_lightning: metric({
+    chain_lightning: {
         label: "Chain Lightning",
         meaning: "Chain Lightning contribution to damage or enemy hits.",
         category: "ultimate_weapon",
-        higherIsBetter: true,
-        importance: 1.45,
-        aliases: ["cl"]
-    }),
+        higherIsBetter: true
+    },
 
-    reroll_shards_earned: metric({
+    reroll_shards_earned: {
         label: "Reroll Shards Earned",
         meaning: "Module reroll shard income from the run.",
         category: "modules",
-        higherIsBetter: true,
-        importance: 1.2,
-        aliases: ["reroll_shards"]
-    }),
+        higherIsBetter: true
+    },
 
-    common_modules: metric({
+    common_modules: {
         label: "Common Modules",
         meaning: "Common module drops from the run.",
         category: "modules",
-        higherIsBetter: "context",
-        compareRole: "neutral_signal",
-        importance: 0.8
-    }),
+        higherIsBetter: true
+    },
 
-    rare_modules: metric({
+    rare_modules: {
         label: "Rare Modules",
         meaning: "Rare module drops from the run.",
         category: "modules",
-        higherIsBetter: true,
-        importance: 1.2
-    }),
-
-    gems: metric({
-        label: "Gems",
-        meaning: "Gem income signal.",
-        category: "currency",
-        higherIsBetter: true,
-        importance: 1.1
-    }),
-
-    medals: metric({
-        label: "Medals",
-        meaning: "Event medal income signal.",
-        category: "currency",
-        higherIsBetter: true,
-        importance: 1.1
-    })
+        higherIsBetter: true
+    }
 });
 
-const ALIAS_INDEX = buildAliasIndex(METRIC_CATALOG);
+/* --------------------------------------------------
+   HELPERS
+-------------------------------------------------- */
 
-export function getMetricInfo(key = "") {
 
-    const canonical = resolveMetricKey(key);
+export function getMetricInfo(key = "", sectionKey = "") {
 
-    if (METRIC_CATALOG[canonical]) {
-        return METRIC_CATALOG[canonical];
+    const normalised = normaliseMetricKey(key);
+
+    if (METRIC_CATALOG[normalised]) {
+        return METRIC_CATALOG[normalised];
     }
 
-    const external =
-        getExternalMetricInfo(canonical, key);
+    const schemaInfo = getReportMetricInfo(normalised, sectionKey);
+
+    if (schemaInfo) {
+        return {
+            label: schemaInfo.label,
+            meaning: schemaInfo.meaning,
+            category: schemaInfo.category,
+            higherIsBetter: schemaInfo.higherIsBetter,
+            importance: schemaInfo.importance || 1,
+            sourceIds: schemaInfo.sourceIds || ["local_battle_report_samples"]
+        };
+    }
+
+    const external = getExternalMetricInfo(normalised);
 
     if (external) {
-        return metric(external);
+        return external;
     }
 
-    return metric({
-        key: canonical,
+    return {
         label: formatMetricLabel(key),
         meaning: "No detailed meaning registered yet.",
         category: "unknown",
         higherIsBetter: null,
-        compareRole: "higher_is_better",
-        importance: 1,
+        importance: 0.5,
         sourceIds: ["local_history"]
-    });
-}
-
-export function hasMetricInfo(key = "") {
-    return Boolean(METRIC_CATALOG[resolveMetricKey(key)]);
-}
-
-export function resolveMetricKey(value = "") {
-
-    const normalised = normaliseMetricKey(value);
-
-    return ALIAS_INDEX[normalised] || normalised;
-}
-
-export function getMetricCompareProfile(key = "") {
-
-    const info = getMetricInfo(key);
-
-    return {
-        key: resolveMetricKey(key),
-        label: info.label,
-        category: info.category,
-        role: info.compareRole || roleFromHigherIsBetter(info.higherIsBetter),
-        importance: Number(info.importance || 1),
-        note: info.note || info.meaning || "",
-        higherIsBetter: info.higherIsBetter,
-        sourceIds: info.sourceIds || []
     };
 }
 
+
+export function hasMetricInfo(key = "", sectionKey = "") {
+
+    const normalised = normaliseMetricKey(key);
+
+    return Boolean(
+        METRIC_CATALOG[normalised] ||
+        getReportMetricInfo(normalised, sectionKey) ||
+        getExternalMetricInfo(normalised)
+    );
+}
+
+
 export function normaliseMetricKey(value = "") {
-
-    return String(value)
-        .trim()
-        .toLowerCase()
-        .replace(/[%:/()]/g, "")
-        .replace(/\$/g, "")
-        .replace(/[+]/g, "")
-        .replace(/[\-]+/g, "_")
-        .replace(/\s+/g, "_")
-        .replace(/__+/g, "_")
-        .replace(/^_+|_+$/g, "");
-}
-
-export function formatMetricLabel(value = "") {
-
-    return String(value || "Unknown")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, char => char.toUpperCase());
+    return normaliseReportKey(value);
 }
 
 
-function getExternalMetricInfo(canonical = "", original = "") {
+function getExternalMetricInfo(normalised = "") {
 
-    const currency = getCurrencyInfo(canonical);
-    if (currency?.category && currency.category !== "unknown") {
+    const currency = getCurrencyInfo(normalised);
+    if (currency && currency.category !== "unknown") {
         return {
-            key: canonical,
             label: currency.label,
             meaning: currency.meaning,
-            category: currency.category === "premium" || currency.category === "event" ? "currency" : currency.category,
+            category: currency.category,
             higherIsBetter: true,
-            importance: currency.category === "cells" || currency.category === "economy" ? 2 : 1.2,
-            sourceIds: ["local_history"]
+            importance: 1.2,
+            sourceIds: currency.sourceIds || []
         };
     }
 
-    const moduleInfo = getModuleInfo(canonical);
-    if (moduleInfo?.category && moduleInfo.category !== "unknown") {
+    const module = getModuleInfo(normalised);
+    if (module && module.category !== "unknown") {
         return {
-            key: canonical,
-            label: moduleInfo.label,
-            meaning: moduleInfo.meaning,
-            category: "modules",
-            higherIsBetter: moduleInfo.category === "drops" ? "context" : true,
-            compareRole: moduleInfo.category === "drops" ? "neutral_signal" : "higher_is_better",
-            importance: moduleInfo.category === "reroll" ? 1.4 : 1,
-            sourceIds: ["local_history"]
+            label: module.label,
+            meaning: module.meaning,
+            category: module.category,
+            higherIsBetter: true,
+            importance: 1.1,
+            sourceIds: module.sourceIds || []
         };
     }
 
-    const ultimate = getUltimateWeaponInfo(canonical);
-    if (ultimate?.categories?.length) {
+    const effect = getUltimateWeaponInfo(normalised);
+    if (effect && effect.type !== "unknown_effect") {
         return {
-            key: canonical,
-            label: ultimate.label,
-            meaning: ultimate.meaning,
-            category: ultimate.categories.includes("economy") ? "economy" : ultimate.categories.includes("survival") ? "survivability" : "damage",
+            label: effect.label,
+            meaning: effect.meaning,
+            category: effect.categories?.[0] || effect.type || "effect",
             higherIsBetter: true,
-            importance: ultimate.categories.includes("economy") ? 1.8 : 1.45,
-            sourceIds: ["local_history", "patch_v28_1_reddit"]
+            importance: 1.25,
+            sourceIds: effect.sourceIds || []
         };
     }
 
     return null;
 }
 
-function roleFromHigherIsBetter(value) {
-
-    if (value === false) {
-        return "lower_is_better";
-    }
-
-    if (value === null || value === "context") {
-        return "neutral_signal";
-    }
-
-    return "higher_is_better";
-}
-
-function buildAliasIndex(catalog = {}) {
-
-    const index = {};
-
-    for (const [key, info] of Object.entries(catalog)) {
-        index[normaliseMetricKey(key)] = key;
-        index[normaliseMetricKey(info.label)] = key;
-
-        for (const alias of info.aliases || []) {
-            index[normaliseMetricKey(alias)] = key;
-        }
-    }
-
-    return Object.freeze(index);
+export function formatMetricLabel(value = "") {
+    return formatReportLabel(value);
 }

@@ -1,87 +1,29 @@
 "use strict";
 
-/**
- * MODULE CATALOG
- * Meaning layer for module-related report rewards.
- */
+import { normaliseReportKey, formatReportLabel } from "./battleReportAliases.js";
+
+export const MODULE_TYPES = Object.freeze({
+    cannon: module("Cannon", "Attack", "Attack-focused module family."),
+    armor: module("Armor", "Defense", "Defense-focused module family."),
+    generator: module("Generator", "Utility", "Utility-focused module family."),
+    core: module("Core", "Ultimate Weapons", "Ultimate Weapon-focused module family.")
+});
 
 export const MODULE_CATALOG = Object.freeze({
-
-    reroll_shards_earned: {
-        label: "Reroll Shards Earned",
-        meaning: "Reroll shard income from the run.",
-        category: "reroll"
-    },
-
-    reroll_shards_fetched: {
-        label: "Reroll Shards Fetched",
-        meaning: "Reroll shards collected through fetch mechanics.",
-        category: "reroll"
-    },
-
-    cannon_shards: {
-        label: "Cannon Shards",
-        meaning: "Shard reward for cannon module progression.",
-        category: "shards"
-    },
-
-    armor_shards: {
-        label: "Armor Shards",
-        meaning: "Shard reward for armor module progression.",
-        category: "shards"
-    },
-
-    generator_shards: {
-        label: "Generator Shards",
-        meaning: "Shard reward for generator module progression.",
-        category: "shards"
-    },
-
-    core_shards: {
-        label: "Core Shards",
-        meaning: "Shard reward for core module progression.",
-        category: "shards"
-    },
-
-    common_modules: {
-        label: "Common Modules",
-        meaning: "Common module drops.",
-        category: "drops"
-    },
-
-    rare_modules: {
-        label: "Rare Modules",
-        meaning: "Rare module drops.",
-        category: "drops"
-    }
+    ...MODULE_TYPES,
+    reroll_shards_earned: metric("Reroll Shards Earned", "Reroll shard income used for module sub-stat rerolls.", "reroll"),
+    reroll_shards_fetched: metric("Reroll Shards Fetched", "Fetched reroll shard income.", "reroll"),
+    cannon_shards: metric("Cannon Shards", "Attack module shard reward.", "shards"),
+    armor_shards: metric("Armor Shards", "Defense module shard reward.", "shards"),
+    generator_shards: metric("Generator Shards", "Utility module shard reward.", "shards"),
+    core_shards: metric("Core Shards", "Ultimate Weapon module shard reward.", "shards"),
+    common_modules: metric("Common Modules", "Common module drops.", "drops"),
+    rare_modules: metric("Rare Modules", "Rare module drops.", "drops")
 });
 
 export function getModuleInfo(key = "") {
-
-    const normalised =
-        normaliseModuleKey(key);
-
-    return MODULE_CATALOG[normalised] || {
-        label: formatModuleLabel(key),
-        meaning: "Module metric not registered yet.",
-        category: "unknown"
-    };
+    const normal = normaliseReportKey(key);
+    return MODULE_CATALOG[normal] || { label: formatReportLabel(key), meaning: "Module metric not registered yet.", category: "unknown", sourceIds: ["local_history"] };
 }
-
-export function normaliseModuleKey(value = "") {
-
-    return String(value)
-        .trim()
-        .toLowerCase()
-        .replace(/[%:/()]/g, "")
-        .replace(/\s+/g, "_")
-        .replace(/__+/g, "_")
-        .replace(/^_+|_+$/g, "");
-}
-
-export function formatModuleLabel(value = "") {
-
-    return String(value)
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, char => char.toUpperCase());
-}
+function metric(label, meaning, category) { return Object.freeze({ label, meaning, category, sourceIds: Object.freeze(["wiki_modules", "local_battle_report_samples"]), aliases: [] }); }
+function module(label, focus, meaning) { return Object.freeze({ label, focus, meaning, category: "module_type", sourceIds: Object.freeze(["wiki_modules"]), aliases: [] }); }
