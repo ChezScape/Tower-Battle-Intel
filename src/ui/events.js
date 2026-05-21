@@ -38,6 +38,23 @@ import {
 } from "../core/history.js";
 
 import {
+    actionSetDashboardTab,
+    actionOpenCompareSection,
+    actionOpenSystemSection,
+    actionToggleDisplayMode,
+    actionLoadHistoryRun,
+    actionArchiveHistoryRun,
+    actionRestoreHistoryRun,
+    actionSwapHistorySlots,
+    actionClearHistorySelection,
+    actionDeleteHistoryRun,
+    actionDeleteLastRun,
+    actionClearHistory,
+    actionImportHistoryRuns,
+    actionExportHistoryJSON
+} from "../actions/actions.js";
+
+import {
     buildHistoryStatsModal
 } from "./layouts/historyStatsModal.js";
 
@@ -214,18 +231,7 @@ function runUniversalAction(actionTarget) {
 
 function openCompareSection(sectionTarget = "damage") {
 
-    const state =
-        getState();
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab: "compare",
-            selectedSection: normaliseActionSection(sectionTarget)
-        }
-    });
-
-    saveStorage(getState());
+    actionOpenCompareSection(sectionTarget);
 
     withMobileTabSwitch(() => {
         render();
@@ -236,30 +242,18 @@ function openCompareSection(sectionTarget = "damage") {
 
 function openSystemSection(sectionTarget = "core") {
 
-    const state =
-        getState();
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab: "systems",
-            selectedSection: normaliseActionSection(sectionTarget)
-        }
-    });
-
-    saveStorage(getState());
+    const selectedSection =
+        actionOpenSystemSection(sectionTarget);
 
     withMobileTabSwitch(() => {
         render();
     });
 
-    if (isMobileMode()) {
+    if (isMobileMode() && selectedSection) {
         scrollMobileElementIntoView(".tbi-system-detail", {
             fallbackSelector: '[data-dashboard-panel="systems"]',
             offset: 14
         });
-    } else {
-        scrollToStatPanel(sectionTarget);
     }
 }
 
@@ -313,25 +307,7 @@ function focusReportInput({ select = false } = {}) {
 
 function toggleDisplayMode() {
 
-    const state =
-        getState();
-
-    const current =
-        state.ui?.displayMode || "normal";
-
-    const next =
-        current === "normal"
-            ? "quiet"
-            : "normal";
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            displayMode: next
-        }
-    });
-
-    saveStorage(getState());
+    actionToggleDisplayMode();
 
     applyDisplayModeFromState();
 }
@@ -448,14 +424,7 @@ function handleHistoryActionClick(event) {
             return;
         }
 
-        archiveHistoryRun(index);
-
-        refreshAnalysis({
-            reason: "archive_history_run",
-            historyIndex: index
-        });
-
-        saveStorage(getState());
+        actionArchiveHistoryRun(index);
         render();
         return;
     }
@@ -467,8 +436,7 @@ function handleHistoryActionClick(event) {
             return;
         }
 
-        restoreHistoryRun(index);
-        saveStorage(getState());
+        actionRestoreHistoryRun(index);
         render();
         return;
     }
@@ -494,32 +462,20 @@ function handleHistoryActionClick(event) {
     }
 
     if (button.matches("[data-swap-history-slots]")) {
-        swapHistorySlots();
-
-        refreshAnalysis({
-            reason: "swap_history_slots"
-        });
-
-        saveStorage(getState());
+        actionSwapHistorySlots();
         render();
         return;
     }
 
     if (button.matches("[data-clear-history-selection]")) {
-        clearHistorySelection();
-
-        refreshAnalysis({
-            reason: "clear_history_selection"
-        });
-
-        saveStorage(getState());
+        actionClearHistorySelection();
         render();
         return;
     }
 
     if (button.matches("[data-export-history]")) {
         downloadTextFile(
-            exportHistoryJSON(),
+            actionExportHistoryJSON(),
             buildHistoryExportFilename(),
             "application/json;charset=utf-8"
         );
@@ -618,14 +574,7 @@ function activateDashboardTab(dashboardTab = "overview") {
         return;
     }
 
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab
-        }
-    });
-
-    saveStorage(getState());
+    actionSetDashboardTab(dashboardTab);
 
     withMobileTabSwitch(() => {
         render();
@@ -830,18 +779,7 @@ function bindHistoryLoadEvents() {
                 return;
             }
 
-            loadHistoryRun(
-                index,
-                slot
-            );
-
-            refreshAnalysis({
-                reason: "load_history_run",
-                historyIndex: index,
-                targetSlot: slot
-            });
-
-            saveStorage(getState());
+            actionLoadHistoryRun(index, slot);
 
             render();
         });
@@ -1441,7 +1379,7 @@ function bindHistoryImportExportButtons() {
 
         exportButton.addEventListener("click", () => {
             downloadTextFile(
-                exportHistoryJSON(),
+                actionExportHistoryJSON(),
                 buildHistoryExportFilename(),
                 "application/json;charset=utf-8"
             );
@@ -1560,9 +1498,7 @@ async function handleHistoryImportInput(importInput, { removeAfter = false } = {
         const text =
             await file.text();
 
-        importHistoryRuns(text);
-
-        saveStorage(getState());
+        actionImportHistoryRuns(text);
 
         render();
 
@@ -2554,26 +2490,16 @@ function runConfirmedHistoryAction() {
         Number(modal.dataset.confirmIndex);
 
     if (action === "delete-run") {
-        deleteHistoryRun(index);
+        actionDeleteHistoryRun(index);
     }
 
     if (action === "delete-last") {
-        deleteLastHistory();
+        actionDeleteLastRun();
     }
 
     if (action === "delete-all") {
-        clearHistory();
+        actionClearHistory();
     }
-
-    refreshAnalysis({
-        reason: action || "history_confirm_action",
-        historyIndex:
-            Number.isInteger(index)
-                ? index
-                : null
-    });
-
-    saveStorage(getState());
 
     closeHistoryConfirmModal();
 
