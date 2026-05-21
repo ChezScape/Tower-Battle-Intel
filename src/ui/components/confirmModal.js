@@ -14,6 +14,8 @@ export function buildConfirmModal({
             class="confirm-modal"
             id="${escapeAttr(id)}"
             aria-hidden="true"
+            hidden
+            inert
         >
 
             <div class="confirm-card">

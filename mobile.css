@@ -1352,6 +1352,12 @@ button:disabled {
     transform: none;
 }
 
+
+.confirm-modal[hidden],
+.confirm-modal[aria-hidden="true"] {
+    display: none !important;
+}
+
 .confirm-modal {
 
     position: fixed;

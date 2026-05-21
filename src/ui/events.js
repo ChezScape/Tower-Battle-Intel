@@ -1770,7 +1770,14 @@ function bindHistoryConfirmModal() {
             closeHistoryConfirmModal();
         }
     });
+
+    modal.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            closeHistoryConfirmModal();
+        }
+    });
 }
+
 
 function openHistoryConfirmModal({
     action = "",
@@ -1806,6 +1813,8 @@ function openHistoryConfirmModal({
     setModalText(modal, "[data-confirm-final-message]", finalMessage);
     setModalText(modal, "[data-confirm-accept]", buttonText);
 
+    modal.hidden = false;
+    modal.inert = false;
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
 
@@ -1835,8 +1844,14 @@ function closeHistoryConfirmModal() {
         return;
     }
 
+    if (modal.contains(document.activeElement)) {
+        document.activeElement?.blur?.();
+    }
+
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
+    modal.inert = true;
+    modal.hidden = true;
 
     modal.dataset.confirmAction = "";
     modal.dataset.confirmIndex = "";

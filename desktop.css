@@ -288,8 +288,11 @@ button.danger, .danger { border-color: rgba(255,64,90,.42); color: #ffd6dd; back
 .debug-health-summary { color: #e7f6ff; font-weight: 900; }
 .debug-section-title { color: var(--cyan); text-transform: uppercase; letter-spacing: .16em; font-weight: 1000; }
 .debug-json, .debug-output { min-height: 260px; max-height: 52vh; overflow: auto; margin: 0; padding: 14px; border: 1px solid rgba(29,231,255,.20); border-radius: 12px; background: rgba(0,4,12,.82); color: #e8f7ff; font-family: Consolas, "Courier New", monospace; font-size: 12px; line-height: 1.45; }
-.confirm-modal[hidden], .confirm-modal.hidden { display: none !important; }
-.confirm-modal { position: fixed; inset: 0; z-index: 480; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.64); backdrop-filter: blur(6px); }
+.confirm-modal[hidden],
+.confirm-modal.hidden,
+.confirm-modal[aria-hidden="true"] { display: none !important; }
+.confirm-modal { position: fixed; inset: 0; z-index: 480; display: none; place-items: center; padding: 24px; background: rgba(0,0,0,.64); backdrop-filter: blur(6px); }
+.confirm-modal.active { display: grid; }
 .confirm-card { width: min(560px, 100%); padding: 22px; border: 1px solid rgba(255,64,90,.42); border-radius: 16px; background: linear-gradient(180deg, rgba(23,8,20,.98), rgba(5,8,18,.98)); box-shadow: var(--shadow), var(--glow-magenta); }
 
 @media (max-width: 1500px) {
