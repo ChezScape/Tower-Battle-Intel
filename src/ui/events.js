@@ -1155,73 +1155,127 @@ function bindHistoryImportExportButtons() {
         });
     }
 
-    const importButton =
-        document.querySelector("[data-import-history-button], [data-import-history-label]");
+    document
+        .querySelectorAll("[data-import-history-button], [data-import-history-label]")
+        .forEach(importButton => {
 
-    const importInput =
-        document.querySelector("[data-import-history-input]");
-
-    if (importButton && importButton.dataset.bound !== "true") {
-
-        importButton.dataset.bound = "true";
-
-        importButton.addEventListener("click", event => {
-            event.preventDefault();
-            if (importInput) {
-                importInput.value = "";
-                importInput.click();
-            }
-        });
-
-        importButton.addEventListener("keydown", event => {
-            if (event.key !== "Enter" && event.key !== " ") {
+            if (importButton.dataset.bound === "true") {
                 return;
             }
 
-            event.preventDefault();
+            importButton.dataset.bound = "true";
 
-            if (importInput) {
-                importInput.value = "";
-                importInput.click();
-            }
+            importButton.addEventListener("click", event => {
+                event.preventDefault();
+                openHistoryImportPicker();
+            });
+
+            importButton.addEventListener("keydown", event => {
+
+                if (event.key !== "Enter" && event.key !== " ") {
+                    return;
+                }
+
+                event.preventDefault();
+                openHistoryImportPicker();
+            });
         });
+
+    document
+        .querySelectorAll("[data-import-history-input]")
+        .forEach(importInput => {
+
+            if (importInput.dataset.bound === "true") {
+                return;
+            }
+
+            importInput.dataset.bound = "true";
+
+            importInput.addEventListener("change", () => {
+                handleHistoryImportInput(importInput);
+            });
+        });
+}
+
+function openHistoryImportPicker() {
+
+    const input =
+        document.createElement("input");
+
+    input.type = "file";
+    input.accept = "application/json,.json";
+    input.setAttribute("aria-label", "Import Battle History JSON");
+
+    Object.assign(input.style, {
+        position: "fixed",
+        left: "-9999px",
+        top: "0",
+        width: "1px",
+        height: "1px",
+        opacity: "0"
+    });
+
+    input.addEventListener("change", () => {
+        handleHistoryImportInput(input, {
+            removeAfter: true
+        });
+    });
+
+    document.body.appendChild(input);
+
+    window.setTimeout(() => {
+        input.click();
+    }, 0);
+
+    window.addEventListener(
+        "focus",
+        () => {
+            window.setTimeout(() => {
+                if (input.isConnected && !input.files?.length) {
+                    input.remove();
+                }
+            }, 1000);
+        },
+        { once: true }
+    );
+}
+
+async function handleHistoryImportInput(importInput, { removeAfter = false } = {}) {
+
+    const file =
+        importInput.files?.[0];
+
+    if (!file) {
+        if (removeAfter) {
+            importInput.remove();
+        }
+        return;
     }
 
-    if (importInput && importInput.dataset.bound !== "true") {
+    try {
 
-        importInput.dataset.bound = "true";
+        const text =
+            await file.text();
 
-        importInput.addEventListener("change", async () => {
+        importHistoryRuns(text);
 
-            const file =
-                importInput.files?.[0];
+        saveStorage(getState());
 
-            if (!file) {
-                return;
-            }
+        render();
 
-            try {
+    } catch (error) {
 
-                const text =
-                    await file.text();
+        console.warn(
+            "[Tower Battle Intel] Failed to import history:",
+            error
+        );
 
-                importHistoryRuns(text);
+    } finally {
+        importInput.value = "";
 
-                saveStorage(getState());
-
-                render();
-
-            } catch (error) {
-
-                console.warn(
-                    "[Tower Battle Intel] Failed to import history:",
-                    error
-                );
-
-            } finally {
-                importInput.value = "";
-            }
-        });
+        if (removeAfter) {
+            importInput.remove();
+        }
     }
 }
 
