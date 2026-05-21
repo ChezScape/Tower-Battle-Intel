@@ -1,5 +1,10 @@
 "use strict";
 
+/**
+ * SECTION ENGINE v4.10b
+ * Builds section data from The Tower battle reports.
+ */
+
 import {
     getKnownSectionHeaders,
     getKnownBattleReportLabels,
@@ -7,179 +12,144 @@ import {
     normaliseReportKey
 } from "../game/battleReportAliases.js";
 
-/**
- * SECTION ENGINE
- *
- * Builds section data from The Tower battle reports.
- *
- * Supports:
- * - Tab-separated reports
- * - 2+ space separated reports
- * - Single-space copied reports
- */
-
-const SECTION_HEADERS = new Set(getKnownSectionHeaders());
+const SECTION_HEADERS = new Map(
+    getKnownSectionHeaders()
+        .map(header => [normaliseHeader(header), normaliseReportSection(header)])
+);
 
 export function buildSections(lines = []) {
+    const sections = { core: {} };
+    let currentSection = "core";
 
-    const sections = {};
+    for (const rawLine of safeLines(lines)) {
+        const trimmed = String(rawLine || "").trim();
 
-    let currentSection =
-        "core";
-
-    sections[currentSection] =
-        {};
-
-    for (const line of lines) {
-
-        const trimmed =
-            String(line || "").trim();
-
-        if (!trimmed) {
+        if (!trimmed || /^Battle Report$/i.test(trimmed)) {
             continue;
         }
 
-        if (trimmed === "Battle Report") {
+        const section = resolveSectionHeader(trimmed);
+
+        if (section) {
+            currentSection = section;
+            sections[currentSection] ||= {};
             continue;
         }
 
-        if (SECTION_HEADERS.has(trimmed)) {
-
-            currentSection =
-                normaliseSectionName(trimmed);
-
-            if (!sections[currentSection]) {
-                sections[currentSection] = {};
-            }
-
-            continue;
-        }
-
-        const pair =
-            splitSectionLine(trimmed);
+        const pair = splitSectionLine(trimmed);
 
         if (!pair) {
             continue;
         }
 
-        const key =
-            normaliseKey(pair.key);
+        const key = normaliseReportKey(pair.key);
 
-        sections[currentSection][key] =
-            pair.value;
+        if (!key) {
+            continue;
+        }
+
+        sections[currentSection] ||= {};
+        sections[currentSection][key] = pair.value;
     }
 
     return sections;
 }
 
-/* --------------------------------------------------
-   SECTION LINE SPLITTER
--------------------------------------------------- */
-
-function splitSectionLine(line = "") {
-
-    const clean =
-        String(line || "").trim();
+export function splitSectionLine(line = "") {
+    const clean = String(line || "").trim();
 
     if (!clean) {
         return null;
     }
 
-    /*
-       Best case:
-       Official reports often use tabs.
-    */
-    let parts =
-        clean.split(/\t+/);
+    const tabPair = splitOnTabs(clean);
+    if (tabPair) return tabPair;
 
-    if (parts.length >= 2) {
-        return {
-            key:
-                parts[0].trim(),
+    const multiSpacePair = splitOnMultiSpaces(clean);
+    if (multiSpacePair) return multiSpacePair;
 
-            value:
-                parts
-                    .slice(1)
-                    .join(" ")
-                    .trim()
-        };
+    return splitOnKnownLabel(clean);
+}
+
+export function isKnownSectionHeader(value = "") {
+    return Boolean(resolveSectionHeader(value));
+}
+
+export function resolveSectionHeader(value = "") {
+    return SECTION_HEADERS.get(normaliseHeader(value)) || "";
+}
+
+export function getKnownSectionLabels() {
+    return getKnownBattleReportLabels();
+}
+
+function splitOnTabs(clean = "") {
+    const parts = clean.split(/\t+/).map(part => part.trim()).filter(Boolean);
+
+    if (parts.length < 2) {
+        return null;
     }
 
-    /*
-       Second case:
-       Some copied reports keep 2+ spaces.
-    */
-    parts =
-        clean.split(/\s{2,}/);
+    return {
+        key: parts[0],
+        value: parts.slice(1).join(" ").trim()
+    };
+}
 
-    if (parts.length >= 2) {
-        return {
-            key:
-                parts[0].trim(),
+function splitOnMultiSpaces(clean = "") {
+    const parts = clean.split(/\s{2,}/).map(part => part.trim()).filter(Boolean);
 
-            value:
-                parts
-                    .slice(1)
-                    .join(" ")
-                    .trim()
-        };
+    if (parts.length < 2) {
+        return null;
     }
 
-    /*
-       Fallback:
-       Some reports lose tabs completely:
-       "Damage Dealt 37.17aa"
-       "Coins Earned 542.11T"
-       "Enemy Attack Levels Skipped 5095"
-    */
-    const labels =
-        getKnownSectionLabels();
+    return {
+        key: parts[0],
+        value: parts.slice(1).join(" ").trim()
+    };
+}
+
+function splitOnKnownLabel(clean = "") {
+    const labels = getKnownBattleReportLabels();
 
     for (const label of labels) {
+        const prefix = `${label} `;
 
-        const prefix =
-            `${label} `;
-
-        if (clean.startsWith(prefix)) {
-
-            const value =
-                clean
-                    .slice(prefix.length)
-                    .trim();
+        if (clean.toLowerCase().startsWith(prefix.toLowerCase())) {
+            const value = clean.slice(prefix.length).trim();
 
             if (!value) {
                 return null;
             }
 
-            return {
-                key:
-                    label,
-
-                value
-            };
+            return { key: label, value };
         }
     }
 
     return null;
 }
 
-/* --------------------------------------------------
-   KNOWN LABELS
--------------------------------------------------- */
+function safeLines(lines = []) {
+    if (Array.isArray(lines)) {
+        return lines;
+    }
 
-function getKnownSectionLabels() {
-
-    return getKnownBattleReportLabels();
+    return String(lines || "")
+        .replace(/\r/g, "")
+        .split("\n");
 }
 
-/* --------------------------------------------------
-   NORMALISE
--------------------------------------------------- */
-
-function normaliseSectionName(value = "") {
-    return normaliseReportSection(value);
+function normaliseHeader(value = "") {
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
 }
 
-function normaliseKey(value = "") {
-    return normaliseReportKey(value);
-}
+export default {
+    buildSections,
+    splitSectionLine,
+    isKnownSectionHeader,
+    resolveSectionHeader,
+    getKnownSectionLabels
+};

@@ -1,163 +1,77 @@
 "use strict";
 
-import { parseNumber } from "../utils/math.js";
-
 /**
- * PROGRESSION AI (V9 REFACTORED)
- * - Pure function
- * - Uses injected history (no global coupling)
- * - Fully aligned with V11 compare engine
+ * PROGRESSION AI v4.10d
+ * History trend readout with safe numbers.
  */
 
-/**
- * MAIN ENTRY
- * @param {Array} history - run history array
- * @param {Object} currentRun - latest computed run
- */
+import {
+    parseNumber,
+    avg,
+    percentChange
+} from "../utils/math.js";
+
+import {
+    formatPercent,
+    formatNumber
+} from "../utils/format.js";
+
 export function progressionAI(history = [], currentRun = null) {
+    const runs = Array.isArray(history) ? history.filter(Boolean) : [];
+    const current = currentRun || runs.at(-1) || null;
 
-    if (!currentRun || history.length < 2) {
-
-        return [{
-            type: "info",
-            title: "Progression AI",
-            message: "Not enough historical data for trend analysis",
-            severity: "info"
-        }];
+    if (!current || runs.length < 2) {
+        return [message("info", "Progression AI", "Not enough historical data for trend analysis.")];
     }
 
-    // -----------------------------
-    // BUILD SERIES
-    // -----------------------------
-    const coins = [];
-    const waves = [];
-    const cells = [];
+    const previousRuns = runs.filter(run => run !== current).slice(-10);
+    const baselines = previousRuns.length ? previousRuns : runs.slice(0, -1);
 
-    for (const run of history) {
+    const coinAvg = avg(baselines.map(run => run.core?.coins || 0));
+    const waveAvg = avg(baselines.map(run => run.core?.wave || 0));
+    const cellAvg = avg(baselines.map(run => run.core?.cells || 0));
+    const cphAvg = avg(baselines.map(run => run.stats?.coinsPerHour || 0));
+    const cellRateAvg = avg(baselines.map(run => run.stats?.cellsPerHour || 0));
 
-        const core = run?.core || {};
+    const signals = [
+        trend("Coin Progression", current.core?.coins, coinAvg, "coins"),
+        trend("Wave Progression", current.core?.wave, waveAvg, "waves"),
+        trend("Cell Progression", current.core?.cells, cellAvg, "cells"),
+        trend("Coin Rate Progression", current.stats?.coinsPerHour, cphAvg, "coins/hour"),
+        trend("Cell Rate Progression", current.stats?.cellsPerHour, cellRateAvg, "cells/hour")
+    ];
 
-        coins.push(parseNumber(core.coins));
-        waves.push(parseNumber(core.wave));
-        cells.push(parseNumber(core.cells));
+    const positives = signals.filter(item => item.severity === "good").length;
+    const negatives = signals.filter(item => item.severity === "bad").length;
+
+    if (positives >= 3) {
+        signals.push(message("good", "Overall Progression Up", "Most major trend signals are above your recent average."));
+    } else if (negatives >= 3) {
+        signals.push(message("bad", "Overall Progression Down", "Most major trend signals are below your recent average."));
+    } else {
+        signals.push(message("neutral", "Mixed Progression", "Some trend signals improved while others weakened."));
     }
 
-    const currentCoins = parseNumber(currentRun.core?.coins);
-    const currentWave = parseNumber(currentRun.core?.wave);
-    const currentCells = parseNumber(currentRun.core?.cells);
-
-    const coinAvg = avg(coins);
-    const waveAvg = avg(waves);
-    const cellAvg = avg(cells);
-
-    const output = [];
-
-    // -----------------------------
-    // COIN TREND
-    // -----------------------------
-    const coinChange = percent(currentCoins, coinAvg);
-
-    output.push({
-        type: "trend",
-        title: "Coin Progression",
-        message: formatTrend("coins", coinChange),
-        severity: severity(coinChange)
-    });
-
-    // -----------------------------
-    // WAVE TREND
-    // -----------------------------
-    const waveChange = percent(currentWave, waveAvg);
-
-    output.push({
-        type: "trend",
-        title: "Wave Progression",
-        message: formatTrend("waves", waveChange),
-        severity: severity(waveChange)
-    });
-
-    // -----------------------------
-    // CELLS TREND
-    // -----------------------------
-    const cellChange = percent(currentCells, cellAvg);
-
-    output.push({
-        type: "trend",
-        title: "Cell Progression",
-        message: formatTrend("cells", cellChange),
-        severity: severity(cellChange)
-    });
-
-    // -----------------------------
-    // SKILL INTERPRETATION
-    // -----------------------------
-    const strongUp =
-        coinChange > 15 &&
-        waveChange > 10;
-
-    const strongDown =
-        coinChange < -15 &&
-        waveChange < -10;
-
-    if (strongUp) {
-
-        output.push({
-            type: "skill",
-            title: "Skill Growth Detected",
-            message: "Your economy and endurance are improving together.",
-            severity: "good"
-        });
-
-    } else if (strongDown) {
-
-        output.push({
-            type: "skill",
-            title: "Performance Regression",
-            message: "Multiple core systems are declining.",
-            severity: "bad"
-        });
-    }
-
-    return output;
+    return signals;
 }
 
-/* ==================================================
-   HELPERS
-================================================== */
-
-function avg(arr) {
-
-    return arr.length
-        ? arr.reduce((a, b) => a + b, 0) / arr.length
-        : 0;
+function trend(title, currentValue, baselineValue, label) {
+    const current = parseNumber(currentValue);
+    const baseline = parseNumber(baselineValue);
+    const change = percentChange(baseline, current);
+    const sev = change > 10 ? "good" : change < -10 ? "bad" : "neutral";
+    return message(sev, title, `${label} is ${formatPercent(change)} versus recent average (${formatNumber(baseline)}).`, { change, current, baseline });
 }
 
-/**
- * percent change vs baseline
- */
-function percent(current, baseline) {
-
-    if (!baseline) return 0;
-
-    return ((current - baseline) / baseline) * 100;
+function message(severity, title, text, extra = {}) {
+    return {
+        type: "progression",
+        severity,
+        level: severity,
+        title,
+        message: text,
+        ...extra
+    };
 }
 
-function severity(val) {
-
-    if (val > 10) return "good";
-    if (val < -10) return "bad";
-    return "neutral";
-}
-
-function formatTrend(label, change) {
-
-    if (change > 10) {
-        return `${label} trending upward (+${change.toFixed(1)}%)`;
-    }
-
-    if (change < -10) {
-        return `${label} trending downward (${change.toFixed(1)}%)`;
-    }
-
-    return `${label} is stable`;
-}
+export default progressionAI;

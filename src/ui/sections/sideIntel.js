@@ -64,7 +64,7 @@ export function buildAnomalyMiniPanel(state = {}) {
         <section class="tbi-card tbi-anomaly-mini">
             <div class="tbi-card-heading">
                 <h3>Anomalies</h3>
-                <button type="button" data-dashboard-tab="anomalies">View All</button>
+                <button type="button" data-ui-action="open-anomalies">View All</button>
             </div>
             ${buildAnomalyList(state.anomalies, { full: false })}
         </section>
@@ -91,9 +91,9 @@ export function buildQuickActionsPanel() {
         <section class="tbi-card tbi-quick-actions">
             <h3>Quick Actions</h3>
             <div class="tbi-action-grid">
-                <button type="button" data-dashboard-tab="command">Paste Report</button>
+                <button type="button" data-ui-action="open-command">Paste Report</button>
                 <button type="button" data-ui-action="save-report">Save Report</button>
-                <button type="button" data-dashboard-tab="history">History</button>
+                <button type="button" data-ui-action="open-history">History</button>
                 <button type="button" data-ui-action="clear-runs">Clear Runs</button>
             </div>
         </section>

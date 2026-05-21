@@ -1,56 +1,97 @@
 "use strict";
 
 /**
- * NORMALIZATION UTILITIES
- * Used by parser.js
+ * PIPELINE NORMALIZE v4.10d
+ * Shared parser/compare normalisation layer.
  */
 
-/* --------------------------------------------------
-   KEY NORMALIZATION
--------------------------------------------------- */
+import {
+    normaliseReportKey,
+    normaliseReportSection,
+    resolveBattleReportAlias,
+    formatReportLabel
+} from "../game/battleReportAliases.js";
+
+import {
+    parseNumber
+} from "../utils/math.js";
+
+import {
+    parseTimeToSeconds
+} from "../utils/timeEngine.js";
 
 export function normalizeKey(key = "") {
-
-    return String(key)
-        .trim()
-        .toLowerCase()
-        .replace(/\$/g, "")
-        .replace(/%/g, "percent")
-        .replace(/\s*\/\s*/g, "_")
-        .replace(/[:()]/g, "")
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/__+/g, "_")
-        .replace(/^_+|_+$/g, "");
+    return resolveBattleReportAlias(key);
 }
 
-/* --------------------------------------------------
-   VALUE NORMALIZATION
--------------------------------------------------- */
+export function normaliseKey(key = "") {
+    return normalizeKey(key);
+}
+
+export function normalizeSection(section = "") {
+    return normaliseReportSection(section);
+}
+
+export function normaliseSection(section = "") {
+    return normalizeSection(section);
+}
 
 export function normalizeValue(value = "") {
-
     if (value == null) {
         return "";
     }
 
-    const str = String(value).trim();
+    return String(value)
+        .replace(/\u00a0/g, " ")
+        .trim();
+}
 
-    // numeric cleanup
-    const cleaned = str.replace(/,/g, "");
+export function normalizeLine(line = "") {
+    return String(line || "")
+        .replace(/\r/g, "")
+        .replace(/\u00a0/g, " ")
+        .trim();
+}
 
-    // preserve time strings
-    if (
-        /\d+\s*d/i.test(str) ||
-        /\d+\s*h/i.test(str) ||
-        /\d+\s*m/i.test(str) ||
-        /\d+\s*s/i.test(str)
-    ) {
-        return str;
+export function normaliseLine(line = "") {
+    return normalizeLine(line);
+}
+
+export function normalizeLabel(value = "") {
+    return formatReportLabel(value);
+}
+
+export function valueToNumber(value, fallback = 0) {
+    const text = normalizeValue(value);
+
+    if (!text) {
+        return fallback;
     }
 
-    const num = Number(cleaned);
+    const time = parseTimeToSeconds(text);
+    if (time > 0 && /\d\s*(?:d|h|m|s)\b|^\d{1,3}:\d{2}(?::\d{2})?$/i.test(text)) {
+        return time;
+    }
 
-    return Number.isFinite(num)
-        ? num
-        : str;
+    return parseNumber(text, fallback);
 }
+
+export function normalizeRecord(record = {}) {
+    return Object.entries(record || {}).reduce((out, [key, value]) => {
+        out[normalizeKey(key)] = normalizeValue(value);
+        return out;
+    }, {});
+}
+
+export default {
+    normalizeKey,
+    normaliseKey,
+    normalizeSection,
+    normaliseSection,
+    normalizeValue,
+    normalizeLine,
+    normaliseLine,
+    normalizeLabel,
+    valueToNumber,
+    normalizeRecord
+};

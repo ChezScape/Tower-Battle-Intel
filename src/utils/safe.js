@@ -1,34 +1,27 @@
 "use strict";
 
 /**
- * SAFE UTILITY ENGINE
- * Defensive helpers used across the whole app.
+ * SAFE UTILITY ENGINE v4.10b
+ * Defensive helpers with no browser dependency.
  */
 
 import {
     parseNumber
 } from "./math.js";
 
-/* --------------------------------------------------
-   SAFE GET
--------------------------------------------------- */
-
 export function safeGet(obj, path, fallback = null) {
-
     if (!obj || !path) {
         return fallback;
     }
 
-    const keys =
-        Array.isArray(path)
-            ? path
-            : String(path).split(".");
+    const keys = Array.isArray(path)
+        ? path
+        : String(path).split(".").filter(Boolean);
 
     let current = obj;
 
     for (const key of keys) {
-
-        if (current == null) {
+        if (current == null || typeof current !== "object" || !(key in current)) {
             return fallback;
         }
 
@@ -38,67 +31,61 @@ export function safeGet(obj, path, fallback = null) {
     return current ?? fallback;
 }
 
-/* --------------------------------------------------
-   SAFE NUMBER
--------------------------------------------------- */
+export function safeSet(obj, path, value) {
+    if (!obj || !path) {
+        return obj;
+    }
+
+    const keys = Array.isArray(path)
+        ? path
+        : String(path).split(".").filter(Boolean);
+
+    if (!keys.length) {
+        return obj;
+    }
+
+    let current = obj;
+
+    keys.slice(0, -1).forEach(key => {
+        if (!current[key] || typeof current[key] !== "object") {
+            current[key] = {};
+        }
+
+        current = current[key];
+    });
+
+    current[keys[keys.length - 1]] = value;
+    return obj;
+}
 
 export function safeNumber(value, fallback = 0) {
-
-    const num = parseNumber(value);
-
-    return Number.isFinite(num)
-        ? num
-        : fallback;
+    const num = parseNumber(value, NaN);
+    return Number.isFinite(num) ? num : fallback;
 }
-
-/* --------------------------------------------------
-   SAFE ARRAY
--------------------------------------------------- */
 
 export function safeArray(value) {
-
-    return Array.isArray(value)
-        ? value
-        : [];
+    return Array.isArray(value) ? value : [];
 }
 
-/* --------------------------------------------------
-   SAFE OBJECT
--------------------------------------------------- */
-
 export function safeObject(value) {
-
     return value && typeof value === "object" && !Array.isArray(value)
         ? value
         : {};
 }
 
-/* --------------------------------------------------
-   SAFE CLONE
--------------------------------------------------- */
-
 export function safeClone(value) {
-
     try {
-
         if (typeof structuredClone === "function") {
             return structuredClone(value);
         }
 
         return JSON.parse(JSON.stringify(value));
-
     } catch {
-
         return value;
     }
 }
 
-/* --------------------------------------------------
-   SAFE STRING
--------------------------------------------------- */
-
 export function safeString(value, fallback = "") {
-
     if (value == null) {
         return fallback;
     }
@@ -106,23 +93,44 @@ export function safeString(value, fallback = "") {
     return String(value);
 }
 
-/* --------------------------------------------------
-   SAFE BOOLEAN
--------------------------------------------------- */
-
 export function safeBool(value) {
-
     return Boolean(value);
 }
 
-/* --------------------------------------------------
-   HTML ESCAPE
--------------------------------------------------- */
-
 export function escapeHTML(value = "") {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 }
+
+export function escapeAttr(value = "") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+export function tryOrFallback(fn, fallback = null) {
+    try {
+        return typeof fn === "function" ? fn() : fallback;
+    } catch {
+        return fallback;
+    }
+}
+
+export default {
+    safeGet,
+    safeSet,
+    safeNumber,
+    safeArray,
+    safeObject,
+    safeClone,
+    safeString,
+    safeBool,
+    escapeHTML,
+    escapeAttr,
+    tryOrFallback
+};

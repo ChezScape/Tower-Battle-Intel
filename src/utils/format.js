@@ -1,8 +1,8 @@
 "use strict";
 
 /**
- * SHARED FORMAT ENGINE
- * Used by core, pipeline, diagnostics, and utility helpers.
+ * SHARED FORMAT ENGINE v4.10b
+ * Shared by non-UI modules plus older UI compatibility imports.
  */
 
 import {
@@ -10,109 +10,79 @@ import {
     formatTowerDelta
 } from "../game/numberNotation.js";
 
-/* --------------------------------------------------
-   NUMBER FORMAT
--------------------------------------------------- */
+import {
+    safeNumber
+} from "./math.js";
 
 export function formatNumber(value, precision = 2) {
     return formatTowerNumber(value, precision);
 }
 
-/* --------------------------------------------------
-   DELTA FORMAT
--------------------------------------------------- */
-
-export function formatDelta(value, options = {}) {
-
-    const {
-        precision = 2,
-        signed = true
-    } = options;
-
-    const num =
-        Number(value || 0);
-
-    if (!Number.isFinite(num)) {
-        return "0";
-    }
-
-    if (!signed) {
-        return formatTowerNumber(num, precision);
-    }
-
-    return formatTowerDelta(num, precision);
+export function formatCompactNumber(value, precision = 2) {
+    return formatNumber(value, precision);
 }
 
-/* --------------------------------------------------
-   PERCENT FORMAT
--------------------------------------------------- */
+export function formatDelta(value, options = {}) {
+    const {
+        precision = 2,
+        signed = true,
+        compact = false
+    } = options;
 
-export function formatPercent(value, precision = 1) {
+    const num = safeNumber(value);
 
+    if (!signed) {
+        return formatTowerNumber(Math.abs(num), precision);
+    }
+
+    return compact
+        ? formatTowerDelta(num, precision)
+        : formatTowerDelta(num, precision);
+}
+
+export function formatPercent(value, precision = 1, { signed = true } = {}) {
     if (value == null) {
         return "from near zero";
     }
 
-    const num =
-        Number(value);
+    const num = Number(value);
 
     if (!Number.isFinite(num)) {
         return "0%";
     }
 
-    const sign =
-        num > 0
-            ? "+"
-            : "";
-
+    const sign = signed && num > 0 ? "+" : "";
     return `${sign}${trimFixed(num, precision)}%`;
 }
 
-/* --------------------------------------------------
-   TIME FORMAT
--------------------------------------------------- */
+export function formatPercentDelta(value, precision = 1) {
+    return formatPercent(value, precision, { signed: true });
+}
 
 export function formatTime(seconds = 0) {
-
-    let total =
-        Math.floor(Number(seconds || 0));
+    let total = Math.floor(safeNumber(seconds));
 
     if (!Number.isFinite(total) || total <= 0) {
         return "0s";
     }
 
-    const d =
-        Math.floor(total / 86400);
-
+    const d = Math.floor(total / 86400);
     total %= 86400;
-
-    const h =
-        Math.floor(total / 3600);
-
+    const h = Math.floor(total / 3600);
     total %= 3600;
-
-    const m =
-        Math.floor(total / 60);
-
-    const s =
-        total % 60;
+    const m = Math.floor(total / 60);
+    const s = total % 60;
 
     const out = [];
-
     if (d) out.push(`${d}d`);
     if (h) out.push(`${h}h`);
     if (m) out.push(`${m}m`);
-    if (s) out.push(`${s}s`);
+    if (s || !out.length) out.push(`${s}s`);
 
     return out.join(" ");
 }
 
-/* --------------------------------------------------
-   LABEL FORMAT
--------------------------------------------------- */
-
 export function formatLabel(value = "") {
-
     return String(value || "")
         .replace(/^section\./i, "")
         .replace(/^core\./i, "")
@@ -124,12 +94,7 @@ export function formatLabel(value = "") {
         .replace(/\b\w/g, char => char.toUpperCase());
 }
 
-/* --------------------------------------------------
-   SAFE TEXT
--------------------------------------------------- */
-
 export function safeText(value, fallback = "-") {
-
     if (value == null || value === "") {
         return fallback;
     }
@@ -137,12 +102,7 @@ export function safeText(value, fallback = "-") {
     return String(value);
 }
 
-/* --------------------------------------------------
-   HTML ESCAPE
--------------------------------------------------- */
-
 export function escapeHTML(value = "") {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -150,39 +110,45 @@ export function escapeHTML(value = "") {
 }
 
 export function escapeAttr(value = "") {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 }
 
-/* --------------------------------------------------
-   HELPERS
--------------------------------------------------- */
+export function truncateText(value = "", maxLength = 80) {
+    const text = safeText(value, "");
+    const max = Math.max(0, Number(maxLength) || 0);
+
+    return text.length > max
+        ? `${text.slice(0, Math.max(0, max - 1))}…`
+        : text;
+}
 
 function trimFixed(value, precision = 1) {
-
-    const num =
-        Number(value || 0);
+    const num = Number(value || 0);
 
     if (!Number.isFinite(num)) {
         return "0";
     }
 
     return num
-        .toFixed(precision)
+        .toFixed(Math.max(0, precision))
         .replace(/\.?0+$/, "");
 }
 
 export default {
     formatNumber,
+    formatCompactNumber,
     formatDelta,
     formatPercent,
+    formatPercentDelta,
     formatTime,
     formatLabel,
     safeText,
     escapeHTML,
-    escapeAttr
+    escapeAttr,
+    truncateText
 };

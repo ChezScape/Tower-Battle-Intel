@@ -1,45 +1,81 @@
-# Tower Battle Intel v4.8r — UI Wiring + Menu Polish
+# Tower Battle Intel v4.10c
 
-Protected rollback remains:
+Current working line: **v4.10c Root Shell Rebuild**.
+
+This project is a local, browser-based Battle Report Intelligence Dashboard for **The Tower - Idle Tower Defense**.
+
+## Current architecture
+
+The project is now split into clear layers:
 
 ```text
-Tower-Battle-Intel_Phase4.7 Stable.zip
+app.js / bootstrap.js        startup only
+index.html                  static shell only
+desktop.css                 desktop layout/theme only
+mobile.css                  mobile layout/theme only
+src/core/                   state, history, update, compute
+src/pipeline/               parser, compare, coach, insights, schema
+src/game/                   local game catalogue / report knowledge brain
+src/actions/                visible UI command bus
+src/ui/                     renderer, events, views, components, sections
+src/history/                history filters, selectors, stats, badges
+src/storage/                local persistence
+src/utils/                  shared parsing/time/math/safety utilities
+src/diagnostics/            health scan, trace, pipeline inspection
 ```
 
-This build is based on v4.8o and focuses on making the Battle History Trace easier to use on phone and desktop without removing the existing history tools.
+## Important rules
 
-## Main changes
+- Do not put desktop layout fixes in `mobile.css`.
+- Do not put mobile layout fixes in `desktop.css`.
+- Visible buttons should route through `src/ui/events.js` then `src/actions/actions.js`.
+- Core files should not directly own visible UI button behaviour.
+- `src/game/` is the local game-brain catalogue and should stay separate from UI code.
 
-- Keeps the true CSS split: `desktop.css` for the large-screen layout and `mobile.css` for the phone layout.
-- Keeps the current banners and hidden banner-hold debug access.
-- Keeps the v4.8o mobile stabilisation work: tab-to-top behaviour, compact report button, scroll locking, and debug scroll improvements.
-- Makes the History tool area collapsible under **History Tools**.
-- Makes the History filter area collapsible under **Filter Console**.
-- Replaces the Sort / Build / Tag button walls with styled dropdown menus.
-- Makes the History Summary collapsible so it does not eat space when checking runs.
-- Redesigns each run card action area:
-  - **A / B** are grouped under **Compare Slots**.
-  - **Stats / Edit / Archive / Delete** are grouped under **Run Tools**.
-  - extra run details are tucked under **More Intel**.
-- Updates version labels to `v4.8r`.
+## Running locally
 
-## Test order
+Open `index.html` directly in a browser, or serve the folder with any simple local server.
 
-1. Open `index.html` on phone.
-2. Go to History.
-3. Open **Filter Console** and check Sort / Build / Tag dropdowns.
-4. Change each dropdown once and confirm the history list updates.
-5. Open **History Summary** and close it again.
-6. On a run card, press **A** and **B** under Compare Slots.
-7. Open **Run Tools** and try Stats / Edit / Archive / Delete.
-8. Open **More Intel** on a run and check the hidden details.
-9. Check desktop after phone.
-10. Hold the banner to make sure debug still opens.
+For tests, run from the project root:
 
+```powershell
+node .\tests\utils-foundation.test.mjs
+node .\tests\history-storage-ui-utils.test.mjs
+node .\tests\ui-action-foundation.test.mjs
+node .\tests\report-parser-game-brain.test.mjs
+```
 
-## v4.8r fixes
+## Console helpers
 
-- Fixed missing `isMobileMode()` helper in the UI event layer, which broke desktop Subsystem Matrix clicks and mobile bottom-tab switching.
-- Replaced History native select popups with sci-fi styled dropdown panels for Sort, Build, and Tag.
-- Kept Filter Console open while typing/searching so the search box no longer collapses after each key.
-- Added stronger mobile/desktop dropdown styling and preserved the compact run tools layout.
+After the app starts, these are available in DevTools:
+
+```js
+TowerBattleIntel.state()
+TowerBattleIntel.render()
+TowerBattleIntel.save()
+TowerBattleIntel.shell()
+```
+
+## v4.10c root rebuild
+
+Rebuilt these root files:
+
+```text
+app.js
+bootstrap.js
+desktop.css
+index.html
+mobile.css
+README.md
+style.css
+```
+
+Focus:
+
+- cleaner startup entry
+- safer bootstrap order
+- rendered header debug-hold binding now works because initial render happens before core event binding
+- no old topbar/banner shell competing with the rebuilt UI renderer
+- static HTML only contains the true report input, mobile deck, dashboard root and debug roots
+- updated README and inactive `style.css` note
+```

@@ -1,42 +1,33 @@
 "use strict";
 
 /**
- * PARSER
- * Converts raw Battle Report text into structured pipeline data.
- *
- * Responsibilities:
- * - split raw report into lines
- * - protect against multiple pasted reports
- * - build section groups
- * - build flat key/value map
- * - extract core values
- * - extract imported stats
- * - preserve full battle sections
- *
- * Does NOT compute final metrics.
- * Does NOT compare runs.
+ * BATTLE REPORT PARSER v4.10d
+ * Uses the shared report splitter, section engine, aliases and schema brain.
  */
 
 import {
-    normalizeValue,
-    normalizeKey
-} from "./normalize.js";
+    getFirstBattleReport,
+    countBattleReports,
+    fingerprintReport,
+    normaliseLineEndings
+} from "../utils/reportSplitter.js";
 
 import {
-    validateAndRepair
-} from "./schemaEngine.js";
-
-import {
-    buildSections
+    buildSections,
+    splitSectionLine
 } from "../utils/sectionEngine.js";
 
 import {
-    parseNumber
+    parseNumber,
+    safeDiv
 } from "../utils/math.js";
 
 import {
-    normaliseReportKey,
-    getKnownBattleReportLabels as getKnownBattleReportLabelsImported
+    buildTimeModel
+} from "../utils/timeEngine.js";
+
+import {
+    normaliseReportKey
 } from "../game/battleReportAliases.js";
 
 import {
@@ -44,139 +35,90 @@ import {
     findUnknownReportFields
 } from "../game/reportSchema.js";
 
-/* --------------------------------------------------
-   MAIN PARSER
--------------------------------------------------- */
+import {
+    scanUnknownReportMetrics
+} from "../game/unknownMetricLogger.js";
+
+import {
+    validateAndRepair
+} from "./schemaEngine.js";
 
 export function parser(rawText) {
+    const raw = String(rawText || "");
 
-    if (!rawText || typeof rawText !== "string") {
-        return validateAndRepair({});
+    if (!raw.trim()) {
+        return validateAndRepair({
+            meta: {
+                parserVersion: "battle-report-parser-v4.10d",
+                confidence: 0,
+                error: "empty_input"
+            }
+        });
     }
 
-    /*
-       Important:
-       If the user accidentally pastes two Battle Reports,
-       only use the first report.
+    const reportText = getFirstBattleReport(raw);
+    const lines = normaliseLineEndings(reportText)
+        .split("\n")
+        .map(line => line.trim())
+        .filter(Boolean);
 
-       This prevents the second report overwriting values
-       from the first one.
-    */
-    const reportText =
-        extractFirstBattleReport(rawText);
+    const sections = buildSections(lines);
+    const flat = buildFlatMap(lines);
+    const timeModel = buildTimeModel({
+        realTime: flat.real_time,
+        gameTime: flat.game_time,
+        fallback: flat.time
+    });
 
-    const lines =
-        reportText
-            .replace(/\r/g, "")
-            .split("\n");
-
-    const sections =
-        buildSections(lines);
-
-    const flat =
-        buildFlatMap(lines);
-
-    /* --------------------------------------------------
-       CORE RAW STRUCTURE
-    -------------------------------------------------- */
+    const wave = parseNumber(flat.wave);
+    const coins = parseNumber(flat.coins_earned ?? flat.coins);
+    const cells = parseNumber(flat.cells_earned ?? flat.cells);
 
     const core = {
-
-        battleDate:
-            flat.battle_date || "",
-
-        game_time:
-            flat.game_time || "",
-
-        real_time:
-            flat.real_time || "",
-
-        tier:
-            parseNumber(flat.tier),
-
-        wave:
-            parseNumber(flat.wave),
-
-        killedBy:
-            flat.killed_by || "",
-
-        coins:
-            parseNumber(
-                flat.coins_earned ??
-                flat.coins
-            ),
-
-        cells:
-            parseNumber(
-                flat.cells_earned ??
-                flat.cells
-            ),
-
-        time:
-            flat.real_time ||
-            flat.game_time ||
-            flat.time ||
-            ""
+        battleDate: flat.battle_date || "",
+        game_time: flat.game_time || "",
+        real_time: flat.real_time || "",
+        tier: parseNumber(flat.tier),
+        wave,
+        killedBy: flat.killed_by || "",
+        coins,
+        cells,
+        time: timeModel.selectedSeconds
     };
 
-    /* --------------------------------------------------
-       IMPORTED STATS
-    -------------------------------------------------- */
-
+    const hours = core.time > 0 ? core.time / 3600 : 0;
     const stats = {
-
-        coinsPerHour:
-            parseNumber(flat.coins_per_hour),
-
-        cellsPerHour:
-            parseNumber(flat.cells_per_hour),
-
-        coinsPerWave:
-            parseNumber(flat.coins_per_wave),
-
-        cellsPerWave:
-            safeDiv(
-                parseNumber(flat.cells_earned),
-                parseNumber(flat.wave)
-            ),
-
-        efficiency:
-            0
+        coinsPerHour: positiveOr(flat.coins_per_hour, safeDiv(coins, hours)),
+        cellsPerHour: positiveOr(flat.cells_per_hour, safeDiv(cells, hours)),
+        coinsPerWave: positiveOr(flat.coins_per_wave, safeDiv(coins, wave)),
+        cellsPerWave: safeDiv(cells, wave),
+        efficiency: 0
     };
 
-    /* --------------------------------------------------
-       FINAL PARSED OBJECT
-    -------------------------------------------------- */
+    const reportSchema = validateReportAgainstSchema(sections);
+    const unknownReportFields = findUnknownReportFields(sections);
+    const unknownMetricScan = scanUnknownReportMetrics({ sections });
 
     const parsed = {
-
         core,
-
         stats,
-
         sections,
-
         flat,
-
         meta: {
-            confidence:
-                estimateConfidence({
-                    core,
-                    sections,
-                    flat
-                }),
-            reportSchema:
-                validateReportAgainstSchema(sections),
-            unknownReportFields:
-                findUnknownReportFields(sections)
+            parserVersion: "battle-report-parser-v4.10d",
+            confidence: estimateConfidence({ core, sections, flat, reportSchema }),
+            reportId: fingerprintReport(reportText),
+            reportCount: countBattleReports(raw),
+            lineCount: lines.length,
+            reportSchema,
+            unknownReportFields,
+            unknownMetricScan,
+            timeModel
         },
-
         raw: {
-            originalText: rawText,
+            originalText: raw,
             reportText,
             lines,
-            core,
-            stats,
             sections,
             flat
         }
@@ -185,257 +127,48 @@ export function parser(rawText) {
     return validateAndRepair(parsed);
 }
 
-/* --------------------------------------------------
-   MULTI REPORT SAFETY
--------------------------------------------------- */
-
-function extractFirstBattleReport(rawText = "") {
-
-    const text =
-        String(rawText || "")
-            .replace(/\r/g, "")
-            .trim();
-
-    if (!text) {
-        return "";
-    }
-
-    const marker =
-        "Battle Report";
-
-    const firstIndex =
-        text.indexOf(marker);
-
-    if (firstIndex === -1) {
-        return text;
-    }
-
-    const secondIndex =
-        text.indexOf(
-            marker,
-            firstIndex + marker.length
-        );
-
-    if (secondIndex === -1) {
-        return text
-            .slice(firstIndex)
-            .trim();
-    }
-
-    console.warn(
-        "[Battle Analyser] Multiple battle reports detected. Using the first one only."
-    );
-
-    return text
-        .slice(firstIndex, secondIndex)
-        .trim();
-}
-
-/* --------------------------------------------------
-   FLAT MAP BUILDER
--------------------------------------------------- */
-
 function buildFlatMap(lines = []) {
-
     const flat = {};
 
-    for (const rawLine of lines) {
+    for (const line of lines) {
+        const pair = splitSectionLine(line);
 
-        if (!rawLine || !rawLine.trim()) {
+        if (!pair) {
             continue;
         }
 
-        const parts =
-            splitKeyValue(rawLine);
-
-        if (!parts) {
-            continue;
-        }
-
-        const key =
-            normaliseReportKey(parts.key);
-
-        const value =
-            normalizeValue(parts.value);
-
+        const key = normaliseReportKey(pair.key);
         if (!key) {
             continue;
         }
 
-        flat[key] = value;
+        flat[key] = String(pair.value ?? "").trim();
     }
 
     return flat;
 }
 
-/* --------------------------------------------------
-   KEY / VALUE SPLITTER
--------------------------------------------------- */
-
-function splitKeyValue(line = "") {
-
-    const clean =
-        String(line || "").trim();
-
-    if (!clean) {
-        return null;
-    }
-
-    /*
-       Best case:
-       Official exported reports usually use tabs.
-    */
-    let parts =
-        clean.split(/\t+/);
-
-    if (parts.length >= 2) {
-        return {
-            key:
-                parts[0]?.trim(),
-
-            value:
-                parts
-                    .slice(1)
-                    .join(" ")
-                    .trim()
-        };
-    }
-
-    /*
-       Second case:
-       Some copies preserve spacing with 2+ spaces.
-    */
-    parts =
-        clean.split(/\s{2,}/);
-
-    if (parts.length >= 2) {
-        return {
-            key:
-                parts[0]?.trim(),
-
-            value:
-                parts
-                    .slice(1)
-                    .join(" ")
-                    .trim()
-        };
-    }
-
-    /*
-       Fallback:
-       Some reports lose tabs and become:
-       "Battle Date May 12, 2026 21:26"
-       "Coins Earned 542.11T"
-       "Killed By Fast"
-
-       This matches known Battle Report labels from longest to shortest.
-    */
-    const labels =
-        getKnownBattleReportLabels();
-
-    for (const label of labels) {
-
-        const prefix =
-            `${label} `;
-
-        if (clean.startsWith(prefix)) {
-
-            const value =
-                clean
-                    .slice(prefix.length)
-                    .trim();
-
-            if (!value) {
-                return null;
-            }
-
-            return {
-                key:
-                    label,
-
-                value
-            };
-        }
-    }
-
-    return null;
+function positiveOr(value, fallback = 0) {
+    const parsed = parseNumber(value);
+    return parsed > 0 ? parsed : fallback;
 }
 
-function getKnownBattleReportLabels() {
-
-    return getKnownBattleReportLabelsImported();
-}
-
-/* --------------------------------------------------
-   CONFIDENCE ESTIMATION
--------------------------------------------------- */
-
-function estimateConfidence({
-    core = {},
-    sections = {},
-    flat = {}
-} = {}) {
-
+function estimateConfidence({ core = {}, sections = {}, flat = {}, reportSchema = {} } = {}) {
     let score = 100;
 
-    if (!core.wave) {
-        score -= 20;
-    }
+    if (!core.wave) score -= 18;
+    if (!core.tier) score -= 8;
+    if (!core.coins) score -= 8;
+    if (!core.cells) score -= 6;
+    if (!core.killedBy) score -= 5;
+    if (!core.time) score -= 5;
+    if (!Object.keys(sections || {}).length) score -= 24;
+    if (!Object.keys(flat || {}).length) score -= 14;
 
-    if (!core.tier) {
-        score -= 10;
-    }
+    const missing = Array.isArray(reportSchema.missingSections) ? reportSchema.missingSections.length : 0;
+    score -= Math.min(12, missing * 2);
 
-    if (!core.coins) {
-        score -= 15;
-    }
-
-    if (!core.cells) {
-        score -= 10;
-    }
-
-    if (!core.real_time && !core.game_time) {
-        score -= 10;
-    }
-
-    if (!Object.keys(sections || {}).length) {
-        score -= 20;
-    }
-
-    if (!Object.keys(flat || {}).length) {
-        score -= 20;
-    }
-
-    return clamp(score, 0, 100);
+    return Math.max(0, Math.min(100, score));
 }
 
-/* --------------------------------------------------
-   HELPERS
--------------------------------------------------- */
-
-function safeDiv(a, b) {
-
-    const left =
-        Number(a);
-
-    const right =
-        Number(b);
-
-    if (
-        !Number.isFinite(left) ||
-        !Number.isFinite(right) ||
-        right === 0
-    ) {
-        return 0;
-    }
-
-    return left / right;
-}
-
-function clamp(value, min, max) {
-
-    return Math.max(
-        min,
-        Math.min(max, value)
-    );
-}
+export default parser;

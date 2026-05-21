@@ -2,147 +2,106 @@
 
 /**
  * COLOUR SCALE ENGINE
- * Central heatmap severity + intensity logic
+ * Central heatmap, badge and severity logic.
  */
 
-/* --------------------------------------------------
-   SEVERITY CLASS
--------------------------------------------------- */
+export const SEVERITY_ORDER = Object.freeze({
+    bad: -1,
+    neutral: 0,
+    good: 1,
+    warn: 2,
+    info: 3
+});
 
 export function getSeverityClass(value, threshold = 0) {
-
     const num = Number(value);
 
-    if (!Number.isFinite(num)) {
-        return "neutral";
-    }
-
-    if (num > threshold) {
-        return "good";
-    }
-
-    if (num < -threshold) {
-        return "bad";
-    }
-
+    if (!Number.isFinite(num)) return "neutral";
+    if (num > threshold) return "good";
+    if (num < -threshold) return "bad";
     return "neutral";
 }
 
-/* --------------------------------------------------
-   HEAT INTENSITY
--------------------------------------------------- */
+export function getInverseSeverityClass(value, threshold = 0) {
+    const cls = getSeverityClass(value, threshold);
+    if (cls === "good") return "bad";
+    if (cls === "bad") return "good";
+    return cls;
+}
 
 export function getHeatIntensity(value, max = 100) {
+    const num = Math.abs(Number(value) || 0);
+    const safeMax = Math.max(Math.abs(Number(max) || 1), 1);
 
-    const num =
-        Math.abs(Number(value) || 0);
-
-    const safeMax =
-        Math.max(Number(max) || 1, 1);
-
-    if (!Number.isFinite(num)) {
-        return 0;
-    }
-
+    if (!Number.isFinite(num)) return 0;
     return clamp(num / safeMax, 0, 1);
 }
 
-/* --------------------------------------------------
-   HEATMAP CSS STYLE DATA
--------------------------------------------------- */
+export function getHeatStyle(value, max = 100, options = {}) {
+    const severity = options.inverse
+        ? getInverseSeverityClass(value, options.threshold ?? 0)
+        : getSeverityClass(value, options.threshold ?? 0);
 
-export function getHeatStyle(value, max = 100) {
-
-    const severity =
-        getSeverityClass(value);
-
-    const intensity =
-        getHeatIntensity(value, max);
+    const intensity = getHeatIntensity(value, max);
 
     return {
         severity,
-
+        tone: severity,
         intensity,
-
-        // used by CSS variable --heat-opacity
-        opacity:
-            0.08 + intensity * 0.42
+        opacity: 0.08 + intensity * 0.42,
+        style: `--heat-opacity:${(0.08 + intensity * 0.42).toFixed(3)};--heat-intensity:${intensity.toFixed(3)};`
     };
 }
 
-/* --------------------------------------------------
-   SECTION SCORE
-   Average diff across a whole section
--------------------------------------------------- */
-
 export function getSectionScore(values = {}) {
-
-    let total = 0;
-    let count = 0;
-
-    for (const item of Object.values(values || {})) {
-
-        const diff =
-            Number(item?.diff ?? 0);
-
-        if (!Number.isFinite(diff)) {
-            continue;
-        }
-
-        total += diff;
-        count++;
-    }
-
-    return count
-        ? total / count
-        : 0;
+    const diffs = getFiniteDiffs(values);
+    if (!diffs.length) return 0;
+    return diffs.reduce((sum, value) => sum + value, 0) / diffs.length;
 }
-
-/* --------------------------------------------------
-   SECTION MAGNITUDE
-   Useful for stronger/larger heatmap scaling
--------------------------------------------------- */
 
 export function getSectionMagnitude(values = {}) {
-
-    let total = 0;
-    let count = 0;
-
-    for (const item of Object.values(values || {})) {
-
-        const diff =
-            Math.abs(Number(item?.diff ?? 0));
-
-        if (!Number.isFinite(diff)) {
-            continue;
-        }
-
-        total += diff;
-        count++;
-    }
-
-    return count
-        ? total / count
-        : 0;
+    const diffs = getFiniteDiffs(values).map(Math.abs);
+    if (!diffs.length) return 0;
+    return diffs.reduce((sum, value) => sum + value, 0) / diffs.length;
 }
 
-/* --------------------------------------------------
-   DRILLDOWN CLASS
--------------------------------------------------- */
+export function getSectionMaxMagnitude(values = {}) {
+    const diffs = getFiniteDiffs(values).map(Math.abs);
+    return diffs.length ? Math.max(...diffs) : 0;
+}
 
 export function getDeltaClass(value, threshold = 0) {
-
     return getSeverityClass(value, threshold);
 }
 
-/* --------------------------------------------------
-   INTERNAL CLAMP
--------------------------------------------------- */
+export function getToneClass(value, threshold = 0) {
+    return getSeverityClass(value, threshold);
+}
+
+export function heatCSSVariables(value, max = 100) {
+    const heat = getHeatStyle(value, max);
+    return heat.style;
+}
+
+function getFiniteDiffs(values = {}) {
+    return Object.values(values || {})
+        .map(item => Number(item?.diff ?? item ?? 0))
+        .filter(Number.isFinite);
+}
 
 function clamp(value, min, max) {
-
-    return Math.min(
-        Math.max(value, min),
-        max
-    );
+    return Math.min(Math.max(value, min), max);
 }
+
+export default {
+    getSeverityClass,
+    getInverseSeverityClass,
+    getHeatIntensity,
+    getHeatStyle,
+    getSectionScore,
+    getSectionMagnitude,
+    getSectionMaxMagnitude,
+    getDeltaClass,
+    getToneClass,
+    heatCSSVariables
+};

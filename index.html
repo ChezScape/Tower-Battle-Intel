@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-device-mode="desktop">
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Tower Battle Intel - Battle Report Intelligence Dashboard">
+    <meta name="theme-color" content="#050812">
+    <meta name="color-scheme" content="dark">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Tower Battle Intel - Battle Report Intelligence Dashboard"
-    >
-
-    <title>
-        Tower Battle Intel
-    </title>
+    <title>Tower Battle Intel</title>
 
     <script>
         (function () {
@@ -36,17 +28,20 @@
                 : "desktop";
 
             window.TowerBattleIntelDeviceMode = mode;
-
             document.documentElement.setAttribute("data-device-mode", mode);
             document.documentElement.classList.add("device-" + mode);
 
-            document.write(
-                '<link rel="stylesheet" href="./' +
-                (mode === "mobile" ? "mobile.css" : "desktop.css") +
-                '">'
-            );
+            var link = document.createElement("link");
+            link.id = "towerBattleIntelStylesheet";
+            link.rel = "stylesheet";
+            link.href = mode === "mobile" ? "./mobile.css" : "./desktop.css";
+            document.head.appendChild(link);
         }());
     </script>
+
+    <noscript>
+        <link rel="stylesheet" href="./desktop.css">
+    </noscript>
 
 </head>
 
@@ -54,120 +49,25 @@
 
     <div id="app">
 
-        <header
-            class="topbar desktop-topbar"
-            data-device-only="desktop"
-            hidden
-        >
+        <section class="input-section" id="mobileReportSheet" aria-label="Battle report command deck">
 
-            <div class="brand-wrap">
-
-                <div class="brand">
-                    Tower Battle Intel
-                </div>
-
-                <div class="version">
-                    Battle Report Intelligence Dashboard
-                </div>
-
-            </div>
-
-            <div class="topbar-actions" aria-hidden="true"></div>
-
-        </header>
-
-        <div
-            id="debugHoldZone"
-            class="banner-debug-hold-zone"
-            aria-label="Tower Battle Intel banner. Hold for diagnostics."
-        >
-
-            <section
-                class="hero-banner desktop-hero-banner"
-                aria-label="Tower Battle Intel banner"
-                data-device-only="desktop"
-                hidden
-            >
-
-                <img
-                    id="topbarBannerImage"
-                    src="./assets/tower-battle-intel-banner-desktop.png"
-                    data-desktop-src="./assets/tower-battle-intel-banner-desktop.png"
-                    data-mobile-src="./assets/tower-battle-intel-banner-mobile.png"
-                    alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
-                    draggable="false"
-                >
-
-            </section>
-
-            <header
-                class="topbar topbar-banner-mode mobile-topbar"
-                data-device-only="mobile"
-                hidden
-            >
-
-                <div
-                    class="topbar-banner-brand"
-                    aria-label="Tower Battle Intel"
-                >
-
-                    <img
-                        class="topbar-banner-img"
-                        src="./assets/tower-battle-intel-banner-mobile.png"
-                        alt="Tower Battle Intel - Battle Report Intelligence Dashboard"
-                        draggable="false"
-                    >
-
-                </div>
-
-            </header>
-
-        </div>
-
-        <button
-            id="toggleDebug"
-            type="button"
-            hidden
-            aria-hidden="true"
-            tabindex="-1"
-        >
-            Debug
-        </button>
-
-        <section class="input-section" id="mobileReportSheet">
-
-            <div
-                class="mobile-input-sheet-handle"
-                data-device-only="mobile"
-                hidden
-                aria-hidden="true"
-            >
-
+            <div class="mobile-input-sheet-handle" data-device-only="mobile" hidden aria-hidden="true">
                 <div>
                     <span class="mobile-sheet-kicker">Command Deck</span>
                     <strong>Report Console</strong>
                 </div>
 
-                <button
-                    id="mobileInputClose"
-                    type="button"
-                    aria-label="Close report console"
-                >
+                <button id="mobileInputClose" type="button" aria-label="Close report console">
                     Close
                 </button>
-
             </div>
 
             <div class="input-header">
-
-                <div class="section-title">
-                    Battle Report Input
-                </div>
-
+                <div class="section-title">Battle Report Input</div>
                 <div class="section-subtitle">
-                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace. Choose A as the baseline and B as the run to compare against it. Deltas show B - A.
+                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace.
+                    Choose A as the baseline and B as the run to compare against it. Deltas show B - A.
                 </div>
-
             </div>
 
             <textarea
@@ -179,70 +79,28 @@
 
             <div class="input-actions">
 
-                <button
-                    id="saveReport"
-                    type="button"
-                >
+                <button id="saveReport" type="button">
                     Save Report
                 </button>
 
-                <label
-                    class="build-style-wrap build-style-inline"
-                    for="buildStyleSelect"
-                >
-
-                    <span>
-                        Build
-                    </span>
-
-                    <select
-                        id="buildStyleSelect"
-                        aria-label="Select build style"
-                    >
-
-                        <option value="unknown">
-                            Unknown
-                        </option>
-
-                        <option value="health_ehp">
-                            Health / EHP
-                        </option>
-
-                        <option value="blender">
-                            Blender
-                        </option>
-
-                        <option value="devo">
-                            Devo
-                        </option>
-
-                        <option value="orb_devo">
-                            Orb Devo
-                        </option>
-
-                        <option value="glass_cannon">
-                            Glass Cannon
-                        </option>
-
-                        <option value="hybrid">
-                            Hybrid
-                        </option>
-
+                <label class="build-style-wrap build-style-inline" for="buildStyleSelect">
+                    <span>Build</span>
+                    <select id="buildStyleSelect" aria-label="Select build style">
+                        <option value="unknown">Unknown</option>
+                        <option value="health_ehp">Health / EHP</option>
+                        <option value="blender">Blender</option>
+                        <option value="devo">Devo</option>
+                        <option value="orb_devo">Orb Devo</option>
+                        <option value="glass_cannon">Glass Cannon</option>
+                        <option value="hybrid">Hybrid</option>
                     </select>
-
                 </label>
 
-                <button
-                    id="clearInput"
-                    type="button"
-                >
+                <button id="clearInput" type="button">
                     Clear Input
                 </button>
 
-                <button
-                    id="clearRuns"
-                    type="button"
-                >
+                <button id="clearRuns" type="button">
                     Clear Runs
                 </button>
 
@@ -250,50 +108,13 @@
 
         </section>
 
-        <div
-            id="mobileSheetBackdrop"
-            class="mobile-sheet-backdrop"
-            data-device-only="mobile"
-            hidden
-            aria-hidden="true"
-        ></div>
+        <div id="mobileSheetBackdrop" class="mobile-sheet-backdrop" data-device-only="mobile" hidden aria-hidden="true"></div>
 
-        <div
-            id="mobileCommandRail"
-            class="mobile-command-rail"
-            data-device-only="mobile"
-            hidden
-            aria-hidden="true"
-        >
-
-            <button
-                type="button"
-                data-mobile-command="open-report"
-            >
-                Paste
-            </button>
-
-            <button
-                type="button"
-                data-mobile-command="save-report"
-            >
-                Save
-            </button>
-
-            <button
-                type="button"
-                data-mobile-command="clear-input"
-            >
-                Clear
-            </button>
-
-            <button
-                type="button"
-                data-mobile-command="history-tab"
-            >
-                History
-            </button>
-
+        <div id="mobileCommandRail" class="mobile-command-rail" data-device-only="mobile" hidden aria-hidden="true">
+            <button type="button" data-mobile-command="open-report">Paste</button>
+            <button type="button" data-mobile-command="save-report">Save</button>
+            <button type="button" data-mobile-command="clear-input">Clear</button>
+            <button type="button" data-mobile-command="history-tab">History</button>
         </div>
 
         <button
@@ -308,42 +129,24 @@
             + Report
         </button>
 
+        <button id="toggleDebug" type="button" hidden aria-hidden="true" tabindex="-1">
+            Debug
+        </button>
+
         <main class="layout">
-
-            <section
-                id="dashboard"
-                aria-live="polite"
-            >
-
-                <div class="wa-empty-shell">
-
-                    <div class="wa-panel wa-empty">
-
-                        <div class="wa-title">
-                            System
-                        </div>
-
-                        <div class="wa-sub">
-                            Waiting for battle reports...
-                        </div>
-
-                    </div>
-
+            <section id="dashboard" aria-live="polite">
+                <div class="startup-shell">
+                    <section class="startup-loading-panel" aria-busy="true">
+                        <div class="startup-loading-kicker">System</div>
+                        <h1>Tower Battle Intel</h1>
+                        <p>Booting battle report intelligence...</p>
+                    </section>
                 </div>
-
             </section>
-
         </main>
 
-        <section
-            id="debugPanel"
-            aria-live="polite"
-        ></section>
-
-        <section
-            id="debug"
-            aria-live="polite"
-        ></section>
+        <section id="debugPanel" aria-live="polite"></section>
+        <section id="debug" aria-live="polite"></section>
 
     </div>
 
@@ -353,24 +156,18 @@
                 document.documentElement.getAttribute("data-device-mode") ||
                 "desktop";
 
+            document.body.setAttribute("data-device-mode", mode);
+            document.body.classList.add("device-" + mode);
+
             document.querySelectorAll("[data-device-only]").forEach(function (element) {
-                element.hidden = element.getAttribute("data-device-only") !== mode;
+                var visible = element.getAttribute("data-device-only") === mode;
+                element.hidden = !visible;
+                element.setAttribute("aria-hidden", visible ? "false" : "true");
             });
-
-            var banner = document.getElementById("topbarBannerImage");
-
-            if (banner) {
-                banner.src = mode === "mobile"
-                    ? banner.getAttribute("data-mobile-src")
-                    : banner.getAttribute("data-desktop-src");
-            }
         }());
     </script>
 
-    <script
-        type="module"
-        src="./app.js"
-    ></script>
+    <script type="module" src="./app.js"></script>
 
 </body>
 </html>

@@ -1,24 +1,49 @@
 "use strict";
 
-export function optimiser(A, B, compare) {
+/**
+ * OPTIMISER v4.10d
+ * Conservative optimisation hints from compare summary.
+ */
 
-    if (!A || !B || !compare) {
-        return null;
+export function optimiser(A = null, B = null, compareData = null) {
+    if (!A || !B || !compareData) {
+        return [];
     }
 
-    const wave =
-        compare?.core?.wave;
+    const out = [];
+    const summary = compareData.summary || {};
 
-    if ((wave?.pct ?? 0) < 0) {
-
-        return {
-            recommendation:
-                "Improve survivability scaling (defensive setup lagging)"
-        };
+    for (const loss of (summary.topLosses || []).slice(0, 5)) {
+        out.push({
+            type: "optimiser",
+            severity: "bad",
+            title: `Recover ${loss.label}`,
+            message: `${loss.label} is one of the largest losses. Check the related subsystem before keeping this setup.`,
+            metric: loss.key,
+            section: loss.section
+        });
     }
 
-    return {
-        recommendation:
-            "Current build is balanced"
-    };
+    const farm = summary.farming || summary.farmingVerdict;
+    if (farm?.verdict === "better_farm") {
+        out.push({
+            type: "optimiser",
+            severity: "good",
+            title: "Preserve Farm Setup",
+            message: "Run B has better farming signals. Keep notes on what changed so it can be repeated."
+        });
+    }
+
+    if (farm?.verdict === "worse_farm") {
+        out.push({
+            type: "optimiser",
+            severity: "bad",
+            title: "Review Farm Trade-Off",
+            message: "Run B has weaker farming signals. Compare economy sources, survival and run length."
+        });
+    }
+
+    return out;
 }
+
+export default optimiser;

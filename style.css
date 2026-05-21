@@ -1,13 +1,11 @@
 /*
-Tower Battle Intel v4.8m
+Tower Battle Intel v4.10c
 
-This file is intentionally not loaded.
+This file is intentionally not loaded by index.html.
 
-Desktop CSS lives in:
-- desktop.css
+The app keeps a hard CSS split:
+- desktop.css for desktop layout/theme
+- mobile.css for mobile layout/theme
 
-Mobile CSS lives in:
-- mobile.css
-
-index.html chooses exactly one stylesheet at load time.
+Do not add live styles here unless index.html is deliberately changed to load it.
 */

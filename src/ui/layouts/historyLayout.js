@@ -108,7 +108,7 @@ export function buildHistory(state = {}) {
 
                         <button
                             type="button"
-                            data-swap-history-slots="true"
+                            data-ui-action="history-swap-slots" data-swap-history-slots="true"
                             ${state.runA || state.runB ? "" : "disabled"}
                         >
                             Swap A/B
@@ -116,7 +116,7 @@ export function buildHistory(state = {}) {
 
                         <button
                             type="button"
-                            data-clear-history-selection="true"
+                            data-ui-action="history-clear-selection" data-clear-history-selection="true"
                             ${state.runA || state.runB ? "" : "disabled"}
                         >
                             Clear A/B
@@ -124,34 +124,23 @@ export function buildHistory(state = {}) {
 
                         <button
                             type="button"
-                            data-export-history="true"
+                            data-ui-action="export-history" data-export-history="true"
                             ${history.length ? "" : "disabled"}
                         >
                             Export History
                         </button>
 
-                        <input
-                            id="historyImportInput"
-                            class="history-import-input"
-                            type="file"
-                            accept="application/json,.json"
-                            data-import-history-input="true"
-                        >
-
-                        <label
-                            class="history-import-label history-action-label"
-                            for="historyImportInput"
-                            role="button"
-                            tabindex="0"
-                            aria-label="Import Battle History JSON"
+                        <button
+                            type="button"
+                            data-ui-action="import-history" data-import-history-button="true"
                         >
                             Import History
-                        </label>
+                        </button>
 
                         <button
                             type="button"
                             class="danger-soft"
-                            data-delete-last-history="true"
+                            data-ui-action="delete-last-history" data-delete-last-history="true"
                             ${history.length ? "" : "disabled"}
                         >
                             Delete Last Run
@@ -160,7 +149,7 @@ export function buildHistory(state = {}) {
                         <button
                             type="button"
                             class="danger"
-                            data-delete-all-history="true"
+                            data-ui-action="delete-all-history" data-delete-all-history="true"
                             ${history.length ? "" : "disabled"}
                         >
                             Delete All History

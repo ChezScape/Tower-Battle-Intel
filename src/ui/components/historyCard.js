@@ -135,6 +135,7 @@ export function buildHistoryCard({
                     <button
                         type="button"
                         class="icon-btn stats"
+                        data-ui-action="open-history-stats"
                         data-history-stats-index="${escapeAttr(index)}"
                         data-history-display-index="${escapeAttr(displayIndex)}"
                         aria-label="View full stats for Run ${escapeAttr(displayIndex + 1)}"
@@ -146,6 +147,7 @@ export function buildHistoryCard({
                     <button
                         type="button"
                         class="icon-btn edit"
+                        data-ui-action="open-history-edit"
                         data-history-edit-index="${escapeAttr(index)}"
                         data-history-display-index="${escapeAttr(displayIndex)}"
                         aria-label="Edit notes and tags for Run ${escapeAttr(displayIndex + 1)}"
@@ -159,7 +161,10 @@ export function buildHistoryCard({
                     <button
                         type="button"
                         class="icon-btn danger"
+                        data-ui-action="delete-history-run"
                         data-delete-history-index="${escapeAttr(index)}"
+                        data-index="${escapeAttr(index)}"
+                        data-history-display-index="${escapeAttr(displayIndex)}"
                         aria-label="Delete Run ${escapeAttr(displayIndex + 1)}"
                         title="Delete this run"
                     >
@@ -221,6 +226,7 @@ function archiveButtonHTML(index = 0, displayIndex = 0) {
         <button
             type="button"
             class="icon-btn archive"
+            data-ui-action="history-archive-run"
             data-archive-history-index="${escapeAttr(index)}"
             aria-label="Archive Run ${escapeAttr(displayIndex + 1)}"
             title="Archive this run"
@@ -236,6 +242,7 @@ function restoreButton(index = 0, displayIndex = 0) {
         <button
             type="button"
             class="icon-btn restore"
+            data-ui-action="history-restore-run"
             data-restore-history-index="${escapeAttr(index)}"
             aria-label="Restore Run ${escapeAttr(displayIndex + 1)}"
             title="Restore this run"

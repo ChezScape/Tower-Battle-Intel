@@ -12,7 +12,7 @@ export function buildCommandDeckView(state = {}) {
                     <button type="button" data-ui-action="save-report">Save Report</button>
                     <button type="button" data-ui-action="clear-input">Clear Input</button>
                     <button type="button" data-ui-action="clear-runs">Clear Runs</button>
-                    <button type="button" data-dashboard-tab="history">Open History</button>
+                    <button type="button" data-ui-action="open-history">Open History</button>
                 </div>
                 <p class="tbi-muted">The report console opens below on desktop. On mobile, use the Open Deck button.</p>
             </section>
@@ -36,7 +36,7 @@ export function buildSettingsView(state = {}) {
                 <h2>Settings</h2>
                 <p>Current build style: <strong>${escapeHTML(state.ui?.buildStyle || "unknown")}</strong></p>
                 <p>Hold the header for diagnostics. Debug output remains powered by the inspection panel.</p>
-                <button type="button" data-dashboard-tab="command">Open Command Deck</button>
+                <button type="button" data-ui-action="open-command">Open Command Deck</button>
             </section>
         </div>
     `;

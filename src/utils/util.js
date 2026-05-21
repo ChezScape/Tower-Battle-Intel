@@ -1,74 +1,93 @@
 "use strict";
 
 /**
- * UTILS HUB
- * Central export file for shared utility helpers.
+ * UTILS HUB v4.10b
+ * Central compatibility export for shared helpers.
  */
-
-/* --------------------------------------------------
-   MATH
--------------------------------------------------- */
 
 export {
     clamp,
     sum,
     avg,
+    min,
+    max,
+    median,
     safeDiv,
     parseNumber,
     toNumber,
     safeNumber as mathSafeNumber,
+    toNumberArray,
     pctChange,
     percentChange,
     diffNumbers,
+    compareNumbers,
+    getDirection,
+    normalise,
+    normalize,
+    ratio,
+    percent,
+    round,
+    floor,
+    ceil,
     isNumber,
-    isPositive
+    isPositive,
+    isNegative,
+    isZero,
+    formatNumber as formatMathNumber
 } from "./math.js";
-
-/* --------------------------------------------------
-   FORMAT
--------------------------------------------------- */
 
 export {
     formatNumber,
+    formatCompactNumber,
     formatDelta,
     formatPercent,
+    formatPercentDelta,
     formatTime,
     formatLabel,
-    safeText
+    safeText,
+    escapeHTML,
+    escapeAttr,
+    truncateText
 } from "./format.js";
-
-/* --------------------------------------------------
-   SAFE
--------------------------------------------------- */
 
 export {
     safeGet,
+    safeSet,
     safeNumber,
     safeArray,
     safeObject,
     safeClone,
     safeString,
     safeBool,
-    escapeHTML
+    escapeHTML as safeEscapeHTML,
+    escapeAttr as safeEscapeAttr,
+    tryOrFallback
 } from "./safe.js";
-
-/* --------------------------------------------------
-   TIME
--------------------------------------------------- */
 
 export {
     parseTimeToSeconds,
     secondsToHours,
     hoursToSeconds,
     formatSeconds,
+    formatDuration,
     resolveBattleTime,
     buildTimeModel
 } from "./timeEngine.js";
 
-/* --------------------------------------------------
-   SECTIONS
--------------------------------------------------- */
+export {
+    buildSections,
+    splitSectionLine,
+    isKnownSectionHeader,
+    resolveSectionHeader,
+    getKnownSectionLabels
+} from "./sectionEngine.js";
 
 export {
-    buildSections
-} from "./sectionEngine.js";
+    splitBattleReports,
+    getFirstBattleReport,
+    hasMultipleReports,
+    countBattleReports,
+    fingerprintReport,
+    normaliseReportText,
+    normaliseLineEndings
+} from "./reportSplitter.js";

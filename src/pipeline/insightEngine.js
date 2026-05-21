@@ -1,121 +1,69 @@
 "use strict";
 
 /**
- * INSIGHT ENGINE (V10 HIERARCHICAL)
- * Works with compare.core / stats / sections structure
+ * INSIGHT ENGINE v4.10d
+ * Additional trend-aware insight layer.
  */
 
-export function insightEngine(current, previous, diff, trend = {}) {
+import {
+    analyser
+} from "./analyser.js";
 
-    if (!current || !diff) return [];
+import {
+    formatNumber,
+    formatDelta
+} from "../utils/format.js";
 
-    const insights = [];
+export function insightEngine(current = null, previous = null, diff = null, trend = {}) {
+    const base = analyser(current, previous, diff);
+    const out = [...base];
 
-    const core = diff.core || {};
-    const stats = diff.stats || {};
+    if (!current) {
+        return out;
+    }
 
-    const coinsDiff = core.coins?.diff ?? 0;
-    const waveDiff = core.wave?.diff ?? 0;
-    const efficiencyDiff = stats.efficiency?.diff ?? 0;
+    const historyCount = Number(trend?.count || trend?.historyCount || 0);
+    if (historyCount >= 3) {
+        out.push({
+            type: "trend",
+            severity: "info",
+            title: "History Trend Available",
+            message: `${historyCount} saved runs are available for trend context.`
+        });
+    }
 
-    // -----------------------------
-    // SHORT TERM ECONOMY
-    // -----------------------------
-    if (coinsDiff > 0) {
-
-        insights.push({
+    const bestWave = trend?.bestWave?.value || trend?.bestWave || 0;
+    if (bestWave && current.core?.wave >= bestWave) {
+        out.push({
+            type: "trend",
             severity: "good",
-            title: "Economy Surge",
-            message: "Coin output is improving in the short term."
-        });
-
-    } else if (coinsDiff < 0) {
-
-        insights.push({
-            severity: "bad",
-            title: "Economy Drop",
-            message: "Coin output has decreased since last run."
+            title: "Best Wave Pressure",
+            message: `Current run is at or above the recorded best wave (${formatNumber(bestWave)}).`
         });
     }
 
-    // -----------------------------
-    // PROGRESSION SIGNAL
-    // -----------------------------
-    if (waveDiff > 150) {
-
-        insights.push({
-            severity: "good",
-            title: "Wave Breakthrough",
-            message: "Large progression jump detected."
-        });
-
-    } else if (waveDiff < -100) {
-
-        insights.push({
-            severity: "bad",
-            title: "Progression Drop",
-            message: "Significant reduction in wave progression."
+    const waveDiff = diff?.core?.wave?.diff || 0;
+    const coinRateDiff = diff?.stats?.coinsPerHour?.diff || 0;
+    if (waveDiff < 0 && coinRateDiff > 0) {
+        out.push({
+            type: "tradeoff",
+            severity: "neutral",
+            title: "Farm Versus Progression Split",
+            message: `Coins/hour rose by ${formatDelta(coinRateDiff, { compact: true })}, but wave fell by ${formatDelta(waveDiff, { compact: true })}.`
         });
     }
 
-    // -----------------------------
-    // EFFICIENCY SIGNAL
-    // -----------------------------
-    if (efficiencyDiff > 0.15) {
-
-        insights.push({
-            severity: "good",
-            title: "Efficiency Spike",
-            message: "Resource output efficiency improved."
-        });
-
-    } else if (efficiencyDiff < -0.15) {
-
-        insights.push({
-            severity: "bad",
-            title: "Efficiency Loss",
-            message: "You are getting less output per run."
-        });
-    }
-
-    // -----------------------------
-    // LONG TERM BASELINE (TREND)
-    // -----------------------------
-    if (trend?.avgCoins && current?.core?.coins != null) {
-
-        const deviation =
-            (current.core.coins - trend.avgCoins) /
-            (trend.avgCoins || 1);
-
-        if (deviation > 0.25) {
-
-            insights.push({
-                severity: "good",
-                title: "Above Long-Term Average",
-                message: "This run outperforms your historical baseline."
-            });
-
-        } else if (deviation < -0.25) {
-
-            insights.push({
-                severity: "bad",
-                title: "Below Baseline",
-                message: "Performance is below your long-term average."
-            });
-        }
-    }
-
-    // -----------------------------
-    // MILESTONE DETECTION
-    // -----------------------------
-    if (trend?.maxWave && current?.core?.wave >= trend.maxWave) {
-
-        insights.push({
-            severity: "good",
-            title: "New Peak Potential",
-            message: "You are matching or exceeding previous best wave."
-        });
-    }
-
-    return insights;
+    return dedupe(out).slice(0, 14);
 }
+
+function dedupe(items = []) {
+    const seen = new Set();
+    return items.filter(item => {
+        const key = `${item.type}:${item.title}:${item.message}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+}
+
+export default insightEngine;

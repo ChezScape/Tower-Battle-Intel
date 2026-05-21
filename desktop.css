@@ -991,59 +991,88 @@ button.danger, .danger { border-color: rgba(255,64,90,.42); color: #ffd6dd; back
     letter-spacing: 0.08em;
 }
 
-/* v4.9v full action audit support */
-.history-import-input {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-    clip: rect(0 0 0 0) !important;
-    clip-path: inset(50%) !important;
-    white-space: nowrap !important;
-    opacity: 0.001 !important;
-    pointer-events: none !important;
+/* v4.9y display action state */
+html.tbi-quiet-display,
+body.tbi-quiet-display {
+    --glow-cyan: 0 0 8px rgba(91, 215, 255, 0.16), inset 0 0 10px rgba(91, 215, 255, 0.025);
+    --glow-gold: 0 0 8px rgba(255, 200, 87, 0.16), inset 0 0 10px rgba(255, 200, 87, 0.025);
+}
+html.tbi-quiet-display * {
+    transition-duration: 80ms !important;
+}
+html.tbi-quiet-display .tbi-card,
+html.tbi-quiet-display .wa-panel,
+html.tbi-quiet-display .tbi-run-card {
+    box-shadow: 0 8px 20px rgba(0,0,0,.34) !important;
 }
 
-.history-action-label,
-.history-import-label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 42px;
-    padding: 10px 16px;
-    border: 1px solid rgba(39, 229, 255, 0.34);
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(39, 229, 255, 0.12), rgba(39, 229, 255, 0.035));
-    color: #ecfbff;
-    font-size: 11px;
-    font-weight: 950;
-    letter-spacing: 0.12em;
+
+/* --------------------------------------------------
+   v4.10c ROOT SHELL REBUILD SUPPORT
+-------------------------------------------------- */
+
+.startup-shell {
+    min-height: 38vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.startup-loading-panel,
+.startup-error-panel {
+    width: min(720px, 100%);
+    border: 1px solid rgba(91, 215, 255, 0.32);
+    border-radius: 18px;
+    padding: 22px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(91, 215, 255, 0.13), transparent 42%),
+        linear-gradient(180deg, rgba(9, 18, 33, 0.96), rgba(2, 7, 18, 0.98));
+    box-shadow: var(--shadow), var(--glow-cyan);
+    color: var(--text, #eaf6ff);
+}
+
+.startup-loading-kicker,
+.startup-error-kicker {
+    color: var(--cyan, #5bd7ff);
     text-transform: uppercase;
-    cursor: pointer;
-    user-select: none;
+    letter-spacing: 0.18em;
+    font-weight: 1000;
+    font-size: 12px;
 }
 
-.history-action-label:hover,
-.history-import-label:hover,
-.history-action-label:focus-visible,
-.history-import-label:focus-visible {
-    outline: none;
-    border-color: rgba(39, 229, 255, 0.72);
-    box-shadow: 0 0 20px rgba(39, 229, 255, 0.22);
+.startup-loading-panel h1,
+.startup-error-panel h1 {
+    margin: 8px 0 8px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
-.tbi-quiet-display .tbi-card,
-.tbi-quiet-display .wa-panel,
-.tbi-quiet-display .tbi-header {
-    box-shadow: none !important;
+.startup-loading-panel p,
+.startup-error-panel p {
+    margin: 0;
+    color: var(--text-soft, #a9c6df);
 }
 
-.tbi-quiet-display .tbi-target-reticle,
-.tbi-quiet-display .tbi-chart-icon,
-.tbi-quiet-display body::after {
-    opacity: 0.35;
+.startup-error-panel {
+    border-color: rgba(255, 95, 120, 0.46);
+    box-shadow: var(--shadow), var(--glow-bad);
 }
 
-[data-compare-section] {
-    scroll-margin-top: 86px;
+.startup-error-panel pre {
+    max-height: 38vh;
+    overflow: auto;
+    margin: 14px 0 0;
+    padding: 12px;
+    border: 1px solid rgba(255, 95, 120, 0.24);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.36);
+    color: #ffd6de;
+    white-space: pre-wrap;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+body[data-app-version]::before {
+    content: "";
 }
