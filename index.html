@@ -111,13 +111,12 @@
 
 
         <input
-            id="historyImportInput"
+            id="historyImportFallbackInput"
             class="native-file-input"
             type="file"
             accept="application/json,.json"
-            data-history-import-input="true"
-            data-import-history-input="true"
-            aria-label="Import Battle History JSON"
+            data-history-import-fallback-input="true"
+            aria-label="Fallback Import Battle History JSON"
         >
 
         <div id="mobileSheetBackdrop" class="mobile-sheet-backdrop" data-device-only="mobile" hidden aria-hidden="true"></div>
@@ -180,11 +179,13 @@
     </script>
 
 
+    <!-- v4.10l Native Control Hardening -->
     <script id="towerBattleIntelNativeControlBackbone">
         (function () {
             "use strict";
 
             var STORAGE_KEY = "battle_analyser_state";
+            var OPEN_DEBUG_KEY = "tower_battle_intel_debug_open";
             var bound = false;
 
             function ready(fn) {
@@ -261,7 +262,11 @@
                     return;
                 }
 
-                if (target.closest(".history-import-label, [data-native-history-import-label], [data-history-import-trigger], [data-import-history-label], [data-ui-action='import-history']")) {
+                if (target.matches("[data-history-visible-import-input], .history-native-import-input")) {
+                    return;
+                }
+
+                if (target.closest(".history-native-import-control, [data-native-history-import-control], .history-import-label, [data-native-history-import-label], [data-history-import-trigger], [data-import-history-label], [data-ui-action='import-history']")) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
                     openImportPicker();
@@ -285,7 +290,7 @@
                     return;
                 }
 
-                if ((event.key === "Enter" || event.key === " ") && target.closest(".history-import-label, [data-native-history-import-label]")) {
+                if ((event.key === "Enter" || event.key === " ") && target.closest(".history-native-import-control, [data-native-history-import-control], .history-import-label, [data-native-history-import-label]")) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
                     openImportPicker();
@@ -294,29 +299,35 @@
 
             function handleChange(event) {
                 var target = event.target;
-                if (!target || target.id !== "historyImportInput") return;
+                if (!target || !target.matches("#historyImportInput, #historyImportFallbackInput, [data-history-import-input], [data-import-history-input], [data-history-import-fallback-input]")) return;
                 importFromInput(target);
             }
 
+            function getVisibleImportInput() {
+                return document.querySelector("#historyImportInput[data-history-visible-import-input], .history-native-import-input[data-history-visible-import-input]");
+            }
+
             function ensureImportInput() {
-                var input = document.getElementById("historyImportInput");
+                var visible = getVisibleImportInput();
+                if (visible) return visible;
+
+                var input = document.getElementById("historyImportFallbackInput");
                 if (!input) {
                     input = document.createElement("input");
-                    input.id = "historyImportInput";
+                    input.id = "historyImportFallbackInput";
                     input.type = "file";
                     input.accept = "application/json,.json";
-                    input.setAttribute("aria-label", "Import Battle History JSON");
+                    input.setAttribute("aria-label", "Fallback Import Battle History JSON");
                     document.body.appendChild(input);
                 }
 
                 input.classList.add("native-file-input");
-                input.dataset.historyImportInput = "true";
-                input.dataset.importHistoryInput = "true";
+                input.dataset.historyImportFallbackInput = "true";
                 return input;
             }
 
             function openImportPicker() {
-                var input = ensureImportInput();
+                var input = getVisibleImportInput() || ensureImportInput();
                 input.value = "";
                 input.click();
                 return input;
@@ -371,25 +382,40 @@
             }
 
             function closeDebugPanel() {
-                try {
-                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.perform === "function") {
-                        window.TowerBattleIntelActions.perform("toggle-debug", { force: false });
-                    }
-                } catch (error) {
-                    console.warn("[Tower Battle Intel] Debug state close fallback used", error);
-                }
+                forceDebugClosedInState();
 
                 var panel = document.getElementById("debugPanel");
                 if (panel) {
                     panel.classList.remove("active");
                     panel.hidden = true;
                     panel.setAttribute("aria-hidden", "true");
+                    panel.setAttribute("inert", "");
                     panel.innerHTML = "";
                 }
 
                 document.body.classList.remove("debug-open");
                 document.documentElement.classList.remove("debug-open");
-                rerenderSoon();
+            }
+
+            function forceDebugClosedInState() {
+                try {
+                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.perform === "function") {
+                        window.TowerBattleIntelActions.perform("toggle-debug", { force: false });
+                        return;
+                    }
+                } catch (error) {
+                    console.warn("[Tower Battle Intel] Debug action close failed, using storage fallback", error);
+                }
+
+                try {
+                    var current = readStoredState();
+                    current.ui = current.ui || {};
+                    current.ui.debug = false;
+                    writeStoredState(current);
+                    sessionStorage.removeItem(OPEN_DEBUG_KEY);
+                } catch (error) {
+                    // ignore storage fallback issues
+                }
             }
 
             function downloadHealth() {
@@ -511,7 +537,9 @@
             function status() {
                 return {
                     bound: bound,
-                    filePickerExists: Boolean(document.getElementById("historyImportInput")),
+                    filePickerExists: Boolean(document.querySelector("#historyImportInput, #historyImportFallbackInput, [data-history-visible-import-input], [data-history-import-fallback-input]")),
+                    visibleNativeImportInputs: document.querySelectorAll(".history-native-import-input, [data-history-visible-import-input]").length,
+                    fallbackFilePickerExists: Boolean(document.getElementById("historyImportFallbackInput")),
                     importLabels: document.querySelectorAll(".history-import-label, [data-native-history-import-label]").length,
                     exportButtons: document.querySelectorAll("[data-export-history], [data-ui-action='export-history']").length,
                     debugPanelExists: Boolean(document.getElementById("debugPanel")),
@@ -523,7 +551,11 @@
         }());
     </script>
 
+        <script src="./src/ui/universalDownloadBridge.js"></script>
+        <script src="./src/ui/historySearchFocusGuard.js"></script>
     <script type="module" src="./app.js"></script>
 
 </body>
 </html>
+
+

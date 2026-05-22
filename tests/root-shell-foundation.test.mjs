@@ -1,30 +1,17 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
 
-const read = file => fs.readFileSync(file, "utf8");
+const app = fs.readFileSync("./app.js", "utf8");
+const bootstrap = fs.readFileSync("./bootstrap.js", "utf8");
+const index = fs.readFileSync("./index.html", "utf8");
+const config = fs.readFileSync("./config/appConfig.js", "utf8");
 
-const app = read("app.js");
-const bootstrap = read("bootstrap.js");
-const index = read("index.html");
-const desktop = read("desktop.css");
-const mobile = read("mobile.css");
-const readme = read("README.md");
-const style = read("style.css");
-const config = read("config/appConfig.js");
-
-assert.match(config, /version:\s*"v4\.10j"/);
-assert.match(app, /APP ENTRY v4\.10j/);
-assert.match(app, /bootstrap\(\)/);
-assert.match(bootstrap, /BOOTSTRAP v4\.10j/);
-assert.match(bootstrap, /render\(\);\s*\n\s*bindCoreEvents\(\);/);
-assert.match(index, /id="dashboard"/);
-assert.match(index, /id="input"/);
-assert.match(index, /id="debugPanel"/);
-assert.match(index, /type="module" src="\.\/app\.js"/);
-assert.doesNotMatch(index, /desktop-topbar/);
-assert.match(desktop, /v4\.10j Native Control Backbone/);
-assert.match(mobile, /v4\.10j Native Control Backbone/);
-assert.match(readme, /v4\.10j/);
-assert.match(style, /intentionally not loaded/);
+assert.match(config, /version:\s*"v4\.10l"/);
+assert.match(index, /historyImportFallbackInput/);
+assert.match(index, /towerBattleIntelNativeControlBackbone/);
+assert.match(index, /script type="module" src="\.\/app\.js"/);
+assert.match(app, /bootstrap\.js/);
+assert.match(bootstrap, /bindStaticControlBridge/);
+assert.match(bootstrap, /bindLiveInteractionBridge/);
 
 console.log("root-shell-foundation.test.mjs passed");

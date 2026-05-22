@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * LIVE INTERACTION BRIDGE v4.10h
+ * LIVE INTERACTION BRIDGE v4.10l
  * Browser-level safety bridge for visible controls.
  *
  * This is deliberately small and delegated. It catches real browser clicks,
@@ -73,7 +73,11 @@ function handleClick(event) {
         return;
     }
 
-    const importTrigger = target.closest("[data-history-import-trigger], [data-import-history-trigger], [data-import-history-button], [data-import-history-label]");
+    if (target.matches("#historyImportInput, .history-native-import-input, [data-history-visible-import-input]")) {
+        return;
+    }
+
+    const importTrigger = target.closest(".history-native-import-control, [data-native-history-import-control], [data-native-history-import-label], [data-history-import-trigger], [data-import-history-trigger], [data-import-history-button], [data-import-history-label]");
     if (importTrigger) {
         event.preventDefault();
         event.stopPropagation();
@@ -231,7 +235,7 @@ function handleChange(event) {
     const target = event.target;
     if (!target || typeof target.matches !== "function") return;
 
-    if (target.matches("[data-history-import-input], [data-import-history-input], #historyImportInput")) {
+    if (target.matches("#historyImportInput, #historyImportFallbackInput, [data-history-import-input], [data-import-history-input], [data-history-import-fallback-input]")) {
         importFromInput(target);
         return;
     }
@@ -359,8 +363,23 @@ function handleDebugClick(event, target) {
 }
 
 function closeDebug() {
-    performUIAction("toggle-debug", { force: false });
-    renderApp();
+    try {
+        performUIAction("toggle-debug", { force: false });
+    } catch (error) {
+        console.warn("[Tower Battle Intel] Debug close action failed", error);
+    }
+
+    const panel = document.getElementById("debugPanel");
+    if (panel) {
+        panel.classList.remove("active");
+        panel.hidden = true;
+        panel.inert = true;
+        panel.setAttribute("aria-hidden", "true");
+        panel.innerHTML = "";
+    }
+
+    document.body.classList.remove("debug-open");
+    document.documentElement.classList.remove("debug-open");
 }
 
 function buildHealthPayload() {
@@ -383,16 +402,23 @@ function buildFullDebugPayload() {
    HISTORY IMPORT / EXPORT
 -------------------------------------------------- */
 
+function getVisibleImportInput() {
+    return document.querySelector("#historyImportInput[data-history-visible-import-input], .history-native-import-input[data-history-visible-import-input], [data-history-visible-import-input]");
+}
+
 function openImportPicker() {
-    let input = document.getElementById("historyImportInput") || document.querySelector("[data-history-import-input], [data-import-history-input]");
+    let input = getVisibleImportInput();
+
+    if (!input) {
+        input = document.getElementById("historyImportFallbackInput");
+    }
 
     if (!input) {
         input = document.createElement("input");
         input.type = "file";
         input.accept = "application/json,.json";
-        input.id = "historyImportInput";
-        input.dataset.historyImportInput = "true";
-        input.dataset.importHistoryInput = "true";
+        input.id = "historyImportFallbackInput";
+        input.dataset.historyImportFallbackInput = "true";
         input.style.position = "fixed";
         input.style.left = "-9999px";
         input.style.top = "0";

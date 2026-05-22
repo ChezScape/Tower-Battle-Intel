@@ -19,7 +19,7 @@ export const appConfig = {
 
         name: "Tower Battle Intel",
 
-        version: "v4.10j",
+        version: "v4.10y",
 
         environment: "production"
     },
@@ -175,3 +175,18 @@ export const appConfig = {
         prioritiseEfficiency: true
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

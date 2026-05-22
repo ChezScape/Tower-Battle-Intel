@@ -1,7 +1,10 @@
 "use strict";
 
+import {
+    bindNativeControlGuard
+} from "./src/ui/nativeControlGuard.js";
 /**
- * BOOTSTRAP v4.10j
+ * BOOTSTRAP v4.10l
  * Root startup flow for Tower Battle Intel.
  *
  * Owns only application startup:
@@ -52,6 +55,8 @@ let autosaveBound = false;
 
 export function bootstrap() {
 
+    bindNativeControlGuard();
+
     if (bootstrapComplete) {
         console.warn("[Tower Battle Intel] Bootstrap skipped: already complete.");
         return getState();
@@ -66,9 +71,19 @@ export function bootstrap() {
 
     // Render before binding core events. This allows core debug-hold binding
     // to see the rebuilt dashboard header as well as the static shell.
-    render();
+        render();
 
+    import("./src/ui/nativeImportHardBridge.js")
+        .then((module) => module.bindNativeImportHardBridge?.())
+        .catch((error) => console.warn("[Tower Battle Intel] Native import hard bridge failed to load", error));
+    import("./src/ui/finalControlPolishBridge.js")
+        .then((module) => module.bindFinalControlPolishBridge?.(() => render()))
+        .catch((error) => console.warn("[Tower Battle Intel] Final control polish bridge failed to load", error));
     bindCoreEvents();
+
+    import("./src/ui/actionAuditBridge.js")
+        .then((module) => module.bindActionAuditBridge?.(() => render()))
+        .catch((error) => console.warn("[Tower Battle Intel] Action audit bridge failed to load", error));
     bindLiveInteractionBridge(() => render());
     bindInputAutosave(shell.input);
     bindExitAutosave(shell.input);
@@ -207,3 +222,8 @@ function exposeConsoleHelpers(input) {
         "TowerBattleIntel.shell()"
     );
 }
+
+
+
+
+

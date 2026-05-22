@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * INSPECTION PANEL v4.10h
+ * INSPECTION PANEL v4.10l
  * Delegated debug inspector. Buttons do not rely on per-render listeners.
  */
 

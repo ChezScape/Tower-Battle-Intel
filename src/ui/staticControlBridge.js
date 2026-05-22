@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * STATIC CONTROL BRIDGE v4.10i
+ * STATIC CONTROL BRIDGE v4.10l
  *
  * Small browser-native safety bridge for controls that must work even when
  * the rendered UI was replaced after the normal UI event binding.
@@ -58,7 +58,11 @@ function handleStaticClick(event) {
     const debugHandled = handleDebugControlClick(event, target);
     if (debugHandled) return;
 
-    const importTrigger = target.closest("[data-history-import-trigger], [data-import-history-button], [data-import-history-label], [data-ui-action='import-history']");
+    if (target.matches("#historyImportInput, .history-native-import-input, [data-history-visible-import-input]")) {
+        return;
+    }
+
+    const importTrigger = target.closest(".history-native-import-control, [data-native-history-import-control], [data-native-history-import-label], [data-history-import-trigger], [data-import-history-button], [data-import-history-label], [data-ui-action='import-history']");
     if (importTrigger) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -79,7 +83,7 @@ function handleStaticChange(event) {
     const target = event.target;
     if (!target || typeof target.matches !== "function") return;
 
-    if (target.matches("#historyImportInput, [data-history-import-input], [data-import-history-input]")) {
+    if (target.matches("#historyImportInput, #historyImportFallbackInput, [data-history-import-input], [data-import-history-input], [data-history-import-fallback-input]")) {
         importHistoryFromInput(target);
     }
 }
@@ -88,7 +92,7 @@ function handleStaticKeydown(event) {
     const target = event.target;
     if (!target || typeof target.closest !== "function") return;
 
-    const importLabel = target.closest("[data-history-import-trigger], [data-import-history-label]");
+    const importLabel = target.closest(".history-native-import-control, [data-native-history-import-control], [data-native-history-import-label], [data-history-import-trigger], [data-import-history-label]");
     if (importLabel && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -153,8 +157,6 @@ function handleDebugControlClick(event, target) {
 function closeDebugPanelFromBridge() {
     try {
         performUIAction("toggle-debug", { force: false });
-        renderApp();
-        return;
     } catch (error) {
         console.warn("[Tower Battle Intel] Debug state close failed, using DOM fallback", error);
     }
@@ -162,6 +164,8 @@ function closeDebugPanelFromBridge() {
     const panel = document.getElementById("debugPanel");
     if (panel) {
         panel.classList.remove("active");
+        panel.hidden = true;
+        panel.inert = true;
         panel.setAttribute("aria-hidden", "true");
         panel.innerHTML = "";
     }
@@ -170,27 +174,33 @@ function closeDebugPanelFromBridge() {
     document.documentElement.classList.remove("debug-open");
 }
 
+function getVisibleHistoryImportInput() {
+    return document.querySelector("#historyImportInput[data-history-visible-import-input], .history-native-import-input[data-history-visible-import-input], [data-history-visible-import-input]");
+}
+
 function ensureHistoryImportInput() {
-    let input = document.getElementById("historyImportInput");
+    const visible = getVisibleHistoryImportInput();
+    if (visible) return visible;
+
+    let input = document.getElementById("historyImportFallbackInput");
 
     if (!input) {
         input = document.createElement("input");
-        input.id = "historyImportInput";
+        input.id = "historyImportFallbackInput";
         input.type = "file";
         input.accept = "application/json,.json";
-        input.setAttribute("aria-label", "Import Battle History JSON");
+        input.setAttribute("aria-label", "Fallback Import Battle History JSON");
         document.body.appendChild(input);
     }
 
     input.classList.add("native-file-input");
-    input.dataset.historyImportInput = "true";
-    input.dataset.importHistoryInput = "true";
+    input.dataset.historyImportFallbackInput = "true";
 
     return input;
 }
 
 function openHistoryImportPicker() {
-    const input = ensureHistoryImportInput();
+    const input = getVisibleHistoryImportInput() || ensureHistoryImportInput();
     input.value = "";
     input.click();
     return input;
@@ -303,11 +313,13 @@ function installHandlerAuditHelpers() {
 function status() {
     return {
         staticBridgeBound: bound,
-        filePickerExists: Boolean(document.getElementById("historyImportInput")),
-        filePickerSelector: "#historyImportInput",
+        filePickerExists: Boolean(document.querySelector("#historyImportInput, #historyImportFallbackInput, [data-history-visible-import-input], [data-history-import-fallback-input]")),
+        visibleFilePickerExists: Boolean(getVisibleHistoryImportInput()),
+        fallbackFilePickerExists: Boolean(document.getElementById("historyImportFallbackInput")),
+        filePickerSelector: "#historyImportInput or #historyImportFallbackInput",
         debugPanelExists: Boolean(document.getElementById("debugPanel")),
         debugCloseExists: Boolean(document.getElementById("debugClose")),
-        historyImportTriggers: document.querySelectorAll("[data-history-import-trigger], [data-import-history-button], [data-import-history-label], [data-ui-action='import-history']").length,
+        historyImportTriggers: document.querySelectorAll("[data-native-history-import-control], [data-native-history-import-label], [data-history-import-trigger], [data-import-history-button], [data-import-history-label], [data-ui-action='import-history']").length,
         historyExportTriggers: document.querySelectorAll("[data-export-history], [data-ui-action='export-history']").length,
         dashboardActionButtons: document.querySelectorAll("[data-ui-action]").length,
         dashboardTabs: document.querySelectorAll("[data-dashboard-tab]").length

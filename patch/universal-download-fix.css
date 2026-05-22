@@ -1,0 +1,82 @@
+/* --------------------------------------------------
+   v4.10x Save As Download Fix
+-------------------------------------------------- */
+.universal-download-toast {
+    position: fixed;
+    right: 18px;
+    bottom: 74px;
+    z-index: 1000008;
+    max-width: min(500px, calc(100vw - 36px));
+    padding: 12px 14px;
+    border: 1px solid rgba(29,231,255,.44);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(4,18,32,.98), rgba(1,6,15,.98));
+    color: #eef8ff;
+    font-weight: 900;
+    letter-spacing: .035em;
+    box-shadow: 0 16px 44px rgba(0,0,0,.56), 0 0 18px rgba(29,231,255,.18);
+}
+.universal-download-toast.bad {
+    border-color: rgba(255,64,90,.56);
+    color: #ffd6dd;
+}
+.universal-download-shelf {
+    display: grid;
+    gap: 8px;
+}
+.universal-download-title {
+    color: #57ff57;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: 11px;
+}
+.universal-download-file {
+    color: #ffffff;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+.universal-download-meta {
+    color: #a7c2d8;
+    font-size: 11px;
+}
+.universal-download-manual-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 11px;
+    border: 1px solid rgba(87,255,87,.36);
+    border-radius: 10px;
+    background: rgba(87,255,87,.08);
+    color: #d9ffde;
+    text-decoration: none;
+    cursor: pointer;
+}
+.universal-download-manual-link:hover {
+    border-color: rgba(87,255,87,.78);
+    color: #ffffff;
+}
+.universal-download-close {
+    justify-self: end;
+    min-height: 30px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.universal-download-save-as {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 11px;
+    border: 1px solid rgba(29,231,255,.44);
+    border-radius: 10px;
+    background: rgba(29,231,255,.10);
+    color: #e8fbff;
+    cursor: pointer;
+    font-weight: 1000;
+}
+.universal-download-save-as:hover {
+    border-color: rgba(29,231,255,.86);
+    color: #ffffff;
+}

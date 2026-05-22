@@ -131,14 +131,22 @@ export function buildHistory(state = {}) {
                         </button>
 
                         <label
-                            class="history-action-button history-import-label"
-                            role="button"
-                            tabindex="0"
+                            class="history-action-button history-native-import-control"
                             for="historyImportInput"
-                            data-native-history-import-label="true"
+                            data-native-history-import-control="true"
                             title="Choose a Tower Battle Intel history JSON file"
                         >
-                            Import History
+                            <span>Import History</span>
+                            <input
+                                id="historyImportInput"
+                                class="history-native-import-input"
+                                type="file"
+                                accept="application/json,.json"
+                                data-history-import-input="true"
+                                data-import-history-input="true"
+                                data-history-visible-import-input="true"
+                                aria-label="Import Battle History JSON"
+                            >
                         </label>
 
                         <button
