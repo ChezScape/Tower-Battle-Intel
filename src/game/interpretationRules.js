@@ -10,71 +10,32 @@
 
 import {
     getMetricInfo,
-    getMetricCompareProfile,
     normaliseMetricKey
 } from "./metricCatalog.js";
 
 import {
     getEnemyInfo,
-    getEnemySeverity,
-    isEliteEnemy,
-    enemyActionChecklist
+    isEliteEnemy
 } from "./enemyCatalog.js";
 
 import {
-    getSectionInfo
-} from "./reportSections.js";
-
-import {
-    getKnowledgeSnapshotLabel,
     getSourceWarning
 } from "./sourceRegistry.js";
+
+import {
+    BUILD_STYLE_PROFILES,
+    getBuildStyleProfile
+} from "./buildStyleProfiles.js";
 
 /* --------------------------------------------------
    BUILD STYLES
 -------------------------------------------------- */
 
-export const BUILD_STYLES = Object.freeze({
-
-    unknown: {
-        label: "Unknown",
-        meaning: "No build style selected. Advice should stay cautious and history-based."
-    },
-
-    health_ehp: {
-        label: "Health / EHP",
-        meaning: "Survival-focused build using health, defense, recovery, wall, and sustain."
-    },
-
-    blender: {
-        label: "Blender",
-        meaning: "Orb/control focused style where enemy clear flow matters heavily."
-    },
-
-    devo: {
-        label: "Devo",
-        meaning: "Devolution-style setup focused around controlled enemy handling and economy timing."
-    },
-
-    orb_devo: {
-        label: "Orb Devo",
-        meaning: "Devo variant with strong orb-based clearing."
-    },
-
-    glass_cannon: {
-        label: "Glass Cannon",
-        meaning: "Damage-first style. Survival drops may be expected if damage scaling is the priority."
-    },
-
-    hybrid: {
-        label: "Hybrid",
-        meaning: "Mixed damage and survival approach."
-    }
-});
+export const BUILD_STYLES = BUILD_STYLE_PROFILES;
 
 export function getBuildStyleInfo(style = "unknown") {
 
-    return BUILD_STYLES[style] || BUILD_STYLES.unknown;
+    return getBuildStyleProfile(style);
 }
 
 /* --------------------------------------------------
@@ -95,9 +56,6 @@ export function interpretMetricDelta(metricKey, diff = 0, pct = 0, buildStyle = 
     const metric =
         getMetricInfo(metricKey);
 
-    const profile =
-        getMetricCompareProfile(metricKey);
-
     const num =
         Number(diff || 0);
 
@@ -116,49 +74,44 @@ export function interpretMetricDelta(metricKey, diff = 0, pct = 0, buildStyle = 
 
     if (direction === "up") {
         severity =
-            profile.role === "lower_is_better"
+            metric.higherIsBetter === false
                 ? "bad"
-                : profile.role === "neutral_signal"
-                    ? "neutral"
-                    : "good";
+                : "good";
 
         message =
-            profile.role === "lower_is_better"
+            metric.higherIsBetter === false
                 ? `${metric.label} increased, which may be unwanted for this metric.`
-                : profile.role === "neutral_signal"
-                    ? `${metric.label} increased. Treat this as context rather than an automatic win.`
-                    : `${metric.label} improved.`;
+                : `${metric.label} improved.`;
     }
 
     if (direction === "down") {
         severity =
-            profile.role === "higher_is_better"
+            metric.higherIsBetter === true
                 ? "bad"
-                : profile.role === "lower_is_better"
-                    ? "good"
-                    : "neutral";
+                : metric.higherIsBetter === false
+                ? "good"
+                : "neutral";
 
         message =
-            profile.role === "higher_is_better"
+            metric.higherIsBetter === true
                 ? `${metric.label} dropped.`
-                : profile.role === "lower_is_better"
-                    ? `${metric.label} reduced, which may be good.`
-                    : `${metric.label} changed downward. Treat this as context rather than an automatic loss.`;
+                : metric.higherIsBetter === false
+                ? `${metric.label} reduced, which may be good.`
+                : `${metric.label} changed downward.`;
     }
 
     return {
         metric: normaliseMetricKey(metricKey),
         label: metric.label,
         meaning: metric.meaning,
-        category: profile.category || metric.category,
+        category: metric.category,
         direction,
         severity,
         diff: num,
         pct: Number(pct || 0),
         buildStyle,
         buildStyleLabel: build.label,
-        message,
-        sourceNote: getSourceWarning({ short: true })
+        message
     };
 }
 
@@ -183,25 +136,16 @@ export function interpretDeathCause(killedBy = "", buildStyle = "unknown") {
     const elite =
         isEliteEnemy(killedBy);
 
-    const checklist =
-        enemyActionChecklist(killedBy);
-
     let severity =
-        getEnemySeverity(killedBy);
+        elite
+            ? "warn"
+            : "neutral";
 
     let message =
         `${enemy.label} ended the run. ${enemy.meaning}`;
 
-    if (enemy.behavior) {
-        message += ` Behaviour note: ${enemy.behavior}`;
-    }
-
     if (elite) {
-        message += " Elite pressure also connects to cells, late-run survival and whether your clear tools still work when enemies ignore some instant-clear effects.";
-    }
-
-    if (checklist.length) {
-        message += ` First checks: ${checklist.slice(0, 2).join(" ")}`;
+        message += " This is worth tracking because elite pressure also connects to cell farming and late-run survival.";
     }
 
     if (buildStyle === "health_ehp" && elite) {
@@ -216,119 +160,8 @@ export function interpretDeathCause(killedBy = "", buildStyle = "unknown") {
         title: `Killed By ${enemy.label}`,
         severity,
         enemy,
-        message,
-        checklist,
-        sourceNote: getSourceWarning({ short: true })
+        message
     };
-}
-
-
-/* --------------------------------------------------
-   RUN TRADEOFF INTELLIGENCE
--------------------------------------------------- */
-
-export function interpretRunTradeoff(compareData = {}) {
-
-    const core = compareData?.core || {};
-    const stats = compareData?.stats || {};
-
-    const waveDiff = Number(core?.wave?.diff || 0);
-    const coinsDiff = firstNumber([
-        stats?.coinsPerHour?.diff,
-        stats?.coins_per_hour?.diff,
-        core?.coins?.diff,
-        core?.coins_earned?.diff
-    ]);
-    const cellsDiff = firstNumber([
-        stats?.cellsPerHour?.diff,
-        stats?.cells_per_hour?.diff,
-        core?.cells?.diff,
-        core?.cells_earned?.diff
-    ]);
-
-    let title = "Run Tradeoff";
-    let severity = "neutral";
-    let message = "The run does not show a strong economy/progression split yet.";
-
-    if (coinsDiff > 0 && waveDiff < 0) {
-        severity = "warn";
-        message = "Farming improved but progression fell. Treat B as a possible faster farm, not automatically a stronger survival setup.";
-    } else if (coinsDiff < 0 && waveDiff > 0) {
-        severity = "info";
-        message = "Progression improved but coin farming fell. B may be better for pushing waves, while A may still farm better.";
-    } else if (coinsDiff > 0 && waveDiff > 0) {
-        severity = "good";
-        message = "B improved both farming and wave progression. This is the cleanest type of improvement.";
-    } else if (coinsDiff < 0 && waveDiff < 0) {
-        severity = "bad";
-        message = "B lost both farming and wave progression. Check build changes, killed-by pressure and run conditions.";
-    }
-
-    if (cellsDiff > 0 && severity !== "bad") {
-        message += " Cells/hour or cells also improved, so elite-cell farming may still be moving in the right direction.";
-    }
-
-    return {
-        title,
-        severity,
-        message,
-        waveDiff,
-        coinsDiff,
-        cellsDiff,
-        knowledge: getKnowledgeSnapshotLabel()
-    };
-}
-
-export function interpretSubsystemSection(sectionName = "") {
-
-    const key = normaliseMetricKey(sectionName);
-
-    const sectionNotes = {
-        core: "Core run output: tier, wave, coins, cells and run duration.",
-        records: "Record-style output. Useful as context, but not always direct run strength.",
-        damage: "Offensive output. Stronger damage helps only if survival/control can still keep up.",
-        damage_taken: "Survival pressure. Lower damage taken is usually better unless a wall/EHP build intentionally absorbs more.",
-        bonus_health_gained: "Health bonus growth. Useful for EHP and Death Wave style context when present.",
-        health_regenerated: "Sustain layer. Watch this especially when Vampire or sustain pressure is involved.",
-        damage_blocked: "Defense/blocking layer. Important for Health/EHP and mitigation-style builds.",
-        utility: "Utility control and run-flow layer, including skips or other support metrics.",
-        counts: "Count-based progress layer. Useful for waves skipped, enemies and run pacing.",
-        enemies_hit_by: "Shows which tools are touching enemies. Good for spotting damage-source shifts.",
-        killed_with_effect_active: "Shows effect uptime usefulness, often tied to UW or control effects.",
-        total_enemies: "Enemy volume and spawn pressure context.",
-        coins: "Coin source split. Treat as signals, not perfectly additive totals, because multipliers can overlap.",
-        cash: "In-run cash economy signal.",
-        currencies: "Currencies gained. Useful for cells, gems, shards or other reward traces when present.",
-        enemies_destroyed_by: "Kill-source distribution. One of the best places to see what actually carried the run."
-    };
-
-    const registered =
-        getSectionInfo(key);
-
-    return {
-        section: key,
-        title: registered?.label || (sectionNotes[key] ? formatSectionLabel(key) : formatSectionLabel(sectionName)),
-        message: sectionNotes[key] || registered?.meaning || "Subsystem detail from the battle report. Use it with top gains/losses and killed-by context.",
-        warning: getSourceWarning({ short: true })
-    };
-}
-
-function firstNumber(values = []) {
-
-    for (const value of values) {
-        const num = Number(value);
-        if (Number.isFinite(num) && num !== 0) {
-            return num;
-        }
-    }
-
-    return 0;
-}
-
-function formatSectionLabel(value = "") {
-    return String(value || "Subsystem")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, char => char.toUpperCase());
 }
 
 /* --------------------------------------------------

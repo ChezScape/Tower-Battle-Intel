@@ -2,7 +2,7 @@
 
 /**
  * DELTA FORMAT ENGINE
- * Shared UI delta formatting + severity helpers.
+ * Shared display and severity helpers for all A/B comparisons.
  */
 
 import {
@@ -10,27 +10,22 @@ import {
     formatTowerNumber
 } from "../../game/numberNotation.js";
 
-/* --------------------------------------------------
-   MAIN FORMATTER
--------------------------------------------------- */
-
 export function formatDelta(value, options = {}) {
 
     const {
         precision = 2,
         signed = true,
-        compact = false
+        compact = false,
+        zero = "0"
     } = options;
 
-    const num =
-        Number(value);
+    const num = Number(value);
 
     if (!Number.isFinite(num)) {
-        return "0";
+        return zero;
     }
 
     if (compact) {
-
         return signed
             ? formatTowerDelta(num, precision)
             : formatTowerNumber(num, precision);
@@ -41,16 +36,10 @@ export function formatDelta(value, options = {}) {
             ? String(Math.round(num))
             : trimFixed(num, precision);
 
-    if (signed && num > 0) {
-        return `+${formatted}`;
-    }
-
-    return formatted;
+    return signed && num > 0
+        ? `+${formatted}`
+        : formatted;
 }
-
-/* --------------------------------------------------
-   PERCENT
--------------------------------------------------- */
 
 export function formatPercentDelta(value, precision = 1) {
 
@@ -58,84 +47,73 @@ export function formatPercentDelta(value, precision = 1) {
         return "from near zero";
     }
 
-    const num =
-        Number(value);
+    const num = Number(value);
 
     if (!Number.isFinite(num)) {
         return "0%";
     }
 
-    const sign =
-        num > 0
-            ? "+"
-            : "";
-
+    const sign = num > 0 ? "+" : "";
     return `${sign}${trimFixed(num, precision)}%`;
 }
 
-/* --------------------------------------------------
-   DISPLAY OBJECT
--------------------------------------------------- */
+export function buildDeltaDisplay(diffData = {}, options = {}) {
 
-export function buildDeltaDisplay(diffData = {}) {
+    const diff = Number(diffData?.diff ?? 0);
+    const pct = diffData?.pct;
 
     return {
-        raw:
-            diffData?.diff ?? 0,
-
-        formatted:
-            formatDelta(diffData?.diff, {
-                compact: true
-            }),
-
-        percent:
-            formatPercentDelta(diffData?.pct),
-
-        severity:
-            classifyDelta(diffData?.diff)
+        raw: Number.isFinite(diff) ? diff : 0,
+        formatted: formatDelta(diff, {
+            compact: true,
+            precision: options.precision ?? 2
+        }),
+        percent: formatPercentDelta(pct, options.percentPrecision ?? 1),
+        severity: classifyDelta(diff, options.threshold ?? 0),
+        tone: classifyDelta(diff, options.threshold ?? 0),
+        direction: diff > 0 ? "up" : diff < 0 ? "down" : "flat"
     };
 }
 
-/* --------------------------------------------------
-   CLASSIFIER
--------------------------------------------------- */
-
 export function classifyDelta(value, threshold = 0) {
+    const num = Number(value);
 
-    const num =
-        Number(value);
-
-    if (!Number.isFinite(num)) {
-        return "neutral";
-    }
-
-    if (num > threshold) {
-        return "good";
-    }
-
-    if (num < -threshold) {
-        return "bad";
-    }
-
+    if (!Number.isFinite(num)) return "neutral";
+    if (num > threshold) return "good";
+    if (num < -threshold) return "bad";
     return "neutral";
 }
 
-/* --------------------------------------------------
-   INTERNAL
--------------------------------------------------- */
+export function classifyDeltaForMetric(value, metric = {}) {
+    const num = Number(value);
+
+    if (!Number.isFinite(num)) return "neutral";
+
+    const role = String(metric?.compareRole || "").toLowerCase();
+    const higher = metric?.higherIsBetter;
+
+    if (role === "neutral_signal" || higher === "context") {
+        return "neutral";
+    }
+
+    if (higher === false) {
+        return num < 0 ? "good" : num > 0 ? "bad" : "neutral";
+    }
+
+    return classifyDelta(num);
+}
+
+export function deltaSign(value = 0) {
+    const num = Number(value);
+    if (!Number.isFinite(num) || num === 0) return 0;
+    return num > 0 ? 1 : -1;
+}
 
 function trimFixed(value, precision = 2) {
+    const num = Number(value || 0);
 
-    const num =
-        Number(value || 0);
-
-    if (!Number.isFinite(num)) {
-        return "0";
-    }
-
-    if (precision <= 0) {
-        return String(Math.round(num));
-    }
+    if (!Number.isFinite(num)) return "0";
+    if (precision <= 0) return String(Math.round(num));
 
     return num
         .toFixed(precision)
@@ -146,5 +124,7 @@ export default {
     formatDelta,
     formatPercentDelta,
     buildDeltaDisplay,
-    classifyDelta
+    classifyDelta,
+    classifyDeltaForMetric,
+    deltaSign
 };

@@ -1,17 +1,24 @@
 "use strict";
 
+import {
+    bindNativeControlGuard
+} from "./src/ui/nativeControlGuard.js";
 /**
- * BOOTSTRAP
+ * BOOTSTRAP v4.10l
  * Root startup flow for Tower Battle Intel.
  *
- * Responsibilities:
- * - load saved state
- * - hydrate runtime state
- * - bind core button / debug events
- * - render dashboard
- * - expose safe console helpers
- * - save state before leaving page
+ * Owns only application startup:
+ * - validate static shell
+ * - load state
+ * - first render
+ * - bind static controls after render, so rendered header debug-hold exists
+ * - autosave last input
+ * - expose console helpers
  */
+
+import {
+    appConfig
+} from "./config/appConfig.js";
 
 import {
     getState,
@@ -23,13 +30,24 @@ import {
 } from "./src/core/events.js";
 
 import {
+    bindStaticControlBridge
+} from "./src/ui/staticControlBridge.js";
+
+import {
     render
 } from "./src/ui/render.js";
+
+import {
+    bindLiveInteractionBridge
+} from "./src/ui/liveInteractionBridge.js";
 
 import {
     loadStorage,
     saveStorage
 } from "./src/storage/localStore.js";
+
+let bootstrapComplete = false;
+let autosaveBound = false;
 
 /* --------------------------------------------------
    BOOTSTRAP
@@ -37,90 +55,127 @@ import {
 
 export function bootstrap() {
 
-    console.log(
-        "BOOTSTRAP LOADED"
-    );
+    bindNativeControlGuard();
 
-    const input =
-        document.getElementById("input");
+    if (bootstrapComplete) {
+        console.warn("[Tower Battle Intel] Bootstrap skipped: already complete.");
+        return getState();
+    }
 
-    /* --------------------------------------------------
-       REQUIRED ELEMENT CHECK
-    -------------------------------------------------- */
+    console.log(`BOOTSTRAP LOADED ${appConfig.app.version}`);
 
-    if (!input) {
+    const shell = getStaticShell();
+    validateStaticShell(shell);
+    bindStaticControlBridge(() => render());
+    hydrateFromStorage(shell.input);
 
-        console.error(
-            "[Tower Battle Intel] Missing #input element."
-        );
+    // Render before binding core events. This allows core debug-hold binding
+    // to see the rebuilt dashboard header as well as the static shell.
+        render();
 
+    import("./src/ui/nativeImportHardBridge.js")
+        .then((module) => module.bindNativeImportHardBridge?.())
+        .catch((error) => console.warn("[Tower Battle Intel] Native import hard bridge failed to load", error));
+    import("./src/ui/finalControlPolishBridge.js")
+        .then((module) => module.bindFinalControlPolishBridge?.(() => render()))
+        .catch((error) => console.warn("[Tower Battle Intel] Final control polish bridge failed to load", error));
+    bindCoreEvents();
+
+    import("./src/ui/actionAuditBridge.js")
+        .then((module) => module.bindActionAuditBridge?.(() => render()))
+        .catch((error) => console.warn("[Tower Battle Intel] Action audit bridge failed to load", error));
+    bindLiveInteractionBridge(() => render());
+    bindInputAutosave(shell.input);
+    bindExitAutosave(shell.input);
+    exposeConsoleHelpers(shell.input);
+
+    bootstrapComplete = true;
+    document.documentElement.dataset.bootstrapReady = "true";
+
+    return getState();
+}
+
+/* --------------------------------------------------
+   STATIC SHELL
+-------------------------------------------------- */
+
+function getStaticShell() {
+    return {
+        app: document.getElementById("app"),
+        dashboard: document.getElementById("dashboard"),
+        input: document.getElementById("input"),
+        debugPanel: document.getElementById("debugPanel"),
+        saveReport: document.getElementById("saveReport"),
+        clearInput: document.getElementById("clearInput"),
+        clearRuns: document.getElementById("clearRuns"),
+        buildStyleSelect: document.getElementById("buildStyleSelect")
+    };
+}
+
+function validateStaticShell(shell) {
+    const missing = Object.entries(shell)
+        .filter(([key, value]) => key !== "buildStyleSelect" && !value)
+        .map(([key]) => key);
+
+    if (missing.length) {
+        throw new Error(`Missing static shell element(s): ${missing.join(", ")}`);
+    }
+}
+
+/* --------------------------------------------------
+   STORAGE HYDRATION
+-------------------------------------------------- */
+
+function hydrateFromStorage(input) {
+    const saved = loadStorage();
+
+    if (saved && typeof saved === "object") {
+        hydrateState(saved);
+
+        if (typeof saved.lastInput === "string" && input) {
+            input.value = saved.lastInput;
+        }
+    }
+}
+
+function persistCurrentState(input) {
+    saveStorage({
+        ...getState(),
+        lastInput: input?.value || ""
+    });
+}
+
+function bindInputAutosave(input) {
+    if (!input || autosaveBound) {
         return;
     }
 
-    /* --------------------------------------------------
-       LOAD SAVED STATE
-    -------------------------------------------------- */
+    autosaveBound = true;
 
-    const saved =
-        loadStorage();
-
-    if (
-        saved &&
-        typeof saved === "object"
-    ) {
-
-        hydrateState(saved);
-
-        if (saved.lastInput) {
-            input.value =
-                saved.lastInput;
-        }
-    }
-
-    /* --------------------------------------------------
-       BIND EVENTS
-    -------------------------------------------------- */
-
-    bindCoreEvents();
-
-    /* --------------------------------------------------
-       INITIAL RENDER
-    -------------------------------------------------- */
-
-    render();
-
-    /* --------------------------------------------------
-       SAVE INPUT WHILE TYPING
-       Light safety, so pasted report is not lost.
-    -------------------------------------------------- */
+    let timer = null;
 
     input.addEventListener("input", () => {
-
-        saveStorage({
-            ...getState(),
-            lastInput:
-                input.value || ""
-        });
+        clearTimeout(timer);
+        timer = window.setTimeout(() => persistCurrentState(input), 220);
     });
+}
 
-    /* --------------------------------------------------
-       SAVE ON EXIT
-    -------------------------------------------------- */
+function bindExitAutosave(input) {
+    if (window.__TowerBattleIntelExitSaveBound) {
+        return;
+    }
+
+    window.__TowerBattleIntelExitSaveBound = true;
 
     window.addEventListener("beforeunload", () => {
-
-        saveStorage({
-            ...getState(),
-            lastInput:
-                input.value || ""
-        });
+        persistCurrentState(input);
     });
 
-    /* --------------------------------------------------
-       CONSOLE HELPERS
-    -------------------------------------------------- */
-
-    exposeConsoleHelpers(input);
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+            persistCurrentState(input);
+        }
+    });
 }
 
 /* --------------------------------------------------
@@ -128,53 +183,47 @@ export function bootstrap() {
 -------------------------------------------------- */
 
 function exposeConsoleHelpers(input) {
-
-    window.TowerBattleIntel = {
+    window.TowerBattleIntel = Object.freeze({
+        version: appConfig.app.version,
 
         state() {
-
             return getState();
         },
 
         render() {
-
             render();
-
             return getState();
         },
 
         save() {
-
-            saveStorage({
-                ...getState(),
-                lastInput:
-                    input?.value || ""
-            });
-
+            persistCurrentState(input);
             return true;
         },
 
         clearInput() {
-
             if (input) {
                 input.value = "";
             }
 
-            saveStorage({
-                ...getState(),
-                lastInput: ""
-            });
-
+            persistCurrentState(input);
             return true;
         },
 
-        version: "Tower Battle Intel"
-    };
+        shell() {
+            return getStaticShell();
+        }
+    });
 
     console.log(
         "[Tower Battle Intel] Console helpers ready:",
         "TowerBattleIntel.state()",
         "TowerBattleIntel.render()",
-        "TowerBattleIntel.save()"
+        "TowerBattleIntel.save()",
+        "TowerBattleIntel.shell()"
     );
 }
+
+
+
+
+

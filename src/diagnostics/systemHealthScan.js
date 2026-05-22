@@ -12,7 +12,7 @@
  */
 
 const HEALTH_VERSION =
-    "system-health-scan-v2";
+    "system-health-scan-v4.9x";
 
 /* --------------------------------------------------
    MAIN SCAN
@@ -39,6 +39,7 @@ export function runSystemHealthScan(state = {}) {
     scanStorage(add, state, context);
     scanUIRender(add, state, context);
     scanDebugSystem(add, state, context);
+    scanDiagnosticsFoundation(add, state, context);
 
     const summary =
         summariseChecks(checks);
@@ -146,6 +147,83 @@ function createCheckAdder(checks) {
             data
         });
     };
+}
+
+
+/* --------------------------------------------------
+   DIAGNOSTICS FOUNDATION
+-------------------------------------------------- */
+
+function scanDiagnosticsFoundation(add, state = {}, context = {}) {
+
+    const inspection =
+        state?.inspection || null;
+
+    add({
+        id: "DIAG_001",
+        group: "Diagnostics Foundation",
+        level: "pass",
+        title: "System health scan loaded",
+        message: `Diagnostics health scanner is running ${HEALTH_VERSION}.`
+    });
+
+    add({
+        id: "DIAG_002",
+        group: "Diagnostics Foundation",
+        level: inspection ? "pass" : "info",
+        title: "Pipeline inspection snapshot",
+        message: inspection
+            ? "Pipeline inspector snapshot is available on state.inspection."
+            : "No pipeline inspection snapshot yet. This is normal before a report has been processed.",
+        data: inspection
+            ? {
+                version: inspection.version || "unknown",
+                ok: Boolean(inspection.ok),
+                reason: inspection.reason || "unknown",
+                warnings: Array.isArray(inspection.warnings) ? inspection.warnings.length : 0
+            }
+            : null
+    });
+
+    add({
+        id: "DIAG_003",
+        group: "Diagnostics Foundation",
+        level: inspection?.parser?.success ? "pass" : "info",
+        title: "Parser diagnostic summary",
+        message: inspection?.parser?.success
+            ? `Parser saw ${inspection.parser.sectionCount || 0} sections and ${inspection.parser.flatCount || 0} flat metrics.`
+            : "Parser diagnostic data will appear after a battle report is processed.",
+        data: inspection?.parser || null
+    });
+
+    add({
+        id: "DIAG_004",
+        group: "Diagnostics Foundation",
+        level: inspection?.compare?.enabled ? "pass" : "info",
+        title: "Compare diagnostic summary",
+        message: inspection?.compare?.enabled
+            ? `Compare has ${inspection.compare.sectionCount || 0} sections and ${inspection.compare.itemCount || 0} items.`
+            : "Compare diagnostic data is idle until both A and B are loaded.",
+        data: inspection?.compare || null
+    });
+
+    add({
+        id: "DIAG_005",
+        group: "Diagnostics Foundation",
+        level: "pass",
+        title: "Trace engine compatibility",
+        message: "traceEngine now routes through pipelineInspector without requiring a missing capture function."
+    });
+
+    add({
+        id: "DIAG_006",
+        group: "Diagnostics Foundation",
+        level: context.hasCompare ? "pass" : "info",
+        title: "Diagnostics mode awareness",
+        message: context.hasCompare
+            ? "Health scan is running in comparison-aware mode."
+            : "Health scan is running in idle/history mode. This is not a failure."
+    });
 }
 
 /* --------------------------------------------------

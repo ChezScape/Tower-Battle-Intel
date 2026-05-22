@@ -1,61 +1,38 @@
 "use strict";
 
 /**
- * UI MOUNT ENGINE
- * Handles safe HTML mounting
+ * UI MOUNT ENGINE v4.10f
  */
 
-import {
-    byId,
-    setHTML
-} from "./dom.js";
-
-/* --------------------------------------------------
-   MOUNT HTML
--------------------------------------------------- */
+import { byId, setHTML, resolve } from "./dom.js";
 
 export function mountHTML(target, html = "") {
+    const root = typeof target === "string"
+        ? byId(target.replace(/^#/, "")) || resolve(target)
+        : resolve(target);
 
-    if (!target) {
-        return;
+    if (!root) {
+        console.warn(`[Tower Battle Intel] Mount failed: ${String(target)}`);
+        return null;
     }
 
-    if (typeof target === "string") {
-
-        const root = byId(target);
-
-        if (!root) {
-            console.warn(`Mount failed: ${target}`);
-            return;
-        }
-
-        setHTML(root, html);
-
-        return;
-    }
-
-    setHTML(target, html);
+    setHTML(root, html);
+    return root;
 }
 
-/* --------------------------------------------------
-   ALIASES
--------------------------------------------------- */
-
 export function mount(id, html = "") {
-
-    mountHTML(id, html);
+    return mountHTML(id, html);
 }
 
 export function appendMount(id, html = "") {
-
-    const root = byId(id);
-
-    if (!root) {
-        return;
-    }
-
-    root.insertAdjacentHTML(
-        "beforeend",
-        html
-    );
+    const root = byId(String(id).replace(/^#/, ""));
+    if (!root) return null;
+    root.insertAdjacentHTML("beforeend", String(html ?? ""));
+    return root;
 }
+
+export default {
+    mountHTML,
+    mount,
+    appendMount
+};

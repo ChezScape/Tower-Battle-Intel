@@ -11,11 +11,10 @@ export function buildConfirmModal({
 
     return `
         <div
-            class="confirm-modal hidden"
+            class="confirm-modal"
             id="${escapeAttr(id)}"
-            role="alertdialog"
-            aria-modal="true"
             aria-hidden="true"
+            hidden
             inert
         >
 
@@ -41,7 +40,7 @@ export function buildConfirmModal({
                     </div>
 
                     <div class="confirm-warning">
-                        Type <strong>DELETE</strong> to continue.
+                        Type <strong data-confirm-required-phrase>DELETE</strong> to continue.
                     </div>
 
                     <input
@@ -49,6 +48,7 @@ export function buildConfirmModal({
                         class="confirm-input"
                         type="text"
                         autocomplete="off"
+                        data-confirm-input="true"
                         placeholder="Type DELETE"
                     >
 

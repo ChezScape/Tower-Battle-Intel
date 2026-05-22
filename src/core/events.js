@@ -1,31 +1,22 @@
 "use strict";
 
-import {
-    update,
-    saveReportToHistory,
-    refreshAnalysis
-} from "./update.js";
+/**
+ * CORE EVENT BRIDGE v4.9y
+ * Static DOM controls only. Visible dashboard buttons go through src/ui/events.js.
+ */
 
 import {
-    getState,
-    clearRuns,
-    setState,
-    setBuildStyle
-} from "./state.js";
+    performUIAction,
+    actionGetState,
+    actionToggleDebug,
+    actionSetBuildStyle
+} from "../actions/actions.js";
 
 import {
     render
 } from "../ui/render.js";
 
-import {
-    saveStorage
-} from "../storage/localStore.js";
-
 let coreEventsBound = false;
-
-/* --------------------------------------------------
-   CORE EVENT SYSTEM
--------------------------------------------------- */
 
 export function bindCoreEvents() {
 
@@ -35,64 +26,28 @@ export function bindCoreEvents() {
 
     coreEventsBound = true;
 
-    const input =
-        document.getElementById("input");
-
-    const saveReport =
-        document.getElementById("saveReport");
-
-    const clearInput =
-        document.getElementById("clearInput");
-
-    const clearBtn =
-        document.getElementById("clearRuns");
-
-    const debugBtn =
-        document.getElementById("toggleDebug");
-
-    const buildStyleSelect =
-        document.getElementById("buildStyleSelect");
-
-    /* Legacy support if old buttons exist */
-    const saveA =
-        document.getElementById("saveA");
-
-    const saveB =
-        document.getElementById("saveB");
+    const input = document.getElementById("input");
+    const saveReport = document.getElementById("saveReport");
+    const clearInput = document.getElementById("clearInput");
+    const clearRuns = document.getElementById("clearRuns");
+    const debugBtn = document.getElementById("toggleDebug");
+    const buildStyleSelect = document.getElementById("buildStyleSelect");
 
     syncBuildStyleSelect(buildStyleSelect);
 
     saveReport?.addEventListener("click", () => {
-
-        const hadText =
-            Boolean(input?.value && input.value.trim());
-
-        saveInputToHistory(input);
-
-        if (hadText) {
-            closeMobileReportSheet();
-        }
+        const hadText = Boolean(input?.value && input.value.trim());
+        performUIAction("save-report", { input });
+        if (hadText) closeMobileReportSheet();
+        render();
     });
 
     clearInput?.addEventListener("click", () => {
-
-        if (input) {
-            input.value = "";
-            input.placeholder = "Paste Battle Report Here...";
-        }
-
-        saveStorage({
-            ...getState(),
-            lastInput: ""
-        });
+        performUIAction("clear-input", { input });
     });
 
-    clearBtn?.addEventListener("click", () => {
-
-        clearRuns();
-
-        saveStorage(getState());
-
+    clearRuns?.addEventListener("click", () => {
+        performUIAction("clear-runs");
         render();
     });
 
@@ -101,388 +56,142 @@ export function bindCoreEvents() {
     });
 
     buildStyleSelect?.addEventListener("change", () => {
-
-        const selected =
-            buildStyleSelect.value || "unknown";
-
-        const buildStyle =
-            setBuildStyle(selected);
-
-        refreshAnalysis({
-            reason: "build_style_changed",
-            buildStyle
-        });
-
-        saveStorage(getState());
-
+        actionSetBuildStyle(buildStyleSelect.value || "unknown");
         render();
-
-        console.log(
-            `[Tower Battle Intel] Build style set to ${buildStyle}`
-        );
     });
 
-    /* Legacy Save A / Save B support */
-    saveA?.addEventListener("click", () => {
-        saveToSlot("A", input);
-    });
-
-    saveB?.addEventListener("click", () => {
-        saveToSlot("B", input);
-    });
-
+    bindLegacySlotButtons(input);
     bindDebugKeyboardShortcut();
-
-    bindMobileDebugGesture();
-
+    bindHeaderDebugHold();
     bindMobileCommandDeck(input);
-
     exposeDebugConsoleHelpers();
 
-    console.log(
-        "[Tower Battle Intel] Core events bound"
-    );
+    console.log("[Tower Battle Intel] Core event bridge bound");
 }
 
-/* --------------------------------------------------
-   SAVE REPORT TO HISTORY
--------------------------------------------------- */
-
-function saveInputToHistory(input) {
-
-    const text =
-        input?.value || "";
-
-    if (!text.trim()) {
-
-        console.warn(
-            "[Tower Battle Intel] Save Report blocked: empty input"
-        );
-
-        if (input) {
-            input.placeholder = "Paste a battle report first...";
-        }
-
-        return;
-    }
-
-    const result =
-        saveReportToHistory(text);
-
-    if (!result) {
-
-        console.warn(
-            "[Tower Battle Intel] Save Report failed"
-        );
-
-        return;
-    }
-
-    if (input) {
-        input.value = "";
-        input.placeholder = "Saved to Battle History. Paste another report here...";
-    }
-
-    saveStorage({
-        ...getState(),
-        lastInput: ""
+function bindLegacySlotButtons(input) {
+    document.getElementById("saveA")?.addEventListener("click", () => {
+        performUIAction("save-run-a", { input });
+        render();
     });
-
-    render();
-}
-
-/* --------------------------------------------------
-   LEGACY SAVE HELPER
--------------------------------------------------- */
-
-function saveToSlot(slot, input) {
-
-    const text =
-        input?.value || "";
-
-    if (!text.trim()) {
-
-        console.warn(
-            `[Tower Battle Intel] Save ${slot} blocked: empty input`
-        );
-
-        if (input) {
-            input.placeholder = "Paste a battle report first...";
-        }
-
-        return;
-    }
-
-    const result =
-        update(text, slot);
-
-    if (!result) {
-
-        console.warn(
-            `[Tower Battle Intel] Save ${slot} failed`
-        );
-
-        return;
-    }
-
-    if (input) {
-        input.value = "";
-        input.placeholder = `Saved to Run ${slot}. Paste next battle report here...`;
-    }
-
-    saveStorage({
-        ...getState(),
-        lastInput: ""
+    document.getElementById("saveB")?.addEventListener("click", () => {
+        performUIAction("save-run-b", { input });
+        render();
     });
-
-    render();
 }
-
-/* --------------------------------------------------
-   BUILD STYLE SELECT SYNC
--------------------------------------------------- */
 
 function syncBuildStyleSelect(select) {
-
-    if (!select) {
-        return;
-    }
-
-    const state =
-        getState();
-
-    select.value =
-        state.ui?.buildStyle || "unknown";
+    if (!select) return;
+    select.value = actionGetState().ui?.buildStyle || "unknown";
 }
 
-/* --------------------------------------------------
-   DEBUG TOGGLE
--------------------------------------------------- */
-
 function toggleDebug(force = null) {
-
-    const state =
-        getState();
-
-    const currentDebug =
-        Boolean(state?.ui?.debug);
-
-    const nextDebug =
-        typeof force === "boolean"
-            ? force
-            : !currentDebug;
-
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            debug: nextDebug
-        }
-    });
-
-    saveStorage(getState());
-
-    document.body.classList.toggle("debug-open", nextDebug);
-    document.documentElement.classList.toggle("debug-open", nextDebug);
-
+    const next = actionToggleDebug(force);
+    document.body.classList.toggle("debug-open", next);
+    document.documentElement.classList.toggle("debug-open", next);
     if (isMobileMode()) {
-        document.documentElement.classList.toggle("mobile-scroll-locked", nextDebug);
-        document.body.classList.toggle("mobile-scroll-locked", nextDebug);
+        document.documentElement.classList.toggle("mobile-scroll-locked", next);
+        document.body.classList.toggle("mobile-scroll-locked", next);
     }
-
-    console.log(
-        `[Tower Battle Intel] Debug ${nextDebug ? "enabled" : "disabled"}`
-    );
-
     render();
 }
 
-/* --------------------------------------------------
-   DESKTOP DEBUG SHORTCUTS
--------------------------------------------------- */
-
 function bindDebugKeyboardShortcut() {
-
-    window.addEventListener(
-        "keydown",
-        event => {
-
-            const key =
-                String(event.key || "").toLowerCase();
-
-            const isBackquote =
-                event.code === "Backquote" ||
-                event.key === "`" ||
-                event.key === "¬" ||
-                event.key === "¦";
-
-            const ctrlAltD =
-                event.ctrlKey &&
-                event.altKey &&
-                key === "d";
-
-            const altBackquote =
-                event.altKey &&
-                isBackquote;
-
-            if (
-                ctrlAltD ||
-                altBackquote
-            ) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                toggleDebug();
-            }
-        },
-        true
-    );
+    window.addEventListener("keydown", event => {
+        const key = String(event.key || "").toLowerCase();
+        const isBackquote = event.code === "Backquote" || event.key === "`" || event.key === "¬" || event.key === "¦";
+        if ((event.ctrlKey && event.altKey && key === "d") || (event.altKey && isBackquote)) {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleDebug();
+        }
+    }, true);
 }
 
-/* --------------------------------------------------
-   HIDDEN BANNER DEBUG HOLD
--------------------------------------------------- */
-
-function bindMobileDebugGesture() {
-
-    if (document.body?.dataset?.debugHoldDelegatesBound === "true") {
-        return;
-    }
-
-    if (document.body?.dataset) {
-        document.body.dataset.debugHoldDelegatesBound = "true";
-    }
+function bindHeaderDebugHold() {
 
     const HOLD_TIME_MS = 2600;
     const MOVE_CANCEL_PX = 14;
 
-    let pressTimer = null;
-    let startX = 0;
-    let startY = 0;
-    let holdActive = false;
-    let activeTarget = null;
-    let tapCount = 0;
-    let tapTimer = null;
+    const targets = Array.from(document.querySelectorAll("[data-debug-hold-zone], #debugHoldZone, .topbar-banner-brand, .topbar"))
+        .filter(Boolean);
 
-    function getHoldTarget(event) {
-        return event?.target?.closest?.("[data-debug-hold-zone], #debugHoldZone, .topbar-banner-brand, .topbar");
-    }
+    targets.forEach(target => {
 
-    function clearPressTimer() {
-        clearTimeout(pressTimer);
-        pressTimer = null;
-        holdActive = false;
-        activeTarget = null;
-    }
+        if (target.dataset.debugHoldBound === "true") {
+            return;
+        }
 
-    function getPoint(event) {
-        const point = event?.touches?.[0] || event?.changedTouches?.[0] || event;
-        return {
-            x: Number(point?.clientX || 0),
-            y: Number(point?.clientY || 0)
+        target.dataset.debugHoldBound = "true";
+
+        let pressTimer = null;
+        let startX = 0;
+        let startY = 0;
+        let holdActive = false;
+        let tapCount = 0;
+        let tapTimer = null;
+
+        const clearPressTimer = () => {
+            clearTimeout(pressTimer);
+            pressTimer = null;
+            holdActive = false;
         };
-    }
 
-    document.addEventListener("pointerdown", event => {
-        const target = getHoldTarget(event);
+        const getPoint = event => {
+            const point = event?.touches?.[0] || event?.changedTouches?.[0] || event;
+            return { x: Number(point?.clientX || 0), y: Number(point?.clientY || 0) };
+        };
 
-        if (!target) {
-            return;
-        }
+        target.addEventListener("pointerdown", event => {
+            const point = getPoint(event);
+            startX = point.x;
+            startY = point.y;
+            holdActive = true;
+            clearTimeout(pressTimer);
+            pressTimer = setTimeout(() => {
+                if (!holdActive) return;
+                vibrate();
+                toggleDebug(true);
+                clearPressTimer();
+            }, HOLD_TIME_MS);
+        });
 
-        const point = getPoint(event);
-
-        startX = point.x;
-        startY = point.y;
-        holdActive = true;
-        activeTarget = target;
-
-        clearTimeout(pressTimer);
-
-        pressTimer = setTimeout(() => {
-            if (!holdActive) {
-                return;
+        target.addEventListener("pointermove", event => {
+            if (!holdActive) return;
+            const point = getPoint(event);
+            if (Math.abs(point.x - startX) > MOVE_CANCEL_PX || Math.abs(point.y - startY) > MOVE_CANCEL_PX) {
+                clearPressTimer();
             }
+        });
 
-            vibrate();
-            toggleDebug(true);
-            clearPressTimer();
-        }, HOLD_TIME_MS);
-    }, true);
-
-    document.addEventListener("pointermove", event => {
-        if (!holdActive || !activeTarget) {
-            return;
-        }
-
-        const point = getPoint(event);
-        const movedX = Math.abs(point.x - startX);
-        const movedY = Math.abs(point.y - startY);
-
-        if (movedX > MOVE_CANCEL_PX || movedY > MOVE_CANCEL_PX) {
-            clearPressTimer();
-        }
-    }, true);
-
-    document.addEventListener("pointerup", clearPressTimer, true);
-    document.addEventListener("pointerleave", clearPressTimer, true);
-    document.addEventListener("pointercancel", clearPressTimer, true);
-
-    document.addEventListener("contextmenu", event => {
-        if (holdActive && getHoldTarget(event)) {
-            event.preventDefault();
-        }
-    }, true);
-
-    document.addEventListener("click", event => {
-        if (!getHoldTarget(event)) {
-            return;
-        }
-
-        tapCount++;
-        clearTimeout(tapTimer);
-
-        tapTimer = setTimeout(() => {
-            tapCount = 0;
-        }, 1600);
-
-        if (tapCount >= 5) {
-            tapCount = 0;
+        target.addEventListener("pointerup", clearPressTimer);
+        target.addEventListener("pointerleave", clearPressTimer);
+        target.addEventListener("pointercancel", clearPressTimer);
+        target.addEventListener("contextmenu", event => {
+            if (holdActive) event.preventDefault();
+        });
+        target.addEventListener("click", () => {
+            tapCount++;
             clearTimeout(tapTimer);
-            vibrate();
-            toggleDebug(true);
-        }
-    }, true);
+            tapTimer = setTimeout(() => { tapCount = 0; }, 1600);
+            if (tapCount >= 5) {
+                tapCount = 0;
+                clearTimeout(tapTimer);
+                vibrate();
+                toggleDebug(true);
+            }
+        });
+    });
 }
-
-
-/* --------------------------------------------------
-   MOBILE COMMAND DECK
--------------------------------------------------- */
 
 function bindMobileCommandDeck(input = null) {
 
-    if (!isMobileMode()) {
-        return;
-    }
+    const fab = document.getElementById("mobileReportFab");
+    const backdrop = document.getElementById("mobileSheetBackdrop");
+    const closeButton = document.getElementById("mobileInputClose");
+    const commandRail = document.getElementById("mobileCommandRail");
 
-    const fab =
-        document.getElementById("mobileReportFab");
-
-    const backdrop =
-        document.getElementById("mobileSheetBackdrop");
-
-    const closeButton =
-        document.getElementById("mobileInputClose");
-
-    const commandRail =
-        document.getElementById("mobileCommandRail");
-
-    if (!fab) {
-        return;
-    }
-
-    if (fab.dataset.mobileCommandBound === "true") {
+    if (!fab || fab.dataset.mobileCommandBound === "true") {
         return;
     }
 
@@ -491,95 +200,28 @@ function bindMobileCommandDeck(input = null) {
     let holdTimer = null;
     let suppressNextClick = false;
 
-    function setExpanded(value = false) {
-        fab.setAttribute(
-            "aria-expanded",
-            value ? "true" : "false"
-        );
-    }
-
-    function setBackdropVisible(value = false) {
-        if (!backdrop) {
-            return;
-        }
-
-        backdrop.hidden = !value;
-        backdrop.setAttribute("aria-hidden", value ? "false" : "true");
-    }
-
-    function setRailVisible(value = false) {
-        if (!commandRail) {
-            return;
-        }
-
-        commandRail.hidden = !value;
-        commandRail.setAttribute("aria-hidden", value ? "false" : "true");
-    }
-
-    function clearMobileDeckState() {
-        document.body.classList.remove("mobile-report-open");
-        document.body.classList.remove("mobile-command-rail-open");
-        setBackdropVisible(false);
-        setRailVisible(false);
-        setExpanded(false);
-
-        if (!document.body.classList.contains("debug-open")) {
-            document.documentElement.classList.remove("mobile-scroll-locked");
-            document.body.classList.remove("mobile-scroll-locked");
-        }
-    }
-
-    clearMobileDeckState();
+    const setExpanded = value => fab.setAttribute("aria-expanded", value ? "true" : "false");
 
     function openSheet() {
-
-        setRailVisible(false);
-        setBackdropVisible(true);
-
         document.body.classList.remove("mobile-command-rail-open");
         document.body.classList.add("mobile-report-open");
         document.documentElement.classList.add("mobile-scroll-locked");
         document.body.classList.add("mobile-scroll-locked");
-
         setExpanded(true);
-
-        // Do not auto-focus the textarea on mobile.
-        // Android opens the keyboard immediately and can cover the command deck.
-        // The user can tap the textarea when they are ready to type/paste.
     }
 
     function closeSheet() {
-
         document.body.classList.remove("mobile-report-open");
-
-        if (!document.body.classList.contains("mobile-command-rail-open")) {
-            setBackdropVisible(false);
-        }
-
-        if (!document.body.classList.contains("debug-open") &&
-            !document.body.classList.contains("mobile-command-rail-open")) {
+        if (!document.body.classList.contains("debug-open")) {
             document.documentElement.classList.remove("mobile-scroll-locked");
             document.body.classList.remove("mobile-scroll-locked");
         }
-
         setExpanded(false);
     }
 
     function toggleRail(force = null) {
-
-        const shouldOpen =
-            force == null
-                ? !document.body.classList.contains("mobile-command-rail-open")
-                : Boolean(force);
-
-        document.body.classList.toggle(
-            "mobile-command-rail-open",
-            shouldOpen
-        );
-
-        setRailVisible(shouldOpen);
-        setBackdropVisible(shouldOpen);
-
+        const shouldOpen = force == null ? !document.body.classList.contains("mobile-command-rail-open") : Boolean(force);
+        document.body.classList.toggle("mobile-command-rail-open", shouldOpen);
         if (shouldOpen) {
             document.body.classList.remove("mobile-report-open");
             document.documentElement.classList.add("mobile-scroll-locked");
@@ -592,38 +234,23 @@ function bindMobileCommandDeck(input = null) {
     }
 
     fab.addEventListener("pointerdown", () => {
-
         clearTimeout(holdTimer);
         suppressNextClick = false;
-
         holdTimer = window.setTimeout(() => {
             suppressNextClick = true;
             vibrate();
             toggleRail(true);
         }, 520);
     });
-
-    fab.addEventListener("pointerup", () => {
-        clearTimeout(holdTimer);
-    });
-
-    fab.addEventListener("pointerleave", () => {
-        clearTimeout(holdTimer);
-    });
-
-    fab.addEventListener("pointercancel", () => {
-        clearTimeout(holdTimer);
-    });
-
+    fab.addEventListener("pointerup", () => clearTimeout(holdTimer));
+    fab.addEventListener("pointerleave", () => clearTimeout(holdTimer));
+    fab.addEventListener("pointercancel", () => clearTimeout(holdTimer));
     fab.addEventListener("click", event => {
-
         event.preventDefault();
-
         if (suppressNextClick) {
             suppressNextClick = false;
             return;
         }
-
         openSheet();
     });
 
@@ -632,163 +259,70 @@ function bindMobileCommandDeck(input = null) {
         toggleRail(false);
     });
 
-    closeButton?.addEventListener("click", () => {
-        closeSheet();
-    });
+    closeButton?.addEventListener("click", closeSheet);
 
     commandRail?.addEventListener("click", event => {
-
-        const command =
-            event.target?.closest?.("[data-mobile-command]");
-
-        if (!command) {
-            return;
-        }
-
-        const action =
-            command.dataset.mobileCommand;
-
-        if (action === "open-report") {
-            openSheet();
-            return;
-        }
-
+        const command = event.target?.closest?.("[data-mobile-command]");
+        if (!command) return;
+        const action = command.dataset.mobileCommand;
+        if (action === "open-report") openSheet();
         if (action === "save-report") {
-            document.getElementById("saveReport")?.click();
+            performUIAction("save-report", { input });
             toggleRail(false);
-            return;
+            render();
         }
-
         if (action === "clear-input") {
-            document.getElementById("clearInput")?.click();
+            performUIAction("clear-input", { input });
             toggleRail(false);
             openSheet();
-            return;
         }
-
         if (action === "history-tab") {
-            document.querySelector('[data-dashboard-tab="history"]')?.click();
+            performUIAction("set-dashboard-tab", { tab: "history" });
             toggleRail(false);
+            render();
         }
     });
 
     document.addEventListener("keydown", event => {
-
-        if (event.key !== "Escape") {
-            return;
+        if (event.key === "Escape") {
+            closeSheet();
+            toggleRail(false);
         }
-
-        closeSheet();
-        toggleRail(false);
     });
 
-    window.TowerBattleIntelMobileDeck = {
-        openReport: openSheet,
-        closeReport: closeSheet,
-        toggleRail
-    };
+    window.TowerBattleIntelMobileDeck = { openReport: openSheet, closeReport: closeSheet, toggleRail };
 }
 
 function closeMobileReportSheet() {
-
     document.body.classList.remove("mobile-report-open");
-    document.body.classList.remove("mobile-command-rail-open");
-
-    const backdrop =
-        document.getElementById("mobileSheetBackdrop");
-
-    const commandRail =
-        document.getElementById("mobileCommandRail");
-
-    if (backdrop) {
-        backdrop.hidden = true;
-        backdrop.setAttribute("aria-hidden", "true");
-    }
-
-    if (commandRail) {
-        commandRail.hidden = true;
-        commandRail.setAttribute("aria-hidden", "true");
-    }
-
     if (!document.body.classList.contains("debug-open")) {
         document.documentElement.classList.remove("mobile-scroll-locked");
         document.body.classList.remove("mobile-scroll-locked");
     }
-
-    const fab =
-        document.getElementById("mobileReportFab");
-
-    fab?.setAttribute("aria-expanded", "false");
+    document.getElementById("mobileReportFab")?.setAttribute("aria-expanded", "false");
 }
 
-/* --------------------------------------------------
-   CONSOLE HELPERS
--------------------------------------------------- */
-
 function exposeDebugConsoleHelpers() {
-
     window.BattleAnalyserDebug = {
-
-        toggle() {
-            toggleDebug();
-            return getState();
-        },
-
-        show() {
-            toggleDebug(true);
-            return getState();
-        },
-
-        hide() {
-            toggleDebug(false);
-            return getState();
-        },
-
-        state() {
-            return getState();
-        },
-
+        toggle() { toggleDebug(); return actionGetState(); },
+        show() { toggleDebug(true); return actionGetState(); },
+        hide() { toggleDebug(false); return actionGetState(); },
+        state() { return actionGetState(); },
         buildStyle(value = null) {
-
-            if (!value) {
-                return getState().ui?.buildStyle || "unknown";
-            }
-
-            const buildStyle =
-                setBuildStyle(value);
-
-            refreshAnalysis({
-                reason: "console_build_style_changed",
-                buildStyle
-            });
-
-            saveStorage(getState());
-
+            if (!value) return actionGetState().ui?.buildStyle || "unknown";
+            const selected = actionSetBuildStyle(value);
             render();
-
-            return buildStyle;
+            return selected;
         }
     };
 }
 
-/* --------------------------------------------------
-   MOBILE VIBRATION
--------------------------------------------------- */
-
 function vibrate() {
-
-    if (
-        typeof navigator !== "undefined" &&
-        typeof navigator.vibrate === "function"
-    ) {
+    if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
         navigator.vibrate(40);
     }
 }
 
 function isMobileMode() {
-
-    return (
-        typeof document !== "undefined" &&
-        document.documentElement?.getAttribute("data-device-mode") === "mobile"
-    );
+    return document.documentElement?.getAttribute("data-device-mode") === "mobile";
 }

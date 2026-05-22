@@ -1,41 +1,18 @@
 "use strict";
 
 /**
- * UI EVENTS
- * Dashboard-only event bindings.
+ * UI EVENTS v4.10f
+ * One delegated UI bridge. No per-render rebinding for visible buttons.
  */
 
 import {
-    render
-} from "./render.js";
-
-import {
-    getState,
-    setState
-} from "../core/state.js";
-
-import {
-    saveStorage
-} from "../storage/localStore.js";
-
-import {
-    refreshAnalysis
-} from "../core/update.js";
-
-import {
-    loadHistoryRun,
-    deleteHistoryRun,
-    deleteLastHistory,
-    clearHistory,
-    swapHistorySlots,
-    clearHistorySelection,
-    archiveHistoryRun,
-    restoreHistoryRun,
-    updateHistoryRunMeta,
-    setHistoryFilters,
-    exportHistoryJSON,
-    importHistoryRuns
-} from "../core/history.js";
+    performUIAction,
+    actionGetState,
+    actionSetHistoryFilters,
+    actionUpdateHistoryRunMeta,
+    actionImportHistoryText,
+    actionExportHistoryJSON
+} from "../actions/actions.js";
 
 import {
     buildHistoryStatsModal
@@ -45,1665 +22,552 @@ import {
     buildHistoryEditModal
 } from "./layouts/historyEditModal.js";
 
-/* --------------------------------------------------
-   BIND UI EVENTS
--------------------------------------------------- */
-
-export function bindUIEvents() {
-
-    bindDashboardTabEvents();
-
-    bindHeatmapEvents();
-
-    bindHistoryLoadEvents();
-
-    bindHistoryFilterEvents();
-
-    bindHistoryControlEvents();
-
-    bindHistoryStatsEvents();
-
-    bindHistoryEditEvents();
-
-    bindHistoryConfirmModal();
-
-    bindViewEvents();
-}
-
+let bound = false;
+let renderNow = null;
+let historySearchTimer = null;
+let statsKeydownBound = false;
+let editKeydownBound = false;
+let confirmKeydownBound = false;
 
 /* --------------------------------------------------
-   DASHBOARD TABS + SUBSYSTEM MATRIX
+   BIND ONCE
 -------------------------------------------------- */
 
-function bindDashboardTabEvents() {
+export function bindUIEvents(renderCallback = null) {
 
-    if (document.body?.dataset?.dashboardTabDelegatesBound === "true") {
+    if (typeof renderCallback === "function") {
+        renderNow = renderCallback;
+    }
+
+    if (bound) {
+        syncRuntimeClasses();
         return;
     }
 
-    if (document.body?.dataset) {
-        document.body.dataset.dashboardTabDelegatesBound = "true";
-    }
+    bound = true;
 
-    let lastHandled = 0;
+    document.addEventListener("click", handleDocumentClick, true);
+    document.addEventListener("input", handleDocumentInput, true);
+    document.addEventListener("change", handleDocumentChange, true);
+    document.addEventListener("toggle", handleDocumentToggle, true);
+    document.addEventListener("keydown", handleGlobalKeydown, true);
 
-    document.addEventListener("pointerup", event => {
-        handleDashboardTabEvent(event, lastHandledStamp => {
-            lastHandled = lastHandledStamp;
-        }, lastHandled);
-    }, true);
-
-    document.addEventListener("click", event => {
-        handleDashboardTabEvent(event, lastHandledStamp => {
-            lastHandled = lastHandledStamp;
-        }, lastHandled);
-    }, true);
+    syncRuntimeClasses();
 }
 
-function handleDashboardTabEvent(event, setLastHandled, lastHandled = 0) {
+/* --------------------------------------------------
+   CLICK BRIDGE
+-------------------------------------------------- */
 
-    const tab =
-        event.target?.closest?.("[data-dashboard-tab]");
+function handleDocumentClick(event) {
 
-    if (!tab) {
+    const target = event.target;
+
+    if (!target || typeof target.closest !== "function") {
         return;
     }
 
-    const stamp =
-        Number(event.timeStamp || Date.now());
+    if (handleConfirmClick(event, target)) return;
+    if (handleHistoryStatsClick(event, target)) return;
+    if (handleHistoryEditClick(event, target)) return;
 
-    if (Math.abs(stamp - lastHandled) < 120) {
+    const uiAction = target.closest("[data-ui-action]");
+
+    if (uiAction && !uiAction.disabled) {
         event.preventDefault();
+        event.stopPropagation();
+        handleUIActionButton(uiAction);
         return;
     }
 
-    setLastHandled?.(stamp);
+    const dashboardTab = target.closest("[data-dashboard-tab]");
+
+    if (dashboardTab && !dashboardTab.disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+        runAction("set-dashboard-tab", {
+            tab: dashboardTab.dataset.dashboardTab || "overview"
+        });
+        return;
+    }
+
+    const systemTile = target.closest("[data-section]");
+
+    if (systemTile && !systemTile.disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+        runAction("select-section", {
+            section: systemTile.dataset.section || ""
+        });
+        return;
+    }
+
+    const historyLoad = target.closest("[data-history-index][data-history-slot]");
+
+    if (historyLoad && !historyLoad.disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+        runAction("history-load-run", {
+            index: historyLoad.dataset.historyIndex,
+            slot: historyLoad.dataset.historySlot || "runA"
+        });
+        return;
+    }
+
+    if (handleHistoryButton(event, target)) return;
+    if (handleHistoryFilterClick(event, target)) return;
+}
+
+function handleUIActionButton(button) {
+
+    const action = button.dataset.uiAction || "";
+
+    const payload = buildActionPayload(button);
+
+    if (action === "import-history") {
+        openHistoryImportPicker();
+        return;
+    }
+
+    if (action === "export-history") {
+        downloadTextFile(
+            actionExportHistoryJSON(),
+            buildHistoryExportFilename(),
+            "application/json;charset=utf-8"
+        );
+        return;
+    }
+
+    if (action === "delete-history-run") {
+        openHistoryConfirmModal({
+            action: "history-delete-run",
+            index: button.dataset.deleteHistoryIndex || button.dataset.index,
+            title: `Delete Run ${Number(button.dataset.historyDisplayIndex || button.dataset.deleteHistoryIndex || 0) + 1}?`,
+            message: "This will permanently remove this saved run from Battle History Trace.",
+            finalTitle: "Delete Saved Run",
+            finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete This Run",
+            requiredPhrase: "DELETE"
+        });
+        return;
+    }
+
+    if (action === "delete-last-history") {
+        openHistoryConfirmModal({
+            action: "history-delete-last",
+            title: "Delete Latest Saved Run?",
+            message: "This will permanently remove the latest saved run from Battle History Trace.",
+            finalTitle: "Delete Latest Run",
+            finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete Latest Run",
+            requiredPhrase: "LAST"
+        });
+        return;
+    }
+
+    if (action === "delete-all-history") {
+        openHistoryConfirmModal({
+            action: "history-delete-all",
+            title: "Delete All Battle History?",
+            message: "This will permanently remove all saved battle reports from this browser. It also clears Run A and Run B.",
+            finalTitle: "Final Warning",
+            finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
+            buttonText: "Yes, Delete Everything",
+            requiredPhrase: "DELETE ALL"
+        });
+        return;
+    }
+
+    if (action === "open-history-stats") {
+        openHistoryStatsModal(Number(button.dataset.historyStatsIndex), button);
+        return;
+    }
+
+    if (action === "open-history-edit") {
+        openHistoryEditModal(Number(button.dataset.historyEditIndex), button);
+        return;
+    }
+
+    runAction(action, payload);
+}
+
+
+function buildActionPayload(button) {
+
+    const index = firstDefined(
+        button.dataset.index,
+        button.dataset.historyIndex,
+        button.dataset.deleteHistoryIndex,
+        button.dataset.archiveHistoryIndex,
+        button.dataset.restoreHistoryIndex,
+        button.dataset.historyStatsIndex,
+        button.dataset.historyEditIndex,
+        button.dataset.historyModalIndex
+    );
+
+    return {
+        tab: button.dataset.dashboardTab,
+        section: firstDefined(button.dataset.section, button.dataset.compareSection),
+        compareSection: button.dataset.compareSection,
+        value: button.dataset.value,
+        buildStyle: button.dataset.buildStyle,
+        slot: button.dataset.historySlot || button.dataset.historyModalSlot,
+        index,
+        filters: readFilterDataset(button),
+        input: document.getElementById("input")
+    };
+}
+
+function readFilterDataset(button) {
+    const kind = button.dataset.historyFilterKind || button.dataset.historyFilterValue;
+    const option = button.dataset.historyFilterOption;
+
+    if (!kind) {
+        return null;
+    }
+
+    return buildHistoryFilterPatch(kind, option) || null;
+}
+
+function firstDefined(...values) {
+    return values.find(value => value !== undefined && value !== null && String(value) !== "");
+}
+
+/* --------------------------------------------------
+   HISTORY BUTTON COMPATIBILITY
+-------------------------------------------------- */
+
+function handleHistoryButton(event, target) {
+
+    const button = target.closest(`
+        [data-history-stats-index],
+        [data-history-edit-index],
+        [data-archive-history-index],
+        [data-restore-history-index],
+        [data-delete-history-index],
+        [data-swap-history-slots],
+        [data-clear-history-selection],
+        [data-export-history],
+        [data-import-history-button],
+        [data-import-history-label],
+        [data-delete-last-history],
+        [data-delete-all-history]
+    `);
+
+    if (!button || button.disabled) {
+        return false;
+    }
 
     event.preventDefault();
     event.stopPropagation();
 
-    activateDashboardTab(tab.dataset.dashboardTab || "overview");
-}
-
-function activateDashboardTab(dashboardTab = "overview") {
-
-    const state =
-        getState();
-
-    const currentTab =
-        state.ui?.dashboardTab || "overview";
-
-    document.body.dataset.dashboardTab = dashboardTab;
-    document.documentElement.dataset.dashboardTab = dashboardTab;
-
-    if (dashboardTab === currentTab) {
-        scrollMobileDashboardToTop({ smooth: true });
-        return;
+    if (button.matches("[data-history-stats-index]")) {
+        openHistoryStatsModal(Number(button.dataset.historyStatsIndex), button);
+        return true;
     }
 
-    setState({
-        ui: {
-            ...(state.ui || {}),
-            dashboardTab
-        }
-    });
-
-    saveStorage(getState());
-
-    withMobileTabSwitch(() => {
-        render();
-    });
-
-    scrollMobileDashboardToTop();
-}
-
-function withMobileTabSwitch(callback) {
-
-    if (!isMobileMode()) {
-        callback?.();
-        return;
+    if (button.matches("[data-history-edit-index]")) {
+        openHistoryEditModal(Number(button.dataset.historyEditIndex), button);
+        return true;
     }
 
-    document.documentElement.classList.add("mobile-tab-changing");
+    if (button.matches("[data-archive-history-index]")) {
+        runAction("history-archive-run", { index: button.dataset.archiveHistoryIndex });
+        return true;
+    }
 
-    try {
-        callback?.();
-    } finally {
-        window.requestAnimationFrame(() => {
-            window.setTimeout(() => {
-                document.documentElement.classList.remove("mobile-tab-changing");
-            }, 90);
+    if (button.matches("[data-restore-history-index]")) {
+        runAction("history-restore-run", { index: button.dataset.restoreHistoryIndex });
+        return true;
+    }
+
+    if (button.matches("[data-delete-history-index]")) {
+        openHistoryConfirmModal({
+            action: "history-delete-run",
+            index: button.dataset.deleteHistoryIndex,
+            title: `Delete Run ${Number(button.dataset.historyDisplayIndex || button.dataset.deleteHistoryIndex || 0) + 1}?`,
+            message: "This will permanently remove this saved run from Battle History Trace.",
+            finalTitle: "Delete Saved Run",
+            finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete This Run",
+            requiredPhrase: "DELETE"
         });
-    }
-}
-
-function scrollMobileDashboardToTop({ smooth = false } = {}) {
-
-    if (!isMobileMode()) {
-        return;
+        return true;
     }
 
-    scrollMobileElementIntoView(".tbi-header", {
-        fallbackSelector: "[data-dashboard-shell]",
-        offset: 0,
-        smooth
-    });
-}
-
-function scrollMobileElementIntoView(selector, {
-    fallbackSelector = null,
-    offset = 8,
-    smooth = false
-} = {}) {
-
-    if (!isMobileMode()) {
-        return;
+    if (button.matches("[data-swap-history-slots]")) {
+        runAction("history-swap-slots");
+        return true;
     }
 
-    window.requestAnimationFrame(() => {
-        const target =
-            document.querySelector(selector) ||
-            (fallbackSelector ? document.querySelector(fallbackSelector) : null) ||
-            document.getElementById("dashboard");
+    if (button.matches("[data-clear-history-selection]")) {
+        runAction("history-clear-selection");
+        return true;
+    }
 
-        if (!target) {
-            return;
-        }
+    if (button.matches("[data-export-history]")) {
+        downloadTextFile(
+            actionExportHistoryJSON(),
+            buildHistoryExportFilename(),
+            "application/json;charset=utf-8"
+        );
+        return true;
+    }
 
-        const rect =
-            target.getBoundingClientRect();
+    if (button.matches("[data-import-history-button], [data-import-history-label]")) {
+        openHistoryImportPicker();
+        return true;
+    }
 
-        const top =
-            Math.max(0, window.scrollY + rect.top - offset);
-
-        window.scrollTo({
-            top,
-            behavior: smooth ? "smooth" : "auto"
+    if (button.matches("[data-delete-last-history]")) {
+        openHistoryConfirmModal({
+            action: "history-delete-last",
+            title: "Delete Latest Saved Run?",
+            message: "This will permanently remove the latest saved run from Battle History Trace.",
+            finalTitle: "Delete Latest Run",
+            finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
+            buttonText: "Delete Latest Run",
+            requiredPhrase: "LAST"
         });
-    });
-}
-
-function lockMobilePageScroll(force = true) {
-
-    if (!isMobileMode()) {
-        return;
+        return true;
     }
 
-    document.documentElement.classList.toggle("mobile-scroll-locked", Boolean(force));
-    document.body.classList.toggle("mobile-scroll-locked", Boolean(force));
-}
-
-function bindHeatmapEvents() {
-
-    if (document.body?.dataset?.heatmapDelegatesBound === "true") {
-        return;
-    }
-
-    if (document.body?.dataset) {
-        document.body.dataset.heatmapDelegatesBound = "true";
-    }
-
-    document.addEventListener("click", event => {
-
-        const tile =
-            event.target?.closest?.("[data-section]");
-
-        if (!tile) {
-            return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        const section =
-            tile.dataset.section;
-
-        if (!section) {
-            return;
-        }
-
-        const before =
-            captureViewport();
-
-        const state =
-            getState();
-
-        const currentSection = state.ui?.selectedSection || null;
-
-        setState({
-            ui: {
-                ...(state.ui || {}),
-                selectedSection: currentSection === section ? null : section
-            }
+    if (button.matches("[data-delete-all-history]")) {
+        openHistoryConfirmModal({
+            action: "history-delete-all",
+            title: "Delete All Battle History?",
+            message: "This will permanently remove all saved battle reports from this browser. It also clears Run A and Run B.",
+            finalTitle: "Final Warning",
+            finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
+            buttonText: "Yes, Delete Everything",
+            requiredPhrase: "DELETE ALL"
         });
+        return true;
+    }
 
-        saveStorage(getState());
-
-        withMobileTabSwitch(() => {
-            render();
-        });
-
-        restoreViewport(before);
-    }, true);
+    return false;
 }
 
 /* --------------------------------------------------
-   HISTORY LOAD BUTTONS
+   INPUT / CHANGE
 -------------------------------------------------- */
 
-function bindHistoryLoadEvents() {
+function handleDocumentInput(event) {
 
-    const buttons =
-        document.querySelectorAll("[data-history-index][data-history-slot]");
+    const target = event.target;
 
-    buttons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-
-            const index =
-                Number(button.dataset.historyIndex);
-
-            const slot =
-                button.dataset.historySlot || "runA";
-
-            if (!Number.isFinite(index)) {
-                return;
-            }
-
-            loadHistoryRun(
-                index,
-                slot
-            );
-
-            refreshAnalysis({
-                reason: "load_history_run",
-                historyIndex: index,
-                targetSlot: slot
-            });
-
-            saveStorage(getState());
-
-            render();
-        });
-    });
-}
-
-/* --------------------------------------------------
-   HISTORY FILTERS
-   Single delegated filter system. No legacy filter fighting.
--------------------------------------------------- */
-
-let historySearchTimer = null;
-let pendingHistorySearch = null;
-
-function bindHistoryFilterEvents() {
-
-    if (document.body?.dataset?.historyFilterDelegatesBound === "true") {
+    if (!target || typeof target.matches !== "function") {
         return;
     }
 
-    if (document.body?.dataset) {
-        document.body.dataset.historyFilterDelegatesBound = "true";
-    }
-
-    document.addEventListener("input", handleHistoryFilterInput, true);
-    document.addEventListener("search", handleHistoryFilterInput, true);
-    document.addEventListener("click", handleHistoryFilterClick, true);
-    document.addEventListener("toggle", handleHistoryChoiceToggle, true);
-}
-
-function handleHistoryFilterInput(event) {
-
-    const target =
-        event?.target;
-
-    if (!target?.matches?.("[data-history-filter-query]")) {
+    if (target.matches("[data-history-filter-query]")) {
+        queueHistorySearchUpdate(target.value || "");
         return;
     }
 
-    queueHistorySearchUpdate(target.value || "");
-}
-
-function handleHistoryFilterClick(event) {
-
-    const target =
-        event?.target;
-
-    if (!target?.closest) {
+    if (target.matches("[data-confirm-input]")) {
+        updateConfirmContinueState(target.closest("[data-confirm-modal]") || document.getElementById("historyConfirmModal"));
         return;
     }
 
-    const reset =
-        target.closest("[data-history-filter-reset]");
+    if (target.matches("[data-history-stats-section-search]")) {
+        filterHistoryStatsSections(target.value || "");
+    }
+}
 
-    if (reset) {
+function handleDocumentChange(event) {
+
+    const target = event.target;
+
+    if (!target || typeof target.matches !== "function") {
+        return;
+    }
+
+    if (target.matches("#buildStyleSelect")) {
+        runAction("set-build-style", { buildStyle: target.value || "unknown" });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-sort]")) {
+        applyHistoryFilterPatch({ sort: target.value || "newest" });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-build]")) {
+        applyHistoryFilterPatch({ build: target.value || "all" });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-tag]")) {
+        applyHistoryFilterPatch({ tag: target.value || "all" });
+        return;
+    }
+
+    if (target.matches("[data-history-filter-archived]")) {
+        applyHistoryFilterPatch({ showArchived: Boolean(target.checked) });
+        return;
+    }
+
+    if (target.matches("[data-import-history-input]")) {
+        handleHistoryImportInput(target);
+    }
+}
+
+function handleHistoryFilterClick(event, target) {
+
+    const reset = target.closest("[data-history-filter-reset]");
+
+    if (reset && !reset.disabled) {
         event.preventDefault();
         event.stopPropagation();
-        resetHistoryFilters();
-        return;
+        applyHistoryFilterPatch({
+            query: "",
+            sort: "newest",
+            build: "all",
+            tag: "all",
+            showArchived: false
+        });
+        return true;
     }
 
-    const choice =
-        target.closest("[data-history-filter-value]");
+    const choice = target.closest("[data-history-filter-value]");
 
-    if (choice) {
+    if (choice && !choice.disabled) {
         event.preventDefault();
         event.stopPropagation();
-        applyHistoryChoice(choice);
-    }
-}
-
-function handleHistoryChoiceToggle(event) {
-
-    const menu =
-        event.target?.matches?.("[data-history-choice-menu]")
-            ? event.target
-            : null;
-
-    if (!menu || !menu.open) {
-        return;
+        const kind = choice.dataset.historyFilterKind || choice.dataset.historyFilterValue || "";
+        const option = choice.dataset.historyFilterOption || "";
+        const patch = buildHistoryFilterPatch(kind, option);
+        if (patch) applyHistoryFilterPatch(patch);
+        return true;
     }
 
-    const menuName =
-        menu.dataset.historyChoiceMenu;
-
-    document
-        .querySelectorAll("[data-history-choice-menu][open]")
-        .forEach(other => {
-            if (other !== menu && other.dataset.historyChoiceMenu !== menuName) {
-                other.removeAttribute("open");
-            }
-        });
+    return false;
 }
 
-function applyHistoryChoice(choice) {
-
-    const kind =
-        choice.dataset.historyFilterKind ||
-        choice.dataset.historyFilterValue ||
-        "";
-
-    const option =
-        choice.dataset.historyFilterOption ||
-        "";
-
-    const patch =
-        buildHistoryFilterPatchFromChoice(kind, option);
-
-    if (!patch) {
-        return;
-    }
-
-    applyHistoryFilterPatch(patch, {
-        preserveFocus: false,
-        closeChoiceMenus: true
-    });
-}
-
-function buildHistoryFilterPatchFromChoice(kind = "", option = "") {
-
+function buildHistoryFilterPatch(kind = "", option = "") {
     switch (kind) {
-
-        case "sort":
-            return {
-                sort: option || "newest"
-            };
-
-        case "build":
-            return {
-                build: option || "all"
-            };
-
-        case "tag":
-            return {
-                tag: option || "all"
-            };
-
-        case "showArchived":
-            return {
-                showArchived:
-                    option === "true"
-            };
-
-        default:
-            return null;
+        case "sort": return { sort: option || "newest" };
+        case "build": return { build: option || "all" };
+        case "tag": return { tag: option || "all" };
+        case "showArchived": return { showArchived: option === "true" };
+        default: return null;
     }
 }
 
 function queueHistorySearchUpdate(query = "") {
-
     clearTimeout(historySearchTimer);
-
-    pendingHistorySearch = {
-        query,
-        viewport: captureViewport(),
-        openDrawers: captureOpenHistoryDrawers(),
-        caret: getActiveSearchCaret()
-    };
-
-    historySearchTimer =
-        setTimeout(() => {
-            applyHistoryFilterPatch({
-                query:
-                    pendingHistorySearch?.query || ""
-            }, {
-                preserveFocus: true,
-                viewport: pendingHistorySearch?.viewport || null,
-                openDrawers: pendingHistorySearch?.openDrawers || [],
-                caret: pendingHistorySearch?.caret || null,
-                closeChoiceMenus: false
-            });
-        }, 180);
+    historySearchTimer = setTimeout(() => {
+        applyHistoryFilterPatch({ query });
+    }, 180);
 }
 
-function resetHistoryFilters() {
+function applyHistoryFilterPatch(patch = {}) {
 
-    applyHistoryFilterPatch({
-        query: "",
-        sort: "newest",
-        build: "all",
-        tag: "all",
-        showArchived: false
-    }, {
-        preserveFocus: false,
-        closeChoiceMenus: true
-    });
-}
+    const shouldRestoreSearch = Object.prototype.hasOwnProperty.call(patch, "query") &&
+        document.activeElement?.matches?.("[data-history-filter-query]");
 
-function applyHistoryFilterPatch(patch = {}, {
-    preserveFocus = false,
-    viewport = null,
-    openDrawers = null,
-    caret = null,
-    closeChoiceMenus = true
-} = {}) {
+    const searchValue = String(patch.query ?? "");
+    const scroll = shouldRestoreSearch ? { x: window.scrollX || 0, y: window.scrollY || 0 } : null;
 
-    const uiSnapshot = {
-        viewport:
-            viewport || captureViewport(),
-        openDrawers:
-            Array.isArray(openDrawers)
-                ? openDrawers
-                : captureOpenHistoryDrawers(),
-        searchFocused:
-            preserveFocus && document.activeElement?.matches?.("[data-history-filter-query]"),
-        query:
-            String(patch.query ?? document.querySelector("[data-history-filter-query]")?.value ?? ""),
-        caret:
-            caret || getActiveSearchCaret()
-    };
+    const openDetails = captureOpenDetails();
 
-    setHistoryFilters(patch);
+    actionSetHistoryFilters(patch);
+    renderApp();
+    restoreOpenDetails(openDetails);
 
-    saveStorage(getState());
-
-    render();
-
-    restoreHistoryFilterUi(uiSnapshot, {
-        closeChoiceMenus
-    });
-}
-
-function captureOpenHistoryDrawers() {
-
-    return Array.from(
-        document.querySelectorAll(".history-collapsible[open], [data-history-choice-menu][open]")
-    ).map(element => ({
-        selector:
-            element.dataset.historyChoiceMenu
-                ? `[data-history-choice-menu=\"${cssEscape(element.dataset.historyChoiceMenu)}\"]`
-                : classSelector(element)
-    })).filter(item => item.selector);
-}
-
-function restoreHistoryFilterUi(snapshot = {}, {
-    closeChoiceMenus = true
-} = {}) {
-
-    requestAnimationFrame(() => {
-
-        (snapshot.openDrawers || []).forEach(item => {
-            if (closeChoiceMenus && item.selector?.includes("data-history-choice-menu")) {
-                return;
-            }
-
-            document.querySelector(item.selector)?.setAttribute("open", "");
-        });
-
-        const input =
-            document.querySelector("[data-history-filter-query]");
-
-        if (input && snapshot.searchFocused) {
-            input.focus({
-                preventScroll: true
-            });
-
-            const position =
-                Number.isInteger(snapshot.caret?.start)
-                    ? snapshot.caret.start
-                    : String(snapshot.query || "").length;
-
-            try {
-                input.setSelectionRange(position, position);
-            } catch {
-                // Ignore search input implementations without range support.
-            }
-        }
-
-        restoreViewport(snapshot.viewport);
-
+    if (shouldRestoreSearch) {
         requestAnimationFrame(() => {
-            restoreViewport(snapshot.viewport);
+            if (scroll) window.scrollTo(scroll.x, scroll.y);
+            const input = document.querySelector("[data-history-filter-query]");
+            if (input) {
+                input.focus({ preventScroll: true });
+                const caret = String(searchValue || "").length;
+                try { input.setSelectionRange(caret, caret); } catch { /* ignore */ }
+            }
+            if (scroll) requestAnimationFrame(() => window.scrollTo(scroll.x, scroll.y));
         });
-    });
-}
-
-function getActiveSearchCaret() {
-
-    const input =
-        document.activeElement?.matches?.("[data-history-filter-query]")
-            ? document.activeElement
-            : null;
-
-    if (!input) {
-        return null;
     }
-
-    return {
-        start:
-            Number.isInteger(input.selectionStart)
-                ? input.selectionStart
-                : String(input.value || "").length,
-        end:
-            Number.isInteger(input.selectionEnd)
-                ? input.selectionEnd
-                : String(input.value || "").length
-    };
-}
-
-function classSelector(element) {
-
-    if (!element?.classList?.length) {
-        return "";
-    }
-
-    return Array.from(element.classList)
-        .filter(Boolean)
-        .slice(0, 2)
-        .map(className => `.${cssEscape(className)}`)
-        .join("");
-}
-
-function cssEscape(value = "") {
-
-    if (typeof CSS !== "undefined" && typeof CSS.escape === "function") {
-        return CSS.escape(String(value));
-    }
-
-    return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
-}
-
-function captureViewport() {
-
-    return {
-        x: window.scrollX || 0,
-        y: window.scrollY || 0
-    };
-}
-
-function restoreViewport(viewport = null) {
-
-    if (!viewport) {
-        return;
-    }
-
-    window.scrollTo({
-        left: viewport.x || 0,
-        top: viewport.y || 0,
-        behavior: "auto"
-    });
 }
 
 /* --------------------------------------------------
-   HISTORY CONTROLS
+   DETAILS / DRAWERS
 -------------------------------------------------- */
 
-function bindHistoryControlEvents() {
+function handleDocumentToggle(event) {
+    const drawer = event.target;
 
-    bindConfirmOpenButtons();
-
-    const swap =
-        document.querySelector("[data-swap-history-slots]");
-
-    if (swap && swap.dataset.bound !== "true") {
-
-        swap.dataset.bound = "true";
-
-        swap.addEventListener("click", () => {
-
-            swapHistorySlots();
-
-            refreshAnalysis({
-                reason: "swap_history_slots"
-            });
-
-            saveStorage(getState());
-
-            render();
-        });
-    }
-
-    const clearSelection =
-        document.querySelector("[data-clear-history-selection]");
-
-    if (
-        clearSelection &&
-        clearSelection.dataset.bound !== "true"
-    ) {
-
-        clearSelection.dataset.bound = "true";
-
-        clearSelection.addEventListener("click", () => {
-
-            clearHistorySelection();
-
-            refreshAnalysis({
-                reason: "clear_history_selection"
-            });
-
-            saveStorage(getState());
-
-            render();
-        });
-    }
-
-    bindHistoryArchiveButtons();
-
-    bindHistoryImportExportButtons();
-}
-
-function bindHistoryArchiveButtons() {
-
-    const archiveButtons =
-        document.querySelectorAll("[data-archive-history-index]");
-
-    archiveButtons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-
-            const index =
-                Number(button.dataset.archiveHistoryIndex);
-
-            if (!Number.isInteger(index)) {
-                return;
-            }
-
-            archiveHistoryRun(index);
-
-            refreshAnalysis({
-                reason: "archive_history_run",
-                historyIndex: index
-            });
-
-            saveStorage(getState());
-
-            render();
-        });
-    });
-
-    const restoreButtons =
-        document.querySelectorAll("[data-restore-history-index]");
-
-    restoreButtons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-
-            const index =
-                Number(button.dataset.restoreHistoryIndex);
-
-            if (!Number.isInteger(index)) {
-                return;
-            }
-
-            restoreHistoryRun(index);
-
-            saveStorage(getState());
-
-            render();
-        });
-    });
-}
-
-function bindHistoryImportExportButtons() {
-
-    const exportButton =
-        document.querySelector("[data-export-history]");
-
-    if (exportButton && exportButton.dataset.bound !== "true") {
-
-        exportButton.dataset.bound = "true";
-
-        exportButton.addEventListener("click", () => {
-            downloadTextFile(
-                exportHistoryJSON(),
-                buildHistoryExportFilename(),
-                "application/json;charset=utf-8"
-            );
-        });
-    }
-
-    const importButton =
-        document.querySelector("[data-import-history-button]");
-
-    const importInput =
-        document.querySelector("[data-import-history-input]");
-
-    if (importButton && importButton.dataset.bound !== "true") {
-
-        importButton.dataset.bound = "true";
-
-        importButton.addEventListener("click", () => {
-            importInput?.click();
-        });
-    }
-
-    if (importInput && importInput.dataset.bound !== "true") {
-
-        importInput.dataset.bound = "true";
-
-        importInput.addEventListener("change", async () => {
-
-            const file =
-                importInput.files?.[0];
-
-            if (!file) {
-                return;
-            }
-
-            try {
-
-                const text =
-                    await file.text();
-
-                importHistoryRuns(text);
-
-                saveStorage(getState());
-
-                render();
-
-            } catch (error) {
-
-                console.warn(
-                    "[Tower Battle Intel] Failed to import history:",
-                    error
-                );
-
-            } finally {
-                importInput.value = "";
-            }
-        });
-    }
-}
-
-function bindConfirmOpenButtons() {
-
-    const deleteLast =
-        document.querySelector("[data-delete-last-history]");
-
-    if (
-        deleteLast &&
-        deleteLast.dataset.bound !== "true"
-    ) {
-
-        deleteLast.dataset.bound = "true";
-
-        deleteLast.addEventListener("click", () => {
-            openHistoryConfirmModal({
-                action: "delete-last",
-                title: "Delete Latest Saved Run?",
-                message: "This will permanently remove the latest saved run from Battle History Trace.",
-                finalTitle: "Delete Latest Run",
-                finalMessage: "The latest saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-                buttonText: "Delete Latest Run"
-            });
-        });
-    }
-
-    const deleteAll =
-        document.querySelector("[data-delete-all-history]");
-
-    if (
-        deleteAll &&
-        deleteAll.dataset.bound !== "true"
-    ) {
-
-        deleteAll.dataset.bound = "true";
-
-        deleteAll.addEventListener("click", () => {
-            openHistoryConfirmModal({
-                action: "delete-all",
-                title: "Delete All Battle History?",
-                message: "This will permanently remove all saved battle reports from this browser. It will also clear Run A and Run B.",
-                finalTitle: "Final Warning",
-                finalMessage: "All saved battle history will be permanently deleted from this browser. Run A and Run B will also be cleared.",
-                buttonText: "Yes, Delete Everything"
-            });
-        });
-    }
-
-    const deleteRunButtons =
-        document.querySelectorAll("[data-delete-history-index]");
-
-    deleteRunButtons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-
-            const index =
-                Number(button.dataset.deleteHistoryIndex);
-
-            if (!Number.isInteger(index)) {
-                return;
-            }
-
-            openHistoryConfirmModal({
-                action: "delete-run",
-                index,
-                title: `Delete Run ${index + 1}?`,
-                message: "This will permanently remove this saved run from Battle History Trace.",
-                finalTitle: `Delete Run ${index + 1}`,
-                finalMessage: "This saved run will be removed from this browser. If it is loaded in A or B, that slot will be cleared.",
-                buttonText: "Delete This Run"
-            });
-        });
-    });
-}
-
-/* --------------------------------------------------
-   HISTORY STATS MODAL
--------------------------------------------------- */
-
-let historyStatsKeydownBound = false;
-
-function bindHistoryStatsEvents() {
-
-    const buttons =
-        document.querySelectorAll("[data-history-stats-index]");
-
-    buttons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-            openHistoryStatsModalFromButton(button);
-        });
-    });
-}
-
-function openHistoryStatsModalFromButton(button) {
-
-    const index =
-        Number(button?.dataset?.historyStatsIndex);
-
-    if (!Number.isInteger(index)) {
+    if (!drawer?.matches?.("[data-history-drawer]")) {
         return;
     }
 
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? state.history
-            : [];
-
-    const run =
-        history[index];
-
-    if (!run) {
-        return;
+    try {
+        window.sessionStorage?.setItem(
+            `tbi.history.drawer.${drawer.dataset.historyDrawer || "drawer"}`,
+            drawer.open ? "open" : "closed"
+        );
+    } catch {
+        // ignore unavailable sessionStorage
     }
-
-    const mount =
-        document.getElementById("historyStatsModalMount");
-
-    if (!mount) {
-        return;
-    }
-
-    const displayIndex =
-        Number(button?.dataset?.historyDisplayIndex);
-
-    mount.innerHTML =
-        buildHistoryStatsModal({
-            run,
-            index,
-            displayIndex: Number.isInteger(displayIndex) ? displayIndex : index,
-            history,
-            visibleHistory: getVisibleHistoryRunsFromDOM(history),
-            runA: state.runA,
-            runB: state.runB
-        });
-
-    document.body.classList.add("history-stats-open");
-
-    bindOpenHistoryStatsModal();
 }
 
-function getVisibleHistoryRunsFromDOM(history = []) {
-
-    const indexes =
-        Array.from(document.querySelectorAll("[data-history-stats-index]"))
-            .map(button => Number(button.dataset.historyStatsIndex))
-            .filter(Number.isInteger);
-
-    if (!indexes.length) {
-        return history;
-    }
-
-    return indexes
-        .map(index => history[index])
+function captureOpenDetails() {
+    return Array.from(document.querySelectorAll("details[open]"))
+        .map(detail => detail.dataset.historyDrawer || detail.dataset.historyChoiceMenu || detail.className || "")
         .filter(Boolean);
 }
 
-function bindOpenHistoryStatsModal() {
-
-    const modal =
-        document.getElementById("historyStatsModal");
-
-    if (!modal || modal.dataset.bound === "true") {
-        return;
-    }
-
-    modal.dataset.bound = "true";
-
-    const closeButtons =
-        modal.querySelectorAll("[data-history-stats-close]");
-
-    closeButtons.forEach(button => {
-        button.addEventListener("click", closeHistoryStatsModal);
-    });
-
-    modal.querySelectorAll("[data-history-stats-tab]").forEach(button => {
-        button.addEventListener("click", () => {
-            setHistoryStatsTab(button.dataset.historyStatsTab || "overview");
+function restoreOpenDetails(tokens = []) {
+    if (!tokens.length) return;
+    requestAnimationFrame(() => {
+        tokens.forEach(token => {
+            const safe = cssEscape(token);
+            document.querySelector(`[data-history-drawer="${safe}"]`)?.setAttribute("open", "");
+            document.querySelector(`[data-history-choice-menu="${safe}"]`)?.setAttribute("open", "");
         });
     });
-
-    modal.querySelector("[data-history-stats-section-search]")?.addEventListener("input", event => {
-        filterHistoryStatsSections(event.target?.value || "");
-    });
-
-    modal.querySelector("[data-history-stats-copy]")?.addEventListener("click", () => {
-        copyHistoryStatsJSON();
-    });
-
-    modal.querySelector("[data-history-stats-download]")?.addEventListener("click", () => {
-        downloadHistoryStatsJSON();
-    });
-
-    modal.querySelectorAll("[data-history-modal-slot]").forEach(button => {
-        button.addEventListener("click", () => {
-            loadHistoryRunFromStatsModal(button);
-        });
-    });
-
-    modal.addEventListener("click", event => {
-        if (event.target === modal) {
-            closeHistoryStatsModal();
-        }
-    });
-
-    bindHistoryStatsKeydown();
-
-    setTimeout(() => {
-        modal.querySelector("[data-history-stats-close]")?.focus?.();
-    }, 25);
-}
-
-function bindHistoryStatsKeydown() {
-
-    if (historyStatsKeydownBound) {
-        return;
-    }
-
-    historyStatsKeydownBound = true;
-
-    document.addEventListener("keydown", event => {
-
-        const modal =
-            document.getElementById("historyStatsModal");
-
-        if (!modal) {
-            return;
-        }
-
-        if (event.key === "Escape") {
-            closeHistoryStatsModal();
-        }
-    });
-}
-
-function setHistoryStatsTab(view = "overview") {
-
-    const modal =
-        document.getElementById("historyStatsModal");
-
-    if (!modal) {
-        return;
-    }
-
-    const targetView =
-        String(view || "overview");
-
-    modal.querySelectorAll("[data-history-stats-tab]").forEach(button => {
-
-        const active =
-            button.dataset.historyStatsTab === targetView;
-
-        button.classList.toggle("active", active);
-        button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-
-    modal.querySelectorAll("[data-history-stats-view]").forEach(panel => {
-
-        const active =
-            panel.dataset.historyStatsView === targetView;
-
-        panel.classList.toggle("active", active);
-    });
-}
-
-function filterHistoryStatsSections(query = "") {
-
-    const modal =
-        document.getElementById("historyStatsModal");
-
-    if (!modal) {
-        return;
-    }
-
-    const needle =
-        String(query || "")
-            .trim()
-            .toLowerCase();
-
-    let shown = 0;
-
-    modal.querySelectorAll("[data-history-stats-section]").forEach(section => {
-
-        const haystack =
-            String(section.dataset.sectionSearch || "")
-                .toLowerCase();
-
-        const visible =
-            !needle || haystack.includes(needle);
-
-        let matchedRows = 0;
-
-        section.querySelectorAll("[data-history-stats-row]").forEach(row => {
-
-            const rowHaystack =
-                String(row.dataset.historyStatsRowSearch || "")
-                    .toLowerCase();
-
-            const rowMatches =
-                Boolean(needle && rowHaystack.includes(needle));
-
-            row.classList.toggle("search-match", rowMatches);
-
-            if (rowMatches) {
-                matchedRows++;
-            }
-        });
-
-        const sectionMatches =
-            Boolean(needle && visible);
-
-        section.classList.toggle("search-section-match", sectionMatches);
-        section.classList.toggle("search-row-match", matchedRows > 0);
-
-        const matchPill =
-            section.querySelector("[data-history-stats-match-pill]");
-
-        if (matchPill) {
-            matchPill.hidden =
-                !sectionMatches;
-
-            matchPill.textContent =
-                matchedRows > 0
-                    ? `Matched ${matchedRows}`
-                    : "Section match";
-        }
-
-        section.hidden =
-            !visible;
-
-        if (visible) {
-            shown++;
-        }
-    });
-
-    const empty =
-        modal.querySelector("[data-history-stats-no-results]");
-
-    if (empty) {
-        empty.hidden = shown !== 0;
-    }
-}
-
-function loadHistoryRunFromStatsModal(button) {
-
-    const index =
-        Number(button?.dataset?.historyModalIndex);
-
-    const slot =
-        button?.dataset?.historyModalSlot || "runA";
-
-    if (!Number.isInteger(index)) {
-        return;
-    }
-
-    loadHistoryRun(index, slot);
-
-    refreshAnalysis({
-        reason: "load_history_run_from_stats_modal",
-        historyIndex: index,
-        targetSlot: slot
-    });
-
-    saveStorage(getState());
-
-    closeHistoryStatsModal();
-
-    render();
-}
-
-function copyHistoryStatsJSON() {
-
-    const run =
-        getHistoryStatsModalRun();
-
-    if (!run) {
-        return;
-    }
-
-    copyTextToClipboard(
-        JSON.stringify(run, null, 2)
-    );
-}
-
-function downloadHistoryStatsJSON() {
-
-    const run =
-        getHistoryStatsModalRun();
-
-    if (!run) {
-        return;
-    }
-
-    const reportId =
-        String(run?.meta?.reportId || "history-run")
-            .replace(/[^a-z0-9_-]/gi, "-")
-            .toLowerCase();
-
-    downloadTextFile(
-        JSON.stringify(run, null, 2),
-        `tower-battle-intel-${reportId}.json`,
-        "application/json;charset=utf-8"
-    );
-}
-
-function getHistoryStatsModalRun() {
-
-    const modal =
-        document.getElementById("historyStatsModal");
-
-    const index =
-        Number(modal?.dataset?.historyStatsIndex);
-
-    if (!Number.isInteger(index)) {
-        return null;
-    }
-
-    const history =
-        Array.isArray(getState().history)
-            ? getState().history
-            : [];
-
-    return history[index] || null;
-}
-
-async function copyTextToClipboard(text = "") {
-
-    const value =
-        String(text || "");
-
-    try {
-        if (
-            typeof navigator !== "undefined" &&
-            navigator?.clipboard &&
-            typeof navigator.clipboard.writeText === "function"
-        ) {
-            await navigator.clipboard.writeText(value);
-            flashHistoryStatsCopyStatus("Copied");
-            return;
-        }
-    } catch {
-        // fallback below
-    }
-
-    const textarea =
-        document.createElement("textarea");
-
-    textarea.value = value;
-    textarea.setAttribute("readonly", "true");
-    textarea.style.position = "fixed";
-    textarea.style.left = "-9999px";
-
-    document.body.appendChild(textarea);
-    textarea.select();
-
-    try {
-        document.execCommand("copy");
-    } catch {
-        // ignore copy fallback failure
-    }
-
-    document.body.removeChild(textarea);
-
-    flashHistoryStatsCopyStatus("Copied");
-}
-
-function flashHistoryStatsCopyStatus(message = "Copied") {
-
-    const button =
-        document.querySelector("[data-history-stats-copy]");
-
-    if (!button) {
-        return;
-    }
-
-    const old =
-        button.textContent;
-
-    button.textContent =
-        message;
-
-    setTimeout(() => {
-        button.textContent = old || "Copy JSON";
-    }, 900);
-}
-
-function closeHistoryStatsModal() {
-
-    const mount =
-        document.getElementById("historyStatsModalMount");
-
-    if (mount) {
-        mount.innerHTML = "";
-    }
-
-    document.body.classList.remove("history-stats-open");
-}
-
-
-/* --------------------------------------------------
-   HISTORY EDIT MODAL
--------------------------------------------------- */
-
-let historyEditKeydownBound = false;
-
-function bindHistoryEditEvents() {
-
-    const buttons =
-        document.querySelectorAll("[data-history-edit-index]");
-
-    buttons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-            openHistoryEditModalFromButton(button);
-        });
-    });
-}
-
-function openHistoryEditModalFromButton(button) {
-
-    const index =
-        Number(button?.dataset?.historyEditIndex);
-
-    if (!Number.isInteger(index)) {
-        return;
-    }
-
-    const state =
-        getState();
-
-    const history =
-        Array.isArray(state.history)
-            ? state.history
-            : [];
-
-    const run =
-        history[index];
-
-    if (!run) {
-        return;
-    }
-
-    const mount =
-        document.getElementById("historyEditModalMount");
-
-    if (!mount) {
-        return;
-    }
-
-    const displayIndex =
-        Number(button?.dataset?.historyDisplayIndex);
-
-    mount.innerHTML =
-        buildHistoryEditModal({
-            run,
-            index,
-            displayIndex: Number.isInteger(displayIndex) ? displayIndex : index
-        });
-
-    document.body.classList.add("history-edit-open");
-
-    bindOpenHistoryEditModal();
-}
-
-function bindOpenHistoryEditModal() {
-
-    const modal =
-        document.getElementById("historyEditModal");
-
-    if (!modal || modal.dataset.bound === "true") {
-        return;
-    }
-
-    modal.dataset.bound = "true";
-
-    modal.querySelectorAll("[data-history-edit-close]").forEach(button => {
-        button.addEventListener("click", closeHistoryEditModal);
-    });
-
-    modal.querySelectorAll("[data-history-edit-build-choice]").forEach(button => {
-        button.addEventListener("click", () => {
-            setHistoryEditBuild(button);
-        });
-    });
-
-    modal.querySelector("[data-history-edit-save]")?.addEventListener("click", () => {
-        saveHistoryEditModal();
-    });
-
-    modal.addEventListener("click", event => {
-        if (event.target === modal) {
-            closeHistoryEditModal();
-        }
-    });
-
-    bindHistoryEditKeydown();
-
-    setTimeout(() => {
-        modal.querySelector("[data-history-edit-notes]")?.focus?.();
-    }, 25);
-}
-
-function bindHistoryEditKeydown() {
-
-    if (historyEditKeydownBound) {
-        return;
-    }
-
-    historyEditKeydownBound = true;
-
-    document.addEventListener("keydown", event => {
-
-        const modal =
-            document.getElementById("historyEditModal");
-
-        if (!modal) {
-            return;
-        }
-
-        if (event.key === "Escape") {
-            closeHistoryEditModal();
-        }
-    });
-}
-
-function setHistoryEditBuild(button) {
-
-    const modal =
-        document.getElementById("historyEditModal");
-
-    if (!modal || !button) {
-        return;
-    }
-
-    const value =
-        button.dataset.historyEditBuildChoice || "unknown";
-
-    const input =
-        modal.querySelector("[data-history-edit-build]");
-
-    if (input) {
-        input.value = value;
-    }
-
-    modal.querySelectorAll("[data-history-edit-build-choice]").forEach(choice => {
-
-        const active =
-            choice === button;
-
-        choice.classList.toggle("active", active);
-        choice.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-}
-
-function saveHistoryEditModal() {
-
-    const modal =
-        document.getElementById("historyEditModal");
-
-    if (!modal) {
-        return;
-    }
-
-    const index =
-        Number(modal.dataset.historyEditIndex);
-
-    if (!Number.isInteger(index)) {
-        return;
-    }
-
-    const notes =
-        modal.querySelector("[data-history-edit-notes]")?.value || "";
-
-    const tags =
-        modal.querySelector("[data-history-edit-tags]")?.value || "";
-
-    const buildStyle =
-        modal.querySelector("[data-history-edit-build]")?.value || "unknown";
-
-    updateHistoryRunMeta(index, {
-        notes,
-        tags,
-        buildStyle
-    });
-
-    saveStorage(getState());
-
-    closeHistoryEditModal();
-
-    render();
-}
-
-function closeHistoryEditModal() {
-
-    const mount =
-        document.getElementById("historyEditModalMount");
-
-    if (mount) {
-        mount.innerHTML = "";
-    }
-
-    document.body.classList.remove("history-edit-open");
 }
 
 /* --------------------------------------------------
-   HISTORY CONFIRM MODAL
+   CONFIRM MODAL
 -------------------------------------------------- */
 
-let historyConfirmReturnFocus = null;
+function handleConfirmClick(event, target) {
 
-function safeFocusAfterHistoryConfirmClose(modal) {
+    const modal = target.closest("[data-confirm-modal]") || document.getElementById("historyConfirmModal");
 
-    const activeElement =
-        document.activeElement;
-
-    if (!modal || !activeElement || !modal.contains(activeElement)) {
-        return;
+    if (!modal) {
+        return false;
     }
 
-    if (typeof activeElement.blur === "function") {
-        activeElement.blur();
+    const cancel = target.closest("[data-confirm-cancel]");
+    if (cancel) {
+        event.preventDefault();
+        closeHistoryConfirmModal();
+        return true;
     }
 
-    const preferredTarget =
-        historyConfirmReturnFocus &&
-        historyConfirmReturnFocus.isConnected &&
-        !modal.contains(historyConfirmReturnFocus)
-            ? historyConfirmReturnFocus
-            : document.querySelector("[data-history-panel]") ||
-              document.getElementById("dashboard") ||
-              document.body;
-
-    if (!preferredTarget || typeof preferredTarget.focus !== "function") {
-        return;
+    const cont = target.closest("[data-confirm-continue]");
+    if (cont) {
+        event.preventDefault();
+        if (cont.disabled) return true;
+        showHistoryConfirmFinalStep(modal);
+        return true;
     }
 
-    const hadTabIndex =
-        preferredTarget.hasAttribute("tabindex");
-
-    if (!hadTabIndex) {
-        preferredTarget.setAttribute("tabindex", "-1");
+    const accept = target.closest("[data-confirm-accept]");
+    if (accept) {
+        event.preventDefault();
+        runConfirmedHistoryAction(modal);
+        return true;
     }
 
-    try {
-        preferredTarget.focus({
-            preventScroll: true
-        });
-    } catch (error) {
-        preferredTarget.focus();
+    if (target === modal && modal.classList.contains("active")) {
+        closeHistoryConfirmModal();
+        return true;
     }
 
-    if (!hadTabIndex) {
-        preferredTarget.removeAttribute("tabindex");
-    }
-}
-
-function bindHistoryConfirmModal() {
-
-    const modal =
-        document.getElementById("historyConfirmModal");
-
-    if (!modal || modal.dataset.bound === "true") {
-        return;
-    }
-
-    modal.dataset.bound = "true";
-
-    const input =
-        document.getElementById("historyConfirmInput");
-
-    const continueBtn =
-        modal.querySelector("[data-confirm-continue]");
-
-    const acceptBtn =
-        modal.querySelector("[data-confirm-accept]");
-
-    const cancelButtons =
-        modal.querySelectorAll("[data-confirm-cancel]");
-
-    input?.addEventListener("input", () => {
-
-        const typed =
-            String(input.value || "")
-                .trim()
-                .toUpperCase();
-
-        if (continueBtn) {
-            continueBtn.disabled =
-                typed !== "DELETE";
-        }
-    });
-
-    continueBtn?.addEventListener("click", () => {
-
-        const typed =
-            String(input?.value || "")
-                .trim()
-                .toUpperCase();
-
-        if (typed !== "DELETE") {
-            return;
-        }
-
-        showHistoryConfirmFinalStep();
-    });
-
-    acceptBtn?.addEventListener("click", () => {
-        runConfirmedHistoryAction();
-    });
-
-    cancelButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            closeHistoryConfirmModal();
-        });
-    });
-
-    modal.addEventListener("click", event => {
-
-        if (event.target === modal) {
-            closeHistoryConfirmModal();
-        }
-    });
+    return false;
 }
 
 function openHistoryConfirmModal({
@@ -1713,285 +577,578 @@ function openHistoryConfirmModal({
     message = "This action needs confirmation.",
     finalTitle = "Final Warning",
     finalMessage = "This action cannot be undone.",
-    buttonText = "Confirm"
+    buttonText = "Confirm",
+    requiredPhrase = "DELETE"
 } = {}) {
 
-    const modal =
-        document.getElementById("historyConfirmModal");
-
-    const input =
-        document.getElementById("historyConfirmInput");
+    const modal = document.getElementById("historyConfirmModal");
+    const input = document.getElementById("historyConfirmInput") || modal?.querySelector("[data-confirm-input]");
 
     if (!modal) {
         return;
     }
 
-    modal.dataset.confirmAction =
-        action;
-
-    modal.dataset.confirmIndex =
-        index == null
-            ? ""
-            : String(index);
+    modal.dataset.confirmAction = action;
+    modal.dataset.confirmIndex = index == null ? "" : String(index);
+    modal.dataset.confirmPhrase = String(requiredPhrase || "DELETE").trim().toUpperCase();
 
     setModalText(modal, "[data-confirm-title]", title);
     setModalText(modal, "[data-confirm-message]", message);
     setModalText(modal, "[data-confirm-final-title]", finalTitle);
     setModalText(modal, "[data-confirm-final-message]", finalMessage);
     setModalText(modal, "[data-confirm-accept]", buttonText);
-
-    historyConfirmReturnFocus =
-        document.activeElement;
-
-    modal.classList.remove("hidden");
-    modal.classList.add("active");
-    modal.removeAttribute("inert");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("history-confirm-open");
-
-    showHistoryConfirmTypeStep();
+    setModalText(modal, "[data-confirm-required-phrase]", modal.dataset.confirmPhrase);
 
     if (input) {
         input.value = "";
-
-        setTimeout(() => {
-            try {
-                input.focus({
-                    preventScroll: true
-                });
-            } catch (error) {
-                input.focus();
-            }
-        }, 50);
+        input.placeholder = `Type ${modal.dataset.confirmPhrase}`;
+        input.setAttribute("aria-label", `Type ${modal.dataset.confirmPhrase} to confirm`);
     }
+
+    modal.hidden = false;
+    modal.inert = false;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+
+    showHistoryConfirmTypeStep(modal);
+    updateConfirmContinueState(modal);
+
+    bindConfirmKeydown();
+
+    setTimeout(() => input?.focus?.(), 25);
 }
 
 function closeHistoryConfirmModal() {
 
-    const modal =
-        document.getElementById("historyConfirmModal");
+    const modal = document.getElementById("historyConfirmModal");
+    const input = document.getElementById("historyConfirmInput") || modal?.querySelector("[data-confirm-input]");
 
-    const input =
-        document.getElementById("historyConfirmInput");
+    if (!modal) return;
 
-    const continueBtn =
-        modal?.querySelector("[data-confirm-continue]");
-
-    if (!modal) {
-        return;
+    if (modal.contains(document.activeElement)) {
+        document.activeElement?.blur?.();
     }
-
-    safeFocusAfterHistoryConfirmClose(modal);
 
     modal.classList.remove("active");
-    modal.classList.add("hidden");
     modal.setAttribute("aria-hidden", "true");
-    modal.setAttribute("inert", "");
-    document.body.classList.remove("history-confirm-open");
-
+    modal.inert = true;
+    modal.hidden = true;
     modal.dataset.confirmAction = "";
     modal.dataset.confirmIndex = "";
+    modal.dataset.confirmPhrase = "DELETE";
 
-    if (input) {
-        input.value = "";
-    }
+    if (input) input.value = "";
 
-    if (continueBtn) {
-        continueBtn.disabled = true;
-    }
-
-    showHistoryConfirmTypeStep();
-
-    historyConfirmReturnFocus = null;
+    showHistoryConfirmTypeStep(modal);
 }
 
-function showHistoryConfirmTypeStep() {
+function updateConfirmContinueState(modal = null) {
 
-    const modal =
-        document.getElementById("historyConfirmModal");
+    const root = modal || document.getElementById("historyConfirmModal");
+    if (!root) return;
 
-    if (!modal) {
-        return;
-    }
+    const input = document.getElementById("historyConfirmInput") || root.querySelector("[data-confirm-input]");
+    const cont = root.querySelector("[data-confirm-continue]");
 
-    const typeStep =
-        modal.querySelector("[data-confirm-step='type']");
+    if (!cont) return;
 
-    const finalStep =
-        modal.querySelector("[data-confirm-step='final']");
+    const typed = String(input?.value || "").trim().toUpperCase();
+    const phrase = String(root.dataset.confirmPhrase || "DELETE").trim().toUpperCase();
 
-    typeStep?.classList.remove("hidden");
-    finalStep?.classList.add("hidden");
+    cont.disabled = typed !== phrase;
 }
 
-function showHistoryConfirmFinalStep() {
-
-    const modal =
-        document.getElementById("historyConfirmModal");
-
-    if (!modal) {
-        return;
-    }
-
-    const typeStep =
-        modal.querySelector("[data-confirm-step='type']");
-
-    const finalStep =
-        modal.querySelector("[data-confirm-step='final']");
-
-    typeStep?.classList.add("hidden");
-    finalStep?.classList.remove("hidden");
+function showHistoryConfirmTypeStep(modal = null) {
+    const root = modal || document.getElementById("historyConfirmModal");
+    root?.querySelector("[data-confirm-step='type']")?.classList.remove("hidden");
+    root?.querySelector("[data-confirm-step='final']")?.classList.add("hidden");
 }
 
-function runConfirmedHistoryAction() {
+function showHistoryConfirmFinalStep(modal = null) {
+    const root = modal || document.getElementById("historyConfirmModal");
+    root?.querySelector("[data-confirm-step='type']")?.classList.add("hidden");
+    root?.querySelector("[data-confirm-step='final']")?.classList.remove("hidden");
+}
 
-    const modal =
-        document.getElementById("historyConfirmModal");
+function runConfirmedHistoryAction(modal = null) {
 
-    if (!modal) {
-        return;
-    }
+    const root = modal || document.getElementById("historyConfirmModal");
+    if (!root) return;
 
-    const action =
-        modal.dataset.confirmAction || "";
-
-    const index =
-        Number(modal.dataset.confirmIndex);
-
-    if (action === "delete-run") {
-        deleteHistoryRun(index);
-    }
-
-    if (action === "delete-last") {
-        deleteLastHistory();
-    }
-
-    if (action === "delete-all") {
-        clearHistory();
-    }
-
-    refreshAnalysis({
-        reason: action || "history_confirm_action",
-        historyIndex:
-            Number.isInteger(index)
-                ? index
-                : null
-    });
-
-    saveStorage(getState());
+    const action = root.dataset.confirmAction || "";
+    const index = root.dataset.confirmIndex;
 
     closeHistoryConfirmModal();
-
-    render();
+    runAction(action, { index });
 }
 
-function setModalText(modal, selector, value = "") {
+function bindConfirmKeydown() {
+    if (confirmKeydownBound) return;
+    confirmKeydownBound = true;
 
-    const element =
-        modal.querySelector(selector);
+    document.addEventListener("keydown", event => {
+        const modal = document.getElementById("historyConfirmModal");
+        if (!modal || modal.hidden) return;
+        if (event.key === "Escape") closeHistoryConfirmModal();
+    }, true);
+}
 
-    if (element) {
-        element.textContent =
-            String(value || "");
+/* --------------------------------------------------
+   HISTORY STATS MODAL
+-------------------------------------------------- */
+
+function openHistoryStatsModal(index = -1, button = null) {
+
+    if (!Number.isInteger(index) || index < 0) return;
+
+    const state = actionGetState();
+    const history = Array.isArray(state.history) ? state.history : [];
+    const run = history[index];
+    const mount = document.getElementById("historyStatsModalMount");
+
+    if (!run || !mount) return;
+
+    const displayIndex = Number(button?.dataset?.historyDisplayIndex);
+
+    mount.innerHTML = buildHistoryStatsModal({
+        run,
+        index,
+        displayIndex: Number.isInteger(displayIndex) ? displayIndex : index,
+        history,
+        visibleHistory: getVisibleHistoryRunsFromDOM(history),
+        runA: state.runA,
+        runB: state.runB
+    });
+
+    document.body.classList.add("history-stats-open");
+    bindStatsKeydown();
+    setTimeout(() => document.querySelector("[data-history-stats-close]")?.focus?.(), 25);
+}
+
+function handleHistoryStatsClick(event, target) {
+
+    const modal = target.closest("#historyStatsModal");
+    if (!modal) return false;
+
+    const close = target.closest("[data-history-stats-close]");
+    if (close) {
+        event.preventDefault();
+        closeHistoryStatsModal();
+        return true;
     }
-}
 
-/* --------------------------------------------------
-   DEVICE MODE HELPER
--------------------------------------------------- */
+    const tab = target.closest("[data-history-stats-tab]");
+    if (tab) {
+        event.preventDefault();
+        setHistoryStatsTab(tab.dataset.historyStatsTab || "overview");
+        return true;
+    }
 
-function isMobileMode() {
+    const copy = target.closest("[data-history-stats-copy]");
+    if (copy) {
+        event.preventDefault();
+        copyHistoryStatsJSON();
+        return true;
+    }
 
-    return (
-        typeof document !== "undefined" &&
-        document.documentElement?.getAttribute("data-device-mode") === "mobile"
-    );
-}
+    const download = target.closest("[data-history-stats-download]");
+    if (download) {
+        event.preventDefault();
+        downloadHistoryStatsJSON();
+        return true;
+    }
 
-/* --------------------------------------------------
-   OPTIONAL VIEW BUTTONS
--------------------------------------------------- */
-
-function bindViewEvents() {
-
-    const buttons =
-        document.querySelectorAll("[data-view]");
-
-    buttons.forEach(button => {
-
-        if (button.dataset.bound === "true") {
-            return;
-        }
-
-        button.dataset.bound = "true";
-
-        button.addEventListener("click", () => {
-
-            const view =
-                button.dataset.view || "dashboard";
-
-            import("../core/state.js").then(module => {
-
-                const state =
-                    getState();
-
-                module.setState({
-                    ui: {
-                        ...(state.ui || {}),
-                        activeView: view
-                    }
-                });
-
-                saveStorage(getState());
-
-                render();
-            });
+    const slot = target.closest("[data-history-modal-slot]");
+    if (slot) {
+        event.preventDefault();
+        runAction("history-load-run", {
+            index: slot.dataset.historyModalIndex,
+            slot: slot.dataset.historyModalSlot || "runA"
         });
+        closeHistoryStatsModal();
+        return true;
+    }
+
+    if (target === modal) {
+        closeHistoryStatsModal();
+        return true;
+    }
+
+    return false;
+}
+
+function setHistoryStatsTab(view = "overview") {
+    const modal = document.getElementById("historyStatsModal");
+    if (!modal) return;
+
+    modal.querySelectorAll("[data-history-stats-tab]").forEach(button => {
+        const active = button.dataset.historyStatsTab === view;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    modal.querySelectorAll("[data-history-stats-view]").forEach(panel => {
+        panel.classList.toggle("active", panel.dataset.historyStatsView === view);
     });
 }
 
+function getVisibleHistoryRunsFromDOM(history = []) {
+    const indexes = Array.from(document.querySelectorAll("[data-history-stats-index]"))
+        .map(button => Number(button.dataset.historyStatsIndex))
+        .filter(Number.isInteger);
+
+    return indexes.length ? indexes.map(index => history[index]).filter(Boolean) : history;
+}
+
+
+function filterHistoryStatsSections(query = "") {
+
+    const modal = document.getElementById("historyStatsModal");
+
+    if (!modal) {
+        return;
+    }
+
+    const needle = String(query || "").trim().toLowerCase();
+    let shown = 0;
+
+    modal.querySelectorAll("[data-history-stats-section]").forEach(section => {
+
+        const haystack = String(section.dataset.sectionSearch || "").toLowerCase();
+        const visible = !needle || haystack.includes(needle);
+        let matchedRows = 0;
+
+        section.querySelectorAll("[data-history-stats-row]").forEach(row => {
+            const rowHaystack = String(row.dataset.historyStatsRowSearch || "").toLowerCase();
+            const rowMatches = Boolean(needle && rowHaystack.includes(needle));
+            row.classList.toggle("search-match", rowMatches);
+            if (rowMatches) matchedRows++;
+        });
+
+        const matchPill = section.querySelector("[data-history-stats-match-pill]");
+
+        if (matchPill) {
+            matchPill.hidden = !(needle && visible);
+            matchPill.textContent = matchedRows > 0 ? `Matched ${matchedRows}` : "Section match";
+        }
+
+        section.hidden = !visible;
+
+        if (visible) shown++;
+    });
+
+    const empty = modal.querySelector("[data-history-stats-no-results]");
+    if (empty) empty.hidden = shown !== 0;
+}
+
+function closeHistoryStatsModal() {
+    const mount = document.getElementById("historyStatsModalMount");
+    if (mount) mount.innerHTML = "";
+    document.body.classList.remove("history-stats-open");
+}
+
+function bindStatsKeydown() {
+    if (statsKeydownBound) return;
+    statsKeydownBound = true;
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && document.getElementById("historyStatsModal")) {
+            closeHistoryStatsModal();
+        }
+    }, true);
+}
+
+function copyHistoryStatsJSON() {
+    const run = getHistoryStatsModalRun();
+    if (!run) return;
+    copyTextToClipboard(JSON.stringify(run, null, 2));
+}
+
+function downloadHistoryStatsJSON() {
+    const run = getHistoryStatsModalRun();
+    if (!run) return;
+    const id = String(run?.meta?.reportId || "history-run").replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
+    downloadTextFile(JSON.stringify(run, null, 2), `tower-battle-intel-${id}.json`, "application/json;charset=utf-8");
+}
+
+function getHistoryStatsModalRun() {
+    const modal = document.getElementById("historyStatsModal");
+    const index = Number(modal?.dataset?.historyStatsIndex);
+    if (!Number.isInteger(index)) return null;
+    const history = Array.isArray(actionGetState().history) ? actionGetState().history : [];
+    return history[index] || null;
+}
+
 /* --------------------------------------------------
-   DOWNLOAD HELPERS
+   HISTORY EDIT MODAL
 -------------------------------------------------- */
 
+function openHistoryEditModal(index = -1, button = null) {
+
+    if (!Number.isInteger(index) || index < 0) return;
+
+    const state = actionGetState();
+    const history = Array.isArray(state.history) ? state.history : [];
+    const run = history[index];
+    const mount = document.getElementById("historyEditModalMount");
+
+    if (!run || !mount) return;
+
+    const displayIndex = Number(button?.dataset?.historyDisplayIndex);
+
+    mount.innerHTML = buildHistoryEditModal({
+        run,
+        index,
+        displayIndex: Number.isInteger(displayIndex) ? displayIndex : index
+    });
+
+    document.body.classList.add("history-edit-open");
+    bindEditKeydown();
+    setTimeout(() => document.querySelector("[data-history-edit-notes]")?.focus?.(), 25);
+}
+
+function handleHistoryEditClick(event, target) {
+
+    const modal = target.closest("#historyEditModal");
+    if (!modal) return false;
+
+    const close = target.closest("[data-history-edit-close]");
+    if (close) {
+        event.preventDefault();
+        closeHistoryEditModal();
+        return true;
+    }
+
+    const build = target.closest("[data-history-edit-build-choice]");
+    if (build) {
+        event.preventDefault();
+        setHistoryEditBuild(build);
+        return true;
+    }
+
+    const save = target.closest("[data-history-edit-save]");
+    if (save) {
+        event.preventDefault();
+        saveHistoryEditModal();
+        return true;
+    }
+
+    if (target === modal) {
+        closeHistoryEditModal();
+        return true;
+    }
+
+    return false;
+}
+
+function setHistoryEditBuild(button) {
+    const modal = document.getElementById("historyEditModal");
+    if (!modal) return;
+    const value = button.dataset.historyEditBuildChoice || "unknown";
+    const input = modal.querySelector("[data-history-edit-build]");
+    if (input) input.value = value;
+    modal.querySelectorAll("[data-history-edit-build-choice]").forEach(choice => {
+        const active = choice === button;
+        choice.classList.toggle("active", active);
+        choice.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+}
+
+function saveHistoryEditModal() {
+
+    const modal = document.getElementById("historyEditModal");
+    if (!modal) return;
+
+    const index = Number(modal.dataset.historyEditIndex);
+    if (!Number.isInteger(index)) return;
+
+    actionUpdateHistoryRunMeta(index, {
+        notes: modal.querySelector("[data-history-edit-notes]")?.value || "",
+        tags: modal.querySelector("[data-history-edit-tags]")?.value || "",
+        buildStyle: modal.querySelector("[data-history-edit-build]")?.value || "unknown"
+    });
+
+    closeHistoryEditModal();
+    renderApp();
+}
+
+function closeHistoryEditModal() {
+    const mount = document.getElementById("historyEditModalMount");
+    if (mount) mount.innerHTML = "";
+    document.body.classList.remove("history-edit-open");
+}
+
+function bindEditKeydown() {
+    if (editKeydownBound) return;
+    editKeydownBound = true;
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && document.getElementById("historyEditModal")) {
+            closeHistoryEditModal();
+        }
+    }, true);
+}
+
+/* --------------------------------------------------
+   IMPORT / DOWNLOAD / CLIPBOARD
+-------------------------------------------------- */
+
+function openHistoryImportPicker() {
+
+    const existing = document.getElementById("historyImportInput");
+
+    if (existing) {
+        existing.value = "";
+        existing.click();
+        return existing;
+    }
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json,.json";
+    input.id = "historyImportInput";
+    input.dataset.importHistoryInput = "true";
+    input.setAttribute("aria-label", "Import Battle History JSON");
+
+    Object.assign(input.style, {
+        position: "fixed",
+        left: "-9999px",
+        top: "0",
+        width: "1px",
+        height: "1px",
+        opacity: "0"
+    });
+
+    input.addEventListener("change", () => {
+        handleHistoryImportInput(input, { removeAfter: false });
+    });
+
+    document.body.appendChild(input);
+    input.click();
+
+    return input;
+}
+
+async function handleHistoryImportInput(input, { removeAfter = false } = {}) {
+    const file = input?.files?.[0];
+
+    if (!file) {
+        if (removeAfter) input?.remove?.();
+        return;
+    }
+
+    try {
+        const text = await file.text();
+        actionImportHistoryText(text);
+        renderApp();
+    } catch (error) {
+        console.warn("[Tower Battle Intel] Failed to import history:", error);
+    } finally {
+        if (input) input.value = "";
+        if (removeAfter) input?.remove?.();
+    }
+}
+
 function downloadTextFile(text = "", filename = "download.txt", type = "text/plain") {
-
-    const blob =
-        new Blob(
-            [String(text || "")],
-            { type }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const link =
-        document.createElement("a");
-
+    const blob = new Blob([String(text || "")], { type });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
     link.href = url;
     link.download = filename;
-
     document.body.appendChild(link);
-
     link.click();
-
     document.body.removeChild(link);
-
-    setTimeout(() => {
-        URL.revokeObjectURL(url);
-    }, 250);
+    setTimeout(() => URL.revokeObjectURL(url), 250);
 }
 
 function buildHistoryExportFilename() {
+    return `tower-battle-intel-history-${new Date().toISOString().replace(/[:.]/g, "-").replace("T", "-").slice(0, 19)}.json`;
+}
 
-    const stamp =
-        new Date()
-            .toISOString()
-            .replace(/[:.]/g, "-")
-            .replace("T", "-")
-            .slice(0, 19);
+async function copyTextToClipboard(text = "") {
+    const value = String(text || "");
+    try {
+        if (navigator?.clipboard?.writeText) {
+            await navigator.clipboard.writeText(value);
+            return;
+        }
+    } catch {
+        // fallback below
+    }
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand("copy"); } catch { /* ignore */ }
+    textarea.remove();
+}
 
-    return `tower-battle-intel-history-${stamp}.json`;
+/* --------------------------------------------------
+   KEYBOARD / MOBILE / RUNTIME HELPERS
+-------------------------------------------------- */
+
+function handleGlobalKeydown(event) {
+
+    if (event.key !== "Escape") {
+        return;
+    }
+
+    closeMobileReportSheet();
+    closeMobileCommandRail();
+}
+
+function runAction(action, payload = {}) {
+    const result = performUIAction(action, payload || {});
+    syncRuntimeClasses();
+    renderApp();
+    return result;
+}
+
+function renderApp() {
+    if (typeof renderNow === "function") {
+        renderNow();
+    }
+    syncRuntimeClasses();
+}
+
+function syncRuntimeClasses() {
+    const state = actionGetState();
+    const debug = Boolean(state?.ui?.debug);
+    const quiet = Boolean(state?.ui?.quietDisplay);
+    document.body?.classList?.toggle("debug-open", debug);
+    document.documentElement?.classList?.toggle("debug-open", debug);
+    document.body?.classList?.toggle("tbi-quiet-display", quiet);
+    document.documentElement?.classList?.toggle("tbi-quiet-display", quiet);
+}
+
+function closeMobileReportSheet() {
+    document.body?.classList?.remove("mobile-report-open");
+    if (!document.body?.classList?.contains("debug-open")) {
+        document.documentElement?.classList?.remove("mobile-scroll-locked");
+        document.body?.classList?.remove("mobile-scroll-locked");
+    }
+    document.getElementById("mobileReportFab")?.setAttribute("aria-expanded", "false");
+}
+
+function closeMobileCommandRail() {
+    document.body?.classList?.remove("mobile-command-rail-open");
+    if (!document.body?.classList?.contains("debug-open")) {
+        document.documentElement?.classList?.remove("mobile-scroll-locked");
+        document.body?.classList?.remove("mobile-scroll-locked");
+    }
+}
+
+function setModalText(modal, selector, value = "") {
+    const element = modal?.querySelector?.(selector);
+    if (element) element.textContent = String(value || "");
+}
+
+function cssEscape(value = "") {
+    if (typeof CSS !== "undefined" && CSS.escape) {
+        return CSS.escape(String(value || ""));
+    }
+    return String(value || "").replace(/"/g, "\\\"");
 }
 
 /* --------------------------------------------------

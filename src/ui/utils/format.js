@@ -2,7 +2,7 @@
 
 /**
  * UI FORMAT ENGINE
- * Pure presentation formatting for dashboard/layout files.
+ * One safe formatting layer for dashboard, history, modals and debug output.
  */
 
 import {
@@ -10,57 +10,44 @@ import {
     formatTowerDelta
 } from "../../game/numberNotation.js";
 
-/* --------------------------------------------------
-   NUMBER FORMAT
--------------------------------------------------- */
-
 export function formatNumber(value, precision = 2) {
-    return formatTowerNumber(value, precision);
+    return formatTowerNumber(toFiniteNumber(value), precision);
 }
 
 export const format = formatNumber;
-
-/* --------------------------------------------------
-   DELTA FORMAT
--------------------------------------------------- */
 
 export function formatDelta(value, options = {}) {
 
     const {
         precision = 2,
         signed = true,
-        compact = true
+        compact = true,
+        zero = "0"
     } = options;
 
-    const num =
-        Number(value || 0);
+    const num = toFiniteNumber(value, null);
 
-    if (!Number.isFinite(num)) {
-        return "0";
+    if (num == null) {
+        return zero;
     }
 
-    if (!compact) {
-
-        const output =
-            precision <= 0
-                ? String(Math.round(num))
-                : trimFixed(num, precision);
-
-        return signed && num > 0
-            ? `+${output}`
-            : output;
+    if (compact) {
+        return signed
+            ? formatTowerDelta(num, precision)
+            : formatTowerNumber(num, precision);
     }
 
-    if (!signed) {
-        return formatTowerNumber(num, precision);
+    const output =
+        precision <= 0
+            ? String(Math.round(num))
+            : trimFixed(num, precision);
+
+    if (signed && num > 0) {
+        return `+${output}`;
     }
 
-    return formatTowerDelta(num, precision);
+    return output;
 }
-
-/* --------------------------------------------------
-   PERCENT FORMAT
--------------------------------------------------- */
 
 export function formatPercent(value, precision = 1) {
 
@@ -68,66 +55,67 @@ export function formatPercent(value, precision = 1) {
         return "from near zero";
     }
 
-    const num =
-        Number(value);
+    const num = toFiniteNumber(value, null);
 
-    if (!Number.isFinite(num)) {
+    if (num == null) {
         return "0%";
     }
 
-    const sign =
-        num > 0
-            ? "+"
-            : "";
-
+    const sign = num > 0 ? "+" : "";
     return `${sign}${trimFixed(num, precision)}%`;
 }
 
-/* --------------------------------------------------
-   TIME FORMAT
--------------------------------------------------- */
+export function formatRatio(value, precision = 2) {
+    const num = toFiniteNumber(value, null);
+    return num == null ? "0" : trimFixed(num, precision);
+}
 
 export function formatTime(seconds = 0) {
 
-    let total =
-        Math.floor(Number(seconds || 0));
+    let total = Math.floor(toFiniteNumber(seconds, 0));
 
-    if (!Number.isFinite(total) || total <= 0) {
+    if (total <= 0) {
         return "0s";
     }
 
-    const d =
-        Math.floor(total / 86400);
-
+    const days = Math.floor(total / 86400);
     total %= 86400;
 
-    const h =
-        Math.floor(total / 3600);
-
+    const hours = Math.floor(total / 3600);
     total %= 3600;
 
-    const m =
-        Math.floor(total / 60);
-
-    const s =
-        total % 60;
+    const minutes = Math.floor(total / 60);
+    const secs = total % 60;
 
     const out = [];
 
-    if (d) out.push(`${d}d`);
-    if (h) out.push(`${h}h`);
-    if (m) out.push(`${m}m`);
-    if (s) out.push(`${s}s`);
+    if (days) out.push(`${days}d`);
+    if (hours) out.push(`${hours}h`);
+    if (minutes) out.push(`${minutes}m`);
+    if (secs || !out.length) out.push(`${secs}s`);
 
     return out.join(" ");
 }
 
-/* --------------------------------------------------
-   LABEL FORMAT
--------------------------------------------------- */
+export function formatDateTime(value = "") {
+    if (!value) return "Unknown date";
+
+    const date = value instanceof Date ? value : new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return String(value);
+    }
+
+    return date.toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
 
 export function formatLabel(value = "") {
-
     return String(value || "")
         .replace(/^section\./i, "")
         .replace(/^core\./i, "")
@@ -139,12 +127,23 @@ export function formatLabel(value = "") {
         .replace(/\b\w/g, char => char.toUpperCase());
 }
 
-/* --------------------------------------------------
-   SAFE TEXT
--------------------------------------------------- */
+export function formatBuildStyle(value = "unknown") {
+    const key = String(value || "unknown").trim().toLowerCase();
+
+    const labels = {
+        unknown: "Unknown",
+        health_ehp: "Health / EHP",
+        blender: "Blender",
+        devo: "Devo",
+        orb_devo: "Orb Devo",
+        glass_cannon: "Glass Cannon",
+        hybrid: "Hybrid"
+    };
+
+    return labels[key] || formatLabel(key);
+}
 
 export function safeText(value, fallback = "-") {
-
     if (value == null || value === "") {
         return fallback;
     }
@@ -152,12 +151,7 @@ export function safeText(value, fallback = "-") {
     return String(value);
 }
 
-/* --------------------------------------------------
-   ESCAPE
--------------------------------------------------- */
-
 export function escapeHTML(value = "") {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -165,26 +159,18 @@ export function escapeHTML(value = "") {
 }
 
 export function escapeAttr(value = "") {
-
-    return String(value)
-        .replace(/&/g, "&amp;")
+    return escapeHTML(value)
         .replace(/"/g, "&quot;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+        .replace(/'/g, "&#39;");
 }
 
-/* --------------------------------------------------
-   INTERNAL
--------------------------------------------------- */
+export function toFiniteNumber(value, fallback = 0) {
+    const num = Number(value);
+    return Number.isFinite(num) ? num : fallback;
+}
 
 function trimFixed(value, precision = 2) {
-
-    const num =
-        Number(value || 0);
-
-    if (!Number.isFinite(num)) {
-        return "0";
-    }
+    const num = toFiniteNumber(value, 0);
 
     if (precision <= 0) {
         return String(Math.round(num));
@@ -200,9 +186,13 @@ export default {
     format,
     formatDelta,
     formatPercent,
+    formatRatio,
     formatTime,
+    formatDateTime,
     formatLabel,
+    formatBuildStyle,
     safeText,
     escapeHTML,
-    escapeAttr
+    escapeAttr,
+    toFiniteNumber
 };

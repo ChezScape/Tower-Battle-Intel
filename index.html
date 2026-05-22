@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-device-mode="desktop">
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Tower Battle Intel - Battle Report Intelligence Dashboard">
+    <meta name="theme-color" content="#050812">
+    <meta name="color-scheme" content="dark">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Tower Battle Intel - Battle Report Intelligence Dashboard"
-    >
-
-    <title>
-        Tower Battle Intel
-    </title>
+    <title>Tower Battle Intel</title>
 
     <script>
         (function () {
@@ -36,17 +28,20 @@
                 : "desktop";
 
             window.TowerBattleIntelDeviceMode = mode;
-
             document.documentElement.setAttribute("data-device-mode", mode);
             document.documentElement.classList.add("device-" + mode);
 
-            document.write(
-                '<link rel="stylesheet" href="./' +
-                (mode === "mobile" ? "mobile.css" : "desktop.css") +
-                '">'
-            );
+            var link = document.createElement("link");
+            link.id = "towerBattleIntelStylesheet";
+            link.rel = "stylesheet";
+            link.href = mode === "mobile" ? "./mobile.css" : "./desktop.css";
+            document.head.appendChild(link);
         }());
     </script>
+
+    <noscript>
+        <link rel="stylesheet" href="./desktop.css">
+    </noscript>
 
 </head>
 
@@ -54,64 +49,25 @@
 
     <div id="app">
 
-        <button
-            id="toggleDebug"
-            type="button"
-            hidden
-            aria-hidden="true"
-            tabindex="-1"
-        >
-            Debug
-        </button>
+        <section class="input-section" id="mobileReportSheet" aria-label="Battle report command deck">
 
-        <main class="layout">
-
-            <section
-                id="dashboard"
-                aria-live="polite"
-            >
-                <div class="tbi-card">
-                    <h2>System</h2>
-                    <p>Waiting for battle reports...</p>
-                </div>
-            </section>
-
-        </main>
-
-        <section class="input-section" id="mobileReportSheet">
-
-            <div
-                class="mobile-input-sheet-handle"
-                data-device-only="mobile"
-                hidden
-                aria-hidden="true"
-            >
-
+            <div class="mobile-input-sheet-handle" data-device-only="mobile" hidden aria-hidden="true">
                 <div>
                     <span class="mobile-sheet-kicker">Command Deck</span>
                     <strong>Report Console</strong>
                 </div>
 
-                <button
-                    id="mobileInputClose"
-                    type="button"
-                    aria-label="Close report console"
-                >
+                <button id="mobileInputClose" type="button" aria-label="Close report console">
                     Close
                 </button>
-
             </div>
 
             <div class="input-header">
-
-                <div class="section-title">
-                    Battle Report Input
-                </div>
-
+                <div class="section-title">Battle Report Input</div>
                 <div class="section-subtitle">
-                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace. Choose A as the baseline and B as the run to compare against it. Deltas show A - B.
+                    Paste one or more exported battle reports below. Saved reports appear in Battle History Trace.
+                    Choose A as the baseline and B as the run to compare against it. Deltas show B - A.
                 </div>
-
             </div>
 
             <textarea
@@ -123,70 +79,28 @@
 
             <div class="input-actions">
 
-                <button
-                    id="saveReport"
-                    type="button"
-                >
+                <button id="saveReport" type="button">
                     Save Report
                 </button>
 
-                <label
-                    class="build-style-wrap build-style-inline"
-                    for="buildStyleSelect"
-                >
-
-                    <span>
-                        Build
-                    </span>
-
-                    <select
-                        id="buildStyleSelect"
-                        aria-label="Select build style"
-                    >
-
-                        <option value="unknown">
-                            Unknown
-                        </option>
-
-                        <option value="health_ehp">
-                            Health / EHP
-                        </option>
-
-                        <option value="blender">
-                            Blender
-                        </option>
-
-                        <option value="devo">
-                            Devo
-                        </option>
-
-                        <option value="orb_devo">
-                            Orb Devo
-                        </option>
-
-                        <option value="glass_cannon">
-                            Glass Cannon
-                        </option>
-
-                        <option value="hybrid">
-                            Hybrid
-                        </option>
-
+                <label class="build-style-wrap build-style-inline" for="buildStyleSelect">
+                    <span>Build</span>
+                    <select id="buildStyleSelect" aria-label="Select build style">
+                        <option value="unknown">Unknown</option>
+                        <option value="health_ehp">Health / EHP</option>
+                        <option value="blender">Blender</option>
+                        <option value="devo">Devo</option>
+                        <option value="orb_devo">Orb Devo</option>
+                        <option value="glass_cannon">Glass Cannon</option>
+                        <option value="hybrid">Hybrid</option>
                     </select>
-
                 </label>
 
-                <button
-                    id="clearInput"
-                    type="button"
-                >
+                <button id="clearInput" type="button">
                     Clear Input
                 </button>
 
-                <button
-                    id="clearRuns"
-                    type="button"
-                >
+                <button id="clearRuns" type="button">
                     Clear Runs
                 </button>
 
@@ -194,52 +108,24 @@
 
         </section>
 
-        <div
-            id="mobileSheetBackdrop"
-            class="mobile-sheet-backdrop"
-            data-device-only="mobile"
-            data-start-hidden="true"
-            hidden
-            aria-hidden="true"
-        ></div>
 
-        <div
-            id="mobileCommandRail"
-            class="mobile-command-rail"
-            data-device-only="mobile"
-            data-start-hidden="true"
-            hidden
-            aria-hidden="true"
+
+        <input
+            id="historyImportFallbackInput"
+            class="native-file-input"
+            type="file"
+            accept="application/json,.json"
+            data-history-import-fallback-input="true"
+            aria-label="Fallback Import Battle History JSON"
         >
 
-            <button
-                type="button"
-                data-mobile-command="open-report"
-            >
-                Paste
-            </button>
+        <div id="mobileSheetBackdrop" class="mobile-sheet-backdrop" data-device-only="mobile" hidden aria-hidden="true"></div>
 
-            <button
-                type="button"
-                data-mobile-command="save-report"
-            >
-                Save
-            </button>
-
-            <button
-                type="button"
-                data-mobile-command="clear-input"
-            >
-                Clear
-            </button>
-
-            <button
-                type="button"
-                data-mobile-command="history-tab"
-            >
-                History
-            </button>
-
+        <div id="mobileCommandRail" class="mobile-command-rail" data-device-only="mobile" hidden aria-hidden="true">
+            <button type="button" data-mobile-command="open-report">Paste</button>
+            <button type="button" data-mobile-command="save-report">Save</button>
+            <button type="button" data-mobile-command="clear-input">Clear</button>
+            <button type="button" data-mobile-command="history-tab">History</button>
         </div>
 
         <button
@@ -251,13 +137,27 @@
             data-device-only="mobile"
             hidden
         >
-            Open Deck
+            + Report
         </button>
 
-        <section
-            id="debugPanel"
-            aria-live="polite"
-        ></section>
+        <button id="toggleDebug" type="button" hidden aria-hidden="true" tabindex="-1">
+            Debug
+        </button>
+
+        <main class="layout">
+            <section id="dashboard" aria-live="polite">
+                <div class="startup-shell">
+                    <section class="startup-loading-panel" aria-busy="true">
+                        <div class="startup-loading-kicker">System</div>
+                        <h1>Tower Battle Intel</h1>
+                        <p>Booting battle report intelligence...</p>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <section id="debugPanel" aria-live="polite"></section>
+        <section id="debug" aria-live="polite"></section>
 
     </div>
 
@@ -267,26 +167,395 @@
                 document.documentElement.getAttribute("data-device-mode") ||
                 "desktop";
 
+            document.body.setAttribute("data-device-mode", mode);
+            document.body.classList.add("device-" + mode);
+
             document.querySelectorAll("[data-device-only]").forEach(function (element) {
-                var matchesMode = element.getAttribute("data-device-only") === mode;
-                var startsHidden = element.getAttribute("data-start-hidden") === "true";
-
-                element.hidden = !matchesMode || startsHidden;
-
-                if (startsHidden) {
-                    element.setAttribute("aria-hidden", "true");
-                }
+                var visible = element.getAttribute("data-device-only") === mode;
+                element.hidden = !visible;
+                element.setAttribute("aria-hidden", visible ? "false" : "true");
             });
-
-            document.body.classList.remove("mobile-report-open", "mobile-command-rail-open", "mobile-scroll-locked");
-            document.documentElement.classList.remove("mobile-scroll-locked");
         }());
     </script>
 
-    <script
-        type="module"
-        src="./app.js"
-    ></script>
+
+    <!-- v4.10l Native Control Hardening -->
+    <script id="towerBattleIntelNativeControlBackbone">
+        (function () {
+            "use strict";
+
+            var STORAGE_KEY = "battle_analyser_state";
+            var OPEN_DEBUG_KEY = "tower_battle_intel_debug_open";
+            var bound = false;
+
+            function ready(fn) {
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", fn, { once: true });
+                } else {
+                    fn();
+                }
+            }
+
+            ready(function () {
+                if (bound) return;
+                bound = true;
+
+                ensureImportInput();
+
+                document.addEventListener("click", handleClick, true);
+                document.addEventListener("keydown", handleKeydown, true);
+                document.addEventListener("change", handleChange, true);
+
+                window.TowerBattleIntelNativeControls = {
+                    status: status,
+                    openImportPicker: openImportPicker,
+                    exportHistory: exportHistory,
+                    closeDebug: closeDebugPanel,
+                    downloadHealth: downloadHealth,
+                    downloadFullDebug: downloadFullDebug
+                };
+            });
+
+            function handleClick(event) {
+                var target = event.target;
+                if (!target || !target.closest) return;
+
+                if (target.closest("#debugClose, [data-debug-close]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    closeDebugPanel();
+                    return;
+                }
+
+                if (target.closest("#debugDownloadHealth, [data-debug-download-health]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    downloadHealth();
+                    return;
+                }
+
+                if (target.closest("#debugDownloadFull, [data-debug-download-full]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    downloadFullDebug();
+                    return;
+                }
+
+                if (target.closest("#debugCopyHealth, [data-debug-copy-health]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    copyText(JSON.stringify(buildHealthPayload(), null, 2));
+                    return;
+                }
+
+                if (target.closest("#debugCopyFull, [data-debug-copy-full]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    copyText(JSON.stringify(buildFullDebugPayload(), null, 2));
+                    return;
+                }
+
+                if (target.closest("#debugCopy, [data-debug-copy-shown]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    copyText(document.getElementById("debugOutput")?.textContent || "");
+                    return;
+                }
+
+                if (target.matches("[data-history-visible-import-input], .history-native-import-input")) {
+                    return;
+                }
+
+                if (target.closest(".history-native-import-control, [data-native-history-import-control], .history-import-label, [data-native-history-import-label], [data-history-import-trigger], [data-import-history-label], [data-ui-action='import-history']")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    openImportPicker();
+                    return;
+                }
+
+                if (target.closest("[data-export-history], [data-ui-action='export-history'], [data-ui-action='history-export-json']")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    exportHistory();
+                }
+            }
+
+            function handleKeydown(event) {
+                var target = event.target;
+                if (!target || !target.closest) return;
+
+                if (event.key === "Escape" && document.getElementById("debugPanel")?.classList?.contains("active")) {
+                    event.preventDefault();
+                    closeDebugPanel();
+                    return;
+                }
+
+                if ((event.key === "Enter" || event.key === " ") && target.closest(".history-native-import-control, [data-native-history-import-control], .history-import-label, [data-native-history-import-label]")) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    openImportPicker();
+                }
+            }
+
+            function handleChange(event) {
+                var target = event.target;
+                if (!target || !target.matches("#historyImportInput, #historyImportFallbackInput, [data-history-import-input], [data-import-history-input], [data-history-import-fallback-input]")) return;
+                importFromInput(target);
+            }
+
+            function getVisibleImportInput() {
+                return document.querySelector("#historyImportInput[data-history-visible-import-input], .history-native-import-input[data-history-visible-import-input]");
+            }
+
+            function ensureImportInput() {
+                var visible = getVisibleImportInput();
+                if (visible) return visible;
+
+                var input = document.getElementById("historyImportFallbackInput");
+                if (!input) {
+                    input = document.createElement("input");
+                    input.id = "historyImportFallbackInput";
+                    input.type = "file";
+                    input.accept = "application/json,.json";
+                    input.setAttribute("aria-label", "Fallback Import Battle History JSON");
+                    document.body.appendChild(input);
+                }
+
+                input.classList.add("native-file-input");
+                input.dataset.historyImportFallbackInput = "true";
+                return input;
+            }
+
+            function openImportPicker() {
+                var input = getVisibleImportInput() || ensureImportInput();
+                input.value = "";
+                input.click();
+                return input;
+            }
+
+            function importFromInput(input) {
+                var file = input.files && input.files[0];
+                if (!file) return;
+
+                file.text().then(function (text) {
+                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.importHistoryText === "function") {
+                        window.TowerBattleIntelActions.importHistoryText(text);
+                        rerender();
+                        return;
+                    }
+
+                    var parsed = JSON.parse(text);
+                    var current = readStoredState();
+                    current.history = Array.isArray(parsed) ? parsed : (parsed.history || parsed.runs || []);
+                    writeStoredState(current);
+                    location.reload();
+                }).catch(function (error) {
+                    console.error("[Tower Battle Intel] Native history import failed", error);
+                    alert("Import failed. Choose a Tower Battle Intel history JSON file.");
+                }).finally(function () {
+                    input.value = "";
+                });
+            }
+
+            function exportHistory() {
+                var text = "";
+
+                try {
+                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.exportHistoryJSON === "function") {
+                        text = window.TowerBattleIntelActions.exportHistoryJSON();
+                    }
+                } catch (error) {
+                    console.warn("[Tower Battle Intel] Module export failed, using storage fallback", error);
+                }
+
+                if (!text) {
+                    var state = getRuntimeState();
+                    text = JSON.stringify({
+                        app: "Tower Battle Intel",
+                        exportType: "history-export",
+                        exportedAt: new Date().toISOString(),
+                        history: state.history || []
+                    }, null, 2);
+                }
+
+                downloadText(text, "tower-battle-intel-history-" + stamp() + ".json", "application/json;charset=utf-8");
+            }
+
+            function closeDebugPanel() {
+                forceDebugClosedInState();
+
+                var panel = document.getElementById("debugPanel");
+                if (panel) {
+                    panel.classList.remove("active");
+                    panel.hidden = true;
+                    panel.setAttribute("aria-hidden", "true");
+                    panel.setAttribute("inert", "");
+                    panel.innerHTML = "";
+                }
+
+                document.body.classList.remove("debug-open");
+                document.documentElement.classList.remove("debug-open");
+            }
+
+            function forceDebugClosedInState() {
+                try {
+                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.perform === "function") {
+                        window.TowerBattleIntelActions.perform("toggle-debug", { force: false });
+                        return;
+                    }
+                } catch (error) {
+                    console.warn("[Tower Battle Intel] Debug action close failed, using storage fallback", error);
+                }
+
+                try {
+                    var current = readStoredState();
+                    current.ui = current.ui || {};
+                    current.ui.debug = false;
+                    writeStoredState(current);
+                    sessionStorage.removeItem(OPEN_DEBUG_KEY);
+                } catch (error) {
+                    // ignore storage fallback issues
+                }
+            }
+
+            function downloadHealth() {
+                downloadText(JSON.stringify(buildHealthPayload(), null, 2), "tower-battle-intel-health-scan-" + stamp() + ".json", "application/json;charset=utf-8");
+            }
+
+            function downloadFullDebug() {
+                downloadText(JSON.stringify(buildFullDebugPayload(), null, 2), "tower-battle-intel-debug-export-" + stamp() + ".json", "application/json;charset=utf-8");
+            }
+
+            function buildHealthPayload() {
+                var state = getRuntimeState();
+                return {
+                    app: "Tower Battle Intel",
+                    exportType: "health-scan-lite",
+                    exportedAt: new Date().toISOString(),
+                    healthStatus: "browser-fallback",
+                    counts: {
+                        history: Array.isArray(state.history) ? state.history.length : 0,
+                        hasRunA: Boolean(state.runA),
+                        hasRunB: Boolean(state.runB)
+                    },
+                    note: "Generated by native browser control backbone. Full diagnostics use the in-app inspection panel when module handlers are active."
+                };
+            }
+
+            function buildFullDebugPayload() {
+                return {
+                    app: "Tower Battle Intel",
+                    exportType: "full-debug-fallback",
+                    exportedAt: new Date().toISOString(),
+                    location: location.href,
+                    controls: status(),
+                    state: getRuntimeState()
+                };
+            }
+
+            function getRuntimeState() {
+                try {
+                    if (window.TowerBattleIntelActions && typeof window.TowerBattleIntelActions.getState === "function") {
+                        return window.TowerBattleIntelActions.getState() || {};
+                    }
+                    if (window.TowerBattleIntel && typeof window.TowerBattleIntel.state === "function") {
+                        return window.TowerBattleIntel.state() || {};
+                    }
+                } catch (error) {
+                    console.warn("[Tower Battle Intel] Runtime state unavailable, using storage", error);
+                }
+
+                return readStoredState();
+            }
+
+            function readStoredState() {
+                try {
+                    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {};
+                } catch (error) {
+                    return {};
+                }
+            }
+
+            function writeStoredState(state) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state || {}));
+                } catch (error) {
+                    console.error("[Tower Battle Intel] Storage write failed", error);
+                }
+            }
+
+            function rerender() {
+                try {
+                    if (window.TowerBattleIntel && typeof window.TowerBattleIntel.render === "function") {
+                        window.TowerBattleIntel.render();
+                    }
+                } catch (error) {
+                    console.warn("[Tower Battle Intel] Rerender failed", error);
+                }
+            }
+
+            function rerenderSoon() {
+                window.setTimeout(rerender, 0);
+            }
+
+            function downloadText(text, filename, type) {
+                var blob = new Blob([String(text || "")], { type: type || "text/plain;charset=utf-8" });
+                var url = URL.createObjectURL(blob);
+                var anchor = document.createElement("a");
+                anchor.href = url;
+                anchor.download = filename || "tower-battle-intel-export.json";
+                anchor.style.display = "none";
+                document.body.appendChild(anchor);
+                anchor.click();
+                window.setTimeout(function () {
+                    URL.revokeObjectURL(url);
+                    anchor.remove();
+                }, 1000);
+            }
+
+            function copyText(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(String(text || ""));
+                    return;
+                }
+
+                var area = document.createElement("textarea");
+                area.value = String(text || "");
+                area.style.position = "fixed";
+                area.style.left = "-9999px";
+                document.body.appendChild(area);
+                area.focus();
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+
+            function stamp() {
+                return new Date().toISOString().replace(/[:.]/g, "-").replace("T", "_").slice(0, 19);
+            }
+
+            function status() {
+                return {
+                    bound: bound,
+                    filePickerExists: Boolean(document.querySelector("#historyImportInput, #historyImportFallbackInput, [data-history-visible-import-input], [data-history-import-fallback-input]")),
+                    visibleNativeImportInputs: document.querySelectorAll(".history-native-import-input, [data-history-visible-import-input]").length,
+                    fallbackFilePickerExists: Boolean(document.getElementById("historyImportFallbackInput")),
+                    importLabels: document.querySelectorAll(".history-import-label, [data-native-history-import-label]").length,
+                    exportButtons: document.querySelectorAll("[data-export-history], [data-ui-action='export-history']").length,
+                    debugPanelExists: Boolean(document.getElementById("debugPanel")),
+                    debugCloseExists: Boolean(document.getElementById("debugClose")),
+                    actionBridgeExists: Boolean(window.TowerBattleIntelActions),
+                    appHelpersExist: Boolean(window.TowerBattleIntel)
+                };
+            }
+        }());
+    </script>
+
+        <script src="./src/ui/universalDownloadBridge.js"></script>
+        <script src="./src/ui/historySearchFocusGuard.js"></script>
+    <script type="module" src="./app.js"></script>
 
 </body>
 </html>
+
+

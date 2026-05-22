@@ -1,0 +1,68 @@
+/* --------------------------------------------------
+   v4.10u Final Control Polish
+-------------------------------------------------- */
+.tbi-quiet-display,
+.tbi-quiet-display * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 80ms !important;
+}
+
+.tbi-quiet-display .wa-dashboard-shell,
+.tbi-quiet-display .wa-dashboard-panel,
+.tbi-quiet-display .tbi-card,
+.tbi-quiet-display .history-card,
+.tbi-quiet-display .run-card,
+.tbi-quiet-display .panel,
+.tbi-quiet-display .quick-panel,
+.tbi-quiet-display .tbi-nav-item {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+.tbi-quiet-display .wa-dashboard-shell::before,
+.tbi-quiet-display .wa-dashboard-shell::after,
+.tbi-quiet-display .tbi-card::before,
+.tbi-quiet-display .tbi-card::after {
+    opacity: .18 !important;
+}
+
+.tbi-mode-toggle[aria-pressed="true"],
+.tbi-quiet-display .tbi-mode-toggle {
+    border-color: rgba(255, 211, 41, .64) !important;
+    color: #ffd329 !important;
+    box-shadow: 0 0 14px rgba(255, 211, 41, .22) !important;
+}
+
+.final-control-toast {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000004;
+    max-width: min(420px, calc(100vw - 36px));
+    padding: 12px 14px;
+    border: 1px solid rgba(29,231,255,.38);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(4,18,32,.96), rgba(1,6,15,.98));
+    color: #eef8ff;
+    font-weight: 900;
+    letter-spacing: .04em;
+    box-shadow: 0 16px 44px rgba(0,0,0,.5), 0 0 18px rgba(29,231,255,.16);
+}
+
+.final-control-toast.bad {
+    border-color: rgba(255,64,90,.56);
+    color: #ffd6dd;
+}
+
+.final-control-toast.warn {
+    border-color: rgba(255,211,41,.56);
+    color: #fff2b7;
+}
+
+.history-edit-build-choice.active,
+.history-edit-build-choice[aria-pressed="true"] {
+    border-color: rgba(29,231,255,.72) !important;
+    color: #1de7ff !important;
+    background: rgba(29,231,255,.14) !important;
+    box-shadow: 0 0 16px rgba(29,231,255,.2) !important;
+}
