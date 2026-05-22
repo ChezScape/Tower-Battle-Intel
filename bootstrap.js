@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * BOOTSTRAP v4.10h
+ * BOOTSTRAP v4.10f
  * Root startup flow for Tower Battle Intel.
  *
  * Owns only application startup:
@@ -25,6 +25,10 @@ import {
 import {
     bindCoreEvents
 } from "./src/core/events.js";
+
+import {
+    bindStaticControlBridge
+} from "./src/ui/staticControlBridge.js";
 
 import {
     render
@@ -57,6 +61,7 @@ export function bootstrap() {
 
     const shell = getStaticShell();
     validateStaticShell(shell);
+    bindStaticControlBridge(() => render());
     hydrateFromStorage(shell.input);
 
     // Render before binding core events. This allows core debug-hold binding
