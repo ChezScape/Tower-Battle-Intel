@@ -24,6 +24,7 @@ assert.match(liveBridge, /document\.addEventListener\("click", handleClick, true
 assert.match(liveBridge, /openImportPicker/, "live bridge must include import picker fallback");
 
 assert.match(historyLayout, /for="historyImportInput"/, "History Import should have label fallback for native picker");
-assert.match(historyLayout, /data-history-import-trigger="true"/, "History Import label should be detectable by bridge");
+assert.match(historyLayout, /data-native-history-import-label="true"/, "History Import label should be detectable by the native control backbone");
+assert.doesNotMatch(historyLayout, /data-ui-action="import-history"/, "History Import label must not be captured by generic data-ui-action handlers");
 
 console.log("handler-presence-file-picker.test.mjs passed");

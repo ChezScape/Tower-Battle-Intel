@@ -135,9 +135,8 @@ export function buildHistory(state = {}) {
                             role="button"
                             tabindex="0"
                             for="historyImportInput"
-                            data-ui-action="import-history"
-                            data-history-import-trigger="true"
-                            data-import-history-label="true"
+                            data-native-history-import-label="true"
+                            title="Choose a Tower Battle Intel history JSON file"
                         >
                             Import History
                         </label>

@@ -1,4 +1,4 @@
-# Tower Battle Intel v4.10f
+# Tower Battle Intel v4.10j
 
 Current working line: **v4.10e Root / Action / Style Sync**.
 
@@ -81,3 +81,8 @@ Focus:
 - keep desktop/mobile CSS split
 - expand action aliases so visible UI actions have a single command bus
 - keep style.css inactive
+
+
+## v4.10j native control backbone
+
+Adds a browser-native fallback for History Import/Export and Debug close/download controls so critical buttons still work even if rendered module handlers are blocked.

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * ACTION LAYER v4.10e
+ * ACTION LAYER v4.10j
  * One command bus for visible UI actions.
  * Root/action/style sync: supports current data-ui-action names and legacy aliases.
  *
@@ -643,7 +643,7 @@ function normaliseActionKey(action = "") {
         .replace(/_/g, "-");
 }
 
-export default {
+const ACTION_API = Object.freeze({
     performUIAction,
     actionParseInput,
     actionSaveReportFromInput,
@@ -669,5 +669,32 @@ export default {
     actionUpdateHistoryRunMeta,
     actionExportHistoryJSON,
     actionImportHistoryText,
-    actionGetState
-};
+    actionGetState,
+
+    // Browser fallback aliases used by the native control backbone.
+    perform(action, payload) {
+        return performUIAction(action, payload);
+    },
+
+    exportHistoryJSON() {
+        return actionExportHistoryJSON();
+    },
+
+    importHistoryText(text) {
+        return actionImportHistoryText(text);
+    },
+
+    getState() {
+        return actionGetState();
+    }
+});
+
+installGlobalActionBridge(ACTION_API);
+
+function installGlobalActionBridge(api) {
+    if (typeof window === "undefined") return;
+
+    window.TowerBattleIntelActions = api;
+}
+
+export default ACTION_API;

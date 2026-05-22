@@ -12,19 +12,19 @@ const readme = read("README.md");
 const style = read("style.css");
 const config = read("config/appConfig.js");
 
-assert.match(config, /version:\s*"v4\.10f"/);
-assert.match(app, /APP ENTRY v4\.10f/);
+assert.match(config, /version:\s*"v4\.10j"/);
+assert.match(app, /APP ENTRY v4\.10j/);
 assert.match(app, /bootstrap\(\)/);
-assert.match(bootstrap, /BOOTSTRAP v4\.10f/);
+assert.match(bootstrap, /BOOTSTRAP v4\.10j/);
 assert.match(bootstrap, /render\(\);\s*\n\s*bindCoreEvents\(\);/);
 assert.match(index, /id="dashboard"/);
 assert.match(index, /id="input"/);
 assert.match(index, /id="debugPanel"/);
 assert.match(index, /type="module" src="\.\/app\.js"/);
 assert.doesNotMatch(index, /desktop-topbar/);
-assert.match(desktop, /v4\.10f ROOT ACTION STYLE SYNC SUPPORT/);
-assert.match(mobile, /v4\.10f ROOT ACTION STYLE SYNC SUPPORT/);
-assert.match(readme, /Tower Battle Intel v4\.10f/);
+assert.match(desktop, /v4\.10j Native Control Backbone/);
+assert.match(mobile, /v4\.10j Native Control Backbone/);
+assert.match(readme, /v4\.10j/);
 assert.match(style, /intentionally not loaded/);
 
 console.log("root-shell-foundation.test.mjs passed");

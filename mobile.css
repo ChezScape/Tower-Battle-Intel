@@ -7576,3 +7576,49 @@ summary,
     pointer-events: auto !important;
     z-index: 1000000 !important;
 }
+
+
+/* --------------------------------------------------
+   v4.10j Native Control Backbone
+   Ensures critical browser-native controls remain clickable even if
+   rendered-module handlers are replaced or blocked.
+-------------------------------------------------- */
+.history-import-label,
+[data-native-history-import-label],
+[data-export-history],
+[data-debug-close],
+[data-debug-download-health],
+[data-debug-download-full],
+#debugClose,
+#debugDownloadHealth,
+#debugDownloadFull {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 2;
+}
+
+.debug-health-pill {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
+    padding: 9px;
+    border: 1px solid rgba(29, 231, 255, 0.20);
+    border-radius: 14px;
+    background: rgba(0, 5, 14, 0.42);
+}
+
+.debug-health-pill span {
+    display: grid;
+    gap: 2px;
+    padding: 8px 10px;
+    border: 1px solid rgba(29, 231, 255, 0.14);
+    border-radius: 10px;
+    background: rgba(5, 18, 34, 0.82);
+    color: var(--soft, #a7c2d8);
+    font-size: 11px;
+}
+
+.debug-health-pill strong {
+    color: var(--cyan, #1de7ff);
+    font-size: 13px;
+}
