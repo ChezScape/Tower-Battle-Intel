@@ -7769,3 +7769,153 @@ html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-card-f
     border-radius: 10px !important;
     letter-spacing: .105em !important;
 }
+
+/* --------------------------------------------------
+   v4.11u Desktop Column Lead Highlight
+   Removes the bulky comparison bars from metric cards and makes the
+   winning Run A / Run B table column carry the comparison signal instead.
+   Desktop-only CSS; mobile.css remains untouched.
+-------------------------------------------------- */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-run-lead-legend {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: clamp(6px, .45vw, 10px) !important;
+    color: rgba(202, 222, 239, .78) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-run-lead-legend b {
+    width: clamp(7px, .52vw, 10px) !important;
+    height: clamp(7px, .52vw, 10px) !important;
+    border-radius: 999px !important;
+    display: inline-block !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-run-lead-legend .run-a-dot {
+    background: #31efff !important;
+    box-shadow: 0 0 10px rgba(49, 239, 255, .60) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-run-lead-legend .run-b-dot {
+    background: #ffd92d !important;
+    box-shadow: 0 0 10px rgba(255, 217, 45, .60) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-run-lead-legend .neutral-dot {
+    background: #8fa2b6 !important;
+    box-shadow: 0 0 8px rgba(143, 162, 182, .35) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    min-height: clamp(32px, 2.28vw, 46px) !important;
+    padding: clamp(7px, .52vw, 10px) clamp(9px, .66vw, 13px) !important;
+    border: 1px solid rgba(29, 231, 255, .17) !important;
+    border-radius: clamp(8px, .74vw, 13px) !important;
+    background:
+        linear-gradient(90deg, rgba(29,231,255,.045), rgba(255,211,41,.035) 72%, rgba(255,75,226,.040)),
+        rgba(1, 9, 20, .62) !important;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.018),
+        inset 0 -18px 24px rgba(0,0,0,.16),
+        0 0 14px rgba(29,231,255,.040) !important;
+    overflow: hidden !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip::after {
+    content: "";
+    position: absolute;
+    left: clamp(8px, .62vw, 12px);
+    right: clamp(8px, .62vw, 12px);
+    bottom: 5px;
+    height: 1px;
+    opacity: .46;
+    background: linear-gradient(90deg, rgba(49,239,255,.48), transparent 45%, rgba(255,217,45,.42));
+    pointer-events: none;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip > span {
+    font-size: clamp(8px, .56vw, 10px) !important;
+    line-height: 1 !important;
+    letter-spacing: .16em !important;
+    font-weight: 1000 !important;
+    text-transform: uppercase !important;
+    color: rgba(128, 247, 255, .92) !important;
+    text-shadow: 0 0 8px rgba(49, 239, 255, .18) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip.side-b > span {
+    color: rgba(255, 217, 45, .92) !important;
+    text-shadow: 0 0 9px rgba(255, 217, 45, .20) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip.neutral > span {
+    color: rgba(188, 203, 218, .84) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip.side-a > span::before,
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip.side-b > span::after {
+    content: "" !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-panel-delta-strip.tbi-column-lead-strip strong {
+    font-size: clamp(13px, .98vw, 19px) !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    letter-spacing: .055em !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-card.lead-a {
+    --tbi-lead-color: 49, 239, 255;
+    --tbi-lead-strong: #31efff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-card.lead-b {
+    --tbi-lead-color: 255, 217, 45;
+    --tbi-lead-strong: #ffd92d;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-a .metric-run-a,
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-b .metric-run-b {
+    position: relative !important;
+    color: var(--tbi-lead-strong, #67e9ff) !important;
+    text-shadow: 0 0 9px rgba(var(--tbi-lead-color, 49,239,255), .22) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-a .tbi-metric-row.header .metric-run-a,
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-b .tbi-metric-row.header .metric-run-b {
+    border-radius: 6px 6px 2px 2px !important;
+    background: linear-gradient(180deg, rgba(var(--tbi-lead-color,49,239,255), .18), rgba(var(--tbi-lead-color,49,239,255), .050)) !important;
+    box-shadow:
+        inset 0 0 0 1px rgba(var(--tbi-lead-color,49,239,255), .24),
+        0 0 12px rgba(var(--tbi-lead-color,49,239,255), .12) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-row:not(.header) .lead-cell {
+    border-left: 1px solid rgba(var(--tbi-lead-color, 49,239,255), .16) !important;
+    border-right: 1px solid rgba(var(--tbi-lead-color, 49,239,255), .16) !important;
+    background:
+        linear-gradient(90deg, rgba(var(--tbi-lead-color,49,239,255), .045), rgba(var(--tbi-lead-color,49,239,255), .115), rgba(var(--tbi-lead-color,49,239,255), .040)) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-row:not(.header):first-of-type .lead-cell {
+    border-top: 1px solid rgba(var(--tbi-lead-color, 49,239,255), .18) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-row:not(.header):last-child .lead-cell {
+    border-bottom: 1px solid rgba(var(--tbi-lead-color, 49,239,255), .18) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-neutral .metric-run-a,
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table.lead-neutral .metric-run-b {
+    color: #9ab3c8 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Keep the DIFF+ button above the new column highlights in medium layouts. */
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table-toggle {
+    z-index: 8 !important;
+}

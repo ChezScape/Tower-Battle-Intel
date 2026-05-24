@@ -16,7 +16,7 @@ export function buildDifferenceOverview(state = {}) {
         <section class="tbi-card tbi-difference-overview">
             <div class="tbi-card-heading compact-heading">
                 <h3>Difference Overview</h3>
-                <span class="tbi-legend"><b class="good-dot"></b> Better for B <b class="bad-dot"></b> Better for A <b class="neutral-dot"></b> Neutral</span>
+                <span class="tbi-legend tbi-run-lead-legend"><b class="run-a-dot"></b> Run A Leads <b class="run-b-dot"></b> Run B Leads <b class="neutral-dot"></b> Neutral</span>
             </div>
             <div class="tbi-diff-row">
                 ${items.map(diffTile).join("")}

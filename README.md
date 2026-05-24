@@ -1,6 +1,6 @@
-# Tower Battle Intel v4.11t
+# Tower Battle Intel v4.11u
 
-Current working line: **v4.11t Desktop Gap Hero + Finish Polish**.
+Current working line: **v4.11u Desktop Column Lead Highlight**.
 
 ## Summary
 This build starts from v4.11s and keeps the desktop-only Concept 5 direction while giving the Gap in Numbers card a stronger mockup-style treatment with numeric axis values, plus small Quick Actions, meter, and alignment finishing polish.
@@ -8,7 +8,7 @@ This build starts from v4.11s and keeps the desktop-only Concept 5 direction whi
 ## Key points
 - Desktop dashboard only.
 - `mobile.css` remains untouched.
-- Runtime version is `v4.11t`.
+- Runtime version is `v4.11u`.
 - Keeps v4.11q compact VS removal.
 - Keeps v4.11n DIFF+ details modal.
 - Keeps the advantage meter behaviour, but makes the lead wording and meter visuals clearer.
@@ -30,7 +30,7 @@ TowerBattleIntel?.version
 Expected:
 
 ```text
-v4.11t
+v4.11u
 ```
 
 ---

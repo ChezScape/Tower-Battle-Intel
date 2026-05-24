@@ -33,14 +33,15 @@ export function buildSecondaryStatGrid(state = {}) {
 
 export function buildMetricTableCard(title, section, { icon = "◇", accent = "cyan", limit = 8, footer = "View Details", sectionKey = "", iconKey = "" } = {}) {
     const total = sectionTotal(section);
+    const leadSide = total > 0 ? "lead-b" : total < 0 ? "lead-a" : "lead-neutral";
 
     return `
-        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)}" data-metric-detail-title="${escapeAttr(title)}" data-metric-detail-accent="${escapeAttr(accent)}">
+        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)} ${escapeAttr(leadSide)}" data-metric-detail-title="${escapeAttr(title)}" data-metric-detail-accent="${escapeAttr(accent)}" data-lead-side="${escapeAttr(leadSide)}">
             <div class="tbi-card-heading tbi-metric-title-row">
                 <h3>${iconKey ? `<span class="metric-art metric-art-${escapeAttr(iconKey)}" aria-hidden="true"><b>${escapeHTML(icon)}</b></span>` : `<span>${escapeHTML(icon)}</span>`} ${escapeHTML(title)}</h3>
             </div>
             ${buildPanelDeltaStrip(total)}
-            ${buildMetricRows(section, { limit, showHeader: true, diffToggle: true })}
+            ${buildMetricRows(section, { limit, showHeader: true, diffToggle: true, leadSide })}
             <button type="button" class="tbi-card-footer-action" data-ui-action="open-compare-section" data-compare-section="${escapeAttr(sectionKey)}">${escapeHTML(footer)}</button>
         </section>
     `;
@@ -48,22 +49,15 @@ export function buildMetricTableCard(title, section, { icon = "◇", accent = "c
 
 function buildPanelDeltaStrip(total = 0) {
     const value = Number(total || 0);
-    const magnitude = Math.max(0, Math.min(48, Math.log10(Math.abs(value) + 10) * 8.5));
     const tone = value > 0 ? "good" : value < 0 ? "bad" : "neutral";
     const side = value > 0 ? "side-b" : value < 0 ? "side-a" : "neutral";
-    const label = value > 0 ? "Run B ahead" : value < 0 ? "Run A ahead" : "Runs level";
-    const directionLabel = value > 0 ? "Run B Leads" : value < 0 ? "Run A Leads" : "Even";
+    const label = value > 0 ? "Run B leads" : value < 0 ? "Run A leads" : "Runs level";
+    const directionLabel = value > 0 ? "Run B Leads" : value < 0 ? "Run A Leads" : "Even Match";
 
     return `
-        <div class="tbi-panel-delta-strip ${escapeAttr(tone)} ${escapeAttr(side)}" aria-label="${escapeAttr(label)} ${escapeAttr(formatDelta(value, { compact: true }))}">
+        <div class="tbi-panel-delta-strip tbi-column-lead-strip ${escapeAttr(tone)} ${escapeAttr(side)}" aria-label="${escapeAttr(label)} ${escapeAttr(formatDelta(value, { compact: true }))}">
             <span>${escapeHTML(directionLabel)}</span>
             <strong>${escapeHTML(formatDelta(value, { compact: true }))}</strong>
-            <div class="tbi-panel-delta-track tbi-advantage-meter ${escapeAttr(side)}" style="--tbi-meter:${magnitude.toFixed(1)}%;" aria-hidden="true">
-                <b class="tbi-meter-label tbi-meter-label-a">A</b>
-                <em></em>
-                <i></i>
-                <b class="tbi-meter-label tbi-meter-label-b">B</b>
-            </div>
         </div>
     `;
 }

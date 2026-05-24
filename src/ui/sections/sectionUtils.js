@@ -123,22 +123,22 @@ export function toneFromGeneric(item = {}) {
     return "neutral";
 }
 
-export function metricRow(row) {
+export function metricRow(row, { leadSide = "lead-neutral" } = {}) {
     const data = { ...(row.data || {}), key: row.key };
     const tone = toneFromDiffData(data);
     const info = getMetricInfo(row.key);
 
     return `
         <div class="tbi-metric-row ${escapeAttr(tone)}" title="${escapeAttr(info.meaning || "")}">
-            <span>${escapeHTML(info.label || formatLabel(row.key))}</span>
-            <span>${escapeHTML(formatNumber(data.a || 0))}</span>
-            <span>${escapeHTML(formatNumber(data.b || 0))}</span>
-            <strong>${escapeHTML(formatDelta(data.diff || 0, { compact: true }))}</strong>
+            <span class="metric-name">${escapeHTML(info.label || formatLabel(row.key))}</span>
+            <span class="metric-run-a ${leadSide === "lead-a" ? "lead-cell" : ""}">${escapeHTML(formatNumber(data.a || 0))}</span>
+            <span class="metric-run-b ${leadSide === "lead-b" ? "lead-cell" : ""}">${escapeHTML(formatNumber(data.b || 0))}</span>
+            <strong class="metric-diff">${escapeHTML(formatDelta(data.diff || 0, { compact: true }))}</strong>
         </div>
     `;
 }
 
-export function buildMetricRows(section, { limit = 8, showHeader = false, diffToggle = false } = {}) {
+export function buildMetricRows(section, { limit = 8, showHeader = false, diffToggle = false, leadSide = "lead-neutral" } = {}) {
     const rows = sectionRows(section).slice(0, limit);
 
     if (!rows.length) {
@@ -146,7 +146,7 @@ export function buildMetricRows(section, { limit = 8, showHeader = false, diffTo
     }
 
     return `
-        <div class="tbi-metric-table" data-metric-table="true">
+        <div class="tbi-metric-table ${escapeAttr(leadSide)}" data-metric-table="true" data-lead-side="${escapeAttr(leadSide)}">
             ${showHeader ? `
                 ${diffToggle ? `
                     <button
@@ -157,10 +157,10 @@ export function buildMetricRows(section, { limit = 8, showHeader = false, diffTo
                     >DIFF+</button>
                 ` : ""}
                 <div class="tbi-metric-row header">
-                    <span>Metric</span><span>Run A</span><span>Run B</span><span>Diff</span>
+                    <span class="metric-name">Metric</span><span class="metric-run-a ${leadSide === "lead-a" ? "lead-cell" : ""}">Run A</span><span class="metric-run-b ${leadSide === "lead-b" ? "lead-cell" : ""}">Run B</span><span class="metric-diff">Diff</span>
                 </div>
             ` : ""}
-            ${rows.map(metricRow).join("")}
+            ${rows.map(row => metricRow(row, { leadSide })).join("")}
         </div>
     `;
 }
