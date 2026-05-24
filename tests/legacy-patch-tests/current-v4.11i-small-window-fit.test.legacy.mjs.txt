@@ -1,0 +1,23 @@
+import fs from "node:fs";
+
+const css = fs.readFileSync("desktop.css", "utf8");
+const mobile = fs.readFileSync("mobile.css", "utf8");
+const config = fs.readFileSync("config/appConfig.js", "utf8");
+
+function assert(condition, message) {
+    if (!condition) {
+        console.error(message);
+        process.exit(1);
+    }
+}
+
+assert(config.includes('version: "v4.11i"'), "Expected appConfig version v4.11i");
+assert(css.includes("v4.11i Desktop Small-Window Reflow Polish"), "Missing v4.11i reflow CSS section");
+assert(css.includes("max-width: 1040px") && css.includes("grid-template-columns: 1fr !important"), "Missing narrow desktop stacked comparison strip");
+assert(css.includes("min-height: 50px !important") && css.includes("tbi-vs-core"), "Missing compact VS divider treatment");
+assert(css.includes("max-width: 940px") && css.includes("grid-template-columns: repeat(2, minmax(0, 1fr)) !important"), "Missing extra narrow two-row metric fallback");
+assert(css.includes("tbi-primary-matrix") && css.includes("tbi-secondary-matrix"), "Missing preserved two-column main card matrix override");
+assert(css.includes("tbi-side-column") && css.includes("grid-template-columns: 1fr !important"), "Missing lower full-width side intel layout");
+assert(!mobile.includes("v4.11i Desktop Small-Window Reflow Polish"), "Mobile CSS should not contain desktop reflow patch");
+
+console.log("v4.11i small-window reflow checks passed");

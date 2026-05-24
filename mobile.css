@@ -8153,3 +8153,84 @@ details[open] > summary,
     color: #ffffff;
 }
 
+
+/* --------------------------------------------------
+   v4.11a9 Mobile Isolation Notice
+   Mobile is intentionally not repaired in this desktop polish pass.
+-------------------------------------------------- */
+html[data-device-mode="desktop"] [data-device-only="mobile"] {
+    display: none !important;
+}
+
+/* --------------------------------------------------
+   v4.11a9 Save Report Feedback
+-------------------------------------------------- */
+.save-report-feedback {
+    display: grid;
+    gap: 3px;
+    margin-top: 10px;
+    padding: 10px 11px;
+    border: 1px solid rgba(29, 231, 255, .28);
+    border-radius: 12px;
+    background: rgba(2, 10, 22, .8);
+    color: var(--text, #eef8ff);
+}
+
+.save-report-feedback strong {
+    color: var(--cyan, #1de7ff);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.save-report-feedback span {
+    color: var(--soft, #a7c2d8);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.save-report-feedback.good { border-color: rgba(87, 255, 87, .46); }
+.save-report-feedback.good strong { color: var(--green, #57ff57); }
+.save-report-feedback.warn { border-color: rgba(255, 211, 41, .48); }
+.save-report-feedback.warn strong { color: var(--gold, #ffd329); }
+.save-report-feedback.bad { border-color: rgba(255, 64, 90, .52); }
+.save-report-feedback.bad strong { color: var(--red, #ff405a); }
+
+.save-report-toast-mount {
+    position: fixed;
+    right: 12px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 1000012;
+    pointer-events: none;
+}
+
+.save-report-toast {
+    display: grid;
+    gap: 4px;
+    width: min(420px, calc(100vw - 24px));
+    padding: 12px 13px;
+    border: 1px solid rgba(29, 231, 255, .44);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(4, 18, 32, .97), rgba(1, 6, 15, .985));
+    color: #eef8ff;
+    box-shadow: 0 16px 44px rgba(0,0,0,.56), 0 0 18px rgba(29,231,255,.16);
+}
+
+.save-report-toast strong {
+    color: var(--cyan, #1de7ff);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.save-report-toast span {
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.save-report-toast.good { border-color: rgba(87, 255, 87, .5); }
+.save-report-toast.good strong { color: var(--green, #57ff57); }
+.save-report-toast.warn { border-color: rgba(255, 211, 41, .55); }
+.save-report-toast.warn strong { color: var(--gold, #ffd329); }
+.save-report-toast.bad { border-color: rgba(255, 64, 90, .56); }
+.save-report-toast.bad strong { color: var(--red, #ff405a); }

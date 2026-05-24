@@ -43,6 +43,11 @@ import {
     clearStorage
 } from "../storage/localStore.js";
 
+import {
+    splitBattleReports,
+    fingerprintReport
+} from "../utils/reportSplitter.js";
+
 /* --------------------------------------------------
    GENERIC COMMAND BUS
 -------------------------------------------------- */
@@ -219,25 +224,234 @@ export function actionSaveReportFromInput(input = null) {
         if (target) {
             target.placeholder = "Paste a battle report first...";
         }
+        const feedback = buildSaveFeedback({
+            status: "empty",
+            loaded: false,
+            message: "No report loaded. Paste a battle report first."
+        });
+        showSaveReportFeedback(feedback);
         console.warn("[Tower Battle Intel] Save Report blocked: empty input");
-        return null;
+        return feedback;
     }
+
+    const beforeState = getState();
+    const beforeHistory = Array.isArray(beforeState.history) ? beforeState.history : [];
+    const beforeIds = new Set(beforeHistory.map(getRunReportId).filter(Boolean));
+    const candidateIds = getCandidateReportIds(text);
 
     const result = saveReportToHistory(text);
+    const afterState = getState();
+    const afterHistory = Array.isArray(afterState.history) ? afterState.history : [];
+    const addedRuns = afterHistory.filter(run => {
+        const id = getRunReportId(run);
+        return id && !beforeIds.has(id);
+    });
+    const addedIds = addedRuns.map(getRunReportId).filter(Boolean);
+
+    const duplicateIds = candidateIds
+        .filter(id => beforeIds.has(id) && !addedIds.includes(id))
+        .filter((id, index, list) => list.indexOf(id) === index);
 
     if (!result) {
+        const feedback = buildSaveFeedback({
+            status: "failed",
+            loaded: false,
+            message: "Report not loaded. I could not read a valid Battle Report from the input.",
+            candidateIds
+        });
+        showSaveReportFeedback(feedback);
         console.warn("[Tower Battle Intel] Save Report failed");
-        return null;
+        return feedback;
     }
 
-    if (target) {
+    const feedback = buildSaveFeedback({
+        status: addedIds.length ? "saved" : "duplicate",
+        loaded: Boolean(addedIds.length),
+        addedIds,
+        duplicateIds,
+        candidateIds,
+        historyCountBefore: beforeHistory.length,
+        historyCountAfter: afterHistory.length
+    });
+
+    showSaveReportFeedback(feedback);
+
+    if (target && addedIds.length) {
         target.value = "";
-        target.placeholder = "Saved to Battle History. Paste another report here...";
+        target.placeholder = addedIds.length === 1
+            ? `Saved ${addedIds[0]} to Battle History. Paste another report here...`
+            : `Saved ${addedIds.length} reports to Battle History. Paste another report here...`;
     }
 
-    persist({ lastInput: "" });
+    if (target && !addedIds.length) {
+        target.placeholder = duplicateIds.length
+            ? `Duplicate report not loaded: ${duplicateIds[0]}`
+            : "Report was not added to Battle History.";
+    }
 
-    return result;
+    persist({ lastInput: addedIds.length ? "" : text });
+
+    return feedback;
+}
+
+
+function getCandidateReportIds(text = "") {
+    return splitBattleReports(text)
+        .slice(0, 50)
+        .map(report => fingerprintReport(report))
+        .filter(Boolean)
+        .filter((id, index, list) => list.indexOf(id) === index);
+}
+
+function getRunReportId(run = null) {
+    return run?.meta?.reportId || run?.meta?.id || run?.id || null;
+}
+
+function buildSaveFeedback(details = {}) {
+    const addedIds = Array.isArray(details.addedIds) ? details.addedIds.filter(Boolean) : [];
+    const duplicateIds = Array.isArray(details.duplicateIds) ? details.duplicateIds.filter(Boolean) : [];
+    const candidateIds = Array.isArray(details.candidateIds) ? details.candidateIds.filter(Boolean) : [];
+    const status = details.status || (addedIds.length ? "saved" : duplicateIds.length ? "duplicate" : "failed");
+    const loaded = Boolean(details.loaded ?? addedIds.length);
+
+    let title = "Save Report";
+    let message = details.message || "";
+
+    if (!message && status === "saved") {
+        title = addedIds.length === 1 ? "Report saved" : "Reports saved";
+        message = addedIds.length === 1
+            ? `Loaded report ${addedIds[0]} into Battle History.`
+            : `Loaded ${addedIds.length} reports into Battle History: ${addedIds.join(", ")}.`;
+
+        if (duplicateIds.length) {
+            message += ` Duplicate not loaded: ${duplicateIds.join(", ")}.`;
+        }
+    }
+
+    if (!message && status === "duplicate") {
+        title = "Duplicate not loaded";
+        const ids = duplicateIds.length ? duplicateIds : candidateIds;
+        message = ids.length
+            ? `Duplicate report not loaded: ${ids.join(", ")}.`
+            : "Duplicate report not loaded.";
+    }
+
+    if (!message && status === "failed") {
+        title = "Report not loaded";
+        message = "Report not loaded. I could not read a valid Battle Report from the input.";
+    }
+
+    if (!message && status === "empty") {
+        title = "Nothing to save";
+        message = "No report loaded. Paste a battle report first.";
+    }
+
+    return {
+        action: "save-report",
+        status,
+        loaded,
+        title,
+        message,
+        reportId: addedIds[0] || duplicateIds[0] || candidateIds[0] || null,
+        addedIds,
+        duplicateIds,
+        candidateIds,
+        historyCountBefore: details.historyCountBefore ?? null,
+        historyCountAfter: details.historyCountAfter ?? null,
+        createdAt: new Date().toISOString()
+    };
+}
+
+function showSaveReportFeedback(feedback = {}) {
+    const doc = getDocument();
+    if (!doc) return feedback;
+
+    const status = feedback.status || "info";
+    const tone = status === "saved" ? "good" : status === "duplicate" ? "warn" : "bad";
+    const text = feedback.message || "Save Report finished.";
+    const title = feedback.title || "Save Report";
+
+    const inline = ensureSaveFeedbackInline(doc);
+    if (inline) {
+        inline.className = `save-report-feedback ${tone}`;
+        inline.setAttribute("role", "status");
+        inline.setAttribute("aria-live", "polite");
+        inline.innerHTML = `
+            <strong>${escapeHTML(title)}</strong>
+            <span>${escapeHTML(text)}</span>
+        `;
+    }
+
+    const toast = ensureSaveFeedbackToast(doc);
+    if (toast) {
+        toast.innerHTML = `
+            <div class="save-report-toast ${tone}" role="status" aria-live="polite">
+                <strong>${escapeHTML(title)}</strong>
+                <span>${escapeHTML(text)}</span>
+            </div>
+        `;
+        clearTimeout(showSaveReportFeedback.toastTimer);
+        showSaveReportFeedback.toastTimer = setTimeout(() => {
+            if (toast) toast.innerHTML = "";
+        }, 5200);
+    }
+
+    try {
+        doc.documentElement.dataset.lastSaveReportStatus = status;
+        doc.documentElement.dataset.lastSaveReportId = feedback.reportId || "";
+        doc.documentElement.dataset.lastSaveReportAt = feedback.createdAt || new Date().toISOString();
+    } catch {
+        // ignore dataset failures
+    }
+
+    if (typeof window !== "undefined") {
+        window.TowerBattleIntelLastSaveReport = feedback;
+    }
+
+    return feedback;
+}
+
+function ensureSaveFeedbackInline(doc) {
+    let node = doc.getElementById("saveReportFeedback");
+    if (node) return node;
+
+    node = doc.createElement("div");
+    node.id = "saveReportFeedback";
+    node.className = "save-report-feedback";
+    node.hidden = false;
+
+    const actions = doc.querySelector(".input-actions");
+    if (actions?.parentNode) {
+        actions.insertAdjacentElement("afterend", node);
+        return node;
+    }
+
+    const input = doc.getElementById("input");
+    if (input?.parentNode) {
+        input.insertAdjacentElement("afterend", node);
+        return node;
+    }
+
+    return null;
+}
+
+function ensureSaveFeedbackToast(doc) {
+    let node = doc.getElementById("saveReportToastMount");
+    if (node) return node;
+
+    node = doc.createElement("div");
+    node.id = "saveReportToastMount";
+    node.className = "save-report-toast-mount";
+    doc.body?.appendChild(node);
+    return node;
+}
+
+function escapeHTML(value = "") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
 }
 
 export function actionClearInput(input = null) {

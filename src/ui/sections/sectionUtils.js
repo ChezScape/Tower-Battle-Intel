@@ -138,7 +138,7 @@ export function metricRow(row) {
     `;
 }
 
-export function buildMetricRows(section, { limit = 8, showHeader = false } = {}) {
+export function buildMetricRows(section, { limit = 8, showHeader = false, diffToggle = false } = {}) {
     const rows = sectionRows(section).slice(0, limit);
 
     if (!rows.length) {
@@ -146,10 +146,18 @@ export function buildMetricRows(section, { limit = 8, showHeader = false } = {})
     }
 
     return `
-        <div class="tbi-metric-table">
+        <div class="tbi-metric-table" data-metric-table="true">
             ${showHeader ? `
+                ${diffToggle ? `
+                    <button
+                        type="button"
+                        class="tbi-metric-table-toggle"
+                        data-metric-diff-toggle="true"
+                        aria-label="Open full Diff details"
+                    >DIFF+</button>
+                ` : ""}
                 <div class="tbi-metric-row header">
-                    <span>Metric</span><span>A</span><span>B</span><span>B - A</span>
+                    <span>Metric</span><span>Run A</span><span>Run B</span><span>Diff</span>
                 </div>
             ` : ""}
             ${rows.map(metricRow).join("")}

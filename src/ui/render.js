@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * ROOT UI RENDERER v4.10f
+ * ROOT UI RENDERER v4.11c
  * One render entry for dashboard + debug panel + delegated UI events.
  */
 

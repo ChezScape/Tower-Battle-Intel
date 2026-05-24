@@ -4,7 +4,7 @@ import {
     bindNativeControlGuard
 } from "./src/ui/nativeControlGuard.js";
 /**
- * BOOTSTRAP v4.10l
+ * BOOTSTRAP v4.11t
  * Root startup flow for Tower Battle Intel.
  *
  * Owns only application startup:
@@ -79,6 +79,9 @@ export function bootstrap() {
     import("./src/ui/finalControlPolishBridge.js")
         .then((module) => module.bindFinalControlPolishBridge?.(() => render()))
         .catch((error) => console.warn("[Tower Battle Intel] Final control polish bridge failed to load", error));
+    import("./src/ui/metricTableDiffToggleBridge.js")
+        .then((module) => module.bindMetricTableDiffToggleBridge?.())
+        .catch((error) => console.warn("[Tower Battle Intel] Metric table diff toggle bridge failed to load", error));
     bindCoreEvents();
 
     import("./src/ui/actionAuditBridge.js")

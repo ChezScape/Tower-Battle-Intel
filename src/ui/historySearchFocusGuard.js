@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * HISTORY SEARCH FOCUS GUARD v4.10y
+ * HISTORY SEARCH FOCUS GUARD v4.11q
  *
  * The History search input was losing focus because the dashboard render path
  * replaced the search input while typing. This classic bridge is loaded before
@@ -11,7 +11,7 @@
  * one input, then debounces the real filter action and restores focus/caret.
  */
 (function () {
-    const VERSION = "v4.10y";
+    const VERSION = "v4.11q";
     const FLAG = "__TowerBattleIntelHistorySearchFocusGuardBound";
     const SELECTOR = "[data-history-filter-query], input.history-search";
 

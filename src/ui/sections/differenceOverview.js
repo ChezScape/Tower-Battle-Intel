@@ -41,20 +41,21 @@ export function buildDifferenceItems(state = {}) {
     const stats = state.stats || {};
 
     return [
-        diffItem("Wave", core.wave, "⌁"),
-        diffItem("Coins Earned", core.coins, "$"),
-        diffItem("Coins / Hour", stats.coinsPerHour || stats.coins_per_hour, "↗"),
-        diffItem("Cells Earned", core.cells, "●"),
-        diffItem("Cells / Hour", stats.cellsPerHour || stats.cells_per_hour, "◌"),
-        diffItem("Total Damage", firstExisting(state.sections?.damage, ["damage_dealt", "total_damage"]), "✹")
+        diffItem("Wave", core.wave, "wave", "⌁"),
+        diffItem("Coins Earned", core.coins, "coins", "$"),
+        diffItem("Coins / Hour", stats.coinsPerHour || stats.coins_per_hour, "coins", "↗"),
+        diffItem("Cells Earned", core.cells, "cells", "●"),
+        diffItem("Cells / Hour", stats.cellsPerHour || stats.cells_per_hour, "cells", "◌"),
+        diffItem("Total Damage", firstExisting(state.sections?.damage, ["damage_dealt", "total_damage"]), "damage", "✹")
     ];
 }
 
-function diffItem(label, data, icon) {
+function diffItem(label, data, iconKey, glyph) {
     const enriched = { ...(data || {}), key: label };
     return {
         label,
-        icon,
+        iconKey,
+        glyph,
         diff: data?.diff ?? 0,
         percent: data?.pct,
         tone: toneFromDiffData(enriched)
@@ -63,8 +64,8 @@ function diffItem(label, data, icon) {
 
 function diffTile(item) {
     return `
-        <div class="tbi-diff-tile ${escapeAttr(item.tone)}">
-            <div class="tbi-diff-icon">${escapeHTML(item.icon)}</div>
+        <div class="tbi-diff-tile ${escapeAttr(item.tone)} metric-${escapeAttr(item.iconKey)}">
+            <div class="tbi-diff-icon metric-art metric-art-${escapeAttr(item.iconKey)}" aria-hidden="true"><b>${escapeHTML(item.glyph)}</b></div>
             <span>${escapeHTML(item.label)}</span>
             <strong>${escapeHTML(formatDelta(item.diff, { compact: true }))}</strong>
             <em>${escapeHTML(formatPercentDelta(item.percent))}</em>

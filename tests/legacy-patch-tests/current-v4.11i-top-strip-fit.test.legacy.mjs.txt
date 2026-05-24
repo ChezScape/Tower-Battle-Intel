@@ -1,0 +1,19 @@
+import fs from "node:fs";
+import assert from "node:assert/strict";
+
+const desktop = fs.readFileSync("./desktop.css", "utf8");
+const mobile = fs.readFileSync("./mobile.css", "utf8");
+const config = fs.readFileSync("./config/appConfig.js", "utf8");
+
+assert.match(config, /version:\s*"v4\.11i"/);
+assert.match(desktop, /v4\.11d Desktop Top Strip Fit Polish/);
+assert.match(desktop, /grid-template-columns:\s*minmax\(0, 1fr\) clamp\(86px, 5\.8vw, 118px\) minmax\(0, 1fr\)/);
+assert.match(desktop, /Medium desktop window: keep the side rail/);
+assert.match(desktop, /Small desktop window: compact desktop mode, not mobile stacking/);
+assert.match(desktop, /v4\.11i Desktop Height \/ Scroll Fit Polish/);
+assert.match(desktop, /max-height: 1080px/);
+assert.match(desktop, /Mobile CSS remains intentionally untouched/i);
+assert.doesNotMatch(mobile, /v4\.11i Desktop Height \/ Scroll Fit Polish/);
+assert.match(mobile, /v4\.11a9 Save Report Feedback/);
+
+console.log("current-v4.11i-top-strip-fit.test.mjs passed");

@@ -1,88 +1,108 @@
-# Tower Battle Intel v4.10j
+# Tower Battle Intel v4.11t
 
-Current working line: **v4.10e Root / Action / Style Sync**.
+Current working line: **v4.11t Desktop Gap Hero + Finish Polish**.
 
-This project is a local, browser-based Battle Report Intelligence Dashboard for **The Tower - Idle Tower Defense**.
+## Summary
+This build starts from v4.11s and keeps the desktop-only Concept 5 direction while giving the Gap in Numbers card a stronger mockup-style treatment with numeric axis values, plus small Quick Actions, meter, and alignment finishing polish.
 
-## Current architecture
+## Key points
+- Desktop dashboard only.
+- `mobile.css` remains untouched.
+- Runtime version is `v4.11t`.
+- Keeps v4.11q compact VS removal.
+- Keeps v4.11n DIFF+ details modal.
+- Keeps the advantage meter behaviour, but makes the lead wording and meter visuals clearer.
+- Full build output only.
 
-```text
-app.js / bootstrap.js        startup only
-index.html                  static shell only
-desktop.css                 desktop layout/theme only
-mobile.css                  mobile layout/theme only
-src/core/                   state, history, update, compute
-src/pipeline/               parser, compare, coach, insights, schema
-src/game/                   local game catalogue / report knowledge brain
-src/actions/                visible UI command bus
-src/ui/                     renderer, events, views, components, sections
-src/history/                history filters, selectors, stats, badges
-src/storage/                local persistence
-src/utils/                  shared parsing/time/math/safety utilities
-src/diagnostics/            health scan, trace, pipeline inspection
-```
-
-## Important rules
-
-- Do not put desktop layout fixes in `mobile.css`.
-- Do not put mobile layout fixes in `desktop.css`.
-- Visible buttons should route through `src/ui/events.js` then `src/actions/actions.js`.
-- Core files should not directly own visible UI button behaviour.
-- `src/game/` is the local game-brain catalogue and should stay separate from UI code.
-- `style.css` is intentionally not loaded unless the shell is deliberately changed.
-
-## Running locally
-
-Open `index.html` directly in a browser, or serve the folder with any simple local server.
-
-For tests, run from the project root:
+## Quick local test
+Open PowerShell in this folder and run:
 
 ```powershell
-node .\tests\root-shell-foundation.test.mjs
-node .\tests\utils-foundation.test.mjs
-node .\tests\history-storage-ui-utils.test.mjs
-node .\tests\ui-action-foundation.test.mjs
-node .\tests\pipeline-foundation.test.mjs
-node .\tests\report-parser-game-brain.test.mjs
+node -e "const http=require('http'),fs=require('fs'),path=require('path');const root=process.cwd();const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.json':'application/json','.svg':'image/svg+xml'};http.createServer((req,res)=>{let p=decodeURIComponent(new URL(req.url,'http://x').pathname);if(p==='/')p='/index.html';let f=path.join(root,p);if(!f.startsWith(root)){res.writeHead(403);return res.end('Forbidden')}fs.readFile(f,(e,d)=>{if(e){res.writeHead(404);res.end('Not found')}else{res.writeHead(200,{'Content-Type':types[path.extname(f).toLowerCase()]||'application/octet-stream'});res.end(d)}})}).listen(8080,()=>console.log('Open http://localhost:8080'))"
 ```
 
-## Console helpers
+Then check:
 
-After the app starts, these are available in DevTools:
-
-```js
-TowerBattleIntel.state()
-TowerBattleIntel.render()
-TowerBattleIntel.save()
-TowerBattleIntel.shell()
+```javascript
+TowerBattleIntel?.version
 ```
 
-## v4.10e sync
-
-Updated these files together so the visible shell, action bus, theme files and documentation agree with the current rebuild line:
+Expected:
 
 ```text
-app.js
-bootstrap.js
-desktop.css
-index.html
-mobile.css
-README.md
-style.css
-config/appConfig.js
-src/actions/actions.js
+v4.11t
 ```
 
-Focus:
+---
 
-- sync root shell versioning
-- keep startup guarded and bootstrapped once
-- keep the static HTML shell clean
-- keep desktop/mobile CSS split
-- expand action aliases so visible UI actions have a single command bus
-- keep style.css inactive
+# Tower Battle Intel v4.11g
+
+Current working line: **v4.11g Desktop Height Fit Polish**.
+
+## Summary
+This build starts from the working v4.11d desktop Concept 5 top-strip candidate and adds a focused desktop-only height/scroll fit pass.
+
+## Key points
+- Desktop dashboard only.
+- Mobile CSS remains untouched.
+- Runtime version is `v4.11g`.
+- No helper patch scripts.
+- No external dashboard overlay JS.
+- Full build output only.
+
+## What changed from v4.11d
+- Kept the v4.11d cyan/gold Run A / Run B trim and VS styling.
+- Reduced vertical pressure in maximised and 720p-style desktop windows.
+- Shortened dashboard cards slightly without changing the visual direction.
+- Tightened side-rail spacing so Quick Actions is less likely to be cut off.
+- Tightened recommendation/anomaly text rhythm.
+- Added a stronger 1080-height desktop fit rule and kept the existing 720p rule.
+- Kept small desktop as compact desktop, not mobile stacking.
+
+## How to test locally
+Open PowerShell in this folder and run:
+
+```powershell
+node -e "const http=require('http'),fs=require('fs'),path=require('path');const root=process.cwd();const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.json':'application/json','.svg':'image/svg+xml'};http.createServer((req,res)=>{let p=decodeURIComponent(new URL(req.url,'http://x').pathname);if(p==='/')p='/index.html';let f=path.join(root,p);if(!f.startsWith(root)){res.writeHead(403);return res.end('Forbidden')}fs.readFile(f,(e,d)=>{if(e){res.writeHead(404);res.end('Not found')}else{res.writeHead(200,{'Content-Type':types[path.extname(f).toLowerCase()]||'application/octet-stream'});res.end(d)}})}).listen(8080,()=>console.log('Open http://localhost:8080'))"
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+Expected console version:
+
+```javascript
+TowerBattleIntel?.version
+```
+
+Should return:
+
+```text
+v4.11g
+```
+
+## Tests
+```powershell
+node .\tests\browser-interaction-bridge-foundation.test.mjs
+node .\tests\current-v4.11g-checkpoint.test.mjs
+node .\tests\current-v4.11g-top-strip-fit.test.mjs
+node .\tests\current-v4.11g-height-fit.test.mjs
+node .\tests\current-v4.11g-save-feedback.test.mjs
+node .\tests\diagnostics-foundation.test.mjs
+node .\tests\dropdown-collapsible-fix.test.mjs
+node .\tests\history-search-focus-fix.test.mjs
+node .\tests\history-storage-ui-utils.test.mjs
+node .\tests\native-import-placement.test.mjs
+node .\tests\pipeline-foundation.test.mjs
+node .\tests\report-parser-game-brain.test.mjs
+node .\tests\ui-action-foundation.test.mjs
+node .\tests\ui-render-layer.test.mjs
+```
 
 
-## v4.10j native control backbone
+## v4.11r Desktop Quick Actions Mockup Rematch
 
-Adds a browser-native fallback for History Import/Export and Debug close/download controls so critical buttons still work even if rendered module handlers are blocked.
+Desktop-only polish pass. Keeps v4.11q compact VS removal, DIFF+ modal, and advantage meter. Reworks Quick Actions to be closer to the Concept 5 mockup with flatter action cards, cleaner title-case labels, lighter line icons, and stronger panel framing. `mobile.css` was not changed.

@@ -23,7 +23,7 @@
 
             var ua = navigator.userAgent || "";
             var mobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
-            var mode = (width <= 760 || (coarse && width <= 1024) || mobileUA)
+            var mode = (width < 800 || (coarse && width <= 1024) || mobileUA)
                 ? "mobile"
                 : "desktop";
 
@@ -551,11 +551,14 @@
         }());
     </script>
 
+        <script src="./src/ui/platformIsolationGuard.js"></script>
+        <script src="./src/ui/desktopPolishGuard.js"></script>
         <script src="./src/ui/universalDownloadBridge.js"></script>
         <script src="./src/ui/historySearchFocusGuard.js"></script>
     <script type="module" src="./app.js"></script>
 
 </body>
 </html>
+
 
 

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * UI EVENTS v4.10f
+ * UI EVENTS v4.11c
  * One delegated UI bridge. No per-render rebinding for visible buttons.
  */
 
@@ -825,11 +825,17 @@ function filterHistoryStatsSections(query = "") {
             if (rowMatches) matchedRows++;
         });
 
+        const sectionMatches = Boolean(needle && visible);
+        const rowMatches = matchedRows > 0;
+        section.classList.toggle("search-match", sectionMatches);
+        section.classList.toggle("row-search-match", rowMatches);
+        section.dataset.matchCount = sectionMatches ? String(matchedRows) : "0";
+
         const matchPill = section.querySelector("[data-history-stats-match-pill]");
 
         if (matchPill) {
-            matchPill.hidden = !(needle && visible);
-            matchPill.textContent = matchedRows > 0 ? `Matched ${matchedRows}` : "Section match";
+            matchPill.hidden = !sectionMatches;
+            matchPill.textContent = rowMatches ? `Matched ${matchedRows}` : "Section match";
         }
 
         section.hidden = !visible;

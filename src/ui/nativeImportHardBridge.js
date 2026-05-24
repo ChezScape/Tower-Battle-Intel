@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * NATIVE IMPORT HARD BRIDGE v4.10q
+ * NATIVE IMPORT HARD BRIDGE v4.11q
  *
  * Purpose:
  * - History Import click reaches the file input, but Chrome is not opening the picker.
@@ -12,7 +12,7 @@
 const HARD_IMPORT_FLAG = "__TowerBattleIntelNativeImportHardBridgeBound";
 const PICKER_RECENT_MS = 650;
 
-const VERSION = "v4.10q";
+const VERSION = "v4.11q";
 
 const VISIBLE_INPUT_SELECTOR = [
     "#historyImportInput",

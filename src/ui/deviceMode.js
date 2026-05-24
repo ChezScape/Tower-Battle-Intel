@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * DEVICE MODE v4.10f
+ * DEVICE MODE v4.11c
  * Owns desktop/mobile detection and stylesheet switching.
  *
  * Rules:
@@ -11,7 +11,7 @@
  * - if index.html loaded the wrong stylesheet, this file corrects it
  */
 
-const MOBILE_WIDTH = 799;
+const MOBILE_WIDTH = 799; // desktop starts at 800px
 const TOUCH_MOBILE_LIMIT = 1024;
 const STYLESHEET_ID = "towerBattleIntelStylesheet";
 
@@ -82,6 +82,7 @@ export function applyDeviceMode({ force = false } = {}) {
     }
 
     currentMode = mode;
+    window.TowerBattleIntelPlatformMode = mode;
 
     applyToElement(document.documentElement, mode, pointerClass);
     if (document.body) applyToElement(document.body, mode, pointerClass);

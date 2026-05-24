@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * ACTION AUDIT BRIDGE v4.10s
+ * ACTION AUDIT BRIDGE v4.11q
  *
  * Purpose:
  * - Top tabs work, but inner buttons/selects/modals are unreliable.
@@ -33,7 +33,7 @@ import {
 } from "../diagnostics/systemHealthScan.js";
 
 const BRIDGE_FLAG = "__TowerBattleIntelActionAuditBridgeBound";
-const VERSION = "v4.10s";
+const VERSION = "v4.11q";
 
 const FILE_INPUT_SELECTOR = [
     "#historyImportInput",
@@ -85,7 +85,7 @@ function handleNativePointerDown(event) {
     const target = event.target;
     if (!isElement(target)) return;
 
-    // v4.10s: native select/dropdown controls must be left completely native.
+    // v4.11q: native select/dropdown controls must be left completely native.
     // Stopping pointer/mouse events here made Chrome open then instantly close dropdowns.
     if (isNativeSelectControl(target)) {
         lastAction = { action: "native-select-pointer", at: new Date().toISOString() };
@@ -107,7 +107,7 @@ function handleSummaryToggle(event, target) {
     const details = summary.closest("details");
     if (!details) return false;
 
-    // v4.10s: let the browser's native <details>/<summary> toggle happen.
+    // v4.11q: let the browser's native <details>/<summary> toggle happen.
     // The old bridge prevented default and toggled manually; some summaries then fought
     // with render/rebuild paths and appeared dead.
     const wasOpen = Boolean(details.open);
@@ -713,6 +713,25 @@ function filterStatsSections(input) {
     modal.querySelectorAll("[data-history-stats-section]").forEach(section => {
         const text = String(section.dataset.sectionSearch || section.textContent || "").toLowerCase();
         const show = !query || text.includes(query);
+        let matchedRows = 0;
+
+        section.querySelectorAll("[data-history-stats-row]").forEach(row => {
+            const rowText = String(row.dataset.historyStatsRowSearch || row.textContent || "").toLowerCase();
+            const rowMatches = Boolean(query && rowText.includes(query));
+            row.classList.toggle("search-match", rowMatches);
+            if (rowMatches) matchedRows += 1;
+        });
+
+        section.classList.toggle("search-match", Boolean(query && show));
+        section.classList.toggle("row-search-match", matchedRows > 0);
+        section.dataset.matchCount = query && show ? String(matchedRows) : "0";
+
+        const matchPill = section.querySelector("[data-history-stats-match-pill]");
+        if (matchPill) {
+            matchPill.hidden = !(query && show);
+            matchPill.textContent = matchedRows > 0 ? `Matched ${matchedRows}` : "Section match";
+        }
+
         section.hidden = !show;
         if (show) visible += 1;
     });
@@ -747,7 +766,7 @@ function handleEditModalClick(event, target) {
     if (!modal) return false;
 
     if (isNativeSelectControl(target) || isTextEditingControl(target)) {
-        // v4.10s: leave modal selects/textareas fully native so dropdowns and typing work.
+        // v4.11q: leave modal selects/textareas fully native so dropdowns and typing work.
         return true;
     }
 

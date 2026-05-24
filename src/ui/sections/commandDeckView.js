@@ -3,26 +3,51 @@
 import { escapeHTML, miniStat } from "./sectionUtils.js";
 
 export function buildCommandDeckView(state = {}) {
+    const historyCount = Array.isArray(state.history) ? state.history.length : 0;
+    const activeBuild = state.ui?.buildStyle || "unknown";
+
     return `
-        <div class="tbi-command-view">
-            <section class="tbi-card tbi-command-card">
-                <h2>Command Deck</h2>
-                <p>Paste, save, import, export, scan, and manage run data.</p>
-                <div class="tbi-command-actions">
-                    <button type="button" data-ui-action="save-report">Save Report</button>
-                    <button type="button" data-ui-action="clear-input">Clear Input</button>
-                    <button type="button" data-ui-action="clear-runs">Clear Runs</button>
-                    <button type="button" data-ui-action="open-history">Open History</button>
+        <div class="tbi-command-view desktop-command-polish desktop-command-dedup desktop-command-layout-a5">
+            <section class="tbi-card tbi-command-card tbi-command-flow">
+                <div class="tbi-card-heading compact-heading">
+                    <div>
+                        <h2>Command Deck</h2>
+                        <p>Desktop command hub. Shortcuts, current state, then the Battle Report Input console below.</p>
+                    </div>
+                    <span class="tbi-command-mode-pill">Desktop</span>
                 </div>
-                <p class="tbi-muted">The report console opens below on desktop. On mobile, use the Open Deck button.</p>
+
+                <div class="tbi-command-steps command-shortcut-steps">
+                    ${commandStep("1", "Review data", "Check loaded runs and history count.")}
+                    ${commandStep("2", "Manage history", "Open, import, or export saved runs.")}
+                    ${commandStep("3", "Paste below", "Paste reports underneath. Save, Build, and Clear live there.")}
+                </div>
+
+                <div class="tbi-command-actions desktop-command-actions desktop-command-shortcuts" aria-label="Command deck shortcuts">
+                    <button type="button" data-ui-action="open-history">Open History</button>
+                    <button type="button" data-ui-action="import-history" data-history-import-trigger="true" data-import-history-button="true">Import History</button>
+                    <button type="button" data-ui-action="export-history" data-export-history="true">Export History</button>
+                    <button type="button" data-ui-action="toggle-debug">Open Debug</button>
+                </div>
+
+                <div class="tbi-command-note">
+                    Input actions stay below in one place: Save Report, Build, Clear Input, and Clear Runs.
+                </div>
             </section>
-            <section class="tbi-card tbi-command-status">
-                <h3>Current Data</h3>
-                <div class="tbi-command-stats">
-                    ${miniStat("Run A", state.runA ? "Loaded" : "Empty")}
-                    ${miniStat("Run B", state.runB ? "Loaded" : "Empty")}
-                    ${miniStat("History", String(state.history.length))}
-                    ${miniStat("Build", escapeHTML(state.ui?.buildStyle || "unknown"))}
+
+            <section class="tbi-card tbi-command-status desktop-command-status">
+                <div class="tbi-card-heading compact-heading">
+                    <div>
+                        <h3>Current Data</h3>
+                        <p>Loaded state snapshot</p>
+                    </div>
+                </div>
+
+                <div class="tbi-command-stats desktop-command-stats">
+                    ${miniStat("Run A", state.runA ? "Loaded" : "Empty", state.runA ? "good" : "neutral")}
+                    ${miniStat("Run B", state.runB ? "Loaded" : "Empty", state.runB ? "good" : "neutral")}
+                    ${miniStat("History", String(historyCount), historyCount ? "good" : "neutral")}
+                    ${miniStat("Build", escapeHTML(formatBuild(activeBuild)), "neutral")}
                 </div>
             </section>
         </div>
@@ -49,11 +74,27 @@ export function buildMoreView(state = {}) {
                 <h2>More</h2>
                 ${moreButton("history", "History", `${state.history.length} saved runs`)}
                 ${moreButton("anomalies", "Anomalies", `${state.anomalies.length} active`)}
-                ${moreButton("command", "Command Deck", "Paste, save, clear, export")}
+                ${moreButton("command", "Command Deck", "History, import, export, debug")}
                 ${moreButton("settings", "Settings", "Theme and diagnostics")}
             </section>
         </div>
     `;
+}
+
+function commandStep(number, title, body) {
+    return `
+        <div class="tbi-command-step">
+            <span>${escapeHTML(number)}</span>
+            <strong>${escapeHTML(title)}</strong>
+            <em>${escapeHTML(body)}</em>
+        </div>
+    `;
+}
+
+function formatBuild(value = "unknown") {
+    return String(value || "unknown")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, letter => letter.toUpperCase());
 }
 
 function moreButton(tab, label, subtitle) {

@@ -1,0 +1,41 @@
+import fs from "node:fs";
+import assert from "node:assert/strict";
+
+const read = file => fs.readFileSync(file, "utf8");
+
+const config = read("./config/appConfig.js");
+const index = read("./index.html");
+const platformGuard = read("./src/ui/platformIsolationGuard.js");
+const desktopGuard = read("./src/ui/desktopPolishGuard.js");
+const commandDeck = read("./src/ui/sections/commandDeckView.js");
+const systems = read("./src/ui/sections/systemsMatrix.js");
+const historyStats = read("./src/ui/layouts/historyStatsModal.js");
+const events = read("./src/ui/events.js");
+const actionAudit = read("./src/ui/actionAuditBridge.js");
+const desktopCss = read("./desktop.css");
+
+assert.match(config, /version:\s*"v4\.11a2"/);
+assert.match(index, /platformIsolationGuard\.js/);
+assert.match(index, /desktopPolishGuard\.js/);
+assert.match(index, /universalDownloadBridge\.js/);
+assert.match(index, /historySearchFocusGuard\.js/);
+assert.ok(index.indexOf("platformIsolationGuard.js") < index.indexOf("app.js"));
+assert.ok(index.indexOf("desktopPolishGuard.js") < index.indexOf("app.js"));
+
+assert.match(platformGuard, /PLATFORM ISOLATION GUARD v4\.11a2/);
+assert.match(desktopGuard, /DESKTOP POLISH GUARD v4\.11a2/);
+assert.match(commandDeck, /desktop-command-polish/);
+assert.match(commandDeck, /tbi-command-steps/);
+assert.match(commandDeck, /Desktop report workflow/);
+assert.match(systems, /Subsystem Matrix/);
+assert.match(historyStats, /data-history-stats-match-pill/);
+assert.match(events, /section\.classList\.toggle\("search-match"/);
+assert.match(actionAudit, /row-search-match/);
+
+assert.match(desktopCss, /v4\.11a2 Desktop Polish/);
+assert.match(desktopCss, /history-stats-section\.search-match/);
+assert.match(desktopCss, /tbi-system-tile/);
+assert.match(desktopCss, /desktop-command-polish/);
+assert.match(desktopCss, /Desktop Platform Isolation Guard|v4\.11a2 Desktop Polish/);
+
+console.log("current-v4.11a3-desktop-polish.test.mjs passed");

@@ -1,0 +1,16 @@
+import fs from "node:fs";
+import assert from "node:assert/strict";
+
+const desktop = fs.readFileSync("./desktop.css", "utf8");
+const mobile = fs.readFileSync("./mobile.css", "utf8");
+
+assert.match(desktop, /v4\.11i Desktop Height \/ Scroll Fit Polish/);
+assert.match(desktop, /max-height:\s*1080px/);
+assert.match(desktop, /grid-template-columns:\s*minmax\(0, 1fr\) clamp\(286px, 18\.8vw, 360px\)/);
+assert.match(desktop, /min-height:\s*clamp\(206px, 13\.55vw, 258px\)/);
+assert.match(desktop, /min-height:\s*clamp\(192px, 12\.7vw, 238px\)/);
+assert.match(desktop, /concept5-actions button\.wide/);
+assert.match(desktop, /Small desktop window: preserve compact desktop/);
+assert.doesNotMatch(mobile, /v4\.11i Desktop Height \/ Scroll Fit Polish/);
+
+console.log("current-v4.11i-height-fit.test.mjs passed");

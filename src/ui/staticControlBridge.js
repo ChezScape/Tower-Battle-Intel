@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * STATIC CONTROL BRIDGE v4.10l
+ * STATIC CONTROL BRIDGE v4.11c
  *
  * Small browser-native safety bridge for controls that must work even when
  * the rendered UI was replaced after the normal UI event binding.
