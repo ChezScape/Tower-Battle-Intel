@@ -149,12 +149,14 @@ export function buildMetricRows(section, { limit = 8, showHeader = false, diffTo
         <div class="tbi-metric-table ${escapeAttr(leadSide)}" data-metric-table="true" data-lead-side="${escapeAttr(leadSide)}">
             ${showHeader ? `
                 ${diffToggle ? `
-                    <button
-                        type="button"
-                        class="tbi-metric-table-toggle"
-                        data-metric-diff-toggle="true"
-                        aria-label="Open full Diff details"
-                    >DIFF+</button>
+                    <div class="tbi-metric-diff-action-row" aria-hidden="false">
+                        <button
+                            type="button"
+                            class="tbi-metric-table-toggle"
+                            data-metric-diff-toggle="true"
+                            aria-label="Open full Diff details"
+                        >DIFF+</button>
+                    </div>
                 ` : ""}
                 <div class="tbi-metric-row header">
                     <span class="metric-name">Metric</span><span class="metric-run-a ${leadSide === "lead-a" ? "lead-cell" : ""}">Run A</span><span class="metric-run-b ${leadSide === "lead-b" ? "lead-cell" : ""}">Run B</span><span class="metric-diff">Diff</span>

@@ -82,6 +82,12 @@ export function bootstrap() {
     import("./src/ui/metricTableDiffToggleBridge.js")
         .then((module) => module.bindMetricTableDiffToggleBridge?.())
         .catch((error) => console.warn("[Tower Battle Intel] Metric table diff toggle bridge failed to load", error));
+    import("./src/ui/compareGrowthControlsBridge.js")
+        .then((module) => module.bindCompareGrowthControlsBridge?.())
+        .catch((error) => console.warn("[Tower Battle Intel] Compare growth controls bridge failed to load", error));
+    import("./src/ui/growthLineFocusBridge.js")
+        .then((module) => module.bindGrowthLineFocusBridge?.())
+        .catch((error) => console.warn("[Tower Battle Intel] Growth line focus bridge failed to load", error));
     bindCoreEvents();
 
     import("./src/ui/actionAuditBridge.js")

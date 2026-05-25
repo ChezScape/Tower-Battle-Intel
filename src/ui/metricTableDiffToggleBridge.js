@@ -1,14 +1,14 @@
 "use strict";
 
 /**
- * METRIC TABLE DIFF DETAILS MODAL BRIDGE v4.11q
+ * METRIC TABLE DIFF DETAILS MODAL BRIDGE v4.11z
  * Desktop dashboard helper.
  *
  * Replaces the narrow-table column toggle with a DIFF+ detail modal.
  * Card size stays unchanged; the popup shows Metric / Run A / Run B / Diff clearly.
  */
 
-const VERSION = "v4.11q";
+const VERSION = "v4.11z";
 let bound = false;
 let lastFocusedElement = null;
 
@@ -50,7 +50,8 @@ function handleMetricDiffDetailsClick(event) {
         return;
     }
 
-    const table = button.closest("[data-metric-table]");
+    const table = button.closest("[data-metric-table]")
+        || button.closest(".tbi-metric-card")?.querySelector?.("[data-metric-table]");
 
     if (!table) {
         return;
@@ -82,7 +83,7 @@ function openMetricDiffModal(table, sourceButton) {
     const card = table.closest(".tbi-metric-card");
     const title = cleanText(card?.dataset?.metricDetailTitle || card?.querySelector("h3")?.textContent || "Metric Details");
     const accent = cleanText(card?.dataset?.metricDetailAccent || "cyan").toLowerCase();
-    const rows = readRows(table);
+    const rows = readFullRowsFromCard(card) || readRows(table);
 
     if (!rows.length) {
         return;
@@ -156,6 +157,37 @@ function closeMetricDiffModal({ restoreFocus = true } = {}) {
     }
 
     lastFocusedElement = null;
+}
+
+function readFullRowsFromCard(card) {
+    const raw = card?.dataset?.metricFullRows || "";
+
+    if (!raw) {
+        return null;
+    }
+
+    try {
+        const rows = JSON.parse(raw);
+
+        if (!Array.isArray(rows)) {
+            return null;
+        }
+
+        const normalised = rows
+            .map(row => ({
+                metric: cleanText(row.metric || ""),
+                runA: cleanText(row.runA || ""),
+                runB: cleanText(row.runB || ""),
+                diff: cleanText(row.diff || ""),
+                tone: ["good", "bad", "neutral"].includes(cleanText(row.tone || "")) ? cleanText(row.tone || "") : "neutral"
+            }))
+            .filter(row => row.metric);
+
+        return normalised.length ? normalised : null;
+    } catch (error) {
+        console.warn("[Tower Battle Intel] Unable to read full DIFF+ rows", error);
+        return null;
+    }
 }
 
 function readRows(table) {

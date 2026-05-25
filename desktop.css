@@ -7919,3 +7919,3052 @@ html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric
 html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table-toggle {
     z-index: 8 !important;
 }
+
+/* ==================================================
+   v4.11v Compare + Trend Workspace
+   Dashboard lock note: scoped to Compare tab only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-workspace {
+    gap: 18px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(29, 231, 255, .9);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-trend-console {
+    border-color: rgba(29, 231, 255, .26);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(29, 231, 255, .15), transparent 34%),
+        radial-gradient(circle at 90% 100%, rgba(255, 75, 226, .16), transparent 42%),
+        linear-gradient(135deg, rgba(4, 18, 31, .96), rgba(8, 10, 28, .96));
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+    display: grid;
+    grid-template-columns: minmax(260px, .9fr) minmax(560px, 1.7fr) minmax(280px, .8fr);
+    gap: 16px;
+    align-items: stretch;
+    min-height: unset;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-copy h2 {
+    margin: 8px 0 8px;
+    color: #1de7ff;
+    font-size: clamp(24px, 1.6vw, 34px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-copy p,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-section-heading p {
+    margin: 0;
+    color: rgba(220, 242, 255, .82);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-strip {
+    display: grid;
+    grid-template-columns: 1fr minmax(150px, .55fr) 1fr;
+    gap: 10px;
+    align-items: stretch;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-stats > div {
+    border: 1px solid rgba(29, 231, 255, .2);
+    border-radius: 14px;
+    background: rgba(3, 13, 25, .62);
+    box-shadow: inset 0 0 24px rgba(29, 231, 255, .06);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 10px;
+    padding: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 2px;
+    font-size: 20px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip.run-a h3 { color: #1de7ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip.run-b h3 { color: #ffd329; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip div {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-stats span {
+    color: rgba(170, 219, 244, .75);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-chip b {
+    overflow: hidden;
+    color: #eaf8ff;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict {
+    display: grid;
+    place-items: center;
+    gap: 5px;
+    padding: 12px 10px;
+    text-align: center;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict small {
+    color: rgba(183, 219, 238, .72);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict strong {
+    color: #fff;
+    font-size: 24px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(29, 231, 255, .45);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-stats {
+    display: grid;
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-stats > div {
+    display: grid;
+    align-content: center;
+    gap: 5px;
+    padding: 12px 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-stats strong {
+    overflow: hidden;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: .08em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card {
+    min-height: 190px;
+    display: grid;
+    gap: 12px;
+    align-content: start;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(29, 231, 255, .16);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card header span {
+    display: inline-grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid rgba(29, 231, 255, .35);
+    border-radius: 999px;
+    color: #1de7ff;
+    background: rgba(29, 231, 255, .08);
+    box-shadow: 0 0 18px rgba(29, 231, 255, .15);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card h3 {
+    margin: 0;
+    color: #1de7ff;
+    font-size: 16px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card.gold header span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card.gold h3 {
+    border-color: rgba(255, 211, 41, .45);
+    color: #ffd329;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-line,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 12px;
+    background: rgba(1, 10, 20, .62);
+    padding: 9px 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-line span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip span {
+    color: rgba(139, 242, 255, .95);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-line strong {
+    color: #ffd329;
+    font-size: 18px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card.lead-a .tbi-compare-lead-line strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card.lead-a .tbi-compare-detail-header strong {
+    color: #1de7ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card ul {
+    display: grid;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card li {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: rgba(227, 246, 255, .88);
+    font-size: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card li b {
+    color: #39ff77;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-details-shell {
+    display: grid;
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-section-heading h3,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel h4,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-side h4 {
+    margin: 5px 0;
+    color: #1de7ff;
+    font-size: 18px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card {
+    min-height: 390px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(29, 231, 255, .16);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header span {
+    display: inline-grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid rgba(29, 231, 255, .35);
+    border-radius: 999px;
+    color: #1de7ff;
+    background: rgba(29, 231, 255, .08);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header h3 {
+    margin: 0;
+    overflow: hidden;
+    color: #1de7ff;
+    font-size: 16px;
+    letter-spacing: .16em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header strong.good,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header strong.neutral {
+    color: #ffd329;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip {
+    margin: 10px 0 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip small {
+    color: rgba(186, 218, 235, .72);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card .tbi-card-footer-action {
+    margin-top: auto;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-trend-console {
+    display: grid;
+    gap: 16px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-active-pill {
+    display: grid;
+    gap: 4px;
+    min-width: 130px;
+    border: 1px solid rgba(255, 75, 226, .35);
+    border-radius: 14px;
+    background: rgba(255, 75, 226, .08);
+    padding: 10px 14px;
+    text-align: right;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-active-pill span {
+    color: rgba(217, 185, 255, .8);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-active-pill strong {
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-main {
+    display: grid;
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-side,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-card {
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 14px;
+    background: rgba(2, 10, 22, .62);
+    box-shadow: inset 0 0 28px rgba(29, 231, 255, .05);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card {
+    display: grid;
+    gap: 9px;
+    padding: 12px;
+    min-height: 170px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card footer,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card header span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card footer span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel small {
+    color: rgba(175, 219, 242, .72);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card header strong {
+    color: #fff;
+    font-size: 17px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-sparkline {
+    width: 100%;
+    height: 92px;
+    color: #1de7ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-sparkline.tone-gold { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-sparkline.tone-green { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-sparkline.tone-violet { color: #ff4be2; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .trend-axis {
+    stroke: rgba(255,255,255,.18);
+    stroke-width: 1;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .trend-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 4;
+    filter: drop-shadow(0 0 7px currentColor);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .trend-fill {
+    fill: currentColor;
+    opacity: .1;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .trend-dot {
+    fill: #fff;
+    stroke: currentColor;
+    stroke-width: 3;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-empty-chart {
+    display: grid;
+    min-height: 92px;
+    place-items: center;
+    border: 1px dashed rgba(29, 231, 255, .18);
+    border-radius: 12px;
+    color: rgba(181, 218, 238, .7);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-signal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 58px auto;
+    align-items: center;
+    gap: 10px;
+    min-height: 88px;
+    padding: 10px 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-card strong {
+    display: block;
+    color: #fff;
+    font-size: 13px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-card span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(194, 225, 242, .72);
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-card > b {
+    color: #1de7ff;
+    font-size: 18px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 4px;
+    height: 48px;
+    color: #1de7ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars.tone-gold { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars.tone-green { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars.tone-violet { color: #ff4be2; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars i {
+    display: block;
+    width: 8px;
+    min-height: 5px;
+    border-radius: 999px 999px 2px 2px;
+    background: currentColor;
+    box-shadow: 0 0 10px currentColor;
+    opacity: .82;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-side {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+    padding: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding {
+    display: grid;
+    gap: 5px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    background: rgba(0,0,0,.22);
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding span {
+    color: rgba(181, 218, 238, .72);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding strong {
+    color: #fff;
+    font-size: 15px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding.good strong { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding.bad strong { color: #ff4f76; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-finding.neutral strong { color: #9fb2c8; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .good { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .bad { color: #ff4f76; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .neutral { color: #9fb2c8; }
+
+@media (max-width: 1380px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-hero-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-signal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 920px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-run-strip,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-hero-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-signal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================================
+   v4.11w Compare Workspace Refinement
+   Dashboard lock note: scoped to Compare tab only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+    grid-template-columns: minmax(280px, .82fr) minmax(600px, 1.72fr) minmax(260px, .72fr);
+    gap: 14px;
+    padding: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-copy {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-copy h2 {
+    margin: 4px 0 0;
+    line-height: 1.08;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 999px;
+    background: rgba(2, 10, 22, .58);
+    padding: 4px 8px;
+    box-shadow: inset 0 0 14px rgba(29, 231, 255, .045);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges b {
+    color: rgba(213, 241, 255, .78);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .11em;
+    max-width: 78px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges em {
+    display: inline-grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border-radius: 999px;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 950;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges .lead-a em {
+    color: #06131d;
+    background: #1de7ff;
+    box-shadow: 0 0 12px rgba(29, 231, 255, .42);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges .lead-b em {
+    color: #160f00;
+    background: #ffd329;
+    box-shadow: 0 0 12px rgba(255, 211, 41, .42);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges .lead-neutral em {
+    color: #08131f;
+    background: #9fb2c8;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-card {
+    min-height: 168px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card {
+    min-height: 338px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-header {
+    align-items: center;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    min-width: max-content;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-actions > strong {
+    font-size: 16px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-diff-pill {
+    min-width: 68px;
+    border: 1px solid rgba(255, 75, 226, .45);
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 24% 0%, rgba(255, 75, 226, .28), transparent 62%),
+        linear-gradient(180deg, rgba(53, 16, 68, .86), rgba(14, 11, 35, .9));
+    color: #ffd8ff;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: .08em;
+    line-height: 1;
+    padding: 7px 11px;
+    text-transform: uppercase;
+    box-shadow: inset 0 0 16px rgba(255, 75, 226, .15), 0 0 14px rgba(255, 75, 226, .16);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-diff-pill:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-diff-pill:focus-visible {
+    border-color: rgba(255, 106, 236, .72);
+    color: #fff;
+    outline: none;
+    box-shadow: inset 0 0 18px rgba(255, 75, 226, .24), 0 0 18px rgba(255, 75, 226, .28);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card .tbi-metric-table-toggle {
+    display: none !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip {
+    min-height: 36px;
+    margin: 9px 0 8px;
+    background:
+        linear-gradient(90deg, rgba(29, 231, 255, .085), rgba(255, 211, 41, .045), rgba(255, 75, 226, .065));
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip span {
+    color: rgba(229, 252, 255, .94);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-a .lead-cell,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-b .lead-cell {
+    position: relative;
+    color: rgba(233, 254, 255, .98) !important;
+    background:
+        linear-gradient(90deg, rgba(var(--tbi-lead-color,49,239,255), .035), rgba(var(--tbi-lead-color,49,239,255), .11), rgba(var(--tbi-lead-color,49,239,255), .035));
+    text-shadow: 0 0 10px rgba(var(--tbi-lead-color,49,239,255), .25);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-a { --tbi-lead-color: 49, 239, 255; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-b { --tbi-lead-color: 255, 211, 41; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-row.header .lead-cell {
+    border-radius: 8px 8px 0 0;
+    color: rgb(var(--tbi-lead-color,49,239,255)) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card .tbi-card-footer-action {
+    min-height: 34px;
+    margin-top: 12px;
+    letter-spacing: .1em;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-active-pill {
+    align-self: start;
+    min-width: 116px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card {
+    min-height: 156px;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(29, 231, 255, .08), transparent 48%),
+        rgba(2, 10, 22, .64);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card footer b {
+    font-size: 15px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-side h4 {
+    margin-top: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-side .tbi-kicker {
+    margin-bottom: -2px;
+}
+
+@media (max-width: 1380px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================================
+   v4.11x Compare Readability + Trend Lift
+   Dashboard lock note: scoped to Compare tab only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+    grid-template-columns: minmax(300px, .86fr) minmax(680px, 1.72fr) minmax(270px, .7fr);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero-copy p {
+    max-width: 48ch;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-trend-jump {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    border: 1px solid rgba(29, 231, 255, .28);
+    border-radius: 999px;
+    background:
+        linear-gradient(90deg, rgba(29, 231, 255, .12), rgba(255, 75, 226, .08));
+    color: rgba(229, 252, 255, .94);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .14em;
+    padding: 7px 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: inset 0 0 16px rgba(29, 231, 255, .08), 0 0 12px rgba(29, 231, 255, .08);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-trend-jump::after {
+    content: "↓";
+    margin-left: 8px;
+    color: #ff4be2;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict {
+    align-content: center;
+    gap: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .2;
+    pointer-events: none;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-b {
+    border-color: rgba(255, 211, 41, .34);
+    box-shadow: inset 0 0 28px rgba(255, 211, 41, .08), 0 0 18px rgba(255, 211, 41, .08);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-a {
+    border-color: rgba(29, 231, 255, .36);
+    box-shadow: inset 0 0 28px rgba(29, 231, 255, .1), 0 0 18px rgba(29, 231, 255, .08);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-b::before {
+    background: radial-gradient(circle at 50% 18%, rgba(255, 211, 41, .44), transparent 56%);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-a::before {
+    background: radial-gradient(circle at 50% 18%, rgba(29, 231, 255, .44), transparent 56%);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-b strong {
+    color: #ffd329;
+    text-shadow: 0 0 22px rgba(255, 211, 41, .38);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict.lead-a strong {
+    color: #1de7ff;
+    text-shadow: 0 0 22px rgba(29, 231, 255, .42);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict-facts {
+    display: grid;
+    width: 100%;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict-facts b {
+    display: block;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 9px;
+    background: rgba(0,0,0,.18);
+    color: rgba(230, 248, 255, .92);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    padding: 6px 7px;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges span {
+    min-height: 28px;
+    padding: 5px 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-badges b {
+    max-width: 96px;
+    font-size: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card {
+    min-height: 304px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip {
+    min-height: 32px;
+    margin: 8px 0 7px;
+    padding: 7px 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-lead-chip small {
+    color: rgba(221, 243, 255, .74);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-a .lead-cell,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-table.lead-b .lead-cell {
+    background:
+        linear-gradient(90deg, rgba(var(--tbi-lead-color,49,239,255), .018), rgba(var(--tbi-lead-color,49,239,255), .062), rgba(var(--tbi-lead-color,49,239,255), .018)) !important;
+    text-shadow: 0 0 8px rgba(var(--tbi-lead-color,49,239,255), .16) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-metric-row.header .lead-cell {
+    background: rgba(var(--tbi-lead-color,49,239,255), .05) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-detail-card .tbi-card-footer-action {
+    margin-top: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-section-heading h3 {
+    margin-bottom: 2px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-trend-console {
+    scroll-margin-top: 96px;
+}
+
+@media (max-width: 1380px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-hero {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict-facts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 920px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-verdict-facts {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==================================================
+   v4.11x1 Dashboard Grid Lock Repair
+   Keeps the protected v4.11u dashboard look, but fixes compact desktop
+   table header alignment by taking the DIFF+ control out of the Run A / Run B
+   header grid. Compare/Trend styles remain scoped to the Compare tab.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-diff-action-row {
+    display: none !important;
+}
+
+@media (max-width: 1480px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table {
+        position: relative !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-diff-action-row {
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        min-height: 22px !important;
+        padding: 2px 4px 4px !important;
+        background:
+            linear-gradient(90deg, rgba(29,231,255,.035), rgba(255,75,226,.035)),
+            rgba(1,7,17,.70) !important;
+        border-bottom: 1px solid rgba(29,231,255,.08) !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-diff-action-row .tbi-metric-table-toggle {
+        position: static !important;
+        inset: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 46px !important;
+        height: 18px !important;
+        padding: 0 7px !important;
+        font-size: 8px !important;
+        letter-spacing: .075em !important;
+        z-index: 1 !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row.header {
+        padding-right: 8px !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row.header .metric-run-a,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row.header .metric-run-b {
+        justify-self: stretch !important;
+        text-align: right !important;
+    }
+}
+
+@media (max-width: 1120px) and (min-width: 860px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-diff-action-row {
+        min-height: 20px !important;
+        padding-top: 1px !important;
+        padding-bottom: 3px !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row.header {
+        grid-template-columns: minmax(92px, 1.42fr) minmax(54px, .58fr) minmax(54px, .58fr) !important;
+        gap: 6px !important;
+    }
+}
+
+/* ==================================================
+   v4.11x2 Dashboard Footer DIFF Placement
+   Keeps the compact dashboard table grid clean by moving DIFF+ to the
+   bottom action row next to the existing full-breakdown action.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-card {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    margin-top: auto !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-card-footer-action {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 0 !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-metric-footer-diff-button {
+    display: none !important;
+    position: static !important;
+    inset: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 72px !important;
+    height: auto !important;
+    min-height: 34px !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(255, 79, 221, .58) !important;
+    background:
+        radial-gradient(circle at 35% 0%, rgba(255, 79, 221, .30), transparent 62%),
+        linear-gradient(180deg, rgba(92, 26, 116, .92), rgba(25, 9, 43, .96)) !important;
+    color: #ffd7ff !important;
+    font-size: 12px !important;
+    font-weight: 1000 !important;
+    letter-spacing: .08em !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    box-shadow:
+        0 0 16px rgba(255, 79, 221, .25),
+        inset 0 0 0 1px rgba(255, 255, 255, .06) !important;
+    z-index: 1 !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-metric-footer-diff-button:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-metric-footer-diff-button:focus-visible {
+    border-color: rgba(94, 239, 255, .72) !important;
+    color: #fff !important;
+    outline: none !important;
+    box-shadow:
+        0 0 16px rgba(94, 239, 255, .22),
+        0 0 18px rgba(255, 79, 221, .24),
+        inset 0 0 0 1px rgba(255, 255, 255, .08) !important;
+}
+
+@media (max-width: 1480px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-metric-footer-diff-button {
+        display: inline-flex !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-table .tbi-metric-row.header {
+        padding-right: 8px !important;
+    }
+}
+
+@media (max-width: 1120px) and (min-width: 860px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row {
+        gap: 7px !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="overview"] .tbi-metric-footer-action-row .tbi-metric-footer-diff-button {
+        min-width: 66px !important;
+        min-height: 32px !important;
+        padding: 0 10px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* ==================================================
+   v4.11y Compare Datasheet + Growth Trends
+   Dashboard lock note: scoped to Compare tab only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-jump-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-jump-row .tbi-compare-trend-jump {
+    margin: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-jump-row .tbi-compare-trend-jump:first-child::after {
+    content: "↓";
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-shell,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section {
+    scroll-margin-top: 96px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-datasheet-count-pill {
+    display: grid;
+    gap: 4px;
+    min-width: 118px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 14px;
+    background: rgba(2, 12, 24, .66);
+    padding: 9px 14px;
+    text-align: right;
+    box-shadow: inset 0 0 18px rgba(29, 231, 255, .055);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-datasheet-count-pill span {
+    color: rgba(173, 220, 242, .72);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-datasheet-count-pill strong {
+    color: #1de7ff;
+    font-size: 20px;
+    line-height: 1;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-compare-detail-card {
+    min-height: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-metric-table {
+    max-height: none;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-card-footer-action {
+    display: none !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section {
+    display: grid;
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 28px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section-head strong {
+    color: rgba(231, 248, 255, .82);
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-chart-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card.compact {
+    min-height: 142px;
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card.compact .tbi-trend-sparkline,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card.compact .tbi-trend-empty-chart {
+    min-height: 76px;
+    height: 76px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card.pink .tbi-trend-sparkline,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-sparkline.tone-pink,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-signal-bars.tone-pink {
+    color: #ff4f91;
+}
+
+@media (max-width: 1480px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid {
+        gap: 12px;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-compare-detail-card {
+        padding: 12px;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-metric-row {
+        min-height: 23px;
+        font-size: 11px;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .metric-name {
+        font-size: 10.5px;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-chart-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1220px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-chart-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 920px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-summary-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-datasheet-count-pill {
+        text-align: left;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-compare-datasheet-grid .tbi-metric-row {
+        grid-template-columns: minmax(110px, 1.3fr) minmax(58px, .55fr) minmax(58px, .55fr) minmax(60px, .55fr);
+        gap: 6px;
+    }
+}
+
+/* ==================================================
+   v4.11z Compare Long-Term Growth Charts
+   Dashboard lock note: scoped to Compare tab only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-dashboard-layout {
+    align-items: start;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-console {
+    display: grid;
+    gap: 12px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 8% 0%, rgba(29, 231, 255, .13), transparent 35%),
+        radial-gradient(circle at 100% 100%, rgba(255, 75, 226, .12), transparent 42%),
+        rgba(2, 10, 22, .58);
+    padding: 14px;
+    box-shadow: inset 0 0 28px rgba(29, 231, 255, .045);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-head > div {
+    display: grid;
+    gap: 4px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-head small {
+    color: rgba(225, 244, 255, .72);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-tabs {
+    position: relative;
+    display: grid;
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels label,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    border: 1px solid rgba(29, 231, 255, .2);
+    border-radius: 999px;
+    background: rgba(1, 9, 20, .66);
+    color: rgba(227, 248, 255, .8);
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    padding: 7px 12px;
+    text-transform: uppercase;
+    transition: border-color .16s ease, color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip span {
+    cursor: default;
+    opacity: .7;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels label:hover {
+    border-color: rgba(29, 231, 255, .46);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(29, 231, 255, .12);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-30d:checked ~ .tbi-growth-range-labels label[for="tbi-growth-range-30d"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-90d:checked ~ .tbi-growth-range-labels label[for="tbi-growth-range-90d"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-6m:checked ~ .tbi-growth-range-labels label[for="tbi-growth-range-6m"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-1y:checked ~ .tbi-growth-range-labels label[for="tbi-growth-range-1y"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-all:checked ~ .tbi-growth-range-labels label[for="tbi-growth-range-all"] {
+    border-color: rgba(255, 211, 41, .5);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(255, 211, 41, .2), transparent 58%),
+        rgba(18, 14, 4, .74);
+    color: #ffd329;
+    box-shadow: inset 0 0 16px rgba(255, 211, 41, .1), 0 0 14px rgba(255, 211, 41, .1);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-panels {
+    display: grid;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-panel {
+    display: none;
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-30d:checked ~ .tbi-growth-range-panels [data-growth-range-panel="30d"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-90d:checked ~ .tbi-growth-range-panels [data-growth-range-panel="90d"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-6m:checked ~ .tbi-growth-range-panels [data-growth-range-panel="6m"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-1y:checked ~ .tbi-growth-range-panels [data-growth-range-panel="1y"],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-range-all:checked ~ .tbi-growth-range-panels [data-growth-range-panel="all"] {
+    display: grid;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid article {
+    display: grid;
+    gap: 4px;
+    min-height: 76px;
+    align-content: center;
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 13px;
+    background: rgba(1, 9, 20, .58);
+    padding: 10px;
+    box-shadow: inset 0 0 18px rgba(29, 231, 255, .035);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card small {
+    color: rgba(178, 220, 241, .72);
+    font-size: 9px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid strong {
+    color: #fff;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid small {
+    color: rgba(199, 229, 244, .62);
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-empty {
+    display: grid;
+    gap: 8px;
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 13px;
+    background:
+        linear-gradient(135deg, rgba(29, 231, 255, .07), rgba(255, 75, 226, .045)),
+        rgba(1, 9, 20, .58);
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card header strong {
+    color: #1de7ff;
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-card b {
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-empty {
+    min-height: 92px;
+    place-items: center;
+    text-align: center;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-empty strong {
+    color: #1de7ff;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-empty span {
+    color: rgba(219, 242, 255, .72);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-summary-section,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-monthly-chart-section {
+    border-top: 1px solid rgba(29, 231, 255, .10);
+    padding-top: 4px;
+}
+
+@media (max-width: 1480px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1220px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-console {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 920px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-month-rollup-grid {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels label,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip span {
+        flex: 1 1 130px;
+    }
+}
+
+/* ==================================================
+   v4.11z1 Compare Growth Controls Fix
+   Makes range + mode controls real localhost-safe buttons.
+   Dashboard remains locked/protected; Compare-only scope.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels button,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    border: 1px solid rgba(29, 231, 255, .2);
+    border-radius: 999px;
+    background: rgba(1, 9, 20, .66);
+    color: rgba(227, 248, 255, .8);
+    cursor: pointer;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    padding: 7px 12px;
+    text-transform: uppercase;
+    transition: border-color .16s ease, color .16s ease, background .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels button:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels button:focus-visible,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button:focus-visible {
+    border-color: rgba(29, 231, 255, .46);
+    color: #fff;
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(29, 231, 255, .12);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels button.is-active,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button.is-active {
+    border-color: rgba(255, 211, 41, .5);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(255, 211, 41, .2), transparent 58%),
+        rgba(18, 14, 4, .74);
+    color: #ffd329;
+    box-shadow: inset 0 0 16px rgba(255, 211, 41, .1), 0 0 14px rgba(255, 211, 41, .1);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button.is-active {
+    border-color: rgba(255, 75, 226, .42);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(255, 75, 226, .2), transparent 58%),
+        rgba(18, 8, 26, .74);
+    color: #ffd8ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-panel[hidden] {
+    display: none !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-panel.is-active {
+    display: grid !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-summary-section,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section[data-growth-mode-target] {
+    scroll-margin-top: 92px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-focus-flash {
+    animation: tbiGrowthFocusFlash .85s ease-out 1;
+}
+
+@keyframes tbiGrowthFocusFlash {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 211, 41, .0), inset 0 0 0 rgba(255, 211, 41, .0);
+    }
+    28% {
+        box-shadow: 0 0 0 2px rgba(255, 211, 41, .28), 0 0 24px rgba(255, 211, 41, .18), inset 0 0 24px rgba(255, 211, 41, .075);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 211, 41, .0), inset 0 0 0 rgba(255, 211, 41, .0);
+    }
+}
+
+@media (max-width: 920px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-labels button,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mode-strip button {
+        flex: 1 1 130px;
+    }
+}
+
+/* ==================================================
+   v4.11z2 Growth Workspace Rebuild
+   Replaces fragile hidden range buttons with a visible dashboard-style
+   growth board and plain anchor jump chips. Compare-only; dashboard locked.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z2 {
+    scroll-margin-top: 96px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-head {
+    align-items: flex-start;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-head p {
+    max-width: 76ch;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav {
+    border: 1px solid rgba(29, 231, 255, .15);
+    border-radius: 16px;
+    background:
+        linear-gradient(90deg, rgba(29,231,255,.08), rgba(255,75,226,.055)),
+        rgba(2, 10, 22, .58);
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav a,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 999px;
+    background: rgba(1, 10, 22, .76);
+    color: rgba(225, 249, 255, .94);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    padding: 7px 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: inset 0 0 14px rgba(29,231,255,.06), 0 0 12px rgba(29,231,255,.06);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav a:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav a:focus-visible,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps a:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps a:focus-visible {
+    border-color: rgba(255, 75, 226, .48);
+    color: #fff;
+    outline: none;
+    box-shadow: inset 0 0 16px rgba(255,75,226,.12), 0 0 16px rgba(255,75,226,.12);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-overview-section,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-average-section,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-report-trends,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-monthly-rollup,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] #tbi-growth-stat-families {
+    scroll-margin-top: 96px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    min-height: 188px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(29,231,255,.11), transparent 44%),
+        linear-gradient(135deg, rgba(2, 14, 27, .92), rgba(8, 8, 28, .88));
+    box-shadow: inset 0 0 28px rgba(29,231,255,.05);
+    padding: 13px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card.is-preferred {
+    border-color: rgba(255, 211, 41, .32);
+    box-shadow: inset 0 0 28px rgba(255,211,41,.055), 0 0 18px rgba(255,211,41,.08);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card footer,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card header span {
+    color: #1de7ff;
+    font-size: 13px;
+    font-weight: 950;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header b,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card footer span {
+    color: rgba(203, 230, 244, .74);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics div,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card div {
+    border: 1px solid rgba(29, 231, 255, .1);
+    border-radius: 10px;
+    background: rgba(0,0,0,.18);
+    padding: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics small,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card small {
+    display: block;
+    color: rgba(175, 219, 242, .7);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card footer b {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: .03em;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card footer {
+    align-items: flex-start;
+    border-top: 1px solid rgba(29, 231, 255, .1);
+    padding-top: 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card {
+    display: grid;
+    gap: 9px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 16% 0%, rgba(29,231,255,.08), transparent 44%),
+        rgba(2, 10, 22, .66);
+    padding: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card.gold header span { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card.green header span { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card.violet header span { color: #ff4be2; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-card.pink header span { color: #ff4f9b; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-card-substats {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid rgba(29, 231, 255, .08);
+    color: rgba(195, 227, 243, .72);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    padding-top: 7px;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-intel {
+    position: sticky;
+    top: 92px;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps {
+    margin-top: 8px;
+}
+
+@media (max-width: 1500px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1180px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-dashboard-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-intel {
+        position: static;
+        max-height: none;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-best-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================================
+   v4.11z3 Growth Intelligence Workspace
+   Dashboard lock note: scoped to Compare tab + z3 growth workspace only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 {
+    gap: 16px;
+    border-color: rgba(29, 231, 255, .26);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(29, 231, 255, .16), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(255, 75, 226, .22), transparent 44%),
+        linear-gradient(135deg, rgba(3, 17, 29, .97), rgba(8, 8, 27, .98));
+    overflow: hidden;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-command-head {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 16px;
+    background:
+        linear-gradient(90deg, rgba(29,231,255,.10), rgba(255,75,226,.06)),
+        rgba(0, 8, 18, .42);
+    padding: 15px 16px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-command-head h3 {
+    margin: 4px 0 6px;
+    color: #1de7ff;
+    font-size: clamp(20px, 1.25vw, 28px);
+    letter-spacing: .17em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-command-head p {
+    max-width: 80ch;
+    margin: 0;
+    color: rgba(223, 246, 255, .82);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav-v411z3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 14px;
+    background: rgba(0, 8, 18, .46);
+    padding: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav-v411z3 a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 999px;
+    background:
+        linear-gradient(180deg, rgba(9, 33, 48, .92), rgba(3, 12, 27, .94));
+    color: rgba(231, 250, 255, .9);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    padding: 7px 11px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: inset 0 0 14px rgba(29, 231, 255, .06);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav-v411z3 a:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-anchor-nav-v411z3 a:focus-visible {
+    border-color: rgba(255, 75, 226, .48);
+    color: #fff;
+    outline: none;
+    box-shadow: inset 0 0 18px rgba(255, 75, 226, .14), 0 0 16px rgba(29, 231, 255, .12);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(270px, 330px);
+    gap: 14px;
+    align-items: start;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-main {
+    display: grid;
+    gap: 14px;
+    min-width: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-rail {
+    position: sticky;
+    top: 86px;
+    display: grid;
+    gap: 10px;
+    border: 1px solid rgba(255, 75, 226, .24);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(255, 75, 226, .14), transparent 42%),
+        linear-gradient(180deg, rgba(8, 12, 32, .88), rgba(15, 8, 32, .9));
+    padding: 12px;
+    box-shadow: inset 0 0 28px rgba(255, 75, 226, .05);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section {
+    scroll-margin-top: 94px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 5% 0%, rgba(29, 231, 255, .09), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(255, 75, 226, .09), transparent 38%),
+        rgba(1, 10, 22, .62);
+    padding: 13px;
+    box-shadow: inset 0 0 30px rgba(29, 231, 255, .04);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(29, 231, 255, .14);
+    padding-bottom: 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section-head strong {
+    display: block;
+    margin-top: 4px;
+    color: rgba(236, 251, 255, .96);
+    font-size: 14px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-section-head small {
+    color: rgba(179, 219, 241, .72);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-panel {
+    display: grid;
+    grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr);
+    gap: 14px;
+    border-color: rgba(255, 211, 41, .22);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(29, 231, 255, .15), transparent 38%),
+        radial-gradient(circle at 90% 45%, rgba(255, 211, 41, .10), transparent 44%),
+        linear-gradient(135deg, rgba(2, 17, 30, .92), rgba(12, 10, 31, .95));
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-panel.good { border-color: rgba(57,255,119,.24); }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-panel.bad { border-color: rgba(255,79,118,.28); }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-panel.mixed { border-color: rgba(255,211,41,.26); }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-main h4 {
+    margin: 4px 0 8px;
+    color: #fff;
+    font-size: clamp(24px, 1.5vw, 34px);
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(29, 231, 255, .22);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-main p {
+    margin: 0;
+    color: rgba(226, 247, 255, .82);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-chips span {
+    border: 1px solid rgba(29,231,255,.19);
+    border-radius: 999px;
+    background: rgba(0,0,0,.22);
+    color: rgba(228, 250, 255, .9);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .11em;
+    padding: 6px 9px;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid article,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-block,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-focus-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-locked-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card {
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 13px;
+    background: rgba(1, 9, 22, .62);
+    box-shadow: inset 0 0 20px rgba(29, 231, 255, .035);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid article {
+    display: grid;
+    gap: 5px;
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-row span {
+    color: rgba(181, 219, 240, .74);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid strong {
+    overflow: hidden;
+    color: #fff;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid small {
+    color: rgba(203, 229, 243, .72);
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid-v411z3 {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card {
+    display: grid;
+    gap: 9px;
+    padding: 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card.is-preferred {
+    border-color: rgba(255, 211, 41, .42);
+    box-shadow: inset 0 0 22px rgba(255, 211, 41, .08), 0 0 18px rgba(255, 211, 41, .07);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card footer,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card header,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-trend-graph-card footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header span {
+    color: #1de7ff;
+    font-size: 13px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card header b,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card footer span {
+    color: rgba(190, 222, 240, .72);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics div,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card div {
+    display: grid;
+    gap: 3px;
+    border: 1px solid rgba(255,255,255,.055);
+    border-radius: 9px;
+    background: rgba(0,0,0,.18);
+    padding: 7px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics small,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card small {
+    color: rgba(185, 220, 239, .72);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-metrics strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card strong {
+    color: #fff;
+    font-size: 13px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-main-chart-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 .tbi-trend-graph-card {
+    min-height: 160px;
+    background:
+        radial-gradient(circle at 18% 0%, rgba(29, 231, 255, .09), transparent 46%),
+        rgba(2, 10, 22, .66);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 .tbi-trend-graph-card.large {
+    min-height: 208px;
+    padding: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 .tbi-trend-graph-card.large .tbi-trend-sparkline {
+    height: 122px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 .tbi-trend-graph-card.mini {
+    min-height: 124px;
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 .tbi-trend-graph-card.mini .tbi-trend-sparkline {
+    height: 72px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-movers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-focus-card {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list h5,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-focus-card h5,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-locked-card h5,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-block h4 {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list div,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 9px;
+    background: rgba(0,0,0,.2);
+    padding: 7px 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list span {
+    color: rgba(219, 241, 252, .86);
+    font-size: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-row strong {
+    color: #fff;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list.good strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-row.good strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .good {
+    color: #39ff77 !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-mover-list.bad strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-row.bad strong,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .bad {
+    color: #ff4f76 !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-focus-card p,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-locked-card p,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-block p {
+    margin: 0;
+    color: rgba(212, 236, 249, .78);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-locked-card {
+    padding: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card {
+    display: grid;
+    gap: 7px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card header strong {
+    color: #1de7ff;
+    font-size: 14px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card header span,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card footer span {
+    color: rgba(187, 220, 238, .72);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card div {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+    padding: 2px 0 5px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card div span {
+    color: rgba(201, 230, 246, .75);
+    font-size: 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card div b {
+    color: #fff;
+    font-size: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-locked-card {
+    display: grid;
+    gap: 8px;
+    min-height: 118px;
+    place-content: center;
+    text-align: center;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-grid {
+    display: grid;
+    gap: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card {
+    padding: 12px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card > header span {
+    color: #1de7ff;
+    font-size: 15px;
+    font-weight: 950;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card.gold > header span { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card.pink > header span { color: #ff4f9a; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card.violet > header span { color: #ff4be2; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card > header small {
+    display: block;
+    margin-top: 3px;
+    color: rgba(186, 219, 238, .68);
+    font-size: 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card > header strong {
+    color: #fff;
+    font-size: 16px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-chart-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-grid-v411z3 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card {
+    display: grid;
+    gap: 8px;
+    padding: 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card > span {
+    color: #1de7ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card.gold > span { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card.green > span { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card.violet > span { color: #ff4be2; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card.pink > span { color: #ff4f9a; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-card footer {
+    color: rgba(225, 244, 255, .86);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-single-trend-panel-v411z3 {
+    scroll-margin-top: 94px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-block {
+    display: grid;
+    gap: 8px;
+    padding: 11px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-verdict.good { border-color: rgba(57,255,119,.26); }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-verdict.bad { border-color: rgba(255,79,118,.3); }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-rail-verdict.mixed { border-color: rgba(255,211,41,.3); }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps a {
+    display: grid;
+    min-height: 28px;
+    place-items: center;
+    border: 1px solid rgba(29,231,255,.2);
+    border-radius: 10px;
+    background: rgba(1, 12, 24, .7);
+    color: rgba(226, 248, 255, .9);
+    font-size: 9px;
+    font-weight: 950;
+    letter-spacing: .1em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1500px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-layout {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-rail {
+        position: static;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-side-jumps {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 1280px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid-v411z3,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-main-chart-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-chart-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-grid-v411z3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 980px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-command-head,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-panel,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-movers-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-month-card-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-intel-rail {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-range-card-grid-v411z3,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-main-chart-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-chart-grid,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-best-average-grid-v411z3,
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-verdict-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================================
+   v4.11z4 Combined Growth Graphs
+   Dashboard lock note: scoped to Compare tab + growth workspace only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-workspace-v411z3 {
+    border-color: rgba(29, 231, 255, .28);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-section-v411z4 .tbi-growth-section-head strong::after {
+    content: " · combined";
+    color: rgba(255, 211, 41, .9);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-grid-v411z4 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card {
+    display: grid;
+    gap: 12px;
+    min-height: 420px;
+    padding: 13px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.gold {
+    border-color: rgba(255, 211, 41, .28);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(255, 211, 41, .10), transparent 35%),
+        rgba(1, 9, 22, .68);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.pink {
+    border-color: rgba(255, 79, 154, .26);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(255, 79, 154, .10), transparent 35%),
+        rgba(1, 9, 22, .68);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.cyan {
+    border-color: rgba(29, 231, 255, .24);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(29, 231, 255, .10), transparent 35%),
+        rgba(1, 9, 22, .68);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.violet {
+    border-color: rgba(255, 75, 226, .25);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(255, 75, 226, .10), transparent 35%),
+        rgba(1, 9, 22, .68);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-card-head {
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid rgba(29, 231, 255, .12);
+    padding-bottom: 9px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(240px, .9fr);
+    gap: 12px;
+    align-items: stretch;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-chart-wrap,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-calcs {
+    border: 1px solid rgba(29, 231, 255, .13);
+    border-radius: 13px;
+    background:
+        linear-gradient(180deg, rgba(2, 17, 31, .66), rgba(2, 7, 17, .76));
+    box-shadow: inset 0 0 20px rgba(29, 231, 255, .035);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-chart-wrap {
+    display: grid;
+    gap: 9px;
+    min-width: 0;
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-chart {
+    display: block;
+    width: 100%;
+    min-height: 230px;
+    overflow: visible;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-axis,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-midline {
+    stroke: rgba(202, 240, 255, .18);
+    stroke-width: 1;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-midline {
+    stroke-dasharray: 5 7;
+    opacity: .65;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-axis-label {
+    fill: rgba(201, 231, 245, .48);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3.4;
+    opacity: .92;
+    filter: drop-shadow(0 0 7px currentColor);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-dot {
+    fill: #fff;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    filter: drop-shadow(0 0 6px currentColor);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-cyan { color: #1de7ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-gold { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-green { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-violet { color: #ff4be2; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-pink { color: #ff4f9a; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .24);
+    padding: 5px 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend i {
+    width: 18px;
+    height: 4px;
+    border-radius: 999px;
+    background: currentColor;
+    box-shadow: 0 0 9px currentColor;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend b {
+    color: rgba(232, 248, 255, .9);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend em {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 950;
+    letter-spacing: .05em;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-calcs {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-calcs > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid rgba(29, 231, 255, .10);
+    padding-bottom: 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-calcs > header span {
+    color: rgba(29, 231, 255, .92);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-calcs > header b {
+    overflow: hidden;
+    color: rgba(255, 211, 41, .92);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: .08em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(72px, auto) minmax(72px, auto);
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .22);
+    padding: 7px 8px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row > div {
+    min-width: 0;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row span {
+    display: block;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: .08em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row small {
+    display: block;
+    margin-top: 2px;
+    color: rgba(198, 229, 245, .64);
+    font-size: 10px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row b {
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row em {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 950;
+    text-align: right;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-empty-chart {
+    display: grid;
+    min-height: 230px;
+    place-content: center;
+    gap: 7px;
+    border: 1px dashed rgba(29, 231, 255, .18);
+    border-radius: 12px;
+    text-align: center;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-empty-chart strong {
+    color: #1de7ff;
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-empty-chart span {
+    color: rgba(205, 234, 248, .68);
+    font-size: 12px;
+}
+
+@media (max-width: 1600px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-family-grid-v411z4 {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-body {
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+    }
+}
+
+@media (max-width: 1120px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-body {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-chart {
+        min-height: 190px;
+    }
+
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row {
+        grid-template-columns: minmax(0, 1fr) minmax(66px, auto) minmax(66px, auto);
+    }
+}
+
+/* ==================================================
+   v4.11z5 Growth Chart Clarity Pass
+   Dashboard lock note: scoped to Compare tab + growth workspace only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-section-v411z5 .tbi-growth-section-head strong::after {
+    content: " · clarity";
+    color: rgba(29, 231, 255, .9);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-chart-wrap {
+    background:
+        radial-gradient(circle at 50% 10%, rgba(29, 231, 255, .045), transparent 48%),
+        linear-gradient(180deg, rgba(1, 14, 27, .72), rgba(1, 7, 18, .82));
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line {
+    stroke-width: 2.05 !important;
+    opacity: .62 !important;
+    filter: drop-shadow(0 0 2px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line.primary-line {
+    stroke-width: 3.35 !important;
+    opacity: .98 !important;
+    filter: drop-shadow(0 0 5px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line.secondary-line {
+    stroke-width: 1.85 !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line.dash-line {
+    stroke-dasharray: 8 8;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-dot {
+    opacity: .72 !important;
+    filter: drop-shadow(0 0 2px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-dot.primary-dot {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 5px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-coins { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-coins-rate { color: #ff9f2e; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-cells { color: #39ff77; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-cells-rate { color: #1de7ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-economy { color: #ffe86b; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-damage { color: #ff4be2; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-enemies { color: #ff4f76; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-effects { color: #ffd329; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-wave { color: #1de7ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-defense { color: #66a7ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-records { color: #8ff5ff; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-utility { color: #ff4be2; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tone-counts { color: #27f6d2; }
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend {
+    gap: 6px !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend span {
+    min-height: 27px;
+    border-color: rgba(255, 255, 255, .075) !important;
+    background: rgba(0, 0, 0, .18) !important;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, .025);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend span.primary-metric {
+    border-color: currentColor !important;
+    background: rgba(255, 255, 255, .035) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend i {
+    width: 20px !important;
+    height: 3px !important;
+    box-shadow: 0 0 4px currentColor !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend i.dash {
+    background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 8px) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend b {
+    font-size: 9px !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend small {
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 999px;
+    color: rgba(214, 236, 247, .62);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    padding: 2px 5px;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend em {
+    margin-left: auto;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row.primary-metric {
+    border-color: rgba(255, 255, 255, .14) !important;
+    background:
+        linear-gradient(90deg, rgba(29, 231, 255, .06), rgba(255, 211, 41, .04)),
+        rgba(0, 0, 0, .24) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row b,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row em {
+    display: grid;
+    gap: 1px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row b small,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row em small {
+    margin: 0 !important;
+    color: rgba(189, 219, 236, .55) !important;
+    font-size: 8px !important;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1120px) {
+    html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend span {
+        flex: 1 1 180px;
+    }
+}
+
+/* ==================================================
+   v4.11z6 Growth Line Focus
+   Dashboard lock note: scoped to Compare tab + growth combined charts only.
+   ================================================== */
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-section-v411z5 .tbi-growth-section-head strong::after {
+    content: " · click-focus";
+    color: rgba(255, 211, 41, .95);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-line-focus-hint {
+    margin: -4px 0 0;
+    color: rgba(202, 232, 247, .68);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card[data-focused-label] .tbi-growth-family-card-head::after {
+    content: "Focused: " attr(data-focused-label);
+    border: 1px solid rgba(255, 211, 41, .22);
+    border-radius: 999px;
+    background: rgba(255, 211, 41, .07);
+    color: rgba(255, 232, 107, .96);
+    font-size: 9px;
+    font-weight: 950;
+    letter-spacing: .12em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-line,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .family-overlay-dot,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend [data-growth-metric-focus],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend [data-growth-line-clear],
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row[data-growth-metric-focus] {
+    cursor: pointer;
+    transition: opacity .16s ease, filter .16s ease, transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .family-overlay-line.is-dimmed {
+    opacity: .12 !important;
+    stroke-width: 1.2 !important;
+    filter: none !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .family-overlay-dot.is-dimmed {
+    opacity: .14 !important;
+    filter: none !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .family-overlay-line.is-focused {
+    opacity: 1 !important;
+    stroke-width: 4.8 !important;
+    filter: drop-shadow(0 0 9px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .family-overlay-dot.is-focused {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 8px currentColor) !important;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend span[role="button"]:focus-visible,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row[role="button"]:focus-visible {
+    outline: 2px solid rgba(29, 231, 255, .72);
+    outline-offset: 2px;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .tbi-combined-family-legend [data-growth-metric-focus].is-dimmed,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-growth-combined-family-card.is-line-focused .tbi-combined-calc-row.is-dimmed {
+    opacity: .38;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend [data-growth-metric-focus].is-focused,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row.is-focused {
+    border-color: currentColor !important;
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.075), rgba(255,255,255,.022)),
+        rgba(255, 255, 255, .045) !important;
+    box-shadow: inset 0 0 18px rgba(255, 255, 255, .045), 0 0 14px rgba(255, 255, 255, .035);
+    opacity: 1 !important;
+    transform: translateY(-1px);
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend .all-lines-chip {
+    border-color: rgba(29, 231, 255, .18) !important;
+    color: #1de7ff;
+}
+
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend .all-lines-chip:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-family-legend [data-growth-metric-focus]:hover,
+html[data-device-mode="desktop"] body[data-dashboard-tab="compare"] .tbi-combined-calc-row[data-growth-metric-focus]:hover {
+    border-color: currentColor !important;
+    opacity: 1 !important;
+}

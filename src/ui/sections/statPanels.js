@@ -4,6 +4,10 @@ import {
     escapeHTML,
     escapeAttr,
     formatDelta,
+    formatNumber,
+    formatLabel,
+    toneFromDiffData,
+    sectionRows,
     sectionTotal,
     mergeSections,
     buildMetricRows
@@ -34,17 +38,35 @@ export function buildSecondaryStatGrid(state = {}) {
 export function buildMetricTableCard(title, section, { icon = "◇", accent = "cyan", limit = 8, footer = "View Details", sectionKey = "", iconKey = "" } = {}) {
     const total = sectionTotal(section);
     const leadSide = total > 0 ? "lead-b" : total < 0 ? "lead-a" : "lead-neutral";
+    const fullRows = buildFullRowsData(section);
 
     return `
-        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)} ${escapeAttr(leadSide)}" data-metric-detail-title="${escapeAttr(title)}" data-metric-detail-accent="${escapeAttr(accent)}" data-lead-side="${escapeAttr(leadSide)}">
+        <section class="tbi-card tbi-metric-card ${escapeAttr(accent)} ${escapeAttr(leadSide)}" data-metric-detail-title="${escapeAttr(title)}" data-metric-detail-accent="${escapeAttr(accent)}" data-lead-side="${escapeAttr(leadSide)}" data-metric-full-rows="${escapeAttr(JSON.stringify(fullRows))}">
             <div class="tbi-card-heading tbi-metric-title-row">
                 <h3>${iconKey ? `<span class="metric-art metric-art-${escapeAttr(iconKey)}" aria-hidden="true"><b>${escapeHTML(icon)}</b></span>` : `<span>${escapeHTML(icon)}</span>`} ${escapeHTML(title)}</h3>
             </div>
             ${buildPanelDeltaStrip(total)}
-            ${buildMetricRows(section, { limit, showHeader: true, diffToggle: true, leadSide })}
-            <button type="button" class="tbi-card-footer-action" data-ui-action="open-compare-section" data-compare-section="${escapeAttr(sectionKey)}">${escapeHTML(footer)}</button>
+            ${buildMetricRows(section, { limit, showHeader: true, diffToggle: false, leadSide })}
+            <div class="tbi-metric-footer-action-row">
+                <button type="button" class="tbi-card-footer-action" data-ui-action="open-compare-section" data-compare-section="${escapeAttr(sectionKey)}">${escapeHTML(footer)}</button>
+                <button type="button" class="tbi-metric-table-toggle tbi-metric-footer-diff-button" data-metric-diff-toggle="true" aria-label="Open full ${escapeAttr(title)} Diff details">DIFF+</button>
+            </div>
         </section>
     `;
+}
+
+function buildFullRowsData(section) {
+    return sectionRows(section).map(row => {
+        const data = { ...(row.data || {}), key: row.key };
+
+        return {
+            metric: data.label || formatLabel(row.key),
+            runA: formatNumber(data.a || 0),
+            runB: formatNumber(data.b || 0),
+            diff: formatDelta(data.diff || 0, { compact: true }),
+            tone: toneFromDiffData(data)
+        };
+    });
 }
 
 function buildPanelDeltaStrip(total = 0) {
