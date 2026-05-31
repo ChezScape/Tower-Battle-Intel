@@ -1,0 +1,127 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Bot Catalogue",
+    "catalogueKey": "botCatalogue",
+    "entryCount": 5,
+    "purpose": "Bot names and Battle Report/economy/damage context."
+  },
+  "entries": [
+    {
+      "key": "golden_bot",
+      "label": "Golden Bot",
+      "family": "Bot / Economy",
+      "meaning": "Economy bot/source vocabulary.",
+      "tags": [
+        "bot",
+        "economy"
+      ],
+      "aliases": [
+        "Golden Bot"
+      ],
+      "battleReportLinks": [
+        "CoinsFromGoldenBot"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "flame_bot",
+      "label": "Flame Bot",
+      "family": "Bot / Damage",
+      "meaning": "Damage bot/source vocabulary.",
+      "tags": [
+        "bot",
+        "damage"
+      ],
+      "aliases": [
+        "Flame Bot"
+      ],
+      "battleReportLinks": [
+        "DestroyedByFlameBot"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "amplify_bot",
+      "label": "Amplify Bot",
+      "family": "Bot / Damage Amp",
+      "meaning": "Amplification bot/effect-active vocabulary.",
+      "tags": [
+        "bot",
+        "damage"
+      ],
+      "aliases": [
+        "Amplify Bot"
+      ],
+      "battleReportLinks": [
+        "KilledWithAmplifyBotActive"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "thunder_bot",
+      "label": "Thunder Bot",
+      "family": "Bot / Control",
+      "meaning": "Thunder/stun/control bot vocabulary.",
+      "tags": [
+        "bot",
+        "control"
+      ],
+      "aliases": [
+        "Thunder Bot",
+        "Chain Thunder"
+      ],
+      "battleReportLinks": [
+        "HitByThunderBot"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "event_respec",
+      "label": "Bot Event Respec",
+      "family": "Bot / Event",
+      "meaning": "Observed text says bots can be redistributed at most once per event.",
+      "tags": [
+        "bot",
+        "event"
+      ],
+      "aliases": [
+        "bot respec"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    }
+  ]
+}

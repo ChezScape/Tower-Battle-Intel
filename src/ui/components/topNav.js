@@ -4,13 +4,14 @@ import { escapeHTML, escapeAttr } from "../sections/sectionUtils.js";
 import { appConfig } from "../../../config/appConfig.js";
 
 export const DESKTOP_TABS = Object.freeze([
+    ["command", "Command Deck"],
     ["overview", "Dashboard"],
-    ["compare", "Compare"],
-    ["systems", "Systems"],
-    ["coach", "Coach"],
     ["history", "History"],
+    ["compare", "Compare"],
+    ["coach", "Coach"],
+    ["systems", "Systems"],
     ["anomalies", "Anomalies"],
-    ["command", "Command Deck"]
+    ["settings", "Settings"]
 ]);
 
 export const MOBILE_TOP_TABS = Object.freeze([
@@ -28,11 +29,11 @@ export const MOBILE_BOTTOM_TABS = Object.freeze([
     ["settings", "Settings", "⚙"]
 ]);
 
-export function buildTopNav(activeTab = "overview") {
-    const version = appConfig?.app?.version || "v";
+export function buildTopNav(activeTab = "command") {
+    const version = appConfig?.app?.displayVersion || appConfig?.app?.buildVersion || appConfig?.app?.version || "v";
 
     return `
-        <header class="tbi-header" data-debug-hold-zone="true" aria-label="Tower Battle Intel header. Hold for diagnostics.">
+        <header class="tbi-header" aria-label="Tower Battle Intel">
             <div class="tbi-brand-block">
                 <div class="tbi-logo-mark" aria-hidden="true">${towerLogoSVG()}</div>
                 <div class="tbi-brand-copy">
@@ -42,30 +43,29 @@ export function buildTopNav(activeTab = "overview") {
             </div>
 
             <nav class="tbi-desktop-nav" aria-label="Desktop workspaces">
-                ${DESKTOP_TABS.map(([key, label]) => navButton(key, label, activeTab)).join("")}
+                ${DESKTOP_TABS.map(([key, label]) => navButton(key, label, activeTab, desktopTabIcon(key))).join("")}
             </nav>
 
             <nav class="tbi-mobile-top-nav" aria-label="Mobile analysis workspaces">
                 ${MOBILE_TOP_TABS.map(([key, label, icon]) => navButton(key, label, mobileTopActive(activeTab), icon)).join("")}
             </nav>
-
-            <div class="tbi-header-actions">
-                <span class="tbi-version-pill">${escapeHTML(version)}</span>
-                <button type="button" class="tbi-icon-button" data-ui-action="open-settings" aria-label="Open settings">⚙</button>
-                <button type="button" class="tbi-mode-toggle" data-ui-action="toggle-display-mode" aria-label="Toggle quiet display mode">
-                    <span aria-hidden="true">☼</span><span aria-hidden="true">◐</span>
-                </button>
+            <div class="tbi-header-actions" aria-label="Build version">
+                <span class="tbi-version-pill" title="Visible test build">${escapeHTML(version)}</span>
             </div>
         </header>
     `;
 }
 
-export function buildMobileBottomNav(activeTab = "overview") {
+export function buildMobileBottomNav(activeTab = "command") {
     return `
         <nav class="tbi-mobile-bottom-nav" aria-label="Mobile app destinations">
             ${MOBILE_BOTTOM_TABS.map(([key, label, icon]) => navButton(key, label, activeTab, icon)).join("")}
         </nav>
     `;
+}
+
+function desktopTabIcon(key = "") {
+    return key === "settings" ? "⚙" : "";
 }
 
 function navButton(key, label, activeTab, icon = "") {
@@ -84,7 +84,7 @@ function navButton(key, label, activeTab, icon = "") {
     `;
 }
 
-function mobileTopActive(activeTab = "overview") {
+function mobileTopActive(activeTab = "command") {
     if (["history", "command", "settings", "anomalies"].includes(activeTab)) {
         return "more";
     }

@@ -9,14 +9,14 @@ import { compact, delta, percent, time } from '../src/ui/numbers.js';
 
 assert.equal(normaliseDashboardTab('dashboard'), 'overview');
 assert.equal(normaliseDashboardTab('deck'), 'command');
-assert.equal(normaliseDashboardTab('nonsense'), 'overview');
+assert.equal(normaliseDashboardTab('nonsense'), 'command');
 assert.equal(getDeviceMode(), 'desktop');
 
 resetUIState();
-setUIState({ dashboardTab: 'history', selectedSection: 'damage', quietDisplay: true });
+setUIState({ dashboardTab: 'history', selectedSection: 'damage' });
 assert.equal(getUIState().dashboardTab, 'history');
 assert.equal(getUIState().selectedSection, 'damage');
-assert.equal(getUIState().quietDisplay, true);
+assert.equal('quietDisplay' in getUIState(), false);
 
 const state = {
   runA: null,
@@ -40,8 +40,9 @@ assert.match(desktop, /tbi-desktop-grid/);
 
 const mobile = buildMobileWorkspace('overview', state);
 assert.match(mobile, /data-mobile-workspace="true"/);
-assert.match(mobile, /data-ui-action="open-compare-section"/);
+assert.match(mobile, /data-mobile-dashboard-visual-shell="v4.11z52w12"/);
 assert.match(mobile, /tbi-mobile-bottom-nav/);
+assert.match(mobile, /data-ui-shell-action/);
 
 assert.equal(typeof compact(1000), 'string');
 assert.equal(typeof delta(10), 'string');

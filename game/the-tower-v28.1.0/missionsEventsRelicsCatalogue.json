@@ -1,0 +1,118 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Missions / Events / Relics Catalogue",
+    "catalogueKey": "missionsEventsRelicsCatalogue",
+    "entryCount": 5,
+    "purpose": "Goal-tracker vocabulary for later; not wired into UI yet."
+  },
+  "entries": [
+    {
+      "key": "missions",
+      "label": "Missions",
+      "family": "Missions / Goals",
+      "meaning": "Mission objective vocabulary.",
+      "tags": [
+        "missions"
+      ],
+      "aliases": [
+        "Missions"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "events",
+      "label": "Events",
+      "family": "Events / Medals",
+      "meaning": "Event vocabulary and medal earning context.",
+      "tags": [
+        "events",
+        "medals"
+      ],
+      "aliases": [
+        "Event",
+        "Earn medals during the event"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "relics",
+      "label": "Relics",
+      "family": "Relics / Permanent Bonuses",
+      "meaning": "Relic reward/permanent bonus vocabulary.",
+      "tags": [
+        "relics"
+      ],
+      "aliases": [
+        "Relics"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "milestone_rewards",
+      "label": "Milestone Rewards",
+      "family": "Milestones / Rewards",
+      "meaning": "Milestone reward context tied to Tier/Wave progression.",
+      "tags": [
+        "milestones",
+        "rewards"
+      ],
+      "aliases": [
+        "Milestones",
+        "Wave Milestones"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "no_card_mission",
+      "label": "No-card Mission",
+      "family": "Missions / Challenge",
+      "meaning": "Observed mission text includes reaching a wave on max tier without any card equipped.",
+      "tags": [
+        "missions",
+        "cards"
+      ],
+      "aliases": [
+        "without any card equipped"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    }
+  ]
+}

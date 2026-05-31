@@ -89,6 +89,7 @@ export function validateAndRepair(input) {
             reportSchema,
             unknownReportFields,
             unknownMetricScan,
+            gameBrainFeedback: inputMeta.gameBrainFeedback || null,
             timeModel
         },
         raw: {
@@ -127,7 +128,8 @@ export function createEmpty() {
             confidence: 0,
             reportSchema: null,
             unknownReportFields: [],
-            unknownMetricScan: { count: 0, unknown: [] }
+            unknownMetricScan: { count: 0, unknown: [] },
+            gameBrainFeedback: null
         },
         raw: null
     };

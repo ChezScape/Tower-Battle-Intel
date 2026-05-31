@@ -1,0 +1,1673 @@
+{
+  "sourceApp": "The Tower - Idle Tower Defense v28.1.0 XAPK",
+  "extractedAt": "2026-05-25",
+  "notes": [
+    "Static extraction only; no game code was modified and no runtime/server data was accessed.",
+    "BattleHistoryEntry exposes the app-side saved report schema; visible pasted exports may contain only a subset.",
+    "Loc IDs are best-effort from readable Unity asset strings; exact UI layout/order can still be compiled in IL2CPP code."
+  ],
+  "battleReportUiLabels": [
+    {
+      "locId": 1005,
+      "label": "Combat"
+    },
+    {
+      "locId": 1006,
+      "label": "Battle Report"
+    },
+    {
+      "locId": 1007,
+      "label": "Game Time"
+    },
+    {
+      "locId": 1008,
+      "label": "Real Time"
+    },
+    {
+      "locId": 1009,
+      "label": "Coins Earning Rate"
+    },
+    {
+      "locId": 1010,
+      "label": "Cash Earning Rate"
+    },
+    {
+      "locId": 1011,
+      "label": "Gem Blocks Tapped"
+    },
+    {
+      "locId": 1012,
+      "label": "Damage Dealt Rate"
+    },
+    {
+      "locId": 1013,
+      "label": "Damage Taken"
+    },
+    {
+      "locId": 1014,
+      "label": "Damage Taken Wall"
+    },
+    {
+      "locId": 1015,
+      "label": "Damage Taken While Berserked%"
+    },
+    {
+      "locId": 1016,
+      "label": "Damage Gain From Berserk,"
+    },
+    {
+      "locId": 1017,
+      "label": "Projectiles Damage"
+    },
+    {
+      "locId": 1018,
+      "label": "Projectiles Count"
+    },
+    {
+      "locId": 1019,
+      "label": "Orb Damage"
+    },
+    {
+      "locId": 1020,
+      "label": "Land Mines Spawned"
+    },
+    {
+      "locId": 1021,
+      "label": "Rend Armor Damage"
+    },
+    {
+      "locId": 1022,
+      "label": "Death Ray Damage"
+    },
+    {
+      "locId": 1023,
+      "label": "Smart Missile Damage)"
+    },
+    {
+      "locId": 1024,
+      "label": "Utility"
+    },
+    {
+      "locId": 1025,
+      "label": "Inner Land Mine Damage"
+    },
+    {
+      "locId": 1026,
+      "label": "Chain Lightning Damage"
+    },
+    {
+      "locId": 1027,
+      "label": "Death Wave Damage"
+    },
+    {
+      "locId": 1028,
+      "label": "Swamp Damage"
+    },
+    {
+      "locId": 1029,
+      "label": "Black Hole Damage"
+    },
+    {
+      "locId": 1030,
+      "label": "Waves Skipped"
+    },
+    {
+      "locId": 1031,
+      "label": "Recovery Packages"
+    },
+    {
+      "locId": 1032,
+      "label": "Enemies Destroyed"
+    },
+    {
+      "locId": 1033,
+      "label": "HP From Death Wave"
+    },
+    {
+      "locId": 1034,
+      "label": "Coins From Death Wave"
+    },
+    {
+      "locId": 1035,
+      "label": "Coins From Golden Tower"
+    },
+    {
+      "locId": 1036,
+      "label": "Cash From Golden Tower"
+    },
+    {
+      "locId": 1037,
+      "label": "Coins From Black Hole"
+    },
+    {
+      "locId": 1038,
+      "label": "Coins From Spotlight"
+    },
+    {
+      "locId": 1039,
+      "label": "Total Enemies"
+    },
+    {
+      "locId": 1040,
+      "label": "Destroyed by Thorns"
+    },
+    {
+      "locId": 1041,
+      "label": "Destroyed by Death Ray"
+    },
+    {
+      "locId": 1042,
+      "label": "Destroyed by Land Mine"
+    },
+    {
+      "locId": 1043,
+      "label": "Flame Bot Damage"
+    },
+    {
+      "locId": 1044,
+      "label": "Thunder Bot Stuns"
+    },
+    {
+      "locId": 1045,
+      "label": "Golden Bot Coins Earned"
+    },
+    {
+      "locId": 1046,
+      "label": "Damage from Amp Bot"
+    },
+    {
+      "locId": 3307,
+      "label": "Health Regenerated"
+    },
+    {
+      "locId": 3308,
+      "label": "Damage Blocked"
+    },
+    {
+      "locId": 3309,
+      "label": "Counts"
+    },
+    {
+      "locId": 3310,
+      "label": "Miscellaneous"
+    },
+    {
+      "locId": 3311,
+      "label": "Records"
+    },
+    {
+      "locId": 3312,
+      "label": "Enemies Hit By"
+    },
+    {
+      "locId": 3313,
+      "label": "Killed With Effect Active"
+    },
+    {
+      "locId": 3314,
+      "label": "Currencies"
+    },
+    {
+      "locId": 3315,
+      "label": "Enemies Destroyed By"
+    },
+    {
+      "locId": 3316,
+      "label": "Cells Earned Per Hour"
+    },
+    {
+      "locId": 3317,
+      "label": "Tower Health Regen"
+    },
+    {
+      "locId": 3318,
+      "label": "Wall Health Regen"
+    },
+    {
+      "locId": 3319,
+      "label": "Hits Absorbed By Energy Shield"
+    },
+    {
+      "locId": 3320,
+      "label": "Cells Per Hour"
+    },
+    {
+      "locId": 3321,
+      "label": "Bonus Health Gained"
+    },
+    {
+      "locId": 3322,
+      "label": "Largest Wave Skip"
+    },
+    {
+      "locId": 3323,
+      "label": "Largest Smart Missile Stack"
+    },
+    {
+      "locId": 3324,
+      "label": "Largest Golden Combo"
+    },
+    {
+      "locId": 3325,
+      "label": "Largest Inner Landmine Charge"
+    },
+    {
+      "locId": 3326,
+      "label": "Note: You will resume battle when the last Boss or Fleet enemy spawned."
+    },
+    {
+      "locId": 3327,
+      "label": "Attack Chip"
+    },
+    {
+      "locId": 3328,
+      "label": "From Death Wave"
+    },
+    {
+      "locId": 3329,
+      "label": "Coins From Critical Coin"
+    },
+    {
+      "locId": 3427,
+      "label": "Most Coins From Wave Skip"
+    },
+    {
+      "locId": 3428,
+      "label": "Most Cells From Wave Skip"
+    },
+    {
+      "locId": 3429,
+      "label": "Most Coins From Golden Combo%"
+    },
+    {
+      "locId": 3430,
+      "label": "Highest Coins / Minute"
+    },
+    {
+      "locId": 3451,
+      "label": "Other Coin Bonuses"
+    }
+  ],
+  "battleHistoryEntryFields": [
+    {
+      "order": 1,
+      "property": "SelectedTower",
+      "displayLabel": "Selected Tower",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 2,
+      "property": "BattleDate",
+      "displayLabel": "Battle Date",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 3,
+      "property": "GameTime",
+      "displayLabel": "Game Time",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 4,
+      "property": "RealTime",
+      "displayLabel": "Real Time",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 5,
+      "property": "IsTournament",
+      "displayLabel": "Is Tournament",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Internal battle history supports tournament flag; pasted reports may not show it, so TBI still needs manual tournament tagging."
+    },
+    {
+      "order": 6,
+      "property": "Tier",
+      "displayLabel": "Tier",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 7,
+      "property": "Wave",
+      "displayLabel": "Wave",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 8,
+      "property": "KilledBy",
+      "displayLabel": "Killed By",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 9,
+      "property": "CoinsEarned",
+      "displayLabel": "Coins Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 10,
+      "property": "CashEarned",
+      "displayLabel": "Cash Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 11,
+      "property": "InterestEarned",
+      "displayLabel": "Interest Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 12,
+      "property": "GemsThisRound",
+      "displayLabel": "Gems This Round",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 13,
+      "property": "GemBlocksTapped",
+      "displayLabel": "Gem Blocks Tapped",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 14,
+      "property": "AdGemsThisRound",
+      "displayLabel": "Ad Gems",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 15,
+      "property": "CellsEarned",
+      "displayLabel": "Cells Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 16,
+      "property": "RerollShardsEarned",
+      "displayLabel": "Reroll Shards Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 17,
+      "property": "DamageTaken",
+      "displayLabel": "Damage Taken",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 18,
+      "property": "DamageTakenWall",
+      "displayLabel": "Damage Taken Wall",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 19,
+      "property": "DamageTakenWhileBerserked",
+      "displayLabel": "Damage Taken While Berserked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 20,
+      "property": "DamageGainFromBerserk",
+      "displayLabel": "Damage Gain From Berserk",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 21,
+      "property": "DeathDefy",
+      "displayLabel": "Death Defy",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 22,
+      "property": "Lifesteal",
+      "displayLabel": "Lifesteal",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 23,
+      "property": "TowerHealthRegen",
+      "displayLabel": "Tower Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 24,
+      "property": "WallHealthRegen",
+      "displayLabel": "Wall Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 25,
+      "property": "DefensePercentBlocked",
+      "displayLabel": "Defense Percent Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 26,
+      "property": "DefenseAbsoluteBlocked",
+      "displayLabel": "Defense Absolute Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 27,
+      "property": "ChronoFieldBlocked",
+      "displayLabel": "Chrono Field Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 28,
+      "property": "ChainThunderBlocked",
+      "displayLabel": "Chain Thunder Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 29,
+      "property": "FlameBotBlocked",
+      "displayLabel": "Flame Bot Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 30,
+      "property": "PrimordialCollapseBlocked",
+      "displayLabel": "Primordial Collapse Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 31,
+      "property": "MagicOrbBlocked",
+      "displayLabel": "Magic Orb Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for survival diagnosis and why a run held/folded."
+    },
+    {
+      "order": 32,
+      "property": "EnergyShieldHitsAbsorbed",
+      "displayLabel": "Hits Absorbed By Energy Shield",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 33,
+      "property": "HealthFromDeathWaveThisRound",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 34,
+      "property": "DamageDealt",
+      "displayLabel": "Damage Dealt",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 35,
+      "property": "ProjectilesDamage",
+      "displayLabel": "Projectiles Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 36,
+      "property": "ProjectilesCount",
+      "displayLabel": "Projectiles Count",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 37,
+      "property": "ThornDamage",
+      "displayLabel": "Thorn Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 38,
+      "property": "OrbDamage",
+      "displayLabel": "Orb Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 39,
+      "property": "ElectronsDamage",
+      "displayLabel": "Electrons Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 40,
+      "property": "LandMineDamage",
+      "displayLabel": "Land Mine Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 41,
+      "property": "LandMinesSpawned",
+      "displayLabel": "Land Mines Spawned",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 42,
+      "property": "RendArmorDamage",
+      "displayLabel": "Rend Armor Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 43,
+      "property": "DeathRayDamage",
+      "displayLabel": "Death Ray Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 44,
+      "property": "SmartMissileDamage",
+      "displayLabel": "Smart Missile Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 45,
+      "property": "InnerLandMineDamage",
+      "displayLabel": "Inner Land Mine Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 46,
+      "property": "ChainLightningDamage",
+      "displayLabel": "Chain Lightning Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 47,
+      "property": "DeathWaveDamage",
+      "displayLabel": "Death Wave Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 48,
+      "property": "TaggedByDeathwave",
+      "displayLabel": "Enemies Tagged By Death Wave",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 49,
+      "property": "SwampDamage",
+      "displayLabel": "Swamp Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 50,
+      "property": "BlackHoleDamage",
+      "displayLabel": "Black Hole Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 51,
+      "property": "DestroyedInSpotlight",
+      "displayLabel": "Destroyed In Spotlight",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect-window kills; separate from direct kill source."
+    },
+    {
+      "order": 52,
+      "property": "DestroyedInGoldenTower",
+      "displayLabel": "Destroyed In Golden Tower",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect-window kills; separate from direct kill source."
+    },
+    {
+      "order": 53,
+      "property": "DestroyedInAmplifyBot",
+      "displayLabel": "Destroyed In Amplify Bot",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect-window kills; separate from direct kill source."
+    },
+    {
+      "order": 54,
+      "property": "DestroyedInGoldenBot",
+      "displayLabel": "Destroyed In Golden Bot",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect-window kills; separate from direct kill source."
+    },
+    {
+      "order": 55,
+      "property": "OrbHits",
+      "displayLabel": "Orb Hits",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 56,
+      "property": "EnemiesHitByProjectilesThisRound",
+      "displayLabel": "Enemies Hit By Projectiles",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 57,
+      "property": "EnemiesHitByThornsThisRound",
+      "displayLabel": "Enemies Hit By Thorns",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 58,
+      "property": "EnemiesHitByDeathRayThisRound",
+      "displayLabel": "Enemies Hit By Death Ray",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 59,
+      "property": "EnemiesHitByChainLightningThisRound",
+      "displayLabel": "Enemies Hit By Chain Lightning",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 60,
+      "property": "EnemiesHitBySmartMissilesThisRound",
+      "displayLabel": "Enemies Hit By Smart Missiles",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 61,
+      "property": "EnemiesHitByInnerLandMinesThisRound",
+      "displayLabel": "Enemies Hit By Inner Land Mines",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 62,
+      "property": "EnemiesHitByPoisonSwampThisRound",
+      "displayLabel": "Enemies Hit By Poison Swamp",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 63,
+      "property": "EnemiesHitByBlackHoleThisRound",
+      "displayLabel": "Enemies Hit By Black Hole",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 64,
+      "property": "EnemiesHitByChronoFieldThisRound",
+      "displayLabel": "Enemies Hit By Chrono Field",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 65,
+      "property": "EnemiesHitByLandMineThisRound",
+      "displayLabel": "Enemies Hit By Land Mine",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 66,
+      "property": "EnemiesHitByThunderBotThisRound",
+      "displayLabel": "Enemies Hit By Thunder Bot",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 67,
+      "property": "EnemiesHitByFlameBotThisRound",
+      "displayLabel": "Enemies Hit By Flame Bot",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 68,
+      "property": "EnemiesHitByAttackChipThisRound",
+      "displayLabel": "Enemies Hit By Attack Chip",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 69,
+      "property": "EnemiesHitByOrbitalAugmentThisRound",
+      "displayLabel": "Enemies Hit By Orbital Augment",
+      "family": "Enemies Hit By",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for effect coverage diagnostics: what touched enemies, not necessarily what killed them."
+    },
+    {
+      "order": 70,
+      "property": "WavesSkipped",
+      "displayLabel": "Waves Skipped",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 71,
+      "property": "NukesUsed",
+      "displayLabel": "Nukes Used",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 72,
+      "property": "SecondWindsUsed",
+      "displayLabel": "Second Winds Used",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 73,
+      "property": "DemonModesUsed",
+      "displayLabel": "Demon Modes Used",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 74,
+      "property": "LargestWaveSkip",
+      "displayLabel": "Largest Wave Skip",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 75,
+      "property": "MostCoinsFromWaveSkip",
+      "displayLabel": "Most Coins From Wave Skip",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 76,
+      "property": "MostCellsFromWaveSkip",
+      "displayLabel": "Most Cells From Wave Skip",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 77,
+      "property": "MostCoinsFromGoldenCombo",
+      "displayLabel": "Most Coins From Golden Combo",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 78,
+      "property": "HighestCPM",
+      "displayLabel": "Highest Coins / Minute",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 79,
+      "property": "LargestSmartMissileStack",
+      "displayLabel": "Largest Smart Missile Stack",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 80,
+      "property": "LargestGoldenCombo",
+      "displayLabel": "Largest Golden Combo",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 81,
+      "property": "LargestILMCharge",
+      "displayLabel": "Largest Inner Landmine Charge",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 82,
+      "property": "RecoveryPackages",
+      "displayLabel": "Recovery Packages",
+      "family": "Survival / Damage Blocked / Regen",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 83,
+      "property": "FreeAttackUpgrades",
+      "displayLabel": "Free Attack Upgrades",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 84,
+      "property": "FreeDefenseUpgrades",
+      "displayLabel": "Free Defense Upgrades",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 85,
+      "property": "FreeUtilityUpgrades",
+      "displayLabel": "Free Utility Upgrades",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 86,
+      "property": "AttackLevelSkips",
+      "displayLabel": "Attack Level Skips",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 87,
+      "property": "HealthLevelSkips",
+      "displayLabel": "Health Level Skips",
+      "family": "Records / Utility / Counts",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 88,
+      "property": "CoinsFromDeathWave",
+      "displayLabel": "Coins From Death Wave",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 89,
+      "property": "CoinsFromGoldenTower",
+      "displayLabel": "Coins From Golden Tower",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 90,
+      "property": "CoinsFromGoldenTowerPlus",
+      "displayLabel": "Coins From Golden Tower Plus",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 91,
+      "property": "CashFromGoldenTower",
+      "displayLabel": "Cash From Golden Tower",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 92,
+      "property": "CoinsFromBlackHole",
+      "displayLabel": "Coins From Black Hole",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 93,
+      "property": "CoinsFromSpotlight",
+      "displayLabel": "Coins From Spotlight",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 94,
+      "property": "CoinsFromOrbs",
+      "displayLabel": "Coins From Orbs",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 95,
+      "property": "CoinsFromCoinUpgrade",
+      "displayLabel": "Coins From Coin Bonus Upgrade",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 96,
+      "property": "CoinsFromCoinBonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Separate economy misc bucket; label as Other Coin Bonuses."
+    },
+    {
+      "order": 97,
+      "property": "CoinsFromCritCoin",
+      "displayLabel": "Coins From Critical Coin",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 98,
+      "property": "TotalEnemies",
+      "displayLabel": "Total Enemies",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 99,
+      "property": "TotalBasic",
+      "displayLabel": "Total Basic",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 100,
+      "property": "TotalFast",
+      "displayLabel": "Total Fast",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 101,
+      "property": "TotalTank",
+      "displayLabel": "Total Tank",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 102,
+      "property": "TotalRanged",
+      "displayLabel": "Total Ranged",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 103,
+      "property": "TotalBoss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 104,
+      "property": "TotalProtector",
+      "displayLabel": "Total Protector",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 105,
+      "property": "TotalElites",
+      "displayLabel": "Total Elites",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 106,
+      "property": "TotalVampires",
+      "displayLabel": "Total Vampires",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 107,
+      "property": "TotalRays",
+      "displayLabel": "Total Rays",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 108,
+      "property": "TotalScatters",
+      "displayLabel": "Total Scatters",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 109,
+      "property": "TotalSaboteurs",
+      "displayLabel": "Total Saboteurs",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Newer elite/enemy subtypes; add parser support before users paste reports containing them."
+    },
+    {
+      "order": 110,
+      "property": "TotalCommanders",
+      "displayLabel": "Total Commanders",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Newer elite/enemy subtypes; add parser support before users paste reports containing them."
+    },
+    {
+      "order": 111,
+      "property": "TotalOvercharges",
+      "displayLabel": "Total Overcharges",
+      "family": "Enemy Counts / Kills Breakdown",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Newer elite/enemy subtypes; add parser support before users paste reports containing them."
+    },
+    {
+      "order": 112,
+      "property": "DestroyedByOrbs",
+      "displayLabel": "Destroyed By Orbs",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 113,
+      "property": "DestroyedByThorns",
+      "displayLabel": "Destroyed By Thorns",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 114,
+      "property": "DestroyedByDeathRay",
+      "displayLabel": "Destroyed By Death Ray",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 115,
+      "property": "DestroyedByLandMine",
+      "displayLabel": "Destroyed By Land Mine",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 116,
+      "property": "DestroyedByProjectiles",
+      "displayLabel": "Destroyed By Projectiles",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 117,
+      "property": "DestroyedByChainLightning",
+      "displayLabel": "Destroyed By Chain Lightning",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 118,
+      "property": "DestroyedBySmartMissiles",
+      "displayLabel": "Destroyed By Smart Missiles",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 119,
+      "property": "DestroyedByInnerLandMines",
+      "displayLabel": "Destroyed By Inner Land Mines",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 120,
+      "property": "DestroyedByPoisonSwamp",
+      "displayLabel": "Destroyed By Poison Swamp",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 121,
+      "property": "DestroyedByBlackHole",
+      "displayLabel": "Destroyed By Black Hole",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 122,
+      "property": "DestroyedByFlameBot",
+      "displayLabel": "Destroyed By Flame Bot",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 123,
+      "property": "DestroyedByDeathPenalty",
+      "displayLabel": "Destroyed By Death Penalty",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for kill-credit diagnostics: what actually finished enemies."
+    },
+    {
+      "order": 124,
+      "property": "DestroyedByOther",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By / Effect Active",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Treat as uncategorised kill-source bucket; do not merge with Other Coin Bonuses."
+    },
+    {
+      "order": 125,
+      "property": "FlameBotDamage",
+      "displayLabel": "Flame Bot Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 126,
+      "property": "ThunderBotStuns",
+      "displayLabel": "Thunder Bot Stuns",
+      "family": "Bots",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": ""
+    },
+    {
+      "order": 127,
+      "property": "GoldenBotCoinsEarned",
+      "displayLabel": "Golden Bot Coins Earned",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for economy attribution and Compare family totals."
+    },
+    {
+      "order": 128,
+      "property": "GuardianDamage",
+      "displayLabel": "Guardian Damage",
+      "family": "Damage Output",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 129,
+      "property": "GuardianSummoned",
+      "displayLabel": "Guardian Summoned",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 130,
+      "property": "GuardianCoinsStolen",
+      "displayLabel": "Guardian Coins Stolen",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 131,
+      "property": "GuardianCoinsFetched",
+      "displayLabel": "Guardian Coins Fetched",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 132,
+      "property": "GuardianCatches",
+      "displayLabel": "Guardian Catches",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 133,
+      "property": "GuardianGems",
+      "displayLabel": "Guardian Gems",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 134,
+      "property": "GuardianMedals",
+      "displayLabel": "Guardian Medals",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 135,
+      "property": "GuardianRerollShards",
+      "displayLabel": "Guardian Reroll Shards",
+      "family": "Currencies / Rewards",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 136,
+      "property": "GuardianCannonShards",
+      "displayLabel": "Guardian Cannon Shards",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 137,
+      "property": "GuardianArmorShards",
+      "displayLabel": "Guardian Armor Shards",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 138,
+      "property": "GuardianGeneratorShards",
+      "displayLabel": "Guardian Generator Shards",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 139,
+      "property": "GuardianCoreShards",
+      "displayLabel": "Guardian Core Shards",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 140,
+      "property": "GuardianCommonModules",
+      "displayLabel": "Guardian Common Modules",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 141,
+      "property": "GuardianRareModules",
+      "displayLabel": "Guardian Rare Modules",
+      "family": "Guardian",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for Guardian-era report support and future Command Deck/Systems analysis."
+    },
+    {
+      "order": 142,
+      "property": "DissonanceType",
+      "displayLabel": "Dissonance Type",
+      "family": "Run Header / Identity",
+      "source": "BattleHistoryEntry metadata; display label from localization where available or inferred from property name",
+      "confidence": "High",
+      "tbiUse": "Useful for future Dissonance run support and report filtering."
+    }
+  ],
+  "statValueTypeValues": [
+    "CoinsEarnedWaveSkip",
+    "CoinsEarnedCPW",
+    "CoinsPerHour",
+    "CellsPerHour",
+    "LandmineDamage",
+    "EnemiesTaggedByDeathWave",
+    "EnemiesTaggedByProjectiles",
+    "EnemiesTaggedByThorns",
+    "EnemiesTaggedByDeathRay",
+    "EnemiesTaggedByChainLightning",
+    "EnemiesTaggedBySmartMissiles",
+    "EnemiesTaggedByInnerLandMines",
+    "EnemiesTaggedByPoisonSwamp",
+    "EnemiesTaggedByBlackHole",
+    "EnemiesTaggedByChronoField",
+    "EnemiesTaggedByLandMine",
+    "EnemiesTaggedByThunderBot",
+    "EnemiesTaggedByFlameBot",
+    "EnemiesTaggedByAttackChip",
+    "EnemiesTaggedByOrbitalAugment",
+    "DeathWaveCoins",
+    "GoldenTowerCash",
+    "GoldenTowerCoins",
+    "GoldenTowerPlusCoins",
+    "OrbsCoins",
+    "GoldenBotCoins",
+    "CritCoins",
+    "CoinBonusUpgradesCoins",
+    "CoinBonusTotalCoins",
+    "EnemiesDestroyedNormal",
+    "EnemiesDestroyedFast",
+    "EnemiesDestroyedTank",
+    "EnemiesDestroyedRanged",
+    "EnemiesDestroyedBoss",
+    "EnemiesDestroyedProtector",
+    "EnemiesDestroyedVampires",
+    "EnemiesDestroyedRays",
+    "EnemiesDestroyedScatters",
+    "EnemiesDestroyedSaboteurs",
+    "EnemiesDestroyedCommanders",
+    "EnemiesDestroyedOvercharges",
+    "EnemiesDestroyedByProjectiles",
+    "EnemiesDestroyedByThorn",
+    "EnemiesDestroyedByOrbs",
+    "EnemiesDestroyedByDeathRay",
+    "EnemiesDestroyedByChainLightning",
+    "EnemiesDestroyedBySmartMissiles",
+    "EnemiesDestroyedByInnerLandMines",
+    "EnemiesDestroyedByPoisonSwamp",
+    "EnemiesDestroyedByBlackHole",
+    "EnemiesDestroyedByLandMine",
+    "EnemiesDestroyedByFlameBot",
+    "EnemiesDestroyedByDeathPenalty",
+    "EnemiesDestroyedByOther",
+    "EnemiesDestroyedInSpotlight",
+    "EnemiesDestroyedInGoldenTower",
+    "EnemiesDestroyedInAmplifyBot",
+    "EnemiesDestroyedInGoldenBot",
+    "BotDamage",
+    "StunBotStuns",
+    "CoinBotCoins",
+    "GuardianStolenCoins",
+    "GuardianFetchedCoins"
+  ],
+  "officialSectionLabels": [
+    "Currencies",
+    "Health Regenerated",
+    "Damage Blocked",
+    "Counts",
+    "Miscellaneous",
+    "Records",
+    "Enemies Hit By",
+    "Killed With Effect Active",
+    "Enemies Destroyed By"
+  ],
+  "highValueFindings": [
+    {
+      "finding": "The app has a much wider BattleHistoryEntry schema than the current sample reports show.",
+      "impact": "TBI should accept optional fields without failing and report unknown/new fields in Debug."
+    },
+    {
+      "finding": "The app separates Enemies Hit By, Enemies Destroyed By, and Killed With Effect Active.",
+      "impact": "TBI should not treat hits, kill source, and effect-window kills as the same thing."
+    },
+    {
+      "finding": "Other is present as DestroyedByOther and Other Coin Bonuses is a separate currency field.",
+      "impact": "TBI should split Other Kills from Other Coin Bonuses."
+    },
+    {
+      "finding": "Battle history stores IsTournament and DissonanceType internally.",
+      "impact": "TBI can add report tags for tournament/dissonance instead of relying on pasted marker text."
+    },
+    {
+      "finding": "Newer enemy subtype totals exist: Saboteurs, Commanders, Overcharges.",
+      "impact": "TBI parser/enemy catalogue should support these now, even if older reports do not include them."
+    },
+    {
+      "finding": "Guardian report fields exist for damage, summons, stolen/fetched coins, catches, gems, medals, shards, and module drops.",
+      "impact": "Systems/Command Deck can later evaluate Guardian value and loot contribution."
+    }
+  ]
+}

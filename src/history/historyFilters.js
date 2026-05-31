@@ -1,5 +1,9 @@
 "use strict";
 
+import {
+    buildGameBrainHistorySearchText
+} from "./historyGameBrain.js";
+
 /**
  * HISTORY FILTERS
  * Pure filter/sort helpers for Battle History Trace.
@@ -8,13 +12,13 @@
 export const HISTORY_SORT_OPTIONS = Object.freeze([
     { value: "newest", label: "Newest" },
     { value: "oldest", label: "Oldest" },
+    { value: "tier_desc", label: "Highest Tier" },
     { value: "wave_desc", label: "Highest Wave" },
-    { value: "coins_desc", label: "Highest Coins" },
-    { value: "cells_desc", label: "Highest Cells" },
-    { value: "cph_desc", label: "Highest Coins/h" },
-    { value: "cellsph_desc", label: "Highest Cells/h" },
     { value: "quality_desc", label: "Best Score" },
-    { value: "tier_desc", label: "Highest Tier" }
+    { value: "coins_desc", label: "Highest Coins" },
+    { value: "cph_desc", label: "Highest Coins/h" },
+    { value: "cells_desc", label: "Highest Cells" },
+    { value: "cellsph_desc", label: "Highest Cells/h" }
 ]);
 
 export const HISTORY_BUILD_OPTIONS = Object.freeze([
@@ -28,6 +32,16 @@ export const HISTORY_BUILD_OPTIONS = Object.freeze([
     { value: "hybrid", label: "Hybrid" }
 ]);
 
+export const HISTORY_RUN_TYPE_OPTIONS = Object.freeze([
+    { value: "all", label: "All Run Types" },
+    { value: "normal", label: "Normal" },
+    { value: "tournament", label: "Tournament" },
+    { value: "farming", label: "Farming" },
+    { value: "milestone", label: "Milestone" },
+    { value: "event", label: "Event" },
+    { value: "test", label: "Test" }
+]);
+
 export function normaliseHistoryFilters(filters = {}) {
     const safe = filters && typeof filters === "object" ? filters : {};
 
@@ -36,7 +50,11 @@ export function normaliseHistoryFilters(filters = {}) {
         sort: normaliseSort(safe.sort || "newest"),
         build: normaliseBuild(safe.build || "all"),
         tag: normaliseTagFilter(safe.tag || "all"),
-        showArchived: Boolean(safe.showArchived)
+        runType: normaliseRunTypeFilter(safe.runType || safe.type || "all"),
+        page: normalisePage(safe.page || 1),
+        selectedIndex: normaliseSelectedIndex(safe.selectedIndex),
+        showArchived: Boolean(safe.showArchived),
+        mode: String(safe.mode || safe.searchMode || "normal").toLowerCase() === "deep" ? "deep" : "normal"
     };
 }
 
@@ -68,7 +86,8 @@ export function getVisibleHistoryEntries(history = [], filters = {}, summary = n
             if (!safeFilters.showArchived && archived) return false;
             if (safeFilters.build !== "all" && getRunBuildStyle(run) !== safeFilters.build) return false;
             if (safeFilters.tag !== "all" && !getRunTags(run).includes(safeFilters.tag)) return false;
-            if (query && !historyEntryMatchesQuery(run, query, entry.originalIndex)) return false;
+            if (safeFilters.runType !== "all" && getRunType(run) !== safeFilters.runType) return false;
+            if (query && !historyEntryMatchesQuery(run, query, entry.originalIndex, { mode: safeFilters.mode })) return false;
 
             return true;
         });
@@ -80,38 +99,141 @@ export function getVisibleHistoryEntries(history = [], filters = {}, summary = n
         }));
 }
 
-export function historyEntryMatchesQuery(run = null, query = "", index = 0) {
-    const needle = String(query || "").trim().toLowerCase();
-    if (!needle) return true;
+export function historyEntryMatchesQuery(run = null, query = "", index = 0, options = {}) {
+    return searchTextMatches(buildHistoryEntrySearchText(run, index, options), query);
+}
 
+export function buildHistoryEntrySearchText(run = null, index = 0, options = {}) {
+    const mode = String(options?.mode || options?.searchMode || "normal").toLowerCase() === "deep" ? "deep" : "normal";
+    return mode === "deep"
+        ? buildHistoryEntryDeepSearchText(run, index)
+        : buildHistoryEntryNormalSearchText(run, index);
+}
+
+export function buildHistoryEntryNormalSearchText(run = null, index = 0) {
     const core = run?.core || {};
     const meta = run?.meta || {};
     const stats = run?.stats || {};
     const tags = getRunTags(run).join(" ");
-    const sectionNames = Object.keys(run?.sections || {}).join(" ");
+    const markers = getRunManualMarkers(run).join(" ");
+    const runType = getRunType(run);
+    const gb = safeGameBrainSummary(run);
 
-    const haystack = [
+    return [
         `run ${Number(index) + 1}`,
         core.battleDate,
-        core.tier,
+        core.tier ? `tier ${core.tier}` : "",
+        core.tier ? `t${core.tier}` : "",
+        core.wave ? `wave ${core.wave}` : "",
+        core.wave ? `w${core.wave}` : "",
         core.wave,
         core.coins,
         core.cells,
+        core.killedBy ? `killed by ${core.killedBy}` : "",
         core.killedBy,
         stats.coinsPerHour,
         stats.cellsPerHour,
+        formatSearchNumber(core.coins),
+        formatSearchNumber(core.cells),
+        formatSearchNumber(stats.coinsPerHour),
+        formatSearchNumber(stats.cellsPerHour),
+        gb.nextCheckpoint ? `next checkpoint wave ${gb.nextCheckpoint}` : "",
+        gb.bandLabel,
+        gb.killedByLabel,
+        gb.killedByMeaning,
+        gb.familyLabel,
+        gb.officialLabels ? `${gb.officialLabels} labels recognised` : "",
+        gb.unknownLabels ? `${gb.unknownLabels} mapping polish` : "mapping clean",
+        runType !== "normal" ? `${runType} run` : "normal run",
+        markers,
+        meta.sourceMarker,
+        meta.reportId,
+        meta.buildStyle,
+        meta.build,
+        meta.notes,
+        tags
+    ]
+        .filter(value => value != null && String(value).trim())
+        .join(" ");
+}
+
+export function buildHistoryEntryDeepSearchText(run = null, index = 0) {
+    const core = run?.core || {};
+    const meta = run?.meta || {};
+    const stats = run?.stats || {};
+    const tags = getRunTags(run).join(" ");
+    const markers = getRunManualMarkers(run).join(" ");
+    const runType = getRunType(run);
+    const sectionNames = Object.keys(run?.sections || {}).join(" ");
+    const gameBrainSearch = buildGameBrainHistorySearchText(run, index);
+
+    return [
+        buildHistoryEntryNormalSearchText(run, index),
+        core.coins,
+        core.cells,
+        stats.coinsPerHour,
+        stats.cellsPerHour,
+        run?.raw?.originalText,
+        run?.raw?.reportText,
+        Array.isArray(run?.raw?.lines) ? run.raw.lines.join(" ") : "",
+        runType,
+        markers,
+        meta.sourceMarker,
         meta.reportId,
         meta.buildStyle,
         meta.build,
         meta.notes,
         tags,
-        sectionNames
+        sectionNames,
+        gameBrainSearch
     ]
-        .filter(value => value != null)
-        .join(" ")
-        .toLowerCase();
+        .filter(value => value != null && String(value).trim())
+        .join(" ");
+}
 
-    return haystack.includes(needle);
+function safeGameBrainSummary(run = null) {
+    try {
+        return buildGameBrainHistorySearchText && run
+            ? normaliseGameBrainSummary(run)
+            : {};
+    } catch (_error) {
+        return {};
+    }
+}
+
+function normaliseGameBrainSummary(run = null) {
+    // buildGameBrainHistorySearchText is intentionally kept for deep mode.
+    // Normal mode should only expose user-visible run-card style facts, so
+    // derive these common fields without pulling in raw report/schema labels.
+    const core = run?.core || {};
+    const parsed = run?.gameBrain || run?.meta?.gameBrain || run?.historyGameBrainSummary || {};
+    const readable = parsed?.readableSummary || {};
+
+    return {
+        nextCheckpoint: parsed.nextCheckpoint || readable.nextCheckpoint || "",
+        bandLabel: parsed.bandLabel || readable.bandLabel || "",
+        killedByLabel: parsed.killedByLabel || core.killedBy || "",
+        killedByMeaning: parsed.killedByMeaning || "",
+        familyLabel: parsed.familyLabel || parsed.topFamily || "",
+        officialLabels: parsed.officialLabels || parsed.recognisedLabels || readable.officialLabels || "",
+        unknownLabels: parsed.unknownLabels || readable.unknownLabels || 0
+    };
+}
+
+export function searchTextMatches(haystack = "", query = "") {
+    const tokens = normaliseSearchText(query).split(/\s+/g).filter(Boolean);
+    if (!tokens.length) return true;
+
+    const text = normaliseSearchText(haystack);
+    return tokens.every(token => text.includes(token));
+}
+
+export function normaliseSearchText(value = "") {
+    return String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9+]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
 export function getRunBuildStyle(run = null) {
@@ -136,6 +258,26 @@ export function getRunTags(run = null) {
             seen.add(tag);
             return true;
         });
+}
+
+export function getRunType(run = null) {
+    const value = String(run?.meta?.runType || run?.userMeta?.runType || "normal").trim().toLowerCase().replace(/[\s-]+/g, "_");
+    if (["tournament", "farming", "milestone", "event", "test"].includes(value)) return value;
+    return "normal";
+}
+
+export function getRunManualMarkers(run = null) {
+    const source = Array.isArray(run?.meta?.manualMarkers)
+        ? run.meta.manualMarkers
+        : Array.isArray(run?.meta?.markers)
+            ? run.meta.markers
+            : Array.isArray(run?.userMeta?.manualMarkers)
+                ? run.userMeta.manualMarkers
+                : [];
+
+    return Array.from(new Set(source
+        .map(value => String(value || "").trim().toLowerCase())
+        .filter(Boolean)));
 }
 
 export function sortHistoryEntries(entries = [], sort = "newest", summary = null) {
@@ -215,6 +357,29 @@ function numberValue(value = 0) {
     return Number.isFinite(num) ? num : 0;
 }
 
+
+function formatSearchNumber(value = 0) {
+    const num = Number(value || 0);
+    if (!Number.isFinite(num) || num === 0) return String(value || "");
+
+    const units = [
+        [1e18, "Q"],
+        [1e15, "q"],
+        [1e12, "T"],
+        [1e9, "B"],
+        [1e6, "M"],
+        [1e3, "K"]
+    ];
+
+    const unit = units.find(([limit]) => Math.abs(num) >= limit);
+    if (!unit) return String(num);
+
+    const [limit, suffix] = unit;
+    const short = num / limit;
+    const fixed = short >= 100 ? short.toFixed(0) : short >= 10 ? short.toFixed(1) : short.toFixed(2);
+    return `${fixed.replace(/\.0+$/, "").replace(/(\.\d*[1-9])0+$/, "$1")}${suffix}`;
+}
+
 function normaliseSort(value = "newest") {
     const key = String(value || "newest").trim().toLowerCase();
     return HISTORY_SORT_OPTIONS.some(option => option.value === key) ? key : "newest";
@@ -239,9 +404,27 @@ function normaliseTagFilter(value = "all") {
     return key || "all";
 }
 
+function normaliseRunTypeFilter(value = "all") {
+    const key = String(value || "all").trim().toLowerCase().replace(/[\s-]+/g, "_");
+    if (key === "all") return "all";
+    return getRunType({ meta: { runType: key } });
+}
+
+function normalisePage(value = 1) {
+    const num = Number.parseInt(String(value || 1), 10);
+    return Number.isFinite(num) && num > 0 ? num : 1;
+}
+
+function normaliseSelectedIndex(value = null) {
+    if (value == null || value === "") return null;
+    const num = Number.parseInt(String(value), 10);
+    return Number.isFinite(num) && num >= 0 ? num : null;
+}
+
 export default {
     HISTORY_SORT_OPTIONS,
     HISTORY_BUILD_OPTIONS,
+    HISTORY_RUN_TYPE_OPTIONS,
     normaliseHistoryFilters,
     getHistoryTags,
     getHistoryEntries,

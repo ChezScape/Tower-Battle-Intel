@@ -1,0 +1,41 @@
+{
+  "game": "The Tower - Idle Tower Defense",
+  "version": "28.1.0",
+  "package": "com.TechTreeGames.TheTower",
+  "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+  "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+  "generatedAt": "2026-05-25T20:10:00Z",
+  "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+  "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+  "safePurpose": [
+    "official vocabulary",
+    "parser/search aliases",
+    "Game Brain explanations",
+    "History grouping",
+    "Systems glossary",
+    "Command Deck wording",
+    "Debug catalogue health"
+  ],
+  "notSafePurpose": [
+    "hidden formulas",
+    "exact scaling maths",
+    "live server/tournament settings",
+    "automated gameplay/cheats"
+  ],
+  "catalogueName": "The Tower v28.1.0 Official Game Brain Catalogue Foundation",
+  "baselineTarget": "v4.11z27 Wave/Tier Milestone Catalogue full build",
+  "counts": {
+    "officialCatalogueFilesAdded": 14,
+    "officialCatalogueEntries": 170,
+    "projectWideUsefulHitsAudited": 21627,
+    "battleReportFieldsFromZ26": 142,
+    "waveTierMilestoneLayerFromZ27": true
+  },
+  "protectionRules": [
+    "Dashboard visuals remain locked to the approved v4.11x2/v4.11u+ desktop direction.",
+    "Compare remains bare restart; no graph rebuild in z28.",
+    "mobile.css remains the blank module scaffold.",
+    "Use these catalogues for source-labelled wording, grouping, parser aliases, and explanations only.",
+    "Do not claim exact hidden formula/scaling values from this static catalogue."
+  ]
+}

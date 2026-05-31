@@ -1,0 +1,1301 @@
+{
+  "generatedFrom": "The Tower - Idle Tower Defense v28.1.0 APK/XAPK static strings and IL2CPP metadata string scan",
+  "safetyScope": "Static, read-only extraction of readable strings/metadata. No server access, bypassing, cheating, or app modification.",
+  "totalUsefulHits": 21627,
+  "categories": [
+    {
+      "key": "enemy_catalogue",
+      "label": "Enemy catalogue, death causes, and threat explanations",
+      "tbi_use": [
+        "Command Deck death diagnosis",
+        "History killed-by filters",
+        "Systems enemy glossary",
+        "Compare enemy pressure profile",
+        "Game Brain threat tags"
+      ],
+      "recommendation": "Add enemyCatalogue v28.1.0 with official descriptions and TBI threat tags.",
+      "confidence": "High for names/descriptions; Medium for threat tags; Low for exact scaling.",
+      "hitCount": 2888,
+      "sourceCounts": {
+        "assets": 490,
+        "metadata": 1779,
+        "libil2cpp": 619
+      },
+      "examples": [
+        {
+          "text": "Boss-Leben - {0} %, Bossgeschwindigkeit jedoch + {1} %",
+          "source": "assets",
+          "line": 3992
+        },
+        {
+          "text": "Los escudos de los protectores otorgan inmunidad al da",
+          "source": "assets",
+          "line": 16368
+        },
+        {
+          "text": "Posibilidad de que el Rayo en Cadena aplique Descarga.",
+          "source": "assets",
+          "line": 35420
+        },
+        {
+          "text": "2x faster than basic enemies. Worth 2 coins as base value",
+          "source": "assets",
+          "line": 948
+        },
+        {
+          "text": "di {0} che distrugge i nemici a contatto (eccetto i boss)",
+          "source": "assets",
+          "line": 2280
+        },
+        {
+          "text": "Fires an Energy Net at the Boss, Immobilizing it for=",
+          "source": "assets",
+          "line": 2311
+        },
+        {
+          "text": "On Basic Enemy Crit Kill: Base 1 coin drop at a chance of",
+          "source": "assets",
+          "line": 2341
+        },
+        {
+          "text": "Nach einer Bosswelle spawnt garantiert ein Erholungspaket",
+          "source": "assets",
+          "line": 6059
+        },
+        {
+          "text": "All cards are locked while a boss or Fleet enemy is alive",
+          "source": "assets",
+          "line": 12196
+        },
+        {
+          "text": "Increase the number of reroll shards that bosses drop",
+          "source": "assets",
+          "line": 14169
+        },
+        {
+          "text": "secondes avant de tirer un rayon qui inflige 2x plus de d",
+          "source": "assets",
+          "line": 15489
+        },
+        {
+          "text": "El rayo dispara dos veces. El divisor se divide una vez m",
+          "source": "assets",
+          "line": 16435
+        }
+      ],
+      "priorityForNextBuild": 1
+    },
+    {
+      "key": "ultimate_weapons",
+      "label": "Ultimate Weapons and upgrade families",
+      "tbi_use": [
+        "Economy source explanations",
+        "Command Deck strategy tags",
+        "Compare UW contribution rows",
+        "Systems UW glossary"
+      ],
+      "recommendation": "Add ultimateWeaponCatalogue with effects and linked Battle Report fields.",
+      "confidence": "High for names/descriptions; Medium for linking stats; Low for exact cooldown/quantity values.",
+      "hitCount": 455,
+      "sourceCounts": {
+        "assets": 199,
+        "metadata": 256
+      },
+      "examples": [
+        {
+          "text": "Ultimate weapons are permanent additions to your tower.",
+          "source": "assets",
+          "line": 1702
+        },
+        {
+          "text": "You need the Spotlight Ultimate Weapon to research this",
+          "source": "assets",
+          "line": 7584
+        },
+        {
+          "text": "Extra coins bonus applied to enemies hit by Death Wave",
+          "source": "assets",
+          "line": 4762
+        },
+        {
+          "text": "Effect Wave Hits amplify Death Wave Damage (additive).",
+          "source": "assets",
+          "line": 20858
+        },
+        {
+          "text": "Chain Lightning Hit: Chance to Shock (Increase Damage)",
+          "source": "assets",
+          "line": 35402
+        },
+        {
+          "text": "Increase the damage reduction effect of Chrono Field>",
+          "source": "assets",
+          "line": 4629
+        },
+        {
+          "text": "How high the chance of Chain Lightning to apply Shock",
+          "source": "assets",
+          "line": 4723
+        },
+        {
+          "text": "You need the Death Wave Ultimate Weapon to research thisH",
+          "source": "assets",
+          "line": 7542
+        },
+        {
+          "text": "You need the Black Hole Ultimate Weapon to research thisD",
+          "source": "assets",
+          "line": 7578
+        },
+        {
+          "text": "During Chrono Field: Reduces Damage (After Abs Def).?",
+          "source": "assets",
+          "line": 35690
+        },
+        {
+          "text": "Spawn +1 Black Hole & reduce trapped Damage by {0}%.>",
+          "source": "assets",
+          "line": 35985
+        },
+        {
+          "text": "Spend power stones to unlock and upgrade ultimate weapons.",
+          "source": "assets",
+          "line": 1693
+        }
+      ],
+      "priorityForNextBuild": 2
+    },
+    {
+      "key": "cards_masteries",
+      "label": "Cards, card effects, and card masteries",
+      "tbi_use": [
+        "History cards/no-cards context",
+        "Command Deck advice",
+        "Systems cards glossary",
+        "Compare explaining changed run style"
+      ],
+      "recommendation": "Add cardCatalogue + masteryCatalogue; useful before advanced coaching.",
+      "confidence": "High for names/descriptions; Medium for strategic interpretation.",
+      "hitCount": 419,
+      "sourceCounts": {
+        "assets": 292,
+        "metadata": 127
+      },
+      "examples": [
+        {
+          "text": "You need the Double Crit Coin Mastery to research this",
+          "source": "assets",
+          "line": 18590
+        },
+        {
+          "text": "You need the Double Wave Skip Mastery to research this",
+          "source": "assets",
+          "line": 18607
+        },
+        {
+          "text": "You need the Energy Converter Mastery to research this",
+          "source": "assets",
+          "line": 18720
+        },
+        {
+          "text": "Increases the Wave Accelerator spawn rate acceleration",
+          "source": "assets",
+          "line": 20150
+        },
+        {
+          "text": "Demon Mode will activate when its cooldown is complete",
+          "source": "assets",
+          "line": 22335
+        },
+        {
+          "text": "dent soustrait 5 vagues, 50 si Intro Sprint est actif.",
+          "source": "assets",
+          "line": 35278
+        },
+        {
+          "text": "buy, upgrade and switch cards to evolve your strategy",
+          "source": "assets",
+          "line": 3498
+        },
+        {
+          "text": "All cards are locked while a boss or Fleet enemy is alive",
+          "source": "assets",
+          "line": 12196
+        },
+        {
+          "text": "You need the Attack Speed+ card mastery to research this`",
+          "source": "assets",
+          "line": 18377
+        },
+        {
+          "text": "You need the Health Regen+ card mastery to research thish",
+          "source": "assets",
+          "line": 18407
+        },
+        {
+          "text": "You need the Slow Aura+ card mastery to research this",
+          "source": "assets",
+          "line": 18472
+        },
+        {
+          "text": "You need the Enemy Balance+ card mastery to research this",
+          "source": "assets",
+          "line": 18505
+        }
+      ],
+      "priorityForNextBuild": 3
+    },
+    {
+      "key": "workshop_upgrades",
+      "label": "Workshop upgrades and enhancements",
+      "tbi_use": [
+        "Systems glossary",
+        "Command Deck build weakness hints",
+        "History search aliases",
+        "Compare family grouping",
+        "future build planner"
+      ],
+      "recommendation": "Build a workshopCatalogue with official labels/descriptions and families Attack/Defense/Utility/Economy.",
+      "confidence": "High for labels/descriptions; Low for exact upgrade cost formulas unless extracted later.",
+      "hitCount": 1384,
+      "sourceCounts": {
+        "assets": 533,
+        "metadata": 851
+      },
+      "examples": [
+        {
+          "text": "You need the Interest workshop upgrade to research this",
+          "source": "assets",
+          "line": 7628
+        },
+        {
+          "text": "glicht, die Distanz von Extra-Orbs zum Turm anzupassen",
+          "source": "assets",
+          "line": 4825
+        },
+        {
+          "text": "Increase recovery package chance of spawning each wave",
+          "source": "assets",
+          "line": 7835
+        },
+        {
+          "text": "On Shockwave Hit: Enemies take {0} more Damage for 7s.",
+          "source": "assets",
+          "line": 13215
+        },
+        {
+          "text": "Effect Wave Hits amplify Death Wave Damage (additive).",
+          "source": "assets",
+          "line": 20858
+        },
+        {
+          "text": "Chain Lightning Hit: Chance to Shock (Increase Damage)",
+          "source": "assets",
+          "line": 35402
+        },
+        {
+          "text": "Geschwindigkeit der Orbs, die deinen Turm verteidigen",
+          "source": "assets",
+          "line": 640
+        },
+        {
+          "text": "On Wave End: Chance to grant a Free Defense Upgrade.O",
+          "source": "assets",
+          "line": 702
+        },
+        {
+          "text": "On Wave End: Chance to grant a Free Utility Upgrade.O",
+          "source": "assets",
+          "line": 712
+        },
+        {
+          "text": "Land Mines deal {0}x Tower Damage (Scales with all Crit).",
+          "source": "assets",
+          "line": 910
+        },
+        {
+          "text": "Increase the damage reduction effect of Chrono Field>",
+          "source": "assets",
+          "line": 4629
+        },
+        {
+          "text": "Wall Max Health (Calculated as a % of Tower Health).E",
+          "source": "assets",
+          "line": 8688
+        }
+      ],
+      "priorityForNextBuild": 4
+    },
+    {
+      "key": "labs_research",
+      "label": "Labs / research catalogue",
+      "tbi_use": [
+        "Systems research glossary",
+        "Command Deck upgrade suggestions",
+        "Debug catalogue health",
+        "future priority planner"
+      ],
+      "recommendation": "Add labResearchCatalogue with category/source labels; do not estimate lab costs yet.",
+      "confidence": "High for category names and labels; Low for full formula/cost tables.",
+      "hitCount": 512,
+      "sourceCounts": {
+        "assets": 182,
+        "metadata": 330
+      },
+      "examples": [
+        {
+          "text": "You need the Spotlight Ultimate Weapon to research this",
+          "source": "assets",
+          "line": 7584
+        },
+        {
+          "text": "You need the Interest workshop upgrade to research this",
+          "source": "assets",
+          "line": 7628
+        },
+        {
+          "text": "You need the Double Crit Coin Mastery to research this",
+          "source": "assets",
+          "line": 18590
+        },
+        {
+          "text": "You need the Double Wave Skip Mastery to research this",
+          "source": "assets",
+          "line": 18607
+        },
+        {
+          "text": "You need the Energy Converter Mastery to research this",
+          "source": "assets",
+          "line": 18720
+        },
+        {
+          "text": "Research new upgrades to unlock new parts of the game",
+          "source": "assets",
+          "line": 3131
+        },
+        {
+          "text": "Have a total lab research time of {0} (rushed labs count)",
+          "source": "assets",
+          "line": 6563
+        },
+        {
+          "text": "You need the Death Wave Ultimate Weapon to research thisH",
+          "source": "assets",
+          "line": 7542
+        },
+        {
+          "text": "You need the Land Mines Ultimate Weapon to research this@",
+          "source": "assets",
+          "line": 7555
+        },
+        {
+          "text": "You need the Black Hole Ultimate Weapon to research thisD",
+          "source": "assets",
+          "line": 7578
+        },
+        {
+          "text": "You need the Rend Armor workshop upgrade to research this",
+          "source": "assets",
+          "line": 12525
+        },
+        {
+          "text": "You need the Attack Speed+ card mastery to research this`",
+          "source": "assets",
+          "line": 18377
+        }
+      ],
+      "priorityForNextBuild": 5
+    },
+    {
+      "key": "tournament_heat_leagues",
+      "label": "Tournament, Heat, leagues, battle conditions",
+      "tbi_use": [
+        "Tournament manual tag support",
+        "Heat warning overlay",
+        "league difficulty notes",
+        "Compare tournament vs farming separation",
+        "Command Deck risk notes"
+      ],
+      "recommendation": "Add heat/league catalogue, but keep live tournament settings source-labelled unless pasted by user or confirmed.",
+      "confidence": "High for condition names/descriptions and heat breakpoints; Medium/Low for current live rotations.",
+      "hitCount": 441,
+      "sourceCounts": {
+        "assets": 191,
+        "metadata": 247,
+        "libil2cpp": 3
+      },
+      "examples": [
+        {
+          "text": "Create a Field for {0}s that reduces Enemy Speed by {1}%.",
+          "source": "assets",
+          "line": 815
+        },
+        {
+          "text": "Platziere dich im Champion-Turnier unter den Top {0}0",
+          "source": "assets",
+          "line": 10428
+        },
+        {
+          "text": "Kills im Goldenen Turm bringen +1 Combo. Am Ende: Gew",
+          "source": "assets",
+          "line": 11134
+        },
+        {
+          "text": "Modules that start with Rare rarity can reach Legendary+F",
+          "source": "assets",
+          "line": 13721
+        },
+        {
+          "text": "Elites killed in Golden Bot range grant {0}x more Cells.U",
+          "source": "assets",
+          "line": 34014
+        },
+        {
+          "text": "You need the Golden Tower Ultimate Weapon to research this",
+          "source": "assets",
+          "line": 7561
+        },
+        {
+          "text": "Du brauchst den Goldenen Bot, um dies zu erforschen",
+          "source": "assets",
+          "line": 7654
+        },
+        {
+          "text": "Increases card mastery enemy attack speed reduction",
+          "source": "assets",
+          "line": 19913
+        },
+        {
+          "text": "Turn Tower Golden for {0}s. Grants {1}x Cash & Coins on Kill.",
+          "source": "assets",
+          "line": 859
+        },
+        {
+          "text": "Sync Death Wave, Golden Tower, & Black Hole. Cooldown = {0}s.",
+          "source": "assets",
+          "line": 35663
+        },
+        {
+          "text": "Platziere dich im Goldturnier unter den Top {0}",
+          "source": "assets",
+          "line": 10406
+        },
+        {
+          "text": "Beende das Legends-Turnier unter den ersten {0}",
+          "source": "assets",
+          "line": 10440
+        }
+      ],
+      "priorityForNextBuild": 6
+    },
+    {
+      "key": "guardian",
+      "label": "Guardian and loot/shard tracking",
+      "tbi_use": [
+        "New History/Compare Guardian section",
+        "resource tracking",
+        "Command Deck “is Guardian helping?” verdict",
+        "Debug parser checks"
+      ],
+      "recommendation": "Add guardianCatalogue and a Guardian report section. This is very useful because current TBI likely under-explains it.",
+      "confidence": "High for report fields; Medium for coaching meaning.",
+      "hitCount": 255,
+      "sourceCounts": {
+        "assets": 36,
+        "metadata": 219
+      },
+      "examples": [
+        {
+          "text": "Tower guardian increases the speed of the wave timerC",
+          "source": "assets",
+          "line": 24728
+        },
+        {
+          "text": "Tower guardian scares nearby enemies, causing them to flee",
+          "source": "assets",
+          "line": 24714
+        },
+        {
+          "text": "You may respec Guardian a maximum of once per week",
+          "source": "assets",
+          "line": 27808
+        },
+        {
+          "text": "Cannot respec Guardian while a round is active",
+          "source": "assets",
+          "line": 27997
+        },
+        {
+          "text": "Tower Guardian attacks nearby enemies. Deals % of Missing Health.",
+          "source": "assets",
+          "line": 24691
+        },
+        {
+          "text": "Guardian chips are locked during battle",
+          "source": "assets",
+          "line": 26148
+        },
+        {
+          "text": "Tower guardian attempts to catch enemy projectiles before they hit the towerd",
+          "source": "assets",
+          "line": 24680
+        },
+        {
+          "text": "Tower Guardian retrieves hidden loot (Coins, Gems, Medals, Shards, Modules).r",
+          "source": "assets",
+          "line": 26922
+        },
+        {
+          "text": "All Guardian upgrades will be reset, and you will receive back all Bits spent",
+          "source": "assets",
+          "line": 27786
+        },
+        {
+          "text": "Tower Guardian places a Bounty on a nearby non-Common Enemy. Grants Bonus Coins on Kill.",
+          "source": "assets",
+          "line": 28560
+        },
+        {
+          "text": "Guardian coins stolen",
+          "source": "assets",
+          "line": 24592
+        },
+        {
+          "text": "Tower guardian steals coins from nearby enemies based on the enemies' current coin valuer",
+          "source": "assets",
+          "line": 24661
+        }
+      ],
+      "priorityForNextBuild": 7
+    },
+    {
+      "key": "modules",
+      "label": "Modules, rarities, substats, merge/shatter/reroll",
+      "tbi_use": [
+        "Systems modules glossary",
+        "Guardian/module loot tracking",
+        "Command Deck upgrade notes",
+        "Debug schema grouping"
+      ],
+      "recommendation": "Add moduleCatalogue and moduleResourceCatalogue; keep effects descriptive first.",
+      "confidence": "Medium-High for names/resources; Low for full unique effect tables without deeper extraction.",
+      "hitCount": 4973,
+      "sourceCounts": {
+        "assets": 546,
+        "metadata": 4307,
+        "libil2cpp": 120
+      },
+      "examples": [
+        {
+          "text": "Modules that start with Epic rarity can reach Ancestral",
+          "source": "assets",
+          "line": 13738
+        },
+        {
+          "text": "Ban specific armor effects when rerolling armor modules",
+          "source": "assets",
+          "line": 22901
+        },
+        {
+          "text": "bloquer l'emplacement de module d'assistance du canon)",
+          "source": "assets",
+          "line": 29395
+        },
+        {
+          "text": "bloquer l'emplacement de module d'assistance de l'armure",
+          "source": "assets",
+          "line": 29407
+        },
+        {
+          "text": "bloquer l'emplacement de module d'assistance du noyau(",
+          "source": "assets",
+          "line": 29432
+        },
+        {
+          "text": "You need the Rend Armor workshop upgrade to research this",
+          "source": "assets",
+          "line": 12525
+        },
+        {
+          "text": "You can purchase modules with Module Tickets or GemsL",
+          "source": "assets",
+          "line": 13617
+        },
+        {
+          "text": "Modules that start with Rare rarity can reach Legendary+F",
+          "source": "assets",
+          "line": 13721
+        },
+        {
+          "text": "Increase the number of reroll shards that bosses drop",
+          "source": "assets",
+          "line": 14169
+        },
+        {
+          "text": "Modules used as fodder will be converted into shards!",
+          "source": "assets",
+          "line": 15287
+        },
+        {
+          "text": "Increase the number of shards from shattering modules",
+          "source": "assets",
+          "line": 16471
+        },
+        {
+          "text": "Are you sure that you want to shatter these modules?-",
+          "source": "assets",
+          "line": 17083
+        }
+      ],
+      "priorityForNextBuild": 8
+    },
+    {
+      "key": "bots",
+      "label": "Bots and bot upgrades",
+      "tbi_use": [
+        "Systems bot glossary",
+        "Compare bot economy/combat rows",
+        "Command Deck bot advice",
+        "History search aliases"
+      ],
+      "recommendation": "Add botCatalogue with known bot names/effects and Battle Report fields.",
+      "confidence": "High for names/labels; Medium for exact effect interpretation.",
+      "hitCount": 274,
+      "sourceCounts": {
+        "assets": 200,
+        "metadata": 69,
+        "libil2cpp": 5
+      },
+      "examples": [
+        {
+          "text": "Vous avez besoin du Bot Bot pour faire cette recherche.",
+          "source": "assets",
+          "line": 34618
+        },
+        {
+          "text": "Du kannst Bots maximal einmal pro Event neu verteilen.",
+          "source": "assets",
+          "line": 18155
+        },
+        {
+          "text": "gema(s) de descuento en las reespecificaciones de bots.0",
+          "source": "assets",
+          "line": 26044
+        },
+        {
+          "text": "Potencia los efectos de otros bots dentro de su alcance.",
+          "source": "assets",
+          "line": 33723
+        },
+        {
+          "text": "dulos), medallas (bots) y piedras (armas definitivas).",
+          "source": "assets",
+          "line": 36210
+        },
+        {
+          "text": "Elites killed in Golden Bot range grant {0}x more Cells.U",
+          "source": "assets",
+          "line": 34014
+        },
+        {
+          "text": "Potencia las capacidades Bot+ de los otros bots x{0}.",
+          "source": "assets",
+          "line": 34068
+        },
+        {
+          "text": "Aumenta os efeitos de outros bots dentro do alcance.",
+          "source": "assets",
+          "line": 33725
+        },
+        {
+          "text": "Bots selecionados seguem o mesmo caminho durante o jogo. N",
+          "source": "assets",
+          "line": 34358
+        },
+        {
+          "text": "nnen die Bots pro Event unbegrenzt oft neu zuweisen.",
+          "source": "assets",
+          "line": 35096
+        },
+        {
+          "text": "Bots Respec is not allowed while a round is active.",
+          "source": "assets",
+          "line": 34760
+        },
+        {
+          "text": "Puedes redistribuir los puntos de habilidad de los bots un n",
+          "source": "assets",
+          "line": 35097
+        }
+      ],
+      "priorityForNextBuild": 9
+    },
+    {
+      "key": "perks_tradeoffs",
+      "label": "Perks and trade-off perks",
+      "tbi_use": [
+        "Run context flags",
+        "History annotation",
+        "Command Deck explanation of weird run changes",
+        "future manual tags"
+      ],
+      "recommendation": "Add perkGlossary and optional manual run tags; pasted Battle Reports may not include active perk state.",
+      "confidence": "High for text; Medium/Low for actual run state unless user records it.",
+      "hitCount": 95,
+      "sourceCounts": {
+        "assets": 51,
+        "metadata": 44
+      },
+      "examples": [
+        {
+          "text": "Select a trade off perk to be available from the beginning",
+          "source": "assets",
+          "line": 4037
+        },
+        {
+          "text": "Ban some perks to never show up as a choice for a new perk",
+          "source": "assets",
+          "line": 4912
+        },
+        {
+          "text": "You need the Auto Pick Perks lab unlocked to research this",
+          "source": "assets",
+          "line": 18110
+        },
+        {
+          "text": "x{0} cash per wave, but enemy kills don't give cash",
+          "source": "assets",
+          "line": 3954
+        },
+        {
+          "text": "tower health regen x{0}, but tower max health -{1}%",
+          "source": "assets",
+          "line": 3968
+        },
+        {
+          "text": "hle einen Trade-off-Vorteil, der von Anfang an verf",
+          "source": "assets",
+          "line": 4042
+        },
+        {
+          "text": "On Kill / Mark: Increases Tower Max Health (Max 12.5x Base)._",
+          "source": "assets",
+          "line": 35579
+        },
+        {
+          "text": "Select a perk to always be an option at the first perk choice.",
+          "source": "assets",
+          "line": 4027
+        },
+        {
+          "text": "Orbs will be able to hit bosses by a percentage of boss health",
+          "source": "assets",
+          "line": 6045
+        },
+        {
+          "text": "Enemies speed -{0}%, but enemies damage x{1}/",
+          "source": "assets",
+          "line": 3935
+        },
+        {
+          "text": "Select perks to never show up on perk choices",
+          "source": "assets",
+          "line": 4049
+        },
+        {
+          "text": "Unlock perks. Special powers that you can activate after some waves",
+          "source": "assets",
+          "line": 4841
+        }
+      ],
+      "priorityForNextBuild": 10
+    },
+    {
+      "key": "resources_economy",
+      "label": "Resources and economy sources",
+      "tbi_use": [
+        "Economy breakdown cards",
+        "Compare economy lead reasons",
+        "History resource filters",
+        "Command Deck farming advice"
+      ],
+      "recommendation": "Add resourceGlossary and economySourceMap linking Battle Report fields to source systems.",
+      "confidence": "High for labels; Medium for causal interpretation.",
+      "hitCount": 1373,
+      "sourceCounts": {
+        "assets": 430,
+        "metadata": 937,
+        "libil2cpp": 6
+      },
+      "examples": [
+        {
+          "text": "You need the Spotlight Ultimate Weapon to research this",
+          "source": "assets",
+          "line": 7584
+        },
+        {
+          "text": "Get {0} free tickets to start bumping your tower power!",
+          "source": "assets",
+          "line": 17036
+        },
+        {
+          "text": "Cash Multiplier for all sources (Includes Wave Bonus).",
+          "source": "assets",
+          "line": 660
+        },
+        {
+          "text": "Extra coins bonus applied to enemies hit by Death Wave",
+          "source": "assets",
+          "line": 4762
+        },
+        {
+          "text": "Hol dir {0} kostenlose Tickets, um deine Turmkraft zu st",
+          "source": "assets",
+          "line": 17041
+        },
+        {
+          "text": "Effect Wave Hits amplify Death Wave Damage (additive).",
+          "source": "assets",
+          "line": 20858
+        },
+        {
+          "text": "Stuck on Tier {0} - Wave {1}? Spend Coins on upgrades!",
+          "source": "assets",
+          "line": 33425
+        },
+        {
+          "text": "2x faster than basic enemies. Worth 2 coins as base value",
+          "source": "assets",
+          "line": 948
+        },
+        {
+          "text": "Earn x2 gems for completing offerwall offers throughH",
+          "source": "assets",
+          "line": 5414
+        },
+        {
+          "text": "You need the Death Wave Ultimate Weapon to research thisH",
+          "source": "assets",
+          "line": 7542
+        },
+        {
+          "text": "You need the Black Hole Ultimate Weapon to research thisD",
+          "source": "assets",
+          "line": 7578
+        },
+        {
+          "text": "You can purchase modules with Module Tickets or GemsL",
+          "source": "assets",
+          "line": 13617
+        }
+      ],
+      "priorityForNextBuild": 11
+    },
+    {
+      "key": "missions_events_relics",
+      "label": "Missions, events, relics, medals",
+      "tbi_use": [
+        "Systems event glossary",
+        "future goal tracker",
+        "manual notes beside reports",
+        "source labels"
+      ],
+      "recommendation": "Useful later, not first priority for Battle Report intelligence.",
+      "confidence": "High for labels; Low for live event state.",
+      "hitCount": 4658,
+      "sourceCounts": {
+        "assets": 558,
+        "metadata": 4032,
+        "libil2cpp": 68
+      },
+      "examples": [
+        {
+          "text": "Gana {0} medallas durante el evento Regreso del plasma.",
+          "source": "assets",
+          "line": 10753
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Sabbie del tempo",
+          "source": "assets",
+          "line": 11344
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Mare blu intenso",
+          "source": "assets",
+          "line": 14368
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Tempesta di neve",
+          "source": "assets",
+          "line": 22492
+        },
+        {
+          "text": "rmino do evento, mas os itens marcados como \"Limitado\" n",
+          "source": "assets",
+          "line": 6293
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Epidemia virale",
+          "source": "assets",
+          "line": 10718
+        },
+        {
+          "text": "Gana {0} medallas durante el evento Arenas del tiempo.",
+          "source": "assets",
+          "line": 11349
+        },
+        {
+          "text": "Du kannst Bots maximal einmal pro Event neu verteilen.",
+          "source": "assets",
+          "line": 18155
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Notte miagolosa",
+          "source": "assets",
+          "line": 23382
+        },
+        {
+          "text": "Ganhe {0} medalhas durante o evento Caverna de Cristal",
+          "source": "assets",
+          "line": 31159
+        },
+        {
+          "text": "Reach wave {0} on your max tier without any card equipped",
+          "source": "assets",
+          "line": 6401
+        },
+        {
+          "text": "Guadagna {0} medaglie durante l'evento Nella Matrice>",
+          "source": "assets",
+          "line": 10349
+        }
+      ],
+      "priorityForNextBuild": 12
+    },
+    {
+      "key": "debug_dev_internal_names",
+      "label": "Internal names useful for diagnostics only",
+      "tbi_use": [
+        "Debug Panel health checks",
+        "internal audit naming",
+        "finding missing data wires"
+      ],
+      "recommendation": "Use internally only; do not expose ugly dev names in normal UI.",
+      "confidence": "Medium. Useful for diagnostics, not player-facing wording.",
+      "hitCount": 627,
+      "sourceCounts": {
+        "assets": 8,
+        "metadata": 573,
+        "libil2cpp": 46
+      },
+      "examples": [
+        {
+          "text": "Quanti danni extra subiranno i nemici quando hanno lo status Shock",
+          "source": "assets",
+          "line": 4737
+        },
+        {
+          "text": "nde, die starke Statusverbesserungen gew",
+          "source": "assets",
+          "line": 36171
+        },
+        {
+          "text": "How much extra damage enemies will take when they have the Shock status",
+          "source": "assets",
+          "line": 4734
+        },
+        {
+          "text": "Quantidade de dano extra aplicado aos inimigos quando tiverem o status de ChoqueB",
+          "source": "assets",
+          "line": 4744
+        },
+        {
+          "text": "Alle Karten sind im Status",
+          "source": "assets",
+          "line": 23780
+        },
+        {
+          "text": "-Status erleiden",
+          "source": "assets",
+          "line": 4740
+        },
+        {
+          "text": "ZDeprecated. Use DebugGeography.Other instead.",
+          "source": "metadata",
+          "line": 110628
+        },
+        {
+          "text": "This logging utility has been deprecated. Use UnityEngine.Debug.Log",
+          "source": "metadata",
+          "line": 103003
+        },
+        {
+          "text": "NDebug/Run ScheduleNotifications Preview",
+          "source": "metadata",
+          "line": 101188
+        },
+        {
+          "text": "Id = {Id}, Status = {Status}, Method = {DebuggerDisplayMethodDescription}",
+          "source": "metadata",
+          "line": 101252
+        },
+        {
+          "text": "8Input/Debug/Touch Simulation",
+          "source": "metadata",
+          "line": 101979
+        },
+        {
+          "text": "LogLevel has been deprecated, please use UnityEngine.Debug.Log for your logging needs.",
+          "source": "metadata",
+          "line": 103010
+        }
+      ],
+      "priorityForNextBuild": 13
+    },
+    {
+      "key": "ui_localisation_aliases",
+      "label": "Official UI strings and aliases",
+      "tbi_use": [
+        "Parser aliases",
+        "search synonyms",
+        "tooltip wording",
+        "less guessy UI labels"
+      ],
+      "recommendation": "Use as a parser/search dictionary, not as strategy data.",
+      "confidence": "High for wording; not gameplay logic.",
+      "hitCount": 2190,
+      "sourceCounts": {
+        "assets": 359,
+        "metadata": 1802,
+        "libil2cpp": 29
+      },
+      "examples": [
+        {
+          "text": "Are you sure you want to purchase this menu background?",
+          "source": "assets",
+          "line": 24897
+        },
+        {
+          "text": "This product isn't available to purchase at the moment.",
+          "source": "assets",
+          "line": 28765
+        },
+        {
+          "text": "Riprendere il round precedente sottrae 5 ondate, 50 se",
+          "source": "assets",
+          "line": 35279
+        },
+        {
+          "text": "Research new upgrades to unlock new parts of the game",
+          "source": "assets",
+          "line": 3131
+        },
+        {
+          "text": "Card now available to show up when buying a new card[",
+          "source": "assets",
+          "line": 8497
+        },
+        {
+          "text": "All cards are locked while a boss or Fleet enemy is alive",
+          "source": "assets",
+          "line": 12196
+        },
+        {
+          "text": "Unlock a toggle to automatically shatter rare modules",
+          "source": "assets",
+          "line": 22542
+        },
+        {
+          "text": "This action is not permitted while a round is in progress",
+          "source": "assets",
+          "line": 22687
+        },
+        {
+          "text": "All cards are locked while in the Resume Battle state",
+          "source": "assets",
+          "line": 23776
+        },
+        {
+          "text": "Reduces the effect of active battle conditions by {0}",
+          "source": "assets",
+          "line": 25367
+        },
+        {
+          "text": "Tier {0} Power Tree requires {1} power nodes be unlockedT",
+          "source": "assets",
+          "line": 27479
+        },
+        {
+          "text": "Spend power stones to unlock and upgrade ultimate weapons.",
+          "source": "assets",
+          "line": 1693
+        }
+      ],
+      "priorityForNextBuild": 14
+    },
+    {
+      "key": "battle_report_schema",
+      "label": "Battle Report schema / parser dictionary",
+      "tbi_use": [
+        "Parser aliases",
+        "Save Report feedback",
+        "duplicate checks",
+        "History grouping",
+        "Compare datasheet rows",
+        "unknown-field warnings"
+      ],
+      "recommendation": "Already started in z26. Next: wire field explanations into Save Report feedback and Debug Panel.",
+      "confidence": "High for labels/schema names; Medium for exact meaning of fallback buckets such as Other.",
+      "hitCount": 65,
+      "sourceCounts": {
+        "assets": 40,
+        "metadata": 25
+      },
+      "examples": [
+        {
+          "text": "Extra coins bonus applied to enemies hit by Death Wave",
+          "source": "assets",
+          "line": 4762
+        },
+        {
+          "text": "On Hit: Amplifies Death Wave Damage taken (Max +50x/Wave).",
+          "source": "assets",
+          "line": 35630
+        },
+        {
+          "text": "On Projectile Hit: Chance to permanently increase Damage taken.",
+          "source": "assets",
+          "line": 8650
+        },
+        {
+          "text": "Bonus Damage taken per Rend stack (Max {0}x).",
+          "source": "assets",
+          "line": 8664
+        },
+        {
+          "text": "Cells earned from destroying elite enemies",
+          "source": "assets",
+          "line": 15180
+        },
+        {
+          "text": "Adds a coin bonus to enemies hit by orbs and unlocks Coin Orb research",
+          "source": "assets",
+          "line": 19126
+        },
+        {
+          "text": "Extra coins bonus applied to enemies hit by Effect Waves or Death Wave",
+          "source": "assets",
+          "line": 20775
+        },
+        {
+          "text": "Enemies hit by orbs drop bonus coins>",
+          "source": "assets",
+          "line": 19628
+        },
+        {
+          "text": "Bonus Damage taken by Shocked Enemies",
+          "source": "assets",
+          "line": 35423
+        },
+        {
+          "text": "Heals Tower for a % of Damage dealt.",
+          "source": "assets",
+          "line": 606
+        },
+        {
+          "text": "x2.0 all coins earned permanently",
+          "source": "assets",
+          "line": 1812
+        },
+        {
+          "text": "x3.0 all coins earned permanently",
+          "source": "assets",
+          "line": 1824
+        }
+      ],
+      "priorityForNextBuild": 15
+    },
+    {
+      "key": "wave_tier_milestones",
+      "label": "Waves, tiers, milestones, and run bands",
+      "tbi_use": [
+        "Game Brain next checkpoint",
+        "History milestone badges",
+        "Compare run-band context",
+        "Command Deck progression advice",
+        "Debug tier/wave validator"
+      ],
+      "recommendation": "Already started in z27. Next: show milestone context in Dashboard/History after saving a report.",
+      "confidence": "High for concept/labels; Medium for checkpoint logic; Low for hidden formula values.",
+      "hitCount": 1018,
+      "sourceCounts": {
+        "assets": 247,
+        "metadata": 770,
+        "libil2cpp": 1
+      },
+      "examples": [
+        {
+          "text": "Cash Multiplier for all sources (Includes Wave Bonus).",
+          "source": "assets",
+          "line": 660
+        },
+        {
+          "text": "Extra coins bonus applied to enemies hit by Death Wave",
+          "source": "assets",
+          "line": 4762
+        },
+        {
+          "text": "Increase recovery package chance of spawning each wave",
+          "source": "assets",
+          "line": 7835
+        },
+        {
+          "text": "On Shockwave Hit: Enemies take {0} more Damage for 7s.",
+          "source": "assets",
+          "line": 13215
+        },
+        {
+          "text": "You need the Double Wave Skip Mastery to research this",
+          "source": "assets",
+          "line": 18607
+        },
+        {
+          "text": "Increases the Wave Accelerator spawn rate acceleration",
+          "source": "assets",
+          "line": 20150
+        },
+        {
+          "text": "Effect Wave Hits amplify Death Wave Damage (additive).",
+          "source": "assets",
+          "line": 20858
+        },
+        {
+          "text": "Es existiert bereits ein Konto mit der Spieler-ID {0}.",
+          "source": "assets",
+          "line": 25453
+        },
+        {
+          "text": "Stuck on Tier {0} - Wave {1}? Spend Coins on upgrades!",
+          "source": "assets",
+          "line": 33425
+        },
+        {
+          "text": "On Wave End: Chance to grant a Free Defense Upgrade.O",
+          "source": "assets",
+          "line": 702
+        },
+        {
+          "text": "On Wave End: Chance to grant a Free Utility Upgrade.O",
+          "source": "assets",
+          "line": 712
+        },
+        {
+          "text": "Nach einer Bosswelle spawnt garantiert ein Erholungspaket",
+          "source": "assets",
+          "line": 6059
+        }
+      ],
+      "priorityForNextBuild": 16
+    }
+  ]
+}

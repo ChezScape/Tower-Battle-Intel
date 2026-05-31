@@ -1,0 +1,154 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Guardian Catalogue",
+    "catalogueKey": "guardianCatalogue",
+    "entryCount": 5,
+    "purpose": "Guardian effects and Battle Report reward/damage fields."
+  },
+  "entries": [
+    {
+      "key": "tower_guardian",
+      "label": "Tower Guardian",
+      "family": "Guardian / System",
+      "meaning": "Guardian system observed in app strings and Battle Report fields.",
+      "tags": [
+        "guardian"
+      ],
+      "aliases": [
+        "Tower Guardian"
+      ],
+      "battleReportLinks": [
+        "GuardianDamage",
+        "GuardianSummoned"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "systems glossary",
+        "history section"
+      ],
+      "notes": []
+    },
+    {
+      "key": "bounty",
+      "label": "Bounty",
+      "family": "Guardian / Economy",
+      "meaning": "Guardian can place a Bounty on a nearby non-common enemy, granting bonus coins on kill.",
+      "tags": [
+        "guardian",
+        "economy"
+      ],
+      "aliases": [
+        "Bounty",
+        "Bounty Coins"
+      ],
+      "battleReportLinks": [
+        "GuardianCoinsStolen",
+        "GuardianCoinsFetched"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "economy explanation"
+      ],
+      "notes": []
+    },
+    {
+      "key": "missing_health_attack",
+      "label": "Missing Health Attack",
+      "family": "Guardian / Damage",
+      "meaning": "Guardian attacks enemies with the most missing health and deals a percentage of lost health as damage.",
+      "tags": [
+        "guardian",
+        "damage"
+      ],
+      "aliases": [
+        "Guardian Damage"
+      ],
+      "battleReportLinks": [
+        "GuardianDamage"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "damage explanation"
+      ],
+      "notes": []
+    },
+    {
+      "key": "ally_conversion",
+      "label": "Ally Conversion",
+      "family": "Guardian / Recovery",
+      "meaning": "Guardian can convert enemies into allies or recovery-package style healing sources.",
+      "tags": [
+        "guardian",
+        "recovery"
+      ],
+      "aliases": [
+        "Guardian Catches",
+        "Ally Recovery Package"
+      ],
+      "battleReportLinks": [
+        "GuardianCatches"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "survival explanation"
+      ],
+      "notes": []
+    },
+    {
+      "key": "guardian_loot",
+      "label": "Guardian Loot",
+      "family": "Guardian / Loot",
+      "meaning": "Guardian report fields include gems, medals, reroll shards, module shards and module drops.",
+      "tags": [
+        "guardian",
+        "loot",
+        "modules"
+      ],
+      "aliases": [
+        "Guardian Gems",
+        "Guardian Medals",
+        "Guardian Reroll Shards"
+      ],
+      "battleReportLinks": [
+        "GuardianGems",
+        "GuardianMedals",
+        "GuardianRerollShards",
+        "GuardianCannonShards",
+        "GuardianArmorShards",
+        "GuardianGeneratorShards",
+        "GuardianCoreShards",
+        "GuardianCommonModules",
+        "GuardianRareModules"
+      ],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [
+        "history grouping",
+        "compare loot context"
+      ],
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,1559 @@
+source,line,kind,text
+asset,174,localization/ui,Shockwave Size
+asset,181,localization/ui,Shockwave Frequency
+asset,195,localization/ui,Cash / Wave
+asset,210,localization/ui,Coins / Wave
+asset,236,localization/ui,Interest / Wave
+asset,257,localization/ui,Death Wave
+asset,595,localization/ui,"mpfer, 50 % Schaden an Bossen)"
+asset,651,localization/ui,Size of Knockback Shockwave (except Bosses).B
+asset,656,localization/ui,er Bosse)I
+asset,660,localization/ui,Cash Multiplier for all sources (Includes Wave Bonus).
+asset,669,localization/ui,Cash granted On Wave End.
+asset,685,localization/ui,Coins granted On Wave End.
+asset,693,localization/ui,On Wave End: Chance to grant a Free Attack Upgrade.
+asset,702,localization/ui,On Wave End: Chance to grant a Free Defense Upgrade.O
+asset,712,localization/ui,On Wave End: Chance to grant a Free Utility Upgrade.O
+asset,723,localization/ui,On Wave End: Grants % of Current Cash (Max
+asset,788,localization/ui,"Spawn {0} Effect Waves, then unleash a Death Wave which persists until dealing {1}x Tower Damage (scales with all Crit)."
+asset,815,localization/ui,Create a Field for {0}s that reduces Enemy Speed by {1}%.
+asset,1037,localization/ui,Boss
+asset,1038,localization/ui,Boss
+asset,1039,localization/ui,Boss
+asset,1040,localization/ui,Boss
+asset,1049,localization/ui,Wave
+asset,1117,localization/ui,Power stones are earned in tournaments. Unlock tournaments by reaching wave 60
+asset,1439,localization/ui,waves completed
+asset,1518,localization/ui,Tier
+asset,1531,localization/ui,New Highest Wave!
+asset,1539,localization/ui,Highest Wave
+asset,1579,localization/ui,Killed by: Boss
+asset,1583,localization/ui,tet von: Boss
+asset,1874,localization/ui,unlock by reaching wave x
+asset,2098,localization/ui,Unlock at wave 60
+asset,2107,localization/ui,New Difficulty Tier Available
+asset,2254,localization/ui,Reduces Common Enemy Speed in Range by
+asset,2275,localization/ui,Spawns a rotating Orb at {0} Speed which instantly kills on contact (except Bosses)
+asset,2282,localization/ui,er Bosse) bei Kontakt zerst
+asset,2289,localization/ui,"Fires a Plasma Shot at the Boss, reducing Health by"
+asset,2294,localization/ui,en Plasmaschuss auf einen Boss ab und reduziere seine Leben um
+asset,2297,localization/ui,Fires a Death Ray that instantly kills on contact (except Bosses) with a duration of^
+asset,2304,localization/ui,er Bosse) bei Kontakt zerst
+asset,2311,localization/ui,"Fires an Energy Net at the Boss, Immobilizing it for="
+asset,2315,localization/ui,Feuere ein spezielles Netz auf einen Boss ab und immobilisiere ihn f
+asset,2335,localization/ui,ht die mit jeder Welle gespawnten Gegner; pro T
+asset,3126,localization/ui,Investiere deine wertvollen M
+asset,3687,localization/ui,Difficulty Tier
+asset,3711,localization/ui,Unlock by reaching wave 30
+asset,3726,localization/ui,Cooldown between Shockwaves./
+asset,3773,localization/ui,Perk wave requirement
+asset,3806,localization/ui,wave on death wave
+asset,3845,localization/ui,"Turmschaden x {0}, Bosse haben jedoch Leben x {1}"
+asset,3954,localization/ui,"x{0} cash per wave, but enemy kills don't give cash"
+asset,3988,localization/ui,"Boss health -{0}%, but boss speed +{1}%"
+asset,3992,localization/ui,"Boss-Leben - {0} %, Bossgeschwindigkeit jedoch + {1} %"
+asset,4149,localization/ui,Missiles Despawn Time
+asset,4154,localization/ui,Despawn-Zeit f
+asset,4277,localization/ui,Death Wave Health
+asset,4283,localization/ui,Death Wave Coin Bonus
+asset,4351,localization/ui,Waves Required
+asset,4745,localization/ui,Percentage of Tower max health increased by each enemy killed by Death Wave (Max of x7 base health)
+asset,4762,localization/ui,Extra coins bonus applied to enemies hit by Death Wave
+asset,4767,localization/ui,s par Death Wave
+asset,4768,localization/ui,Bonus extra in monete applicato ai nemici colpiti da Death Wave
+asset,4774,localization/ui,n de monedas extra aplicada a los enemigos golpeados por Death Wave
+asset,4775,localization/ui,nus de moedas extras aplicado a inimigos atingidos por Death WaveW
+asset,4789,localization/ui,"glicht inneren Minen, um den Turm zu rotieren"
+asset,4841,localization/ui,Unlock perks. Special powers that you can activate after some waves
+asset,4853,localization/ui,Reduce how many waves to activate a new perkI
+asset,5147,localization/ui,All players will play on specific tiers for each tournament rank.
+asset,5484,localization/ui,Recovery Packages heal % of Max Health.
+asset,5511,localization/ui,Chance for a Recovery Package to spawn each Wave.
+asset,5516,localization/ui,"Chance, dass bei jeder Welle ein Erholungspaket gespawnt wird"
+asset,5542,localization/ui,Wave Skip
+asset,5549,localization/ui,Intro Sprint
+asset,5578,localization/ui,"Chance to Skip Wave, granting 1.1x previous Wave Cash & Coins, of"
+asset,5598,localization/ui,"Once per Round: Revive Tower at 50% Health, respawn Wall, & grant Invincibility for {0}"
+asset,5646,localization/ui,Skips 10 Waves at a time for the first {0} Waves (capped at your Highest Wave). Bosses spawn every Wave and no Coins are granted during Intro Sprint
+asset,5659,localization/ui,chsten Welle. Ein Boss spawnt bei jeder Welle und es werden keine M
+asset,5719,localization/ui,Unlock Interest / Wave
+asset,5766,localization/ui,Unlock Shockwave Upgrades
+asset,5923,localization/ui,Increase shockwave size
+asset,6000,localization/ui,"You are participating in a tournament, reach the highest wave you can to get a good ranking positionh"
+asset,6011,localization/ui,Orbs Boss Hit
+asset,6014,localization/ui,Orb-Bosstreffer
+asset,6017,localization/ui,Package After Boss
+asset,6021,localization/ui,Paket nach Boss
+asset,6049,localization/ui,nnen Bosse mit einem Prozentsatz des Boss-Lebens treffenM
+asset,6054,localization/ui,"After a boss wave, a recovery package is guaranteed to spawn<"
+asset,6059,localization/ui,Nach einer Bosswelle spawnt garantiert ein Erholungspaket
+asset,6097,localization/ui,Unlock Package After Boss
+asset,6101,localization/ui,Paket nach Boss freischalten%
+asset,6240,localization/ui,Complete missions to earn medals. Each mission has 3 tiers:
+asset,6283,localization/ui,limitiert
+asset,6391,localization/ui,Reach wave {0} on any tier
+asset,6401,localization/ui,Reach wave {0} on your max tier without any card equipped
+asset,6428,localization/ui,Keep {0} consecutive waves getting max Interest
+asset,6443,localization/ui,Take no damage for {0} consecutive waves9
+asset,6459,localization/ui,te {0} Bosse au
+asset,6503,localization/ui,te {0} Bosse
+asset,6592,localization/ui,Kill {0} enemies with Death Wave)
+asset,6686,localization/ui,Skip a total of {0} waves
+asset,6710,localization/ui,Triff einen Boss {0}-mal mit einem Energienetz
+asset,6813,localization/ui,Limitiert
+asset,6873,localization/ui,"Apply Burn to enemies, dealing Damage over Time and reducing Enemy Damage.{0}"
+asset,6900,localization/ui,Stun enemies. Applies Slow for {0} after the Stun ends. 50% effective vs Bosses and Elites.
+asset,6912,localization/ui,Stordisce i nemici. Applica Rallentamento per {0} al termine dello stordimento. Efficacia del 50% contro Boss ed Elite.
+asset,6916,localization/ui,r {0}. 50 % effektiv gegen Bosse und Elitegegner.
+asset,7080,localization/ui,Wave Accelerator
+asset,7086,localization/ui,Reduces Wave Cooldown by {0} seconds?
+asset,7438,localization/ui,Previous round ended because you did not progress {0} waves past previous load
+asset,7474,localization/ui,Milestones
+asset,7493,localization/ui,Milestones Premium
+asset,7501,localization/ui,for tier {0} through tier {1}
+asset,7542,localization/ui,You need the Death Wave Ultimate Weapon to research thisH
+asset,7710,localization/ui,Common Enemy Health
+asset,7722,localization/ui,Fast Enemy Health
+asset,7738,localization/ui,Fast Enemy Speed
+asset,7747,localization/ui,Tank Enemy Health
+asset,7759,localization/ui,Ranged Enemy Health
+asset,7771,localization/ui,Boss Health
+asset,7774,localization/ui,Boss-Leben
+asset,7777,localization/ui,Boss Attack
+asset,7780,localization/ui,Boss-Angriff
+asset,7835,localization/ui,Increase recovery package chance of spawning each wave
+asset,7840,localization/ui,"ht die Chance, dass bei jeder Welle ein Erholungspaket spawnt"
+asset,7886,localization/ui,Decrease Common Enemy Health$
+asset,7900,localization/ui,Decrease Fast Enemy Health
+asset,7916,localization/ui,Decrease Fast Enemy Speed
+asset,7925,localization/ui,Decrease Tank Enemy Health
+asset,7937,localization/ui,Decrease Ranged Enemy Health
+asset,7949,localization/ui,Decrease Boss Health
+asset,7952,localization/ui,Verringert die Boss-Leben
+asset,7955,localization/ui,Decrease Boss Attack
+asset,7958,localization/ui,Verringert den Boss-Angriff
+asset,8142,localization/ui,Wave timer
+asset,8148,localization/ui,Wave cooldown
+asset,8162,localization/ui,Wave Info
+asset,8389,localization/ui,Unlock Enemy Level Skips-
+asset,8405,localization/ui,Enemy Health Level Skip
+asset,8413,localization/ui,On Wave End: Chance to skip Enemy Attack scaling.
+asset,8425,localization/ui,On Wave End: Chance to skip Enemy Health scaling.
+asset,8455,localization/ui,Unlock Recovery Package
+asset,8521,localization/ui,Tier {0} unlocked
+asset,8967,localization/ui,Gespawnte Landminen
+asset,9021,localization/ui,Death Wave Damage
+asset,9044,localization/ui,Waves Skipped
+asset,9066,localization/ui,HP From Death Wave
+asset,9074,localization/ui,Coins From Death Wave
+asset,9197,localization/ui,Unlock Enemy Level Skips-
+asset,9205,localization/ui,Wave Skip!
+asset,9397,localization/ui,Advance through a total of {0} waves
+asset,9540,localization/ui,Gain a {0} chance of skipping waves while still earning cash and coins equal to x1.10 the value of the wave enemies
+asset,9585,localization/ui,Tournament Heat
+asset,9594,localization/ui,"This tournament has Heat applied. The Heat will level up as you reach higher waves. You can view the current heat level in the heat menu during battles. Heat will rise at specific waves: 20, 40, 60, 80, 100, 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000T"
+asset,9674,localization/ui,Heat Info
+asset,9763,localization/ui,Enemy Speed
+asset,9836,localization/ui,{0} more enemies spawn
+asset,9840,localization/ui,{0} weitere Gegner spawnen
+asset,9856,localization/ui,"Besides bosses, only {0} enemies spawn"
+asset,9859,localization/ui,Neben Bossen spawnen nur {0} Gegner
+asset,9920,localization/ui,Wave Jumps
+asset,9927,localization/ui,Waves go up by {0} instead of 1
+asset,9939,localization/ui,More Bosses
+asset,9940,localization/ui,Boss
+asset,9943,localization/ui,Mehr Bosse
+asset,9947,localization/ui,Bosses spawn every {0} waves instead of 10
+asset,9950,localization/ui,Bosse spawnen statt alle 10 alle {0} Wellen
+asset,10449,localization/ui,"Beat wave 4,500 in Tier 1"
+asset,10462,localization/ui,"Beat wave 4,500 in Tier 2"
+asset,10475,localization/ui,"Beat wave 4,500 in Tier 3"
+asset,10488,localization/ui,"Beat wave 4,500 in Tier 4"
+asset,10501,localization/ui,"Beat wave 4,500 in Tier 5"
+asset,10514,localization/ui,"Beat wave 4,500 in Tier 6"
+asset,10527,localization/ui,"Beat wave 4,500 in Tier 7"
+asset,10540,localization/ui,"Beat wave 4,500 in Tier 8"
+asset,10553,localization/ui,"Beat wave 4,500 in Tier 9"
+asset,10566,localization/ui,"Beat wave 4,500 in Tier 10"
+asset,10582,localization/ui,"Beat wave 4,500 in Tier 11"
+asset,10598,localization/ui,"Beat wave 4,500 in Tier 12"
+asset,10614,localization/ui,"Beat wave 4,500 in Tier 13"
+asset,10630,localization/ui,"Beat wave 4,500 in Tier 14"
+asset,10646,localization/ui,"Beat wave 4,500 in Tier 15"
+asset,11028,localization/ui,On Chain Lightning Hit: {0}% chance to deal {1}% Current Wave HP Damage (Max 100 Hits/Enemy).
+asset,11067,localization/ui,Spawn an additional Killing Wave that deals damage equal to the current wave HP and persists until it hits {0} enemies
+asset,11171,localization/ui,On End: Deals {0}% Current Wave HP Damage to trapped Enemies in Black Hole.
+asset,11253,localization/ui,Battle Heat adds special conditions to battles that increase the difficulty
+asset,11266,localization/ui,Battle Heat
+asset,11267,localization/ui,Battle Heat
+asset,11269,localization/ui,Press the Heat button to view the conditions before entering battle
+asset,11319,localization/ui,Boss Damage
+asset,11322,localization/ui,Boss-Schaden
+asset,11549,localization/ui,Retrowave
+asset,11550,localization/ui,Synthwave
+asset,11551,localization/ui,Retrowave
+asset,11552,localization/ui,Retrowave
+asset,11553,localization/ui,Retrowave
+asset,11727,localization/ui,Gain a {0} chance of skipping waves while still earning cash and coins equal to x1.10 the value of the wave enemies
+asset,11756,localization/ui,Land Mines have a 40% chance to Stun for {0} (except Bosses)R
+asset,11764,localization/ui,er Bosse)
+asset,11773,localization/ui,Boss
+asset,11796,localization/ui,Reduce the cooldown between waves by {0}6
+asset,11857,localization/ui,Tiers
+asset,11902,localization/ui,through Tier {0} to Tier {1}
+asset,11921,localization/ui,"Unlock premium on tier {0}, tier {1}, and tier {2}"
+asset,11965,localization/ui,"r den Tod zu markieren, wenn er spawnt, was dazu f"
+asset,11979,localization/ui,sse garantiert superkrit.
+asset,12016,localization/ui,Grants +{0} Coins / Kill Bonus per Free Upgrade this Wave. Free Upgrades cannot increase Tower Range.
+asset,12043,localization/ui,"Sync Death Wave, Golden Tower, & Black Hole activations. Cooldown becomes the average of those {0}."
+asset,12196,localization/ui,All cards are locked while a boss or Fleet enemy is alive
+asset,12202,localization/ui,"Alle Karten sind gesperrt, solange ein Boss oder ein Flottengegner lebt.U"
+asset,12338,localization/ui,You need the Death Wave Ultimate Weapon to research thisH
+asset,12536,localization/ui,Reach wave {0} without any card equipped on tier {1} or above
+asset,12746,localization/ui,Hit {0} enemies with Death Wave
+asset,13161,localization/ui,"On Orb Hit: Reduces Enemy Damage & Speed by {0} (Stacking, Max 50%)."
+asset,13189,localization/ui,On Land Mine Spawn: {0} chance to spawn an automatically organizing Inner Land Mine instead (Max 20).
+asset,13197,localization/ui,"Landminen haben eine Chance von {0}, statt als normale Landmine als innere Landmine (20 max.) zu spawnen. Diese Minen bewegen sich autonom und organisieren sich um den Turm herum."
+asset,13215,localization/ui,On Shockwave Hit: Enemies take {0} more Damage for 7s.
+asset,13229,localization/ui,On Projectile Hit: {0} chance to reduce Enemy Health & Attack Level by 1 (Diminishing returns after 100).
+asset,13311,localization/ui,Poisoned enemies have a {0} chance to Miss attacks (Halved for  Bosses).l
+asset,13319,localization/ui,"Chance von {0}, dass vergiftete Gegner den Angriff verpassen. Boss-Chance ist halbiert."
+asset,13323,localization/ui,Boss
+asset,13327,localization/ui,"Spotlight focuses Bosses. Boss reflects light, applying {0} additional Damage Amp to nearby enemies."
+asset,13334,localization/ui,Der Scheinwerfer fokussiert den Boss. Der Boss reflektiert Licht und verursacht {0} zus
+asset,13600,localization/ui,"Bosses have a chance of dropping Reroll Shards, Common Modules or even Rare Modules"
+asset,13606,localization/ui,"Bosse haben eine Chance, Zufallsscherben, gew"
+asset,13670,localization/ui,"ltst, wird ein episches Modul garantiert"
+asset,13950,localization/ui,Max Heat
+asset,13961,localization/ui,This tournament has Heat applied.
+asset,13969,localization/ui,Heat.
+asset,13971,localization/ui,The Heat will level up as you reach higher waves.
+asset,14005,localization/ui,Heat will rise at specific waves:
+asset,14023,localization/ui,Heat Info
+asset,14038,localization/ui,"r Bosse, Module fallen zu lassen"
+asset,14173,localization/ui,"ht die Anzahl der Zufallsscherben, die Bosse fallen lassen"
+asset,14228,localization/ui,"r Bosse, seltene Module fallen zu lassen"
+asset,14261,localization/ui,Earn {0} medals during the Retrowave event
+asset,14264,localization/ui,nement Synthwave.
+asset,14265,localization/ui,Guadagna {0} medaglie durante l'evento Retrowave4
+asset,14267,localization/ui,hrend des Retrowave-Events.
+asset,14268,localization/ui,Gana {0} medallas durante el evento Retrowave.
+asset,14272,localization/ui,Retrowave
+asset,14417,localization/ui,Wave
+asset,14553,localization/ui,Second Wind will recharge after a number of waves
+asset,14566,localization/ui,Demon Mode will recharge after a number of wavesE
+asset,14582,localization/ui,Missile Barrage will recharge after a number of waves
+asset,14670,localization/ui,Nuke will recharge after a number of waves
+asset,15109,localization/ui,Unlock Recovery Package Enhancements-
+asset,15163,localization/ui,Enemy Level Skip +
+asset,15187,localization/ui,ren von Elitegegnern verdiente Zellen
+asset,15217,localization/ui,Multiplier applied to both Enemy Attack Level Skip and Enemy Health Level Skip workshop upgrades
+asset,15341,localization/ui,Elite Cell
+asset,15346,localization/ui,Elitezelle
+asset,15350,localization/ui,lula de Elite
+asset,15365,localization/ui,"Verwende Elitezellen, um die Laborforschung zu beschleunigenH"
+asset,15416,localization/ui,Total Elites
+asset,15420,localization/ui,Eliten insgesamt
+asset,15423,localization/ui,Total de Elite
+asset,15453,localization/ui,Elites
+asset,15456,localization/ui,Eliten
+asset,15459,localization/ui,Elites
+asset,15582,localization/ui,Elite Tower
+asset,15587,localization/ui,Eliteturm
+asset,15590,localization/ui,Torre de Elite
+asset,15927,localization/ui,Heating Up!
+asset,15934,localization/ui,Wave Skipped!
+asset,16160,localization/ui,"Beat wave 4,500 in Tier 16"
+asset,16177,localization/ui,"Beat wave 4,500 in Tier 17"
+asset,16194,localization/ui,"Beat wave 4,500 in Tier 18"
+asset,16351,localization/ui,"Protector shields give knockback, shockwave, and black hole damage immunity ({0}s Duration / 300s Cooldown)"
+asset,16400,localization/ui,"Panzer verhalten sich wie Bosse, bewegen sich aber nicht mehr, sobald sie in Turmreichweite sind ({0}"
+asset,16417,localization/ui,Elite's Ultimate
+asset,16422,localization/ui,Elite-Ultimativ
+asset,16425,localization/ui,Definitiva de Elite
+asset,16741,localization/ui,Unlock Tier {0}
+asset,16836,localization/ui,Death Wave researches
+asset,16906,localization/ui,Boss Enemy researches
+asset,16909,localization/ui,Bossgegner-Forschungen
+asset,16921,localization/ui,Enemy Level Skip researches
+asset,17154,localization/ui,"Du wurdest von Turnieren gesperrt. Falls du glaubst, dass das ein Fehler war, kontaktiere bitte {0}"
+asset,17189,localization/ui,{0} waves
+asset,17354,localization/ui,Bonus from Death Wave
+asset,17371,localization/ui,Enemy Health Levels Skipped
+asset,17648,localization/ui,Unlock by reaching tier {0} wave {1}B
+asset,17986,localization/ui,Heat Conditions
+asset,18210,localization/ui,Boss's Ultimate
+asset,18213,localization/ui,Boss Ultimativ
+asset,18217,localization/ui,"Bosses receive a boost of health when they spawn, overhealing them by {0}"
+asset,18221,localization/ui,"Bosse erhalten einen Leben-Boost, wenn sie spawnen, was sie mit {0}"
+asset,18243,localization/ui,"Basics have a chance to spawn as different enemies ({0} fast, {1} tank, {2} ranged, {3} boss, {4} protector)"
+asset,18255,localization/ui,"Einfache haben eine Chance, als unterschiedliche Gegner zu spawnen ({0} Schnell, {1} Panzer, {2} Fernkampf, {3} Boss, {4} Besch"
+asset,18575,localization/ui,You need the Elite Cannon Mastery to research this
+asset,18581,localization/ui,necessaria la Maestria del Cannone Elite.
+asset,18583,localization/ui,"tigst die Elite-Kanonen-Meisterschaft, um dies zu erforschen."
+asset,18588,localization/ui,o de Elite para pesquisar isso.
+asset,18607,localization/ui,You need the Double Wave Skip Mastery to research this
+asset,18670,localization/ui,You need the Elite Net Mastery to research this
+asset,18672,localization/ui,trise Elite Net pour effectuer cette recherche.
+asset,18674,localization/ui,necessario Elite Net Mastery.D
+asset,18676,localization/ui,"tigst die Elite-Netzwerkbeherrschung, um dies zu erforschen.7"
+asset,18677,localization/ui,Necesitas el dominio de Elite Net para investigar esto.
+asset,18679,localization/ui,nio de Rede Elite para pesquisar isso.N
+asset,18987,localization/ui,"r Eliten hinzu, Neuw"
+asset,19050,localization/ui,"Adds a chance to double spawn elites, and unlocks Enemy Balance Mastery research|"
+asset,19059,localization/ui,gt eine Chance auf doppeltes Spawnen von Eliten hinzu und schaltet Gegnergleichgewichts-Meisterschaftsforschung frei.
+asset,19141,localization/ui,Plasma Cannon fires at Elite enemies for reduced damage and unlocks Elite Cannon Mastery research
+asset,19153,localization/ui,Plasmakanone feuert auf Elitegegner f
+asset,19154,localization/ui,r reduzierten Schaden und schaltet Elitekanone-Meisterschaftsforschung frei.
+asset,19162,localization/ui,"o de Plasma atirar em inimigos de Elite, causando dano reduzido, e desbloqueia a pesquisa de Dom"
+asset,19164,localization/ui,o de Elite
+asset,19180,localization/ui,Adds a distinct chance to double wave skip and unlocks Double Wave Skip research. This chance can be stacked with other skips
+asset,19195,localization/ui,Dramatically increase how many waves Intro Sprint stays active and unlocks Warp Speed Mastery research
+asset,19235,localization/ui,"Unlocks Care Package which gives packages a chance to also deliver a common module, and unlocks Recovery Package Mastery research"
+asset,19319,localization/ui,"Unlocks a lingering health regen buff when activated which lasts for 400 waves, and unlocks Angel Wings research"
+asset,19342,localization/ui,"Unlocks a lingering damage buff when activated which lasts for 300 waves, and unlocks Demon Revenge research"
+asset,19399,localization/ui,"Increases the rate at which spawn rates accelerate causing more enemies to spawn in earlier waves, and unlocks Wave Accelerator Mastery research"
+asset,19411,localization/ui,"heren Wellen spawnen, und schaltet Wellenbeschleunigungs-Meisterschaftsforschung frei."
+asset,19468,localization/ui,Unlocks a lingering attack speed slow which lasts for 300 waves after the nuke and unlocks Radiation research.
+asset,19548,localization/ui,"r Eliten, Neuw"
+asset,19586,localization/ui,Chance for a double elite spawn to occur+
+asset,19592,localization/ui,Chance auf das Stattfinden eines Doppel-Elite-Spawns=
+asset,19663,localization/ui,Percent chance to double wave skip
+asset,19672,localization/ui,Increases how many waves Intro Sprint stays active
+asset,19760,localization/ui,Increases the rate at which spawn rates accelerate
+asset,19800,localization/ui,Slows enemy attack speed for 300 waves
+asset,19893,localization/ui,"r Eliten, Neuw"
+asset,19949,localization/ui,Increases chance for double elite spawn to occur8
+asset,19955,localization/ui,ht die Chance auf einen Doppel-Elite-Spawn
+asset,20026,localization/ui,t von Plasmakanonen bei Elite
+asset,20044,localization/ui,Increases double wave skip chance
+asset,20053,localization/ui,Increases the multiplier of Intro Sprint Warp Speed
+asset,20150,localization/ui,Increases the Wave Accelerator spawn rate acceleration
+asset,20240,localization/ui,Elite Farming
+asset,20245,localization/ui,Eliteanbau
+asset,20249,localization/ui,mulo de Elite
+asset,20274,localization/ui,Elite Balance
+asset,20279,localization/ui,Elitegleichgewicht
+asset,20283,localization/ui,brio de Elite
+asset,20314,localization/ui,Elite Cannon
+asset,20319,localization/ui,Elitekanone
+asset,20323,localization/ui,o de Elite
+asset,20333,localization/ui,Double Wave Skip
+asset,20587,localization/ui,Wave Skip Mastery
+asset,20596,localization/ui,Intro Sprint Mastery
+asset,20676,localization/ui,Wave Accelerator Mastery&
+asset,20746,localization/ui,Increase tower max health by 0.05% when an enemy is hit by Effect Waves or Death Wave is destroyed (Max of {0} base health)
+asset,20775,localization/ui,Extra coins bonus applied to enemies hit by Effect Waves or Death Wave
+asset,20787,localization/ui,Extra cells bonus applied to elites hit by Effect Waves or Death Wave
+asset,20796,localization/ui,"r Eliten, die durch Effektwellen oder Todeswelle getroffen werdenm"
+asset,20803,localization/ui,Each Effect Wave hit amplifies damage that enemy takes from Death Wave (additively)
+asset,20814,localization/ui,Each Effect Wave hit strips armor from the enemy1
+asset,20822,localization/ui,Death Wave Cells Bonus
+asset,20831,localization/ui,Death Wave Damage Amplifier
+asset,20841,localization/ui,Death Wave Armor Stripping
+asset,20858,localization/ui,Effect Wave Hits amplify Death Wave Damage (additive).
+asset,21150,localization/ui,Boss Stats
+asset,21153,localization/ui,Boss-Statistiken
+asset,21205,localization/ui,Reach wave {0} without any card equipped on tier {1} or above
+asset,21483,localization/ui,Enemy Health Skip
+asset,22743,localization/ui,End Intro Sprint Early
+asset,22753,localization/ui,Are you sure that you want to end Intro Sprint early?
+asset,22762,localization/ui,Intro Sprint
+asset,23102,localization/ui,Enemy Health Level Skip Bonus
+asset,24728,localization/ui,Tower guardian increases the speed of the wave timerC
+asset,24947,localization/ui,On Hit: 1% chance to reduce Enemy Mass by {0} (Non-stacking).
+asset,25006,localization/ui,Fire {0} Inner Land Mines at Bosses entering Tower Range (25% chance to spawn for Elites).
+asset,25014,localization/ui,"Feuer {0} Innere Landminen bei Bossen, die in den Turmbereich eintreten (25% Chance, dass Elitegegner erscheinen)."
+asset,25018,localization/ui,Fogo {0} Minas terrestres internas em chefes que entram no alcance da torre (25% de chance de aparecer para Elites).
+asset,25227,localization/ui,Ce jeu utilise des services d'analyse et de pub de tiers.
+asset,25453,localization/ui,Es existiert bereits ein Konto mit der Spieler-ID {0}.
+asset,25563,localization/ui,Tier 2 Power Tree
+asset,25586,localization/ui,Tier 3 Power Tree
+asset,25690,localization/ui,Shockwave Frequency
+asset,25699,localization/ui,-{0}s to shockwave frequency%
+asset,25739,localization/ui,Interest / Wave
+asset,25747,localization/ui,{0}% boost to interest / wave
+asset,25811,localization/ui,Cash / Wave
+asset,25818,localization/ui,{0}% boost to cash / wave
+asset,25877,localization/ui,Coins / Wave
+asset,25884,localization/ui,{0}% boost to coins / wave
+asset,25901,localization/ui,Enemy Level Skip
+asset,26391,localization/ui,Percent of Enemy Health
+asset,26484,localization/ui,Tier {0} Power Tree requires {1} power nodes be unlocked and {2} tier 2 levels
+asset,26749,localization/ui,"gerischer Weise nutzt, keine Cheats/Hacks/Exploits diskutiert oder verwendet, sich nicht am Verkauf/Kauf von Konten beteiligt und/oder keine Handlungen vornimmt, die darauf abzielen, andere zu diffamieren, zu beleidigen oder zu entmenschlichen. Jegliche illegalen Aktivit"
+asset,27040,localization/ui,Es existiert bereits ein Konto mit dieser E-Mail-Adresse.
+asset,27335,localization/ui,On Boss/Elite Kill: Increases Tower Damage by 5x for {0}.
+asset,27343,localization/ui,ten eines Bosses oder Elite-Gegners erh
+asset,27357,localization/ui,Add {0} Electrons orbiting the Tower. Deals 15% Remaining Health Damage (quarter effective vs. Bosses/Fleets).
+asset,27386,localization/ui,On Recovery Package: Grants +50% Attack Speed for {0} (Decays over 60s).~
+asset,27417,localization/ui,"Active Battle: Tier {0}, Wave {1}"
+asset,27479,localization/ui,Tier {0} Power Tree requires {1} power nodes be unlockedT
+asset,28012,localization/ui,Sentiero sicuro
+asset,28380,localization/ui,Beat wave 30 to unlock Labs!3
+asset,28603,localization/ui,% Schaden bei Bossen).
+asset,29019,localization/ui,Enemy Level Skip Reduction
+asset,29047,localization/ui,Boss's Ultimate
+asset,29050,localization/ui,Boss-Ultimativ
+asset,29086,localization/ui,Enemy Speed
+asset,29221,localization/ui,Reduces the effect of the Enemy Level Skip Reduction battle condition by a percentage.
+asset,29260,localization/ui,Reduces the effect of the Boss's Ultimate battle condition by a percentage.
+asset,29264,localization/ui,Boss-Ultimativ
+asset,29319,localization/ui,Reduces the effect of the Enemy Speed battle condition by a percentage.
+asset,29491,localization/ui,Ray Enemy Health
+asset,29506,localization/ui,Vampire Enemy Health
+asset,29520,localization/ui,Scatter Enemy Health
+asset,29535,localization/ui,Decreases Ray enemy attack at all waves.<
+asset,29544,localization/ui,Decreases Ray enemy health at all waves.>
+asset,29554,localization/ui,Decreases Vampire enemy attack at all waves.4
+asset,29562,localization/ui,Decreases Vampire enemy health at all waves.6
+asset,29571,localization/ui,Decreases Scatter enemy attack at all waves.3
+asset,29579,localization/ui,Decreases Scatter enemy health at all waves.5
+asset,29588,localization/ui,Decreases Ranged enemy range at all waves.
+asset,29727,localization/ui,Elite enemies researches#
+asset,29732,localization/ui,Elitegegner-Forschungen
+asset,29735,localization/ui,Pesquisas de Inimigos de Elite
+asset,30207,localization/ui,Beat wave {0} in Tier {1}
+asset,30288,localization/ui,20x Basic Enemy Health. On Tower Impact: Disables 1 random Ultimate Weapon (Restores On Kill).
+asset,30306,localization/ui,20x Basic Enemy Health. Empowers enemies and increases Health within Range.
+asset,30322,localization/ui,20x Basic Enemy Health. Fires a returning Projectile at the Tower (Damage doubles per subsequent hit).
+asset,30367,localization/ui,Fleets
+asset,30382,localization/ui,Surviving enemies mass increases by {0} per wave they are alive
+asset,30424,localization/ui,Reach Tier 19 Wave 40 to unlock Assist Modules
+asset,30496,localization/ui,"Capped Substats: Shockwave Frequency, Wall Rebuild. Chrono Field Speed Reduction, Inner Land Mine Cooldown"
+asset,30531,localization/ui,"Beat wave 4,500 in Tier 19"
+asset,30548,localization/ui,"Beat wave 4,500 in Tier 20"
+asset,30565,localization/ui,"Beat wave 4,500 in Tier 21"
+asset,30638,localization/ui,Gib {0} zum Akzeptieren ein.*
+asset,31211,localization/ui,Max Wave
+asset,31316,localization/ui,Tagged by Death Wave!
+asset,31322,localization/ui,Death Wave
+asset,31435,localization/ui,"Battle History keeps track of your last 30 runs, including tier and tournament battles. You can click on an entry to view the end of round stats from that attempt."
+asset,31554,localization/ui,Sentiero stellare
+asset,31975,localization/ui,Oder kontaktiere uns unter: {0}
+asset,32054,localization/ui,Enemy health and attack level skip chances are reduced by {0} every {1} waves
+asset,32093,localization/ui,Scale Damage by enemy HP. Edit via Damage Stat in battle. Disabled during Intro Sprint
+asset,32378,localization/ui,Unlock access to Premium milestone track rewards. Progress to earn:
+asset,32391,localization/ui,Through Tier {0} to Tier {1}
+asset,32832,localization/ui,Labs grant you incremental upgrades to different parts of the game. Unlock research by completing Tier milestones. Start a lab by selecting a research and spending coins.
+asset,33022,localization/ui,Heat
+asset,33029,localization/ui,Overheat
+asset,33046,localization/ui,Overheat Incoming
+asset,33054,localization/ui,Overheat conditions add an extra challenge when you reach very high waves.
+asset,33055,localization/ui,"Review active and upcoming Overheat in the Heat panel, found in the Lobby."
+asset,33116,localization/ui,Tournament Heat
+asset,33125,localization/ui,Increasing Heat
+asset,33134,localization/ui,Persistent Heat
+asset,33143,localization/ui,Activate on Wave
+asset,33150,localization/ui,Battle Heat
+asset,33175,localization/ui,More Elites
+asset,33179,localization/ui,Mehr Eliten
+asset,33182,localization/ui,Mais Elites
+asset,33184,localization/ui,More Fleets
+asset,33191,localization/ui,Tower damage is reduced by {0} levels every 10 wavesK
+asset,33214,localization/ui,Tower health is reduced by {0} levels every 10 wavesF
+asset,33235,localization/ui,An additional Elite spawns every {0} waves
+asset,33244,localization/ui,tzliche Elite spawnt alle {0} Wellen.
+asset,33248,localization/ui,Um Elite extra
+asset,33254,localization/ui,An additional Fleet spawns every {0} waves
+asset,33261,localization/ui,tzliche Flotte spawnt alle {0} Wellen..
+asset,33391,localization/ui,Your highest wave: Tier {0} - Wave {1}
+asset,33425,localization/ui,Stuck on Tier {0} - Wave {1}? Spend Coins on upgrades!
+asset,33612,localization/ui,Largest Wave Skip
+asset,33647,localization/ui,Note: You will resume battle when the last Boss or Fleet enemy spawned.
+asset,33648,localization/ui,Previous wave: {0}
+asset,33658,localization/ui,"Hinweis: Du setzt den Kampf an dem Punkt wieder fort, an dem der letzte Boss oder die letzte Flotte gespawnt ist."
+asset,33682,localization/ui,From Death Wave
+asset,33797,localization/ui,Dissonance
+asset,33798,localization/ui,Dissonance
+asset,34014,localization/ui,Elites killed in Golden Bot range grant {0}x more Cells.U
+asset,34023,localization/ui,tete Eliten hinterlassen {0}-mal mehr Zellen.
+asset,34027,localization/ui,Elites mortos no alcance do Bot Dourado concedem {0}x mais c
+asset,34097,localization/ui,A percent of each tier's Dissonant Boosts will be permanently applied to the tower
+asset,34776,localization/ui,Most Coins From Wave Skip
+asset,34787,localization/ui,Most Cells From Wave Skip
+asset,34954,localization/ui,Boosts per tier
+asset,34984,localization/ui,Dissonant Runs are a specialized challenge within Tiers. You must choose a Workshop tab to be disabled for the run.
+asset,34990,localization/ui,Le Corse Dissonanti sono una sfida speciale all'interno dei Tier. Devi scegliere una scheda Workshop da disabilitare per la corsa.
+asset,34992,localization/ui,ufe sind eine spezielle Herausforderung innerhalb der Tiers. Du musst einen Werkstatt-Reiter ausw
+asset,35004,localization/ui,"Based on the selected Workshop and the highest wave reached, you will receive a Dissonant Boost for that tier:"
+asset,35026,localization/ui,"Dissonant Boosts from one Tier echoes to other Tiers, with a bonus value of {0}"
+asset,35042,localization/ui,"Dissonant Echo bonus can be increased through lab researches, unlocked at Tier {0} Wave {1}.{"
+asset,35175,localization/ui,"Lastly, use Guardian Bits (available in the Guild Store) to power up and accessorize your new tower buddy - The Guardian! With upgradable chips, chip slots, and skins, your Guardian will help you reach that next milestone."
+asset,35276,localization/ui,"Resuming previous round subtracts 5 waves, 50 if Intro Sprint is active.O"
+asset,35278,localization/ui,"dent soustrait 5 vagues, 50 si Intro Sprint est actif."
+asset,35283,localization/ui,"Reanudar la ronda anterior resta 5 oleadas, 50 si Intro Sprint est"
+asset,35289,localization/ui,Intro Sprint
+asset,35292,localization/ui,Previous Wave: {0}\nNew Wave: {1}
+asset,35320,localization/ui,Enhanced Death Wave
+asset,35432,localization/ui,-10% Enemy Damage per 6% Health lost (Max 90%).
+asset,35565,localization/ui,Recharges Missile Barrage after set Waves.
+asset,35630,localization/ui,On Hit: Amplifies Death Wave Damage taken (Max +50x/Wave).
+asset,35663,localization/ui,"Sync Death Wave, Golden Tower, & Black Hole. Cooldown = {0}s."
+asset,35776,localization/ui,{0}% chance to spawn autonomous Inner Land Mine (Max 20).
+asset,35797,localization/ui,Fire {0} Inner Land Mines at Bosses (25% chance vs Elites).
+asset,35804,localization/ui,Feuer {0} Innere Landminen bei Bossen (25% Chance gegen Elitegegner).
+asset,35917,localization/ui,{0}% chance Poisoned enemies Miss (halved vs Bosses).
+asset,35923,localization/ui,"{0}% Chance, dass vergiftete Gegner ihr Ziel verfehlen (halbiert gegen Bosse)."
+asset,35929,localization/ui,Boss
+asset,35932,localization/ui,Boss
+asset,36033,localization/ui,Spotlight focuses Boss and is reflected to nearby enemies for {0}x Damage.
+asset,36037,localization/ui,Il riflettore si concentra sul Boss e viene riflesso sui nemici vicini per infliggere {0}x danni.
+asset,36038,localization/ui,"Der Fokus des Scheinwerfers richtet sich auf den Boss und wird auf nahe Gegner reflektiert, wodurch {0}x Schaden entsteht."
+asset,36045,localization/ui,Boss
+asset,36048,localization/ui,Boss
+asset,36103,localization/ui,Kontaktieren Sie uns
+asset,36257,localization/ui,"Specific Wave targets within each Tier. Reach Milestones to unlock one-time permanent rewards, Relics, and new game features."
+asset,36301,localization/ui,Permanent account-wide collectibles. Earned by completing Milestones and Events to grant permanent passive stat multipliers.
+asset,36317,localization/ui,Global difficulty levels. Higher Tiers scale enemy difficulty faster but grant higher Coin Multipliers and unlock exclusive Milestone rewards.
+asset,36346,localization/ui,The primary measure of in-run progression. Each Wave spawns a set amount of enemies and progressively scales Enemy Health & Damage.
+asset,36399,localization/ui,Waves
+metadata,2161,metadata-symbol,BossDamageData
+metadata,2164,metadata-symbol,BossDamageEntry
+metadata,2166,metadata-symbol,waveNumber
+metadata,2178,metadata-symbol,ResetBossStats
+metadata,2179,metadata-symbol,TryTrackBossStats
+metadata,2180,metadata-symbol,GetBossHistoryCount
+metadata,2182,metadata-symbol,GetBossDamageDataByHistoryIndex
+metadata,2183,metadata-symbol,GetBossEntryByHistoryIndex
+metadata,2184,metadata-symbol,AddNewBossDamageEntry
+metadata,2185,metadata-symbol,GetCurrentBossDamageEntry
+metadata,2186,metadata-symbol,GetOrCreateEntryForBoss
+metadata,2187,metadata-symbol,CreateEmptyBossDamageList
+metadata,2201,metadata-symbol,activeBossDamageEntries
+metadata,2258,metadata-symbol,wave
+metadata,2259,metadata-symbol,tier
+metadata,2260,metadata-symbol,TryLogWaveReached
+metadata,2261,metadata-symbol,LogWaveReached
+metadata,2271,metadata-symbol,LogAchievementTierReached
+metadata,2273,metadata-symbol,highestWavePerTierThisCycle
+metadata,2274,metadata-symbol,eventMissionTiersCompletedThisCycle
+metadata,2412,metadata-symbol,CheckAndPostWave100PerTier
+metadata,2413,metadata-symbol,CheckAndPostWaveMilestonesPerTier
+metadata,2414,metadata-symbol,wave20
+metadata,2415,metadata-symbol,wave40
+metadata,2416,metadata-symbol,wave60
+metadata,2417,metadata-symbol,tier2Unlock
+metadata,2418,metadata-symbol,tier3Unlock
+metadata,2421,metadata-symbol,wave100PostedTiers
+metadata,2422,metadata-symbol,waveMilestonePostedEvents
+metadata,2423,metadata-symbol,WaveMilestones
+metadata,2598,metadata-symbol,isOverheat
+metadata,2600,metadata-symbol,Button_HeatTab
+metadata,2601,metadata-symbol,Button_OverheatTab
+metadata,2624,metadata-symbol,activationWave
+metadata,2632,metadata-symbol,maxWave
+metadata,2645,metadata-symbol,tierText
+metadata,2646,metadata-symbol,maxWaveText
+metadata,2689,metadata-symbol,UpdateDissonanceObjects
+metadata,2692,metadata-symbol,TierUp
+metadata,2693,metadata-symbol,TierDown
+metadata,2694,metadata-symbol,OpenMilestoneManager
+metadata,2697,metadata-symbol,DissonanceBonusPanelOpen
+metadata,2716,metadata-symbol,tierHighestWaveText
+metadata,2717,metadata-symbol,tierCoinBonusText
+metadata,2718,metadata-symbol,tierNewAvailableTag
+metadata,2719,metadata-symbol,tierLeftButton
+metadata,2720,metadata-symbol,tierRightButton
+metadata,2770,metadata-symbol,BossHealthBar
+metadata,2777,metadata-symbol,BossNet
+metadata,2785,metadata-symbol,BossNetHit
+metadata,2789,metadata-symbol,BossProjectile
+metadata,2795,metadata-symbol,BossSummaryPanelUI
+metadata,2804,metadata-symbol,RefreshBossSummaryPanel
+metadata,2811,metadata-symbol,bossWaveTitle
+metadata,2815,metadata-symbol,<RefreshBossSummaryPanel>b__26_0
+metadata,3151,metadata-symbol,get_IntroSprintMaxWaves
+metadata,3377,metadata-symbol,IntroSprintMaxWaves
+metadata,3516,metadata-symbol,tierSprite
+metadata,3584,metadata-symbol,Tier
+metadata,3666,metadata-symbol,FreeMilestone
+metadata,3667,metadata-symbol,PremiumMilestone
+metadata,3688,metadata-symbol,BossDrop
+metadata,3689,metadata-symbol,EliteDrop
+metadata,3690,metadata-symbol,FleetsDrop
+metadata,3752,metadata-symbol,HeatDefinition
+metadata,3753,metadata-symbol,IsOverheat
+metadata,3755,metadata-symbol,ActivationWave
+metadata,3759,metadata-symbol,HeatEntries
+metadata,3760,metadata-symbol,OverheatEntries
+metadata,3764,metadata-symbol,get_TournamentHeatLevel
+metadata,3768,metadata-symbol,GetFixedHeatDataForTier
+metadata,3769,metadata-symbol,currentWave
+metadata,3770,metadata-symbol,GetFixedHeatLevelsForWave
+metadata,3773,metadata-symbol,GetTournamentHeatLevelsForWave
+metadata,3774,metadata-symbol,GetTournamentHeat
+metadata,3775,metadata-symbol,tournamentHeat
+metadata,3776,metadata-symbol,fixedHeat
+metadata,3777,metadata-symbol,CombineHeatResults
+metadata,3778,metadata-symbol,QueryConditionsForTier
+metadata,3786,metadata-symbol,AppendHeatDefinitionEntries
+metadata,3790,metadata-symbol,ClearHeat
+metadata,3792,metadata-symbol,IsHeatIncreased
+metadata,3793,metadata-symbol,GetNextAndLastHeatIncreaseWave
+metadata,3794,metadata-symbol,GetTournamentHeatLevelForWave
+metadata,3795,metadata-symbol,GetTournamentHeatValue
+metadata,3796,metadata-symbol,GetHeatValueFromLevels
+metadata,3804,metadata-symbol,GetUltimateBossModifier
+metadata,3817,metadata-symbol,GetBossesUltimateDuration
+metadata,3828,metadata-symbol,numberOfWaves
+metadata,3830,metadata-symbol,CheckOverheatFirstTimeOnboarding
+metadata,3833,metadata-symbol,active_fixedHeatConditions
+metadata,3835,metadata-symbol,DefaultTournamentHeatIncreaseWaves
+metadata,3836,metadata-symbol,TournamentHeatLevelCount
+metadata,3837,metadata-symbol,tournamentHeatIncreaseWaves
+metadata,3843,metadata-symbol,prevTournamentHeatLevel
+metadata,3845,metadata-symbol,isRandomizingHeatConditions
+metadata,3848,metadata-symbol,FixedHeatDataByTier
+metadata,3849,metadata-symbol,TournamentHeatDataByLeague
+metadata,3850,metadata-symbol,TournamentHeatLevel
+metadata,3894,metadata-symbol,requiredTier
+metadata,4044,metadata-symbol,Deathwave
+metadata,4046,metadata-symbol,DeathwaveController
+metadata,4047,metadata-symbol,get_PlayEffectWaves
+metadata,4048,metadata-symbol,SetDeathWaveBrightness
+metadata,4049,metadata-symbol,ResetDeathwaveFinal
+metadata,4050,metadata-symbol,SetDeathwaveFinalSize
+metadata,4051,metadata-symbol,GetDeathWaveFinalTrailColor
+metadata,4053,metadata-symbol,PlayDeathWave
+metadata,4054,metadata-symbol,ApplyDeathWaveEffects
+metadata,4057,metadata-symbol,waveInterval
+metadata,4058,metadata-symbol,deathWaveParticle
+metadata,4063,metadata-symbol,deathwaveFinalWave
+metadata,4064,metadata-symbol,deathWaveFinalParticle
+metadata,4065,metadata-symbol,deathwaveFinalSize
+metadata,4066,metadata-symbol,deathWavePersistingBoost
+metadata,4067,metadata-symbol,deathwaveFinalScaleAdjustment
+metadata,4068,metadata-symbol,deathwaveFinalTimer
+metadata,4069,metadata-symbol,deathwaveColor
+metadata,4070,metadata-symbol,deathwavePlusColor
+metadata,4073,metadata-symbol,isDeathWaveActive
+metadata,4075,metadata-symbol,PlayEffectWaves
+metadata,4077,metadata-symbol,<PlayDeathWave>b__0
+metadata,4082,metadata-symbol,<_waveInterval>5__4
+metadata,4083,metadata-symbol,DeathwaveFinalWave
+metadata,4168,metadata-symbol,WaveAndTierButtonChecks
+metadata,4169,metadata-symbol,WaveEdit
+metadata,4170,metadata-symbol,TierEdit
+metadata,4171,metadata-symbol,OnTierDecrease
+metadata,4172,metadata-symbol,OnTierIncrease
+metadata,4173,metadata-symbol,OnWaveDecrease
+metadata,4174,metadata-symbol,OnWaveIncrease
+metadata,4175,metadata-symbol,OnWaveAndTierConfirm
+metadata,4285,metadata-symbol,tierDecreaseButton
+metadata,4286,metadata-symbol,tierIncreaseButton
+metadata,4287,metadata-symbol,waveDecreaseButton
+metadata,4288,metadata-symbol,waveIncreaseButton
+metadata,4289,metadata-symbol,waveText
+metadata,4290,metadata-symbol,waveAndTierResultText
+metadata,4300,metadata-symbol,deathWaveEffectsText
+metadata,4384,metadata-symbol,deathWaveUpgradeDropdownList
+metadata,4470,metadata-symbol,WaveSkip
+metadata,4479,metadata-symbol,WaveAccelerator
+metadata,4490,metadata-symbol,DeathWave
+metadata,4513,metadata-symbol,DissonanceBonusUI
+metadata,4527,metadata-symbol,DissonanceBoost
+metadata,4528,metadata-symbol,get_WaveReached
+metadata,4536,metadata-symbol,GetWaveReached
+metadata,4540,metadata-symbol,SetMaxWave
+metadata,4543,metadata-symbol,waveReached
+metadata,4546,metadata-symbol,_maxWave
+metadata,4548,metadata-symbol,_cachedForTier
+metadata,4550,metadata-symbol,WaveReached
+metadata,4552,metadata-symbol,DissonanceInfoUI
+metadata,4555,metadata-symbol,DissonanceManager
+metadata,4566,metadata-symbol,get_SelectedDissonance
+metadata,4567,metadata-symbol,set_SelectedDissonance
+metadata,4568,metadata-symbol,add_OnSelectedDissonanceChanged
+metadata,4569,metadata-symbol,remove_OnSelectedDissonanceChanged
+metadata,4578,metadata-symbol,OpenDissonanceInfoWindow
+metadata,4587,metadata-symbol,selectedDissonance
+metadata,4589,metadata-symbol,OnSelectedDissonanceChanged
+metadata,4600,metadata-symbol,SelectedDissonance
+metadata,4601,metadata-symbol,DissonanceType
+metadata,4606,metadata-symbol,DissonanceRemoteData
+metadata,4611,metadata-symbol,DissonanceTabButton
+metadata,4614,metadata-symbol,DissonanceTypeIcon
+metadata,4621,metadata-symbol,DissonantBoostsTierDataEntry
+metadata,4623,metadata-symbol,SetValuesForTier
+metadata,4625,metadata-symbol,attackWaveText
+metadata,4627,metadata-symbol,defenseWaveText
+metadata,4629,metadata-symbol,utilityWaveText
+metadata,4631,metadata-symbol,ultWaveText
+metadata,4773,metadata-symbol,get_IsBossOrElite
+metadata,4827,metadata-symbol,DeathwaveFinalDamage
+metadata,4849,metadata-symbol,DeathWaveCoinBonus
+metadata,4850,metadata-symbol,DeathWaveCellBonus
+metadata,4851,metadata-symbol,LivedWavesCoins
+metadata,4852,metadata-symbol,HandleScatterBossDeath
+metadata,4867,metadata-symbol,spawnPosition
+metadata,4869,metadata-symbol,isBossToTrackStats
+metadata,4878,metadata-symbol,wavesPassed
+metadata,4879,metadata-symbol,OnEachWave
+metadata,4946,metadata-symbol,enemyWaveHealthLevel
+metadata,4947,metadata-symbol,enemyWaveHealthLevelReductionsCount
+metadata,4949,metadata-symbol,enemyWaveDamageLevel
+metadata,4950,metadata-symbol,enemyWaveDamageLevelReductionsCount
+metadata,4964,metadata-symbol,isIntroSprintBoss
+metadata,4965,metadata-symbol,isIntroSprintFleet
+metadata,4966,metadata-symbol,waveEnemySpawned
+metadata,4967,metadata-symbol,numWavesAlive
+metadata,4998,metadata-symbol,rayMiniBossInRangeBool
+metadata,5001,metadata-symbol,scatterBossSplitsLeft
+metadata,5016,metadata-symbol,spawnedDuringSummon
+metadata,5018,metadata-symbol,shockwaveTime
+metadata,5030,metadata-symbol,markedByDeathwave
+metadata,5031,metadata-symbol,deathwaveEnemyAmplifier
+metadata,5034,metadata-symbol,spawnedDuringGoldenTower
+metadata,5081,metadata-symbol,enemyWaveHealthReducer
+metadata,5084,metadata-symbol,IsBossOrElite
+metadata,5132,metadata-symbol,Boss
+metadata,5140,metadata-symbol,FleetType
+metadata,5145,metadata-symbol,DeathWaveKill
+metadata,5618,metadata-symbol,get_IsGuildMilestoneUnlocked
+metadata,5625,metadata-symbol,get_MaxTier
+metadata,5643,metadata-symbol,IsGuildMilestoneUnlocked
+metadata,5644,metadata-symbol,MaxTier
+metadata,6429,metadata-symbol,EliteCells
+metadata,6430,metadata-symbol,Elites
+metadata,6431,metadata-symbol,Fleets
+metadata,6479,metadata-symbol,deathWaveVFX
+metadata,6495,metadata-symbol,hitTextEliteCells
+metadata,6499,metadata-symbol,hitTextDeathWave
+metadata,6506,metadata-symbol,hitTextBoss
+metadata,6509,metadata-symbol,hitTextElites
+metadata,6510,metadata-symbol,hitTextFleets
+metadata,6518,metadata-symbol,onDeathWaveBrightnessChanged
+metadata,6601,metadata-symbol,HandleShockwaveResearchComplete
+metadata,6711,metadata-symbol,researchTierToUnlock
+metadata,6712,metadata-symbol,researchMilestoneToUnlock
+metadata,6776,metadata-symbol,shockwaveSizeLevelSelected
+metadata,7001,metadata-symbol,showTier
+metadata,7104,metadata-symbol,milestonePremiumIcon
+metadata,7315,metadata-symbol,get_IsResumeWave
+metadata,7323,metadata-symbol,get_WaveSeed
+metadata,7325,metadata-symbol,get_IsOnWaveCooldown
+metadata,7342,metadata-symbol,get_MaxSaveCurrentWave
+metadata,7351,metadata-symbol,add_TierChanged
+metadata,7352,metadata-symbol,remove_TierChanged
+metadata,7364,metadata-symbol,CheckUpgradeTiers
+metadata,7371,metadata-symbol,WorkshopUpgradeTier
+metadata,7382,metadata-symbol,DifficultyTierCalcs
+metadata,7385,metadata-symbol,StartNewRoundTestHeat
+metadata,7393,metadata-symbol,GetWavesToSkipForIntroSprint
+metadata,7394,metadata-symbol,NewWave
+metadata,7399,metadata-symbol,GetWaveBaseDamage
+metadata,7400,metadata-symbol,GetWaveBaseHealth
+metadata,7401,metadata-symbol,WaveUpdate
+metadata,7408,metadata-symbol,miniBossType
+metadata,7409,metadata-symbol,SpawnRandomEliteEnemy
+metadata,7411,metadata-symbol,SpawnRandomFleetEnemy
+metadata,7423,metadata-symbol,IsBossActive
+metadata,7424,metadata-symbol,IsFleetActive
+metadata,7425,metadata-symbol,TowerBossNet
+metadata,7426,metadata-symbol,isElite
+metadata,7427,metadata-symbol,TowerBossFire
+metadata,7431,metadata-symbol,BossProjectileHit
+metadata,7445,metadata-symbol,waveHealthLevel
+metadata,7446,metadata-symbol,GetSpecificWaveHealthDamageBossHit
+metadata,7447,metadata-symbol,GetSpecificWaveHealthDamageEnemyHit
+metadata,7456,metadata-symbol,UpdateWaveSkipTextsPos
+metadata,7457,metadata-symbol,HeatingUpFloatingText
+metadata,7458,metadata-symbol,wavesSkipped
+metadata,7462,metadata-symbol,WaveSkipFloatingText
+metadata,7500,metadata-symbol,GetDeathwaveDamage
+metadata,7501,metadata-symbol,GetDeathwaveQuantity
+metadata,7502,metadata-symbol,GetDeathwaveCooldown
+metadata,7579,metadata-symbol,GetOutOfRoundShockwaveSize
+metadata,7580,metadata-symbol,GetOutOfRoundShockwaveFrequency
+metadata,7588,metadata-symbol,GetOutOfRoundCashPerWave
+metadata,7590,metadata-symbol,GetOutOfRoundCoinsPerWave
+metadata,7594,metadata-symbol,GetOutOfRoundInterestPerWave
+metadata,7623,metadata-symbol,triggerHitThisWave
+metadata,7625,metadata-symbol,GetAliveFleetEarliestSpawnWave
+metadata,7626,metadata-symbol,GetAliveBossEarliestSpawnWave
+metadata,7659,metadata-symbol,CheckBossSpawned
+metadata,7670,metadata-symbol,ShockwaveFunction
+metadata,7701,metadata-symbol,IsWaveSkip
+metadata,7702,metadata-symbol,IsDoubleWaveSkip
+metadata,7707,metadata-symbol,IsFleetWave
+metadata,7741,metadata-symbol,maxTierToRegister
+metadata,7753,metadata-symbol,milestoneManager
+metadata,7759,metadata-symbol,miniBossController
+metadata,7765,metadata-symbol,currentWaveBaseHealth
+metadata,7766,metadata-symbol,currentWaveBaseDamage
+metadata,7767,metadata-symbol,currentWaveBaseKillCash
+metadata,7768,metadata-symbol,resumeWaveLimit
+metadata,7769,metadata-symbol,miniBossWaveBool
+metadata,7770,metadata-symbol,doubleMiniBossWaveBool
+metadata,7771,metadata-symbol,bossWaveBool
+metadata,7772,metadata-symbol,bossLastWaveBool
+metadata,7773,metadata-symbol,miniBossSpawnTimePct
+metadata,7774,metadata-symbol,doubleMiniBossSpawnTimePct
+metadata,7777,metadata-symbol,elrFleetsSpawnTimePct
+metadata,7778,metadata-symbol,miniBossSpawnedBool
+metadata,7779,metadata-symbol,doubleMiniBossSpawnedBool
+metadata,7781,metadata-symbol,doubleMiniBossType
+metadata,7783,metadata-symbol,currentWaveKillCoins
+metadata,7791,metadata-symbol,hasFleetSpawned
+metadata,7792,metadata-symbol,hasELRFleetSpawned
+metadata,7793,metadata-symbol,moreEliteWavesUntilActive
+metadata,7794,metadata-symbol,moreEliteWaveBool
+metadata,7795,metadata-symbol,moreEliteSpawnedBool
+metadata,7796,metadata-symbol,moreEliteSpawnTimePct
+metadata,7797,metadata-symbol,moreEliteType
+metadata,7798,metadata-symbol,moreFleetWavesUntilActive
+metadata,7799,metadata-symbol,moreFleetWaveBool
+metadata,7800,metadata-symbol,moreFleetSpawnedBool
+metadata,7801,metadata-symbol,moreFleetSpawnTimePct
+metadata,7802,metadata-symbol,waveLengthSeconds
+metadata,7803,metadata-symbol,waveCooldownSeconds
+metadata,7804,metadata-symbol,enemySpeedWaveMult
+metadata,7807,metadata-symbol,enemyMassWaveMult
+metadata,7808,metadata-symbol,waveTimer
+metadata,7809,metadata-symbol,waveSpawnTimer
+metadata,7810,metadata-symbol,waveFastEnemiesSpawned
+metadata,7811,metadata-symbol,waveTankEnemiesSpawned
+metadata,7812,metadata-symbol,waveRangeEnemiesSpawned
+metadata,7813,metadata-symbol,waveProtectorEnemiesSpawned
+metadata,7837,metadata-symbol,resumeMiniBossSeed
+metadata,7909,metadata-symbol,towerMaxHealthFromDeathWave
+metadata,7932,metadata-symbol,cashPerWave
+metadata,7934,metadata-symbol,coinsPerWave
+metadata,7939,metadata-symbol,interestPerWave
+metadata,7943,metadata-symbol,recoveryThisWave
+metadata,7966,metadata-symbol,spawnCircleObject
+metadata,7967,metadata-symbol,spawnLocation
+metadata,7977,metadata-symbol,protectorEnemyLastWaveSpawned
+metadata,7978,metadata-symbol,protectorEnemyWavesUntilNextCanSpawn
+metadata,7988,metadata-symbol,doubleMiniBossSpawnBool
+metadata,7989,metadata-symbol,scatterBossChildSpawnSplitsLeft
+metadata,7990,metadata-symbol,scatterBossChildSpawnLocation
+metadata,7992,metadata-symbol,currentTier
+metadata,7993,metadata-symbol,maxTier
+metadata,7994,metadata-symbol,tierCoinMultiplier
+metadata,7995,metadata-symbol,tierDifficultyMultiplier
+metadata,7996,metadata-symbol,highestWaveBool
+metadata,7997,metadata-symbol,highestWaveThisTier
+metadata,7998,metadata-symbol,roundsStartedThisTier
+metadata,7999,metadata-symbol,highestCoinsEarnedThisTier
+metadata,8000,metadata-symbol,highestCellsEarnedThisTier
+metadata,8017,metadata-symbol,totalCoinsEarnedFromWaves
+metadata,8022,metadata-symbol,totalWavesCompleted
+metadata,8042,metadata-symbol,totalDamageByDeathWave
+metadata,8053,metadata-symbol,totalWavesSkipped
+metadata,8063,metadata-symbol,totalEnemiesDestroyedBoss
+metadata,8068,metadata-symbol,coinsEarnedWaveSkipThisRound
+metadata,8110,metadata-symbol,enemiesDestroyedByDeathWaveThisRound
+metadata,8129,metadata-symbol,wavesSkippedThisRound
+metadata,8133,metadata-symbol,mostCoinsFromWaveSkipThisRound
+metadata,8134,metadata-symbol,mostCellsFromWaveSkipThisRound
+metadata,8137,metadata-symbol,largestWaveSkipThisRound
+metadata,8141,metadata-symbol,healthFromDeathWaveThisRound
+metadata,8142,metadata-symbol,deathWaveCoinsThisRound
+metadata,8183,metadata-symbol,healthFromDeathWaveMaxed
+metadata,8187,metadata-symbol,totalDamageByDeathWaveThisRound
+metadata,8190,metadata-symbol,totalEnemiesTaggedByDeathwaveThisRound
+metadata,8196,metadata-symbol,totalEnemiesDestroyedBossThisRound
+metadata,8198,metadata-symbol,totalEnemiesDestroyedElitesThisRound
+metadata,8205,metadata-symbol,cashEarnedThisWave
+metadata,8206,metadata-symbol,coinsEarnedThisWave
+metadata,8207,metadata-symbol,cellsEarnedThisWave
+metadata,8210,metadata-symbol,particleExplosionBossPrefab
+metadata,8231,metadata-symbol,particleHeatUp
+metadata,8236,metadata-symbol,upgradeTierUnlocked
+metadata,8245,metadata-symbol,upgradeAttackTierEverUnlocked
+metadata,8251,metadata-symbol,upgradeDefenseTierUnlocked
+metadata,8259,metadata-symbol,upgradeDefenseTierEverUnlocked
+metadata,8265,metadata-symbol,upgradeUtilityTierUnlocked
+metadata,8273,metadata-symbol,upgradeUtilityTierEverUnlocked
+metadata,8279,metadata-symbol,upgradeTierCost
+metadata,8287,metadata-symbol,upgradeDefenseTierCost
+metadata,8295,metadata-symbol,upgradeUtilityTierCost
+metadata,8308,metadata-symbol,presetUpgradeTierUnlocked
+metadata,8309,metadata-symbol,presetUpgradeDefenseTierUnlocked
+metadata,8310,metadata-symbol,presetUpgradeUtilityTierUnlocked
+metadata,8314,metadata-symbol,presetEnhancementTierUnlocked
+metadata,8315,metadata-symbol,presetEnhancementDefenseTierUnlocked
+metadata,8316,metadata-symbol,presetEnhancementUtilityTierUnlocked
+metadata,8327,metadata-symbol,enhancementTierUnlockCoinsThreshold
+metadata,8328,metadata-symbol,enhancementTierUnlocked
+metadata,8334,metadata-symbol,enhancementDefenseTierUnlockCoinsThreshold
+metadata,8335,metadata-symbol,enhancementDefenseTierUnlocked
+metadata,8341,metadata-symbol,enhancementUtilityTierUnlockCoinsThreshold
+metadata,8342,metadata-symbol,enhancementUtilityTierUnlocked
+metadata,8357,metadata-symbol,deathwaveDamageRemaining
+metadata,8358,metadata-symbol,deathwavePlusAmplifier
+metadata,8376,metadata-symbol,deathwavePlusHits
+metadata,8381,metadata-symbol,deathwave
+metadata,8408,metadata-symbol,gemBlockLastClaimedWave
+metadata,8412,metadata-symbol,shockwaveObject
+metadata,8413,metadata-symbol,shockwaveImage
+metadata,8414,metadata-symbol,shockwaveEndTime
+metadata,8415,metadata-symbol,shockwaveActiveBool
+metadata,8416,metadata-symbol,shockwaveColor
+metadata,8417,metadata-symbol,shockwaveSize
+metadata,8418,metadata-symbol,shockwaveFrequency
+metadata,8419,metadata-symbol,shockwaveSpeed
+metadata,8420,metadata-symbol,shockwaveAlphaDropSpeed
+metadata,8431,metadata-symbol,secondWindWavesUntilRefresh
+metadata,8432,metadata-symbol,secondWindAngelWingsTimeoutWave
+metadata,8438,metadata-symbol,demonModeWavesUntilRefresh
+metadata,8440,metadata-symbol,demonModeLingeringTimeoutWave
+metadata,8443,metadata-symbol,nukeWavesUntilRefresh
+metadata,8445,metadata-symbol,nukeSlowTimeoutWave
+metadata,8448,metadata-symbol,missileBarrageWavesUntilRefresh
+metadata,8461,metadata-symbol,lastWaveResumedFrom
+metadata,8462,metadata-symbol,resumeRoundBossAlive
+metadata,8475,metadata-symbol,waveSkipTextsPosOffset
+metadata,8476,metadata-symbol,waveSkipTextsTimer
+metadata,8479,metadata-symbol,noActiveCardsOnMaxTier
+metadata,8480,metadata-symbol,hitThisWave
+metadata,8482,metadata-symbol,eLSDecayWavesUntilDecay
+metadata,8483,metadata-symbol,eLSDecayWasActiveLastWave
+metadata,8485,metadata-symbol,damageDecayWavesUntilDecay
+metadata,8487,metadata-symbol,healthDecayWavesUntilDecay
+metadata,8499,metadata-symbol,magneticHookEliteCounter
+metadata,8506,metadata-symbol,_waveBaseHealthCache
+metadata,8507,metadata-symbol,_waveHealthLock
+metadata,8508,metadata-symbol,_waveBaseDamageCache
+metadata,8509,metadata-symbol,_waveDamageLock
+metadata,8534,metadata-symbol,moreElitesRandom
+metadata,8535,metadata-symbol,wasIntroSprintActiveLastWave
+metadata,8540,metadata-symbol,TierChanged
+metadata,8542,metadata-symbol,numFleetsSkipped
+metadata,8543,metadata-symbol,moreEliteSkipped
+metadata,8544,metadata-symbol,moreFleetSkipped
+metadata,8554,metadata-symbol,isTestingHeat
+metadata,8561,metadata-symbol,IsResumeWave
+metadata,8569,metadata-symbol,WaveSeed
+metadata,8571,metadata-symbol,IsOnWaveCooldown
+metadata,8587,metadata-symbol,MaxSaveCurrentWave
+metadata,8611,metadata-symbol,<get_MaxSaveCurrentWave>b__907_0
+metadata,8612,metadata-symbol,<get_MaxSaveCurrentWave>b__907_1
+metadata,8613,metadata-symbol,<get_MaxSaveCurrentWave>b__907_2
+metadata,8665,metadata-symbol,<ShockwaveFunction>d__1241
+metadata,8684,metadata-symbol,get_Tier
+metadata,8685,metadata-symbol,set_Tier
+metadata,8686,metadata-symbol,get_Wave
+metadata,8687,metadata-symbol,set_Wave
+metadata,8738,metadata-symbol,get_HealthFromDeathWaveThisRound
+metadata,8739,metadata-symbol,set_HealthFromDeathWaveThisRound
+metadata,8766,metadata-symbol,get_DeathWaveDamage
+metadata,8767,metadata-symbol,set_DeathWaveDamage
+metadata,8768,metadata-symbol,get_TaggedByDeathwave
+metadata,8769,metadata-symbol,set_TaggedByDeathwave
+metadata,8812,metadata-symbol,get_WavesSkipped
+metadata,8813,metadata-symbol,set_WavesSkipped
+metadata,8820,metadata-symbol,get_LargestWaveSkip
+metadata,8821,metadata-symbol,set_LargestWaveSkip
+metadata,8822,metadata-symbol,get_MostCoinsFromWaveSkip
+metadata,8823,metadata-symbol,set_MostCoinsFromWaveSkip
+metadata,8824,metadata-symbol,get_MostCellsFromWaveSkip
+metadata,8825,metadata-symbol,set_MostCellsFromWaveSkip
+metadata,8848,metadata-symbol,get_CoinsFromDeathWave
+metadata,8849,metadata-symbol,set_CoinsFromDeathWave
+metadata,8878,metadata-symbol,get_TotalBoss
+metadata,8879,metadata-symbol,set_TotalBoss
+metadata,8882,metadata-symbol,get_TotalElites
+metadata,8883,metadata-symbol,set_TotalElites
+metadata,8956,metadata-symbol,get_DissonanceType
+metadata,8957,metadata-symbol,set_DissonanceType
+metadata,8964,metadata-symbol,coinsEarnedWaveSkip
+metadata,8984,metadata-symbol,hpFromDeathWave
+metadata,8991,metadata-symbol,deathWaveDamage
+metadata,8992,metadata-symbol,taggedByDeathwave
+metadata,9003,metadata-symbol,largestWaveSkip
+metadata,9004,metadata-symbol,mostCoinsFromWaveSkip
+metadata,9005,metadata-symbol,mostCellsFromWaveSkip
+metadata,9017,metadata-symbol,coinsFromDeathWave
+metadata,9032,metadata-symbol,totalBoss
+metadata,9034,metadata-symbol,totalElites
+metadata,9077,metadata-symbol,Wave
+metadata,9103,metadata-symbol,HealthFromDeathWaveThisRound
+metadata,9113,metadata-symbol,DeathWaveDamage
+metadata,9114,metadata-symbol,TaggedByDeathwave
+metadata,9134,metadata-symbol,WavesSkipped
+metadata,9138,metadata-symbol,LargestWaveSkip
+metadata,9139,metadata-symbol,MostCoinsFromWaveSkip
+metadata,9140,metadata-symbol,MostCellsFromWaveSkip
+metadata,9152,metadata-symbol,CoinsFromDeathWave
+metadata,9167,metadata-symbol,TotalBoss
+metadata,9169,metadata-symbol,TotalElites
+metadata,9220,metadata-symbol,get_DeathWaveAmount
+metadata,9221,metadata-symbol,set_DeathWaveAmount
+metadata,9262,metadata-symbol,get_DiedToBoss
+metadata,9263,metadata-symbol,set_DiedToBoss
+metadata,9288,metadata-symbol,get_KilledBoss
+metadata,9289,metadata-symbol,set_KilledBoss
+metadata,9308,metadata-symbol,get_GameWavesSkippedCard
+metadata,9309,metadata-symbol,set_GameWavesSkippedCard
+metadata,9310,metadata-symbol,get_GameWavesSkippedIS
+metadata,9311,metadata-symbol,set_GameWavesSkippedIS
+metadata,9312,metadata-symbol,get_GameWavesCleared
+metadata,9313,metadata-symbol,set_GameWavesCleared
+metadata,9338,metadata-symbol,deathWaveAmount
+metadata,9359,metadata-symbol,diedToBoss
+metadata,9372,metadata-symbol,killedBoss
+metadata,9382,metadata-symbol,gameWavesSkippedCard
+metadata,9383,metadata-symbol,gameWavesSkippedIS
+metadata,9384,metadata-symbol,gameWavesCleared
+metadata,9400,metadata-symbol,DeathWaveAmount
+metadata,9421,metadata-symbol,DiedToBoss
+metadata,9434,metadata-symbol,KilledBoss
+metadata,9444,metadata-symbol,GameWavesSkippedCard
+metadata,9445,metadata-symbol,GameWavesSkippedIS
+metadata,9446,metadata-symbol,GameWavesCleared
+metadata,9540,metadata-symbol,Milestone
+metadata,9544,metadata-symbol,InitializeMilestone
+metadata,9545,metadata-symbol,UpdateMilestone
+metadata,9549,metadata-symbol,<UpdateMilestone>b__38_0
+metadata,9550,metadata-symbol,<UpdateMilestone>b__38_1
+metadata,9556,metadata-symbol,freeTierText
+metadata,9568,metadata-symbol,premiumTierText
+metadata,9581,metadata-symbol,_tier
+metadata,9586,metadata-symbol,MilestoneManager
+metadata,9587,metadata-symbol,add_MilestoneClaimed
+metadata,9588,metadata-symbol,remove_MilestoneClaimed
+metadata,9596,metadata-symbol,UpdateMilestones
+metadata,9598,metadata-symbol,TestResetTierUnlock
+metadata,9601,metadata-symbol,GetNecessaryWave
+metadata,9604,metadata-symbol,IsPremiumUnlockedThisTier
+metadata,9607,metadata-symbol,GetPremiumIndexFromTier
+metadata,9611,metadata-symbol,milestonesButton
+metadata,9627,metadata-symbol,milestonesPanel
+metadata,9630,metadata-symbol,milestones
+metadata,9631,metadata-symbol,currentWaveClickButton
+metadata,9642,metadata-symbol,tierIcon
+metadata,9652,metadata-symbol,tierColor
+metadata,9668,metadata-symbol,tierAvailableCount
+metadata,9670,metadata-symbol,selectedTier
+metadata,9673,metadata-symbol,MilestoneClaimed
+metadata,9676,metadata-symbol,MiniBossController
+metadata,9678,metadata-symbol,InitializeMiniBossSpawns
+metadata,9681,metadata-symbol,TryAddMiniBoss
+metadata,9682,metadata-symbol,GetMiniBossChance
+metadata,9683,metadata-symbol,GetRandomMiniBoss
+metadata,9687,metadata-symbol,miniBossSetups
+metadata,9688,metadata-symbol,tournamentMiniBossSetups
+metadata,9689,metadata-symbol,miniBossDrops
+metadata,9690,metadata-symbol,miniBossSpawns
+metadata,9691,metadata-symbol,MiniBossSetup
+metadata,9692,metadata-symbol,scalingWaves
+metadata,9693,metadata-symbol,spawnChances
+metadata,9695,metadata-symbol,MiniBossSpawnEntry
+metadata,9696,metadata-symbol,secondMiniBossType
+metadata,9697,metadata-symbol,MiniBossType
+metadata,9704,metadata-symbol,get_TotalTiers
+metadata,9705,metadata-symbol,get_CurrentTier
+metadata,9714,metadata-symbol,tierRequirement
+metadata,9717,metadata-symbol,TotalTiers
+metadata,9718,metadata-symbol,CurrentTier
+metadata,10323,metadata-symbol,get_ShockwaveSize
+metadata,10324,metadata-symbol,get_ShockwaveFrequency
+metadata,10330,metadata-symbol,get_CashPerWave
+metadata,10332,metadata-symbol,get_CoinsPerWave
+metadata,10336,metadata-symbol,get_InterestPerWave
+metadata,10347,metadata-symbol,get_DeathWaveQuantity
+metadata,10348,metadata-symbol,get_DeathWaveCooldown
+metadata,10393,metadata-symbol,TryBossDrop
+metadata,10398,metadata-symbol,TryEliteRerollShardsDrop
+metadata,10401,metadata-symbol,GetNumberOfModuleShardsForFleets
+metadata,10402,metadata-symbol,GetNumberOfRerollShardsForFleets
+metadata,10403,metadata-symbol,spawnedWave
+metadata,10404,metadata-symbol,TryFleetsDrop
+metadata,10646,metadata-symbol,ShockwaveSize
+metadata,10647,metadata-symbol,ShockwaveFrequency
+metadata,10653,metadata-symbol,CashPerWave
+metadata,10655,metadata-symbol,CoinsPerWave
+metadata,10659,metadata-symbol,InterestPerWave
+metadata,10669,metadata-symbol,DeathWaveQuantity
+metadata,10670,metadata-symbol,DeathWaveCooldown
+metadata,10801,metadata-symbol,Shockwave_Size
+metadata,10802,metadata-symbol,Shockwave_Frequency
+metadata,10810,metadata-symbol,Cash_Per_Wave
+metadata,10812,metadata-symbol,Coins_Per_Wave
+metadata,10816,metadata-symbol,Interest_Per_Wave
+metadata,10828,metadata-symbol,Death_Wave_Damage
+metadata,10829,metadata-symbol,Death_Wave_Quantity
+metadata,10830,metadata-symbol,Death_Wave_Cooldown
+metadata,10949,metadata-symbol,ShowBossDrop
+metadata,11503,metadata-symbol,CalculateNextWaveToPick
+metadata,11504,metadata-symbol,ApplyWaveBenefit
+metadata,11506,metadata-symbol,GetTotalWavesUntil
+metadata,11581,metadata-symbol,lastWaveToPick
+metadata,11582,metadata-symbol,nextWaveToPick
+metadata,11670,metadata-symbol,CheaterCheckMaxWave
+metadata,11711,metadata-symbol,tempTier
+metadata,11712,metadata-symbol,tempWave
+metadata,12144,metadata-symbol,Tier1
+metadata,12145,metadata-symbol,Tier2
+metadata,12146,metadata-symbol,Tier3
+metadata,12147,metadata-symbol,Tier4
+metadata,12148,metadata-symbol,Tier5
+metadata,12149,metadata-symbol,Tier6
+metadata,12150,metadata-symbol,Tier7
+metadata,12151,metadata-symbol,Tier8
+metadata,12152,metadata-symbol,Tier9
+metadata,12153,metadata-symbol,Tier10
+metadata,12154,metadata-symbol,Tier11
+metadata,12155,metadata-symbol,Tier12
+metadata,12156,metadata-symbol,Tier13
+metadata,12157,metadata-symbol,Tier14
+metadata,12158,metadata-symbol,Tier15
+metadata,12219,metadata-symbol,Tier16
+metadata,12220,metadata-symbol,Tier17
+metadata,12221,metadata-symbol,Tier18
+metadata,12321,metadata-symbol,Tier19
+metadata,12322,metadata-symbol,Tier20
+metadata,12323,metadata-symbol,Tier21
+metadata,12508,metadata-symbol,UpdateResumeRoundTierText
+metadata,12510,metadata-symbol,UpdateResumeRoundWaveText
+metadata,12512,metadata-symbol,resumeRoundTierText
+metadata,12513,metadata-symbol,resumeRoundWaveText
+metadata,12630,metadata-symbol,get_UpgradeTierUnlocked
+metadata,12631,metadata-symbol,set_UpgradeTierUnlocked
+metadata,12632,metadata-symbol,get_UpgradeDefenseTierUnlocked
+metadata,12633,metadata-symbol,set_UpgradeDefenseTierUnlocked
+metadata,12634,metadata-symbol,get_UpgradeUtilityTierUnlocked
+metadata,12635,metadata-symbol,set_UpgradeUtilityTierUnlocked
+metadata,12636,metadata-symbol,get_UpgradeAttackTierEverUnlocked
+metadata,12637,metadata-symbol,set_UpgradeAttackTierEverUnlocked
+metadata,12638,metadata-symbol,get_UpgradeDefenseTierEverUnlocked
+metadata,12639,metadata-symbol,set_UpgradeDefenseTierEverUnlocked
+metadata,12640,metadata-symbol,get_UpgradeUtilityTierEverUnlocked
+metadata,12641,metadata-symbol,set_UpgradeUtilityTierEverUnlocked
+metadata,12642,metadata-symbol,set_CurrentTier
+metadata,12643,metadata-symbol,get_HighestWaveThisTier
+metadata,12644,metadata-symbol,set_HighestWaveThisTier
+metadata,12645,metadata-symbol,get_RoundsStartedThisTier
+metadata,12646,metadata-symbol,set_RoundsStartedThisTier
+metadata,12647,metadata-symbol,get_HighestCoinsEarnedThisTier
+metadata,12648,metadata-symbol,set_HighestCoinsEarnedThisTier
+metadata,12649,metadata-symbol,get_HighestCellsEarnedThisTier
+metadata,12650,metadata-symbol,set_HighestCellsEarnedThisTier
+metadata,12713,metadata-symbol,get_IsTestingHeat
+metadata,12714,metadata-symbol,set_IsTestingHeat
+metadata,12729,metadata-symbol,get_DeathWaveVFX
+metadata,12730,metadata-symbol,set_DeathWaveVFX
+metadata,12745,metadata-symbol,get_HitThisWave
+metadata,12746,metadata-symbol,set_HitThisWave
+metadata,12749,metadata-symbol,get_ELSDecayWavesUntilDecay
+metadata,12750,metadata-symbol,set_ELSDecayWavesUntilDecay
+metadata,12751,metadata-symbol,get_ELSDecayWasActiveLastWave
+metadata,12752,metadata-symbol,set_ELSDecayWasActiveLastWave
+metadata,12753,metadata-symbol,get_MoreEliteWavesUntilActive
+metadata,12754,metadata-symbol,set_MoreEliteWavesUntilActive
+metadata,12755,metadata-symbol,get_MoreFleetWavesUntilActive
+metadata,12756,metadata-symbol,set_MoreFleetWavesUntilActive
+metadata,12759,metadata-symbol,get_DamageDecayWavesUntilDecay
+metadata,12760,metadata-symbol,set_DamageDecayWavesUntilDecay
+metadata,12763,metadata-symbol,get_HealthDecayWavesUntilDecay
+metadata,12764,metadata-symbol,set_HealthDecayWavesUntilDecay
+metadata,12781,metadata-symbol,get_HitTextEliteCells
+metadata,12782,metadata-symbol,set_HitTextEliteCells
+metadata,12789,metadata-symbol,get_HitTextDeathWave
+metadata,12790,metadata-symbol,set_HitTextDeathWave
+metadata,12803,metadata-symbol,get_HitTextBoss
+metadata,12804,metadata-symbol,set_HitTextBoss
+metadata,12809,metadata-symbol,get_HitTextElites
+metadata,12810,metadata-symbol,set_HitTextElites
+metadata,12811,metadata-symbol,get_HitTextFleets
+metadata,12812,metadata-symbol,set_HitTextFleets
+metadata,12897,metadata-symbol,get_TotalCoinsEarnedFromWaves
+metadata,12898,metadata-symbol,set_TotalCoinsEarnedFromWaves
+metadata,12915,metadata-symbol,get_TotalWavesCompleted
+metadata,12916,metadata-symbol,set_TotalWavesCompleted
+metadata,12979,metadata-symbol,get_TotalEnemiesDestroyedBoss
+metadata,12980,metadata-symbol,set_TotalEnemiesDestroyedBoss
+metadata,12991,metadata-symbol,get_TotalDamageByDeathWave
+metadata,12992,metadata-symbol,set_TotalDamageByDeathWave
+metadata,13003,metadata-symbol,get_TotalWavesSkipped
+metadata,13004,metadata-symbol,set_TotalWavesSkipped
+metadata,13107,metadata-symbol,get_TotalDamageByDeathWaveThisRound
+metadata,13108,metadata-symbol,set_TotalDamageByDeathWaveThisRound
+metadata,13113,metadata-symbol,get_TotalEnemiesTaggedByDeathwaveThisRound
+metadata,13114,metadata-symbol,set_TotalEnemiesTaggedByDeathwaveThisRound
+metadata,13125,metadata-symbol,get_OverheatFirstTimeBool
+metadata,13126,metadata-symbol,set_OverheatFirstTimeBool
+metadata,13147,metadata-symbol,get_PresetUpgradeTierUnlocked
+metadata,13148,metadata-symbol,set_PresetUpgradeTierUnlocked
+metadata,13149,metadata-symbol,get_PresetUpgradeDefenseTierUnlocked
+metadata,13150,metadata-symbol,set_PresetUpgradeDefenseTierUnlocked
+metadata,13151,metadata-symbol,get_PresetUpgradeUtilityTierUnlocked
+metadata,13152,metadata-symbol,set_PresetUpgradeUtilityTierUnlocked
+metadata,13159,metadata-symbol,get_PresetEnhancementTierUnlocked
+metadata,13160,metadata-symbol,set_PresetEnhancementTierUnlocked
+metadata,13161,metadata-symbol,get_PresetEnhancementDefenseTierUnlocked
+metadata,13162,metadata-symbol,set_PresetEnhancementDefenseTierUnlocked
+metadata,13163,metadata-symbol,get_PresetEnhancementUtilityTierUnlocked
+metadata,13164,metadata-symbol,set_PresetEnhancementUtilityTierUnlocked
+metadata,13200,metadata-symbol,get_MilestonesPremiumUnlocked
+metadata,13201,metadata-symbol,set_MilestonesPremiumUnlocked
+metadata,13202,metadata-symbol,get_MilestonesRewardClaimed
+metadata,13203,metadata-symbol,set_MilestonesRewardClaimed
+metadata,13204,metadata-symbol,get_MilestonesRewardPremiumClaimed
+metadata,13205,metadata-symbol,set_MilestonesRewardPremiumClaimed
+metadata,13240,metadata-symbol,get_ShockwaveSizeLevelSelected
+metadata,13241,metadata-symbol,set_ShockwaveSizeLevelSelected
+metadata,13270,metadata-symbol,get_TierBeforeTournament
+metadata,13271,metadata-symbol,set_TierBeforeTournament
+metadata,13290,metadata-symbol,get_TournamentHeatViewed
+metadata,13291,metadata-symbol,set_TournamentHeatViewed
+metadata,13326,metadata-symbol,get_EnhancementTierUnlocked
+metadata,13327,metadata-symbol,set_EnhancementTierUnlocked
+metadata,13330,metadata-symbol,get_EnhancementDefenseTierUnlocked
+metadata,13331,metadata-symbol,set_EnhancementDefenseTierUnlocked
+metadata,13334,metadata-symbol,get_EnhancementUtilityTierUnlocked
+metadata,13335,metadata-symbol,set_EnhancementUtilityTierUnlocked
+metadata,13352,metadata-symbol,get_DeathwaveDamageRemaining
+metadata,13353,metadata-symbol,set_DeathwaveDamageRemaining
+metadata,13396,metadata-symbol,get_TempTier
+metadata,13397,metadata-symbol,set_TempTier
+metadata,13398,metadata-symbol,get_TempWave
+metadata,13399,metadata-symbol,set_TempWave
+metadata,13543,metadata-symbol,get_Wave20
+metadata,13544,metadata-symbol,set_Wave20
+metadata,13545,metadata-symbol,get_Wave40
+metadata,13546,metadata-symbol,set_Wave40
+metadata,13547,metadata-symbol,get_Wave60
+metadata,13548,metadata-symbol,set_Wave60
+metadata,13549,metadata-symbol,get_Tier2Unlock
+metadata,13550,metadata-symbol,set_Tier2Unlock
+metadata,13551,metadata-symbol,get_Tier3Unlock
+metadata,13552,metadata-symbol,set_Tier3Unlock
+metadata,13557,metadata-symbol,get_Wave100PostedTiers
+metadata,13558,metadata-symbol,set_Wave100PostedTiers
+metadata,13559,metadata-symbol,get_WaveMilestonePostedEvents
+metadata,13560,metadata-symbol,set_WaveMilestonePostedEvents
+metadata,13563,metadata-symbol,get_CurrentWave
+metadata,13564,metadata-symbol,set_CurrentWave
+metadata,13579,metadata-symbol,get_TotalEnemiesDestroyedBossThisRound
+metadata,13580,metadata-symbol,set_TotalEnemiesDestroyedBossThisRound
+metadata,13583,metadata-symbol,get_TotalEnemiesDestroyedElitesThisRound
+metadata,13584,metadata-symbol,set_TotalEnemiesDestroyedElitesThisRound
+metadata,13599,metadata-symbol,get_CoinsEarnedWaveSkipThisRound
+metadata,13600,metadata-symbol,set_CoinsEarnedWaveSkipThisRound
+metadata,13643,metadata-symbol,get_WavesSkippedThisRound
+metadata,13644,metadata-symbol,set_WavesSkippedThisRound
+metadata,13653,metadata-symbol,get_LargestWaveSkipThisRound
+metadata,13654,metadata-symbol,set_LargestWaveSkipThisRound
+metadata,13655,metadata-symbol,get_MostCoinsFromWaveSkipThisRound
+metadata,13656,metadata-symbol,set_MostCoinsFromWaveSkipThisRound
+metadata,13657,metadata-symbol,get_MostCellsFromWaveSkipThisRound
+metadata,13658,metadata-symbol,set_MostCellsFromWaveSkipThisRound
+metadata,13671,metadata-symbol,get_DeathWaveCoinsThisRound
+metadata,13672,metadata-symbol,set_DeathWaveCoinsThisRound
+metadata,13683,metadata-symbol,get_CashEarnedThisWave
+metadata,13684,metadata-symbol,set_CashEarnedThisWave
+metadata,13685,metadata-symbol,get_CoinsEarnedThisWave
+metadata,13686,metadata-symbol,set_CoinsEarnedThisWave
+metadata,13741,metadata-symbol,get_HealthFromDeathWaveMaxed
+metadata,13742,metadata-symbol,set_HealthFromDeathWaveMaxed
+metadata,13743,metadata-symbol,get_LastWaveResumedFrom
+metadata,13744,metadata-symbol,set_LastWaveResumedFrom
+metadata,13745,metadata-symbol,get_ResumeRoundBossAlive
+metadata,13746,metadata-symbol,set_ResumeRoundBossAlive
+metadata,13757,metadata-symbol,get_GemBlockLastClaimedWave
+metadata,13758,metadata-symbol,set_GemBlockLastClaimedWave
+metadata,13763,metadata-symbol,get_ResumeMiniBossSeed
+metadata,13764,metadata-symbol,set_ResumeMiniBossSeed
+metadata,13771,metadata-symbol,get_SecondWindAngelWingsTimeoutWave
+metadata,13772,metadata-symbol,set_SecondWindAngelWingsTimeoutWave
+metadata,13773,metadata-symbol,get_DemonModeLingeringTimeoutWave
+metadata,13774,metadata-symbol,set_DemonModeLingeringTimeoutWave
+metadata,13775,metadata-symbol,get_NukeSlowTimeoutWave
+metadata,13776,metadata-symbol,set_NukeSlowTimeoutWave
+metadata,13779,metadata-symbol,get_HighestWaveBool
+metadata,13780,metadata-symbol,set_HighestWaveBool
+metadata,13797,metadata-symbol,get_NukeWavesUntilRefresh
+metadata,13798,metadata-symbol,set_NukeWavesUntilRefresh
+metadata,13805,metadata-symbol,get_DemonModeWavesUntilRefresh
+metadata,13806,metadata-symbol,set_DemonModeWavesUntilRefresh
+metadata,13811,metadata-symbol,get_SecondWindWavesUntilRefresh
+metadata,13812,metadata-symbol,set_SecondWindWavesUntilRefresh
+metadata,13819,metadata-symbol,get_MissileBarrageWavesUntilRefresh
+metadata,13820,metadata-symbol,set_MissileBarrageWavesUntilRefresh
+metadata,13823,metadata-symbol,get_TowerMaxHealthFromDeathWave
+metadata,13824,metadata-symbol,set_TowerMaxHealthFromDeathWave
+metadata,13850,metadata-symbol,get_MagneticHookEliteCounter
+metadata,13851,metadata-symbol,set_MagneticHookEliteCounter
+metadata,13888,metadata-symbol,get_HighestWavePerTierThisCycle
+metadata,13889,metadata-symbol,set_HighestWavePerTierThisCycle
+metadata,13979,metadata-symbol,get_DissonanceActive
+metadata,13980,metadata-symbol,set_DissonanceActive
+metadata,13981,metadata-symbol,get_DissonanceSelected
+metadata,13982,metadata-symbol,set_DissonanceSelected
+metadata,13985,metadata-symbol,get_DissonanceInfoShownOnce
+metadata,13986,metadata-symbol,set_DissonanceInfoShownOnce
+metadata,13987,metadata-symbol,get_DissonanceDamageBoost
+metadata,13988,metadata-symbol,set_DissonanceDamageBoost
+metadata,13989,metadata-symbol,get_DissonanceHealthBoost
+metadata,13990,metadata-symbol,set_DissonanceHealthBoost
+metadata,13991,metadata-symbol,get_DissonanceCoinBoost
+metadata,13992,metadata-symbol,set_DissonanceCoinBoost
+metadata,13993,metadata-symbol,get_DissonanceUltDamageBoost
+metadata,13994,metadata-symbol,set_DissonanceUltDamageBoost
+metadata,14061,metadata-symbol,milestonesPremiumUnlocked
+metadata,14062,metadata-symbol,milestonesRewardClaimed
+metadata,14063,metadata-symbol,milestonesRewardPremiumClaimed
+metadata,14070,metadata-symbol,tierBeforeTournament
+metadata,14079,metadata-symbol,tournamentHeatViewed
+metadata,14163,metadata-symbol,UpgradeTierUnlocked
+metadata,14164,metadata-symbol,UpgradeDefenseTierUnlocked
+metadata,14165,metadata-symbol,UpgradeUtilityTierUnlocked
+metadata,14166,metadata-symbol,UpgradeAttackTierEverUnlocked
+metadata,14167,metadata-symbol,UpgradeDefenseTierEverUnlocked
+metadata,14168,metadata-symbol,UpgradeUtilityTierEverUnlocked
+metadata,14169,metadata-symbol,HighestWaveThisTier
+metadata,14170,metadata-symbol,RoundsStartedThisTier
+metadata,14171,metadata-symbol,HighestCoinsEarnedThisTier
+metadata,14172,metadata-symbol,HighestCellsEarnedThisTier
+metadata,14203,metadata-symbol,IsTestingHeat
+metadata,14206,metadata-symbol,DeathWaveVFX
+metadata,14213,metadata-symbol,HitThisWave
+metadata,14215,metadata-symbol,ELSDecayWavesUntilDecay
+metadata,14216,metadata-symbol,ELSDecayWasActiveLastWave
+metadata,14217,metadata-symbol,MoreEliteWavesUntilActive
+metadata,14218,metadata-symbol,MoreFleetWavesUntilActive
+metadata,14220,metadata-symbol,DamageDecayWavesUntilDecay
+metadata,14222,metadata-symbol,HealthDecayWavesUntilDecay
+metadata,14231,metadata-symbol,HitTextEliteCells
+metadata,14235,metadata-symbol,HitTextDeathWave
+metadata,14242,metadata-symbol,HitTextBoss
+metadata,14245,metadata-symbol,HitTextElites
+metadata,14246,metadata-symbol,HitTextFleets
+metadata,14289,metadata-symbol,TotalCoinsEarnedFromWaves
+metadata,14298,metadata-symbol,TotalWavesCompleted
+metadata,14330,metadata-symbol,TotalEnemiesDestroyedBoss
+metadata,14336,metadata-symbol,TotalDamageByDeathWave
+metadata,14342,metadata-symbol,TotalWavesSkipped
+metadata,14394,metadata-symbol,TotalDamageByDeathWaveThisRound
+metadata,14397,metadata-symbol,TotalEnemiesTaggedByDeathwaveThisRound
+metadata,14403,metadata-symbol,OverheatFirstTimeBool
+metadata,14414,metadata-symbol,PresetUpgradeTierUnlocked
+metadata,14415,metadata-symbol,PresetUpgradeDefenseTierUnlocked
+metadata,14416,metadata-symbol,PresetUpgradeUtilityTierUnlocked
+metadata,14420,metadata-symbol,PresetEnhancementTierUnlocked
+metadata,14421,metadata-symbol,PresetEnhancementDefenseTierUnlocked
+metadata,14422,metadata-symbol,PresetEnhancementUtilityTierUnlocked
+metadata,14440,metadata-symbol,MilestonesPremiumUnlocked
+metadata,14441,metadata-symbol,MilestonesRewardClaimed
+metadata,14442,metadata-symbol,MilestonesRewardPremiumClaimed
+metadata,14460,metadata-symbol,ShockwaveSizeLevelSelected
+metadata,14473,metadata-symbol,TierBeforeTournament
+metadata,14483,metadata-symbol,TournamentHeatViewed
+metadata,14501,metadata-symbol,EnhancementTierUnlocked
+metadata,14503,metadata-symbol,EnhancementDefenseTierUnlocked
+metadata,14505,metadata-symbol,EnhancementUtilityTierUnlocked
+metadata,14514,metadata-symbol,DeathwaveDamageRemaining
+metadata,14535,metadata-symbol,TempTier
+metadata,14536,metadata-symbol,TempWave
+metadata,14607,metadata-symbol,Wave20
+metadata,14608,metadata-symbol,Wave40
+metadata,14609,metadata-symbol,Wave60
+metadata,14610,metadata-symbol,Tier2Unlock
+metadata,14611,metadata-symbol,Tier3Unlock
+metadata,14614,metadata-symbol,Wave100PostedTiers
+metadata,14615,metadata-symbol,WaveMilestonePostedEvents
+metadata,14617,metadata-symbol,CurrentWave
+metadata,14623,metadata-symbol,TotalEnemiesDestroyedBossThisRound
+metadata,14625,metadata-symbol,TotalEnemiesDestroyedElitesThisRound
+metadata,14633,metadata-symbol,CoinsEarnedWaveSkipThisRound
+metadata,14655,metadata-symbol,WavesSkippedThisRound
+metadata,14660,metadata-symbol,LargestWaveSkipThisRound
+metadata,14661,metadata-symbol,MostCoinsFromWaveSkipThisRound
+metadata,14662,metadata-symbol,MostCellsFromWaveSkipThisRound
+metadata,14669,metadata-symbol,DeathWaveCoinsThisRound
+metadata,14675,metadata-symbol,CashEarnedThisWave
+metadata,14676,metadata-symbol,CoinsEarnedThisWave
+metadata,14704,metadata-symbol,HealthFromDeathWaveMaxed
+metadata,14705,metadata-symbol,LastWaveResumedFrom
+metadata,14706,metadata-symbol,ResumeRoundBossAlive
+metadata,14712,metadata-symbol,GemBlockLastClaimedWave
+metadata,14715,metadata-symbol,ResumeMiniBossSeed
+metadata,14719,metadata-symbol,SecondWindAngelWingsTimeoutWave
+metadata,14720,metadata-symbol,DemonModeLingeringTimeoutWave
+metadata,14721,metadata-symbol,NukeSlowTimeoutWave
+metadata,14723,metadata-symbol,HighestWaveBool
+metadata,14732,metadata-symbol,NukeWavesUntilRefresh
+metadata,14736,metadata-symbol,DemonModeWavesUntilRefresh
+metadata,14739,metadata-symbol,SecondWindWavesUntilRefresh
+metadata,14743,metadata-symbol,MissileBarrageWavesUntilRefresh
+metadata,14745,metadata-symbol,TowerMaxHealthFromDeathWave
+metadata,14758,metadata-symbol,MagneticHookEliteCounter
+metadata,14777,metadata-symbol,HighestWavePerTierThisCycle
+metadata,14821,metadata-symbol,DissonanceActive
+metadata,14822,metadata-symbol,DissonanceSelected
+metadata,14823,metadata-symbol,DissonanceInfoShownOnce
+metadata,14824,metadata-symbol,DissonanceDamageBoost
+metadata,14825,metadata-symbol,DissonanceHealthBoost
+metadata,14826,metadata-symbol,DissonanceCoinBoost
+metadata,14827,metadata-symbol,DissonanceUltDamageBoost
+metadata,14949,metadata-symbol,shockwaveSizeLevel
+metadata,14950,metadata-symbol,shockwaveFreqLevel
+metadata,14958,metadata-symbol,cashWaveLevel
+metadata,14960,metadata-symbol,coinWaveLevel
+metadata,14974,metadata-symbol,deathWaveQuantity
+metadata,14975,metadata-symbol,deathWaveCooldown
+metadata,14991,metadata-symbol,deathWavePlus
+metadata,15014,metadata-symbol,cardWaveSkip
+metadata,15024,metadata-symbol,cardWaveAccelerator
+metadata,15200,metadata-symbol,Shockwave
+metadata,15363,metadata-symbol,get_AngleCosBoss
+metadata,15364,metadata-symbol,set_AngleCosBoss
+metadata,15368,metadata-symbol,TrackBoss
+metadata,15369,metadata-symbol,BossDied
+metadata,15370,metadata-symbol,ResetBossTrack
+metadata,15378,metadata-symbol,<AngleCosBoss>k__BackingField
+metadata,15380,metadata-symbol,trackBoss
+metadata,15381,metadata-symbol,spotlightToTrackBoss
+metadata,15384,metadata-symbol,AngleCosBoss
+metadata,15405,metadata-symbol,CoinsEarnedWaveSkip
+metadata,15410,metadata-symbol,EnemiesTaggedByDeathWave
+metadata,15425,metadata-symbol,DeathWaveCoins
+metadata,15438,metadata-symbol,EnemiesDestroyedBoss
+metadata,15480,metadata-symbol,GetTierValue
+metadata,15613,metadata-symbol,spawnInterval
+metadata,15614,metadata-symbol,spawnCoroutine
+metadata,15671,metadata-symbol,DespawnAnim
+metadata,15743,metadata-symbol,IncreasePowerTreeTier
+metadata,15789,metadata-symbol,Power_Tree_Tier_2
+metadata,15790,metadata-symbol,Power_Tree_Tier_3
+metadata,16097,metadata-symbol,get_IsHeatTournament
+metadata,16117,metadata-symbol,GetLeagueTier
+metadata,16118,metadata-symbol,GetLeagueIDFromTier
+metadata,16140,metadata-symbol,reachedWave
+metadata,16312,metadata-symbol,IsHeatTournament
+metadata,16414,metadata-symbol,includeBosses
+metadata,16450,metadata-symbol,rushWaveTimerEffect
+metadata,16546,metadata-symbol,_WaveStrengthID
+metadata,16725,metadata-symbol,showHeatSlider
+metadata,16730,metadata-symbol,Button_HeatPanelOpenInGame
+metadata,16733,metadata-symbol,ShowBossSummaryButton
+metadata,16734,metadata-symbol,HideBossSummaryButtonTimeout
+metadata,16735,metadata-symbol,HideBossSummaryButton
+metadata,16736,metadata-symbol,BossSummaryPanelOpen
+metadata,16737,metadata-symbol,BossSummaryPanelOpenRefresh
+metadata,16738,metadata-symbol,BossSummaryPanelClose
+metadata,16783,metadata-symbol,ShowDeathwaveDamageRemaining
+metadata,16784,metadata-symbol,HideDeathwaveDamageRemaining
+metadata,16785,metadata-symbol,UpdateDeathWaveDamageRemaining
+metadata,16786,metadata-symbol,PunchDeathWaveDamageRemainingText
+metadata,16840,metadata-symbol,waveInfoPanel
+metadata,16847,metadata-symbol,tierNumber
+metadata,16848,metadata-symbol,tierNumber2
+metadata,16849,metadata-symbol,wavePanelTrophyImage
+metadata,16850,metadata-symbol,wavePanelTrophyImageObject
+metadata,16936,metadata-symbol,wavePanel
+metadata,16937,metadata-symbol,waveProgressSlider
+metadata,16938,metadata-symbol,waveProgressSliderImage
+metadata,16939,metadata-symbol,waveTimerType
+metadata,16958,metadata-symbol,homeBetaHeatButton
+metadata,16977,metadata-symbol,enhancementTierUnlock
+metadata,16978,metadata-symbol,enhancementTierUnlockButton
+metadata,16979,metadata-symbol,enhancementTierUnlockCoinCostText
+metadata,16980,metadata-symbol,enhancementTierUnlockCoinsNeedGO
+metadata,16981,metadata-symbol,enhancementTierUnlockReadyToUnlockGO
+metadata,16987,metadata-symbol,enhancementDefenseTierUnlock
+metadata,16988,metadata-symbol,enhancementDefenseTierUnlockButton
+metadata,16989,metadata-symbol,enhancementDefenseTierUnlockCoinCostText
+metadata,16990,metadata-symbol,enhancementDefenseTierUnlockCoinsNeedGO
+metadata,16991,metadata-symbol,enhancementDefenseTierUnlockReadyToUnlockGO
+metadata,16997,metadata-symbol,enhancementUtilityTierUnlock
+metadata,16998,metadata-symbol,enhancementUtilityTierUnlockButton
+metadata,16999,metadata-symbol,enhancementUtilityTierUnlockCoinCostText
+metadata,17000,metadata-symbol,enhancementUtilityTierUnlockCoinNeedGO
+metadata,17001,metadata-symbol,enhancementUtilityTierUnlockReadyToUnlockGO
+metadata,17033,metadata-symbol,workshopTierUnlockButtonObject
+metadata,17034,metadata-symbol,workshopTierUnlockButton
+metadata,17035,metadata-symbol,workshopTierUnlockCostText
+metadata,17041,metadata-symbol,workshopDefenseTierUnlockButtonObject
+metadata,17042,metadata-symbol,workshopDefenseTierUnlockButton
+metadata,17043,metadata-symbol,workshopDefenseTierUnlockCostText
+metadata,17049,metadata-symbol,workshopUtilityTierUnlockButtonObject
+metadata,17050,metadata-symbol,workshopUtilityTierUnlockButton
+metadata,17051,metadata-symbol,workshopUtilityTierUnlockCostText
+metadata,17147,metadata-symbol,statsHighestWaveText
+metadata,17148,metadata-symbol,statsHighestCoinsTierText
+metadata,17149,metadata-symbol,statsHighestCellsTierText
+metadata,17186,metadata-symbol,gameEndWaveText
+metadata,17191,metadata-symbol,gameEndTierText
+metadata,17192,metadata-symbol,gameEndHighestWaveTextObject
+metadata,17193,metadata-symbol,gameEndHighestWaveThisTierText
+metadata,17202,metadata-symbol,gameEndDissonanceGO
+metadata,17203,metadata-symbol,gameEndDissonanceTitleText
+metadata,17204,metadata-symbol,gameEndDissonanceWaveText
+metadata,17205,metadata-symbol,gameEndDissonanceBoostText
+metadata,17208,metadata-symbol,tournamentEndWaveText
+metadata,17289,metadata-symbol,sideMenuBattleHeatButton
+metadata,17292,metadata-symbol,tournamentHeatWaveSlider
+metadata,17293,metadata-symbol,tournamentHeatWaveSliderText
+metadata,17294,metadata-symbol,tournamentHeatMainBarObject
+metadata,17295,metadata-symbol,tournamentHeatMainBarSlider
+metadata,17296,metadata-symbol,tournamentHeatMainBarText
+metadata,17297,metadata-symbol,tournamentHeatMainBarParticle
+metadata,17306,metadata-symbol,aspectRatioTier
+metadata,17401,metadata-symbol,deathWaveDamageRemainingObject
+metadata,17402,metadata-symbol,deathWaveDamageRemainingText
+metadata,17403,metadata-symbol,deathWaveDamageRemainingCurrentPunches
+metadata,17454,metadata-symbol,<PunchDeathWaveDamageRemainingText>b__0
+metadata,17455,metadata-symbol,<PunchDeathWaveDamageRemainingText>b__1
+metadata,17460,metadata-symbol,<BossSummaryPanelOpenRefresh>d__857
+metadata,17466,metadata-symbol,<HideBossSummaryButtonTimeout>d__854
+metadata,17561,metadata-symbol,WaveInfoPanel
+metadata,17563,metadata-symbol,ShowWaveInfoPanel
+metadata,17565,metadata-symbol,WaveInfoPanelOpen
+metadata,17566,metadata-symbol,WaveInfoPanelClose
+metadata,17567,metadata-symbol,WaveInfoPanelUpdateFunction
+metadata,17568,metadata-symbol,WaveInfoPanelUpdate
+metadata,17570,metadata-symbol,waveTierNumberText
+metadata,17576,metadata-symbol,waveInfoTitleText
+metadata,17577,metadata-symbol,waveInfoText
+metadata,17579,metadata-symbol,waveInfoContent
+metadata,17581,metadata-symbol,<WaveInfoPanelUpdateFunction>d__26
+metadata,17612,metadata-symbol,alertWave
+metadata,17613,metadata-symbol,_alertWaveSequence
+metadata,19969,metadata-symbol,spawnedPrefabs
+metadata,63350,metadata-symbol,APINotIncludedInTitleUsageTier
+metadata,63370,metadata-symbol,FreeTierCannotHaveVirtualCurrency
+metadata,85337,metadata-symbol,DespawnAll
+metadata,85339,metadata-symbol,Despawn
+metadata,85363,metadata-symbol,DespawnActiveTweens
+metadata,85406,metadata-symbol,_despawnAllCalledFromUpdateLoopCallback
+metadata,97740,metadata-symbol,ParameterShippingTier
+metadata,98981,metadata-symbol,custom_wave
+metadata,98982,metadata-symbol,custom_tier
+metadata,98985,metadata-symbol,tier2
+metadata,98986,metadata-symbol,tier3
+metadata,98987,metadata-symbol,tier4
+metadata,98988,metadata-symbol,tier5
+metadata,98989,metadata-symbol,tier6
+metadata,98990,metadata-symbol,tier7
+metadata,98991,metadata-symbol,tier8
+metadata,98992,metadata-symbol,tier9
+metadata,98993,metadata-symbol,tier10
+metadata,98994,metadata-symbol,tier11
+metadata,98995,metadata-symbol,tier12
+metadata,98996,metadata-symbol,tier13
+metadata,98997,metadata-symbol,tier14
+metadata,98998,metadata-symbol,tier15
+metadata,98999,metadata-symbol,tier16
+metadata,99000,metadata-symbol,tier17
+metadata,99001,metadata-symbol,tier18
+metadata,99002,metadata-symbol,tier19
+metadata,99003,metadata-symbol,tier20.weekly_mission_complete.weekly_mission_box_open(custom_time_category
+metadata,100783,metadata-symbol,Heat Stuff
+metadata,100784,metadata-symbol,Overheat Stuff
+metadata,100819,metadata-symbol,Wave And Tier
+metadata,100889,metadata-symbol,Waves
+metadata,100902,metadata-symbol,Difficulty Tiers
+metadata,100907,metadata-symbol,$Currency This Wave
+metadata,100922,metadata-symbol,Shockwave
+metadata,100944,metadata-symbol,Drop range of Elite Cells by tier. Index 3 means tier 3. X is the min value and Y the max value
+metadata,100976,metadata-symbol,Boss Drop Text
+metadata,101055,metadata-symbol,Wave Panel
+metadata,101109,metadata-symbol,0Tournament Heat Main Bar
+metadata,101110,metadata-symbol,$Boss Summary Panel
+metadata,101122,metadata-symbol,Death Wave
+metadata,101184,metadata-symbol,$Reset Tier Claimed
+libil2cpp,19760,native-string,puestodiariopuebloquieremanuelpropiocrisisciertoseguromuertefuentecerrargrandeefectopartesmedidapropiaofrecetierrae-mailvariasformasfuturoobjetoseguirriesgonormasmismos

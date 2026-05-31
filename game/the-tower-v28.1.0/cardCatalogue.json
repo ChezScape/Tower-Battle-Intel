@@ -1,0 +1,296 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Card Catalogue",
+    "catalogueKey": "cardCatalogue",
+    "entryCount": 13,
+    "purpose": "Cards and card-context terms useful for Systems, History and Command Deck."
+  },
+  "entries": [
+    {
+      "key": "attack_speed",
+      "label": "Attack Speed",
+      "family": "Card / Attack",
+      "meaning": "Attack speed card/stat context.",
+      "tags": [
+        "card",
+        "attack"
+      ],
+      "aliases": [
+        "Attack Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "damage",
+      "label": "Damage",
+      "family": "Card / Attack",
+      "meaning": "Damage card/stat context.",
+      "tags": [
+        "card",
+        "attack"
+      ],
+      "aliases": [
+        "Damage"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "health",
+      "label": "Health",
+      "family": "Card / Defense",
+      "meaning": "Health card/stat context.",
+      "tags": [
+        "card",
+        "defense"
+      ],
+      "aliases": [
+        "Health"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "health_regen",
+      "label": "Health Regen",
+      "family": "Card / Defense",
+      "meaning": "Health regeneration card/stat context.",
+      "tags": [
+        "card",
+        "defense",
+        "regen"
+      ],
+      "aliases": [
+        "Health Regen"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "slow_aura",
+      "label": "Slow Aura",
+      "family": "Card / Control",
+      "meaning": "Slow/control card context.",
+      "tags": [
+        "card",
+        "control"
+      ],
+      "aliases": [
+        "Slow Aura"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "command deck"
+      ],
+      "notes": []
+    },
+    {
+      "key": "enemy_balance",
+      "label": "Enemy Balance",
+      "family": "Card / Economy + Density",
+      "meaning": "Run-density/economy card context.",
+      "tags": [
+        "card",
+        "economy",
+        "enemy-density"
+      ],
+      "aliases": [
+        "Enemy Balance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "history run context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "wave_skip",
+      "label": "Wave Skip",
+      "family": "Card / Utility",
+      "meaning": "Wave skip utility; separates speed/progression from raw strength.",
+      "tags": [
+        "card",
+        "utility",
+        "wave"
+      ],
+      "aliases": [
+        "Wave Skip"
+      ],
+      "battleReportLinks": [
+        "WavesSkipped",
+        "LargestWaveSkip"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "history milestone context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "wave_accelerator",
+      "label": "Wave Accelerator",
+      "family": "Card / Utility",
+      "meaning": "Wave acceleration utility; useful for real-time farming explanations.",
+      "tags": [
+        "card",
+        "utility",
+        "speed"
+      ],
+      "aliases": [
+        "Wave Accelerator"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "compare rate context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "intro_sprint",
+      "label": "Intro Sprint",
+      "family": "Card / Utility",
+      "meaning": "Opening wave acceleration / resume-battle context.",
+      "tags": [
+        "card",
+        "utility",
+        "opening"
+      ],
+      "aliases": [
+        "Intro Sprint"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "history context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "death_ray",
+      "label": "Death Ray",
+      "family": "Card / Kill Source",
+      "meaning": "Instant-kill card source, separate from Ultimate Weapons.",
+      "tags": [
+        "card",
+        "kill-source"
+      ],
+      "aliases": [
+        "Death Ray",
+        "Double Death Ray"
+      ],
+      "battleReportLinks": [
+        "DestroyedByDeathRay"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "kills breakdown"
+      ],
+      "notes": []
+    },
+    {
+      "key": "demon_mode",
+      "label": "Demon Mode",
+      "family": "Card / Survival",
+      "meaning": "Emergency survival / active ability context.",
+      "tags": [
+        "card",
+        "survival"
+      ],
+      "aliases": [
+        "Demon Mode"
+      ],
+      "battleReportLinks": [
+        "DemonMode"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "survival context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "nuke",
+      "label": "Nuke",
+      "family": "Card / Utility",
+      "meaning": "Nuke activation utility / report count.",
+      "tags": [
+        "card",
+        "utility"
+      ],
+      "aliases": [
+        "Nuke"
+      ],
+      "battleReportLinks": [
+        "Nuke"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "misc context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "energy_net",
+      "label": "Energy Net",
+      "family": "Card / Boss Control",
+      "meaning": "Boss immobilisation/control context.",
+      "tags": [
+        "card",
+        "boss",
+        "control"
+      ],
+      "aliases": [
+        "Energy Net"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "boss survival explanation"
+      ],
+      "notes": []
+    }
+  ]
+}

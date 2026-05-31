@@ -1,0 +1,74 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.1.0 Battle Report Official Schema",
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T19:25:50.138638+00:00",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z26_BattleReportOfficialSchema",
+    "baselineTarget": "v4.11z25 Mobile CSS blank module scaffold / desktop module split baseline",
+    "counts": {
+      "battleReportUiLabels": 70,
+      "battleHistoryEntryFields": 142,
+      "statValueTypeValues": 63,
+      "officialSectionLabels": 9,
+      "aliases": 375,
+      "families": 11,
+      "sections": 13,
+      "enemyRelatedFields": 41,
+      "guardianFields": 14
+    },
+    "protectionRules": [
+      "Keep dashboard visuals locked to v4.11x2 direction.",
+      "Keep Compare as bare restart until schema foundation is tested.",
+      "Keep mobile.css blank module scaffold untouched.",
+      "Use this catalogue for labels/schema/source confidence, not hidden formulas."
+    ]
+  },
+  "highValueFindings": [
+    {
+      "finding": "The app has a much wider BattleHistoryEntry schema than the current sample reports show.",
+      "impact": "TBI should accept optional fields without failing and report unknown/new fields in Debug."
+    },
+    {
+      "finding": "The app separates Enemies Hit By, Enemies Destroyed By, and Killed With Effect Active.",
+      "impact": "TBI should not treat hits, kill source, and effect-window kills as the same thing."
+    },
+    {
+      "finding": "Other is present as DestroyedByOther and Other Coin Bonuses is a separate currency field.",
+      "impact": "TBI should split Other Kills from Other Coin Bonuses."
+    },
+    {
+      "finding": "Battle history stores IsTournament and DissonanceType internally.",
+      "impact": "TBI can add report tags for tournament/dissonance instead of relying on pasted marker text."
+    },
+    {
+      "finding": "Newer enemy subtype totals exist: Saboteurs, Commanders, Overcharges.",
+      "impact": "TBI parser/enemy catalogue should support these now, even if older reports do not include them."
+    },
+    {
+      "finding": "Guardian report fields exist for damage, summons, stolen/fetched coins, catches, gems, medals, shards, and module drops.",
+      "impact": "Systems/Command Deck can later evaluate Guardian value and loot contribution."
+    }
+  ],
+  "specialMeanings": [
+    {
+      "label": "Other",
+      "property": "DestroyedByOther",
+      "family": "Enemies Destroyed By",
+      "meaning": "Miscellaneous enemies destroyed by a fallback or uncategorised kill source not broken out into a named Battle Report kill-source row.",
+      "sourceConfidence": "game-file-observed-medium-high",
+      "doNotClaim": "Do not claim every exact source included under Other unless later confirmed."
+    },
+    {
+      "label": "Other Coin Bonuses",
+      "property": "CoinsFromCoinBonuses",
+      "family": "Currencies / Rewards",
+      "meaning": "Miscellaneous coin bonus sources not shown as their own named economy row.",
+      "sourceConfidence": "game-file-observed-medium-high",
+      "doNotClaim": "Do not confuse this with Other Kills / DestroyedByOther."
+    }
+  ]
+}

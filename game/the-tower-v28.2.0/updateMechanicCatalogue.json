@@ -1,0 +1,440 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.2.0 Update Mechanics Static Catalogue",
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.2.0",
+    "sourceFile": "The Tower - Idle Tower Defense_28.2.0_APKPure.xapk",
+    "extractionType": "static readable strings and embedded changelog text from uploaded 28.2.0 XAPK",
+    "generatedAt": "2026-05-27T20:20:00Z",
+    "sourceConfidence": "game-file-confirmed-description",
+    "purpose": "Dissonance, Overheat, Bot+, Battle Report/stat category and v28 mechanics vocabulary for TBI Game Brain."
+  },
+  "entries": [
+    {
+      "key": "dissonance",
+      "label": "Dissonance",
+      "family": "Dissonance / Tier modifier",
+      "meaning": "A v28 layer to Tier gameplay. A Dissonant Run disables one workshop tab and can provide a related tier-specific boost based on progress.",
+      "tags": [
+        "dissonance",
+        "tier",
+        "modifier",
+        "v28"
+      ],
+      "aliases": [
+        "Dissonance",
+        "Dissonant Run",
+        "Dissonant Runs",
+        "Dissonant Boosts"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context",
+        "Compare caution"
+      ],
+      "notes": [
+        "28.2.0 APK still contains the Dissonance update text and Dissonance UI/class names."
+      ]
+    },
+    {
+      "key": "dissonant_echo_labs",
+      "label": "Dissonant Echo Labs",
+      "family": "Dissonance / Labs",
+      "meaning": "Four labs linked to Attack, Defense, Utility, and Ultimate Weapon that apply a percent of tier Dissonant Boost to the Tower.",
+      "tags": [
+        "dissonance",
+        "labs",
+        "echo"
+      ],
+      "aliases": [
+        "Dissonant Echo",
+        "Dissonant Echo labs",
+        "Dissonant Echo Labs"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": [
+        "Patch text states Dissonant Echo labs unlock at Tier 17 Wave 60."
+      ]
+    },
+    {
+      "key": "overheat",
+      "label": "Overheat",
+      "family": "High-wave pressure / Heat",
+      "meaning": "A high-wave pressure system. Normal tiers use Enemy Skip Decay, while tournament Overheat can add extra decay/spawn conditions.",
+      "tags": [
+        "overheat",
+        "heat",
+        "high wave",
+        "tournament"
+      ],
+      "aliases": [
+        "Overheat",
+        "Heat button",
+        "Enemy Skip Decay Overheat"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Coach warning",
+        "Compare context",
+        "Systems glossary"
+      ],
+      "notes": [
+        "Patch text says the panel appears after clearing Wave 4500 on any Tier."
+      ]
+    },
+    {
+      "key": "overheat_damage_decay",
+      "label": "Damage Decay",
+      "family": "Tournament Overheat Condition",
+      "meaning": "Tournament Overheat condition: Tower Damage is reduced every 10 waves.",
+      "tags": [
+        "overheat",
+        "tournament",
+        "damage"
+      ],
+      "aliases": [
+        "Damage Decay"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Coach warning",
+        "Tournament context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "overheat_health_decay",
+      "label": "Health Decay",
+      "family": "Tournament Overheat Condition",
+      "meaning": "Tournament Overheat condition: Tower Health is reduced every 10 waves.",
+      "tags": [
+        "overheat",
+        "tournament",
+        "health"
+      ],
+      "aliases": [
+        "Health Decay"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Coach warning",
+        "Tournament context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "overheat_more_fleets",
+      "label": "More Fleets",
+      "family": "Tournament Overheat Condition",
+      "meaning": "Tournament Overheat condition: an additional Fleet spawns every 100 waves.",
+      "tags": [
+        "overheat",
+        "tournament",
+        "fleet"
+      ],
+      "aliases": [
+        "More Fleets"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Coach warning",
+        "Tournament context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "overheat_more_elites",
+      "label": "More Elites",
+      "family": "Tournament Overheat Condition",
+      "meaning": "Tournament Overheat condition: an additional Elite spawns every 5 waves.",
+      "tags": [
+        "overheat",
+        "tournament",
+        "elite"
+      ],
+      "aliases": [
+        "More Elites"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Coach warning",
+        "Tournament context",
+        "cell/survival context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "bot_bot",
+      "label": "Bot Bot",
+      "family": "Bots",
+      "meaning": "v28 bot that increases the effects of other bot effects within its radius.",
+      "tags": [
+        "bot",
+        "bot plus",
+        "range"
+      ],
+      "aliases": [
+        "Bot Bot"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": [
+        "Patch text lists Range, Cooldown, % Increase, and Duration as Bot Bot stats."
+      ]
+    },
+    {
+      "key": "bot_plus",
+      "label": "Bot+",
+      "family": "Bots / Upgrade Layer",
+      "meaning": "Bot upgrade feature available when all Bots are unlocked. Each bot has a specialized ability unlocked with stones and upgraded with medals.",
+      "tags": [
+        "bot",
+        "bot plus",
+        "medals",
+        "stones"
+      ],
+      "aliases": [
+        "Bot+",
+        "Bot Plus",
+        "Bot+ abilities"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "wildfire",
+      "label": "Wildfire",
+      "family": "Bot+ Ability",
+      "meaning": "Enemies hit by Flame Bot become Enflamed in addition to Burned, receiving extra damage.",
+      "tags": [
+        "bot plus",
+        "flame bot",
+        "damage amplification"
+      ],
+      "aliases": [
+        "Wildfire",
+        "Flame Bot+"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "titan_shock",
+      "label": "Titan Shock",
+      "family": "Bot+ Ability",
+      "meaning": "Enemies struck by Thunder Bot have decreased attack speed; value scales with enemy mass digits according to patch text.",
+      "tags": [
+        "bot plus",
+        "thunder bot",
+        "enemy attack speed"
+      ],
+      "aliases": [
+        "Titan Shock",
+        "Thunder Bot+"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": [
+        "No hidden formula claims are made; the description only follows readable patch text."
+      ]
+    },
+    {
+      "key": "bonus_cells",
+      "label": "Bonus Cells",
+      "family": "Bot+ Ability",
+      "meaning": "Elites killed in Golden Bot range grant more Cells.",
+      "tags": [
+        "bot plus",
+        "golden bot",
+        "cells",
+        "elite"
+      ],
+      "aliases": [
+        "Bonus Cells",
+        "Golden Bot+"
+      ],
+      "battleReportLinks": [
+        "CellsEarned",
+        "CellsPerHour"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "cell farming context",
+        "Coach context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "echoing_shot",
+      "label": "Echoing Shot",
+      "family": "Bot+ Ability",
+      "meaning": "Tower bullets within range count as more bullets; Ultimate Weapon projectiles are also boosted at a reduced rate according to patch text.",
+      "tags": [
+        "bot plus",
+        "amplify bot",
+        "projectiles"
+      ],
+      "aliases": [
+        "Echoing Shot",
+        "Amplify Bot+"
+      ],
+      "battleReportLinks": [
+        "ProjectilesCount",
+        "EnemiesHitByProjectiles"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "damage/utility context",
+        "Coach context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "maximum_power",
+      "label": "Maximum Power",
+      "family": "Bot+ Ability",
+      "meaning": "Boosts Bot+ abilities of other bots.",
+      "tags": [
+        "bot plus",
+        "bot bot"
+      ],
+      "aliases": [
+        "Maximum Power",
+        "Bot Bot+"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary",
+        "Coach context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "synchronicity",
+      "label": "Synchronicity",
+      "family": "Bots / Pathing",
+      "meaning": "Stone upgrade unlocked after all five Bot+ abilities that allows bots to be assigned synchronized pathing slots.",
+      "tags": [
+        "bot plus",
+        "pathing",
+        "stones"
+      ],
+      "aliases": [
+        "Synchronicity"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "battle_report_v28_simplification",
+      "label": "Battle Report v28 simplification",
+      "family": "Battle Report / Stat Categories",
+      "meaning": "The v28 patch text says Battle Report was simplified around time, coins, coins/hour, cells, and cells/hour while adding fun record stats and recategorising stats.",
+      "tags": [
+        "battle report",
+        "stats",
+        "categories"
+      ],
+      "aliases": [
+        "Simplified the Battle Report",
+        "Added new stats and stat categories",
+        "Largest Wave Skip",
+        "Largest Golden Combo"
+      ],
+      "battleReportLinks": [
+        "GameTime",
+        "RealTime",
+        "CoinsEarned",
+        "CoinsPerHour",
+        "CellsEarned",
+        "CellsPerHour",
+        "LargestWaveSkip"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Compare foundation",
+        "History search",
+        "Game Brain Verification"
+      ],
+      "notes": [
+        "The v28.2.0 static pass found all 142 current BattleHistoryEntry property names still present."
+      ]
+    },
+    {
+      "key": "golden_tower_vfx_toggle",
+      "label": "Golden Tower VFX toggle",
+      "family": "Toggles / Ultimate Weapon UI",
+      "meaning": "Patch text says a Golden Tower VFX toggle was added to the Toggles menu.",
+      "tags": [
+        "golden tower",
+        "toggles",
+        "ui"
+      ],
+      "aliases": [
+        "Golden Tower VFX toggle"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "event_relic_store_rotation",
+      "label": "Event Store Relic Section",
+      "family": "Events / Relics",
+      "meaning": "Patch text says the Event Store relic section rotates older free/premium event relics, with Rare and Epic relic costs stated in gems.",
+      "tags": [
+        "event store",
+        "relics"
+      ],
+      "aliases": [
+        "Relic section",
+        "Rare relics",
+        "Epic relics"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "Systems glossary"
+      ],
+      "notes": []
+    }
+  ]
+}

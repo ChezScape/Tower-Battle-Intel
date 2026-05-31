@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * BATTLE REPORT PARSER v4.10d
+ * BATTLE REPORT PARSER v4.11z31
  * Uses the shared report splitter, section engine, aliases and schema brain.
  */
 
@@ -40,6 +40,10 @@ import {
 } from "../game/unknownMetricLogger.js";
 
 import {
+    buildGameBrainParserFeedback
+} from "../game/gameBrainRuntimeFeedback.js";
+
+import {
     validateAndRepair
 } from "./schemaEngine.js";
 
@@ -49,7 +53,7 @@ export function parser(rawText) {
     if (!raw.trim()) {
         return validateAndRepair({
             meta: {
-                parserVersion: "battle-report-parser-v4.10d",
+                parserVersion: "battle-report-parser-v4.11z31",
                 confidence: 0,
                 error: "empty_input"
             }
@@ -98,6 +102,7 @@ export function parser(rawText) {
     const reportSchema = validateReportAgainstSchema(sections);
     const unknownReportFields = findUnknownReportFields(sections);
     const unknownMetricScan = scanUnknownReportMetrics({ sections });
+    const gameBrainFeedback = buildGameBrainParserFeedback({ core, sections, flat });
 
     const parsed = {
         core,
@@ -105,7 +110,7 @@ export function parser(rawText) {
         sections,
         flat,
         meta: {
-            parserVersion: "battle-report-parser-v4.10d",
+            parserVersion: "battle-report-parser-v4.11z31",
             confidence: estimateConfidence({ core, sections, flat, reportSchema }),
             reportId: fingerprintReport(reportText),
             reportCount: countBattleReports(raw),
@@ -113,6 +118,7 @@ export function parser(rawText) {
             reportSchema,
             unknownReportFields,
             unknownMetricScan,
+            gameBrainFeedback,
             timeModel
         },
         raw: {

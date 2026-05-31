@@ -1,26 +1,41 @@
 "use strict";
 
 /**
- * LOCAL STORE
- * Browser persistence for Tower Battle Intel.
+ * LOCAL STORE COMPATIBILITY WRAPPER v4.11z52w12
+ * Public storage API remains stable while real ownership is split into smaller
+ * storage modules. Keep this file as the front door until all callers migrate.
  */
 
-const STORAGE_KEY = "towerBattleIntel.state.v1";
-const BACKUP_KEY = "towerBattleIntel.state.backup.v1";
-const LEGACY_KEYS = Object.freeze([
-    "battleAnalyserState",
-    "battle-analyser-state",
-    "towerBattleIntel",
-    "towerBattleIntel.state"
-]);
+import {
+    STORAGE_SCHEMA_VERSION,
+    STORAGE_KEY,
+    BACKUP_KEY,
+    LEGACY_KEYS,
+    getStorageKey as getPrimaryStorageKey
+} from "./storageKeys.js";
+import {
+    hasLocalStorage,
+    readRawKey,
+    readJSONKey,
+    writeJSONKey,
+    removeStorageKey,
+    safeClone
+} from "./storageUtils.js";
+import { normaliseHistoryRuns, normaliseUIState } from "./historyStore.js";
+import { normaliseComparisonSlotsForStorage } from "./runSlotStore.js";
+import { parseImportJSON } from "./importStore.js";
+import { createExportJSONString, createStoredHistoryCandidates, getExportSourceSummary } from "./exportStore.js";
+import { buildRawArchiveFromRuns, createRawArchiveSummary } from "./rawReportArchiveStore.js";
+
+export const LOCAL_STORE_WRAPPER_VERSION = "v4.11z52w16";
 
 export function loadStorage() {
     if (!hasLocalStorage()) return null;
 
-    const primary = readKey(STORAGE_KEY);
+    const primary = readJSONKey(STORAGE_KEY);
     if (primary) return normaliseLoadedState(primary);
 
-    const backup = readKey(BACKUP_KEY);
+    const backup = readJSONKey(BACKUP_KEY);
     if (backup) return normaliseLoadedState(backup);
 
     const legacy = loadLegacyStorage();
@@ -38,14 +53,13 @@ export function saveStorage(state = {}) {
 
     try {
         const payload = normaliseStoredState(state);
-        const existing = localStorage.getItem(STORAGE_KEY);
+        const existing = readRawKey(STORAGE_KEY);
 
         if (existing) {
             localStorage.setItem(BACKUP_KEY, existing);
         }
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-        return true;
+        return writeJSONKey(STORAGE_KEY, payload);
     } catch (error) {
         console.warn("[Tower Battle Intel] Failed to save local storage:", error);
         return false;
@@ -56,9 +70,9 @@ export function clearStorage() {
     if (!hasLocalStorage()) return false;
 
     try {
-        localStorage.removeItem(STORAGE_KEY);
-        localStorage.removeItem(BACKUP_KEY);
-        for (const key of LEGACY_KEYS) localStorage.removeItem(key);
+        removeStorageKey(STORAGE_KEY);
+        removeStorageKey(BACKUP_KEY);
+        for (const key of LEGACY_KEYS) removeStorageKey(key);
         return true;
     } catch (error) {
         console.warn("[Tower Battle Intel] Failed to clear local storage:", error);
@@ -68,53 +82,99 @@ export function clearStorage() {
 
 export function hasSavedStorage() {
     if (!hasLocalStorage()) return false;
-    return Boolean(localStorage.getItem(STORAGE_KEY) || localStorage.getItem(BACKUP_KEY));
+    return Boolean(readRawKey(STORAGE_KEY) || readRawKey(BACKUP_KEY));
 }
 
 export function exportStorage() {
-    return JSON.stringify(loadStorage() || {}, null, 2);
+    return createExportJSONString(loadStorage() || {});
+}
+
+export function readRawStorageSnapshot() {
+    if (!hasLocalStorage()) {
+        return { available: false, primary: null, backup: null, legacy: [] };
+    }
+
+    return {
+        available: true,
+        storageKey: STORAGE_KEY,
+        backupKey: BACKUP_KEY,
+        primary: readRawKey(STORAGE_KEY),
+        backup: readRawKey(BACKUP_KEY),
+        legacy: LEGACY_KEYS
+            .map(key => ({ key, value: readRawKey(key) }))
+            .filter(item => item.value)
+    };
+}
+
+export function readSavedHistoryCandidates() {
+    return createStoredHistoryCandidates({
+        loaded: loadStorage(),
+        raw: readRawStorageSnapshot()
+    });
+}
+
+export function inspectStorageExportSources() {
+    const loaded = loadStorage();
+    const raw = readRawStorageSnapshot();
+    const candidates = createStoredHistoryCandidates({ loaded, raw });
+
+    return getExportSourceSummary({ loaded, raw, candidates });
 }
 
 export function importStorage(json = "") {
-    if (!json || typeof json !== "string") return false;
+    const parsed = parseImportJSON(json);
 
-    try {
-        const parsed = JSON.parse(json);
-        return saveStorage(parsed);
-    } catch (error) {
-        console.warn("[Tower Battle Intel] Failed to import storage:", error);
+    if (!parsed.ok) {
+        console.warn("[Tower Battle Intel] Failed to import storage:", parsed.error);
         return false;
     }
+
+    return saveStorage(parsed.value);
 }
 
 export function getStorageKey() {
-    return STORAGE_KEY;
+    return getPrimaryStorageKey();
+}
+
+export function getLocalStoreStatus() {
+    return {
+        version: LOCAL_STORE_WRAPPER_VERSION,
+        owner: "src/storage/localStore.js",
+        role: "compatibility-wrapper",
+        storageKey: STORAGE_KEY,
+        backupKey: BACKUP_KEY,
+        legacyKeyCount: LEGACY_KEYS.length,
+        modules: [
+            "storageKeys.js",
+            "storageUtils.js",
+            "historyStore.js",
+            "runSlotStore.js",
+            "importStore.js",
+            "exportStore.js",
+            "rawReportArchiveStore.js"
+        ]
+    };
 }
 
 function loadLegacyStorage() {
     for (const key of LEGACY_KEYS) {
-        const value = readKey(key);
+        const value = readJSONKey(key);
         if (value) return value;
     }
 
     return null;
 }
 
-function readKey(key) {
-    try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return null;
-        return JSON.parse(raw);
-    } catch (error) {
-        console.warn(`[Tower Battle Intel] Failed to read storage key "${key}":`, error);
-        return null;
-    }
-}
-
 function normaliseLoadedState(saved = {}) {
     if (!saved || typeof saved !== "object") return null;
 
-    return {
+    const history = normaliseHistoryRuns(saved.history);
+    const rawArchive = buildRawArchiveFromRuns(
+        [saved.runA, saved.runB, saved.currentRun, ...history].filter(Boolean),
+        saved.rawArchive || saved.rawReportArchive || null
+    );
+
+    return normaliseComparisonSlotsForStorage({
         runA: saved.runA || null,
         runB: saved.runB || null,
         currentRun: saved.currentRun || null,
@@ -124,21 +184,29 @@ function normaliseLoadedState(saved = {}) {
         trend: saved.trend || [],
         anomalies: Array.isArray(saved.anomalies) ? saved.anomalies : [],
         inspection: saved.inspection || null,
-        history: normaliseHistoryRuns(saved.history),
+        history,
+        rawArchive,
         ui: normaliseUIState(saved.ui),
         lastInput: saved.lastInput || "",
         meta: {
             ...(saved.meta || {}),
             storageKey: STORAGE_KEY,
+            rawArchive: createRawArchiveSummary(rawArchive),
             loadedAt: new Date().toISOString()
         }
-    };
+    }, "runB");
 }
 
 function normaliseStoredState(state = {}) {
     const safe = state && typeof state === "object" ? state : {};
 
-    return {
+    const history = safeClone(normaliseHistoryRuns(safe.history));
+    const rawArchive = buildRawArchiveFromRuns(
+        [safe.runA, safe.runB, safe.currentRun, ...history].filter(Boolean),
+        safe.rawArchive || safe.rawReportArchive || null
+    );
+
+    return normaliseComparisonSlotsForStorage({
         runA: safeClone(safe.runA || null),
         runB: safeClone(safe.runB || null),
         currentRun: safeClone(safe.currentRun || null),
@@ -148,133 +216,32 @@ function normaliseStoredState(state = {}) {
         trend: safeClone(safe.trend || []),
         anomalies: safeClone(Array.isArray(safe.anomalies) ? safe.anomalies : []),
         inspection: safeClone(safe.inspection || null),
-        history: safeClone(normaliseHistoryRuns(safe.history)),
+        history,
+        rawArchive,
         ui: normaliseUIState(safe.ui),
         lastInput: safe.lastInput || "",
         meta: {
             ...(safe.meta || {}),
             app: "Tower Battle Intel",
             storageKey: STORAGE_KEY,
+            rawArchive: createRawArchiveSummary(rawArchive),
             savedAt: new Date().toISOString(),
-            schema: 1
+            schema: STORAGE_SCHEMA_VERSION
         }
-    };
-}
-
-function normaliseUIState(ui = {}) {
-    const safe = ui && typeof ui === "object" ? ui : {};
-
-    return {
-        selectedSection: safe.selectedSection ?? null,
-        debug: Boolean(safe.debug),
-        activeView: safe.activeView || "dashboard",
-        dashboardTab: safe.dashboardTab || safe.activeView || "overview",
-        buildStyle: normaliseBuildStyle(safe.buildStyle || "unknown"),
-        historyFilters: normaliseHistoryFilters(safe.historyFilters),
-        quietDisplay: Boolean(safe.quietDisplay)
-    };
-}
-
-function normaliseHistoryRuns(history = []) {
-    const runs = Array.isArray(history) ? history : [];
-
-    return runs.filter(Boolean).map(run => ({
-        ...run,
-        meta: {
-            ...(run.meta || {}),
-            reportId: run.meta?.reportId || run.reportId || run.id || null,
-            savedAt: run.meta?.savedAt || null,
-            archived: Boolean(run.meta?.archived),
-            notes: run.meta?.notes || "",
-            tags: normaliseTags(run.meta?.tags),
-            buildStyle: normaliseBuildStyle(run.meta?.buildStyle || run.meta?.build || "unknown")
-        }
-    }));
-}
-
-function normaliseHistoryFilters(filters = {}) {
-    const safe = filters && typeof filters === "object" ? filters : {};
-
-    return {
-        query: String(safe.query || ""),
-        sort: String(safe.sort || "newest"),
-        build: String(safe.build || "all"),
-        tag: String(safe.tag || "all"),
-        showArchived: Boolean(safe.showArchived)
-    };
-}
-
-function normaliseTags(tags = []) {
-    const source = typeof tags === "string"
-        ? tags.split(/[#,\s]+/g)
-        : Array.isArray(tags)
-            ? tags
-            : [];
-
-    const seen = new Set();
-
-    return source
-        .map(tag => String(tag || "").trim().replace(/^#+/, "").toLowerCase())
-        .map(tag => tag.replace(/\s+/g, "-"))
-        .map(tag => tag.replace(/[^a-z0-9_-]/g, ""))
-        .filter(Boolean)
-        .filter(tag => {
-            if (seen.has(tag)) return false;
-            seen.add(tag);
-            return true;
-        })
-        .slice(0, 12);
-}
-
-function normaliseBuildStyle(value = "unknown") {
-    const key = String(value || "unknown")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, "_")
-        .replace(/\//g, "_")
-        .replace(/__+/g, "_");
-
-    const allowed = new Set([
-        "unknown",
-        "health_ehp",
-        "blender",
-        "devo",
-        "orb_devo",
-        "glass_cannon",
-        "hybrid"
-    ]);
-
-    return allowed.has(key) ? key : "unknown";
-}
-
-function hasLocalStorage() {
-    try {
-        if (typeof localStorage === "undefined") return false;
-        const testKey = "__tower_battle_intel_storage_test__";
-        localStorage.setItem(testKey, "1");
-        localStorage.removeItem(testKey);
-        return true;
-    } catch {
-        return false;
-    }
-}
-
-function safeClone(value) {
-    if (value == null) return value;
-
-    try {
-        return JSON.parse(JSON.stringify(value));
-    } catch {
-        return value;
-    }
+    }, "runB");
 }
 
 export default {
+    LOCAL_STORE_WRAPPER_VERSION,
     loadStorage,
     saveStorage,
     clearStorage,
     hasSavedStorage,
     exportStorage,
     importStorage,
-    getStorageKey
+    readRawStorageSnapshot,
+    readSavedHistoryCandidates,
+    inspectStorageExportSources,
+    getStorageKey,
+    getLocalStoreStatus
 };

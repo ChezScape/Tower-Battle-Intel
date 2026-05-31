@@ -6,7 +6,7 @@
  * - insights
  * - AI coach cards
  * - anomalies
- * - debug notices
+ * - diagnostic notices
  */
 
 /* --------------------------------------------------

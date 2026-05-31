@@ -1,0 +1,7 @@
+/* Tower Battle Intel desktop module: 02-command-base.css
+   Command Deck base layout helpers
+   Source: v4.11z23 desktop.css lines 158-160.
+*/
+.tbi-action-grid, .tbi-command-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tbi-command-view { display: grid; grid-template-columns: 1fr 420px; gap: 14px; }
+.tbi-command-stats { display: grid; gap: 8px; }

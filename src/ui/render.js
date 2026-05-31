@@ -1,39 +1,15 @@
 "use strict";
 
 /**
- * ROOT UI RENDERER v4.11c
- * One render entry for dashboard + debug panel + delegated UI events.
+ * UI RENDER COMPATIBILITY LOADER v4.11z52w12
+ * Active render ownership lives in src/app/render.js.
  */
 
-import { getState } from "../core/state.js";
-import { renderDashboard } from "./dashboard.js";
-import { renderInspectionPanel } from "./dev/inspectionPanel.js";
-import { bindUIEvents } from "./events.js";
-import { applyDeviceMode } from "./deviceMode.js";
+export {
+    renderApp,
+    renderApp as render,
+    isRendering,
+    getRenderStatus
+} from "../app/render.js";
 
-let renderDepth = 0;
-
-export function render(incomingState = null) {
-    const state = incomingState || getState();
-
-    renderDepth += 1;
-
-    try {
-        applyDeviceMode();
-        renderDashboard(state);
-        renderInspectionPanel(state);
-        bindUIEvents(() => render());
-        return state;
-    } finally {
-        renderDepth = Math.max(0, renderDepth - 1);
-    }
-}
-
-export function isRendering() {
-    return renderDepth > 0;
-}
-
-export default {
-    render,
-    isRendering
-};
+export { default } from "../app/render.js";

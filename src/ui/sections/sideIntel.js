@@ -95,7 +95,6 @@ export function buildQuickActionsPanel() {
                 ${actionButton("save-report", "Save Report", "save")}
                 ${actionButton("export-history", "Export", "export")}
                 ${actionButton("import-history", "Import", "import")}
-                ${actionButton("toggle-debug", "Health Scan", "health", "wide")}
                 ${actionButton("clear-runs", "Clear Runs", "clear", "wide")}
             </div>
         </section>

@@ -28,7 +28,3 @@ export {
     buildInsights
 } from "./insightLayout.js";
 
-export {
-    buildHistory,
-    History
-} from "./historyLayout.js";

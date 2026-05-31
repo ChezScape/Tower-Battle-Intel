@@ -19,26 +19,13 @@ export const appConfig = {
 
         name: "Tower Battle Intel",
 
-        version: "v4.11z6",
+        version: "v4.11z52",
+
+        buildVersion: "v4.11z52w59",
+
+        displayVersion: "v4.11z52w59",
 
         environment: "production"
-    },
-
-    /* --------------------------------------------------
-       DEBUG / DIAGNOSTICS
-    -------------------------------------------------- */
-
-    debug: {
-
-        enabled: false,
-
-        logLevel: "info",
-
-        tracePipeline: false,
-
-        traceRendering: false,
-
-        showInspector: false
     },
 
     /* --------------------------------------------------
@@ -53,15 +40,11 @@ export const appConfig = {
 
         animations: true,
 
-        theme: "dark",
-
         maxPanels: 2,
 
-        defaultSection: "overview",
+        defaultSection: "command",
 
-        persistUIState: true,
-
-        showDebugPanel: false
+        persistUIState: true
     },
 
     /* --------------------------------------------------

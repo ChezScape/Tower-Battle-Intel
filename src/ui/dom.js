@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * DOM ENGINE v4.11c
+ * DOM ENGINE v4.11z52w47
  * Safe selectors, mounting helpers and tiny DOM utilities.
  */
 
@@ -31,8 +31,31 @@ export function setText(target, text = "") {
 
 export function clearElement(target) {
     const el = resolve(target);
-    if (el) el.replaceChildren?.() ?? (el.innerHTML = "");
+    if (!el || el.isConnected === false) return el;
+
+    try {
+        if (typeof el.replaceChildren === "function") {
+            el.replaceChildren();
+        } else {
+            el.innerHTML = "";
+        }
+    } catch (error) {
+        if (!isStaleDomClearError(error)) throw error;
+        if (el.isConnected !== false) {
+            try {
+                el.textContent = "";
+            } catch {
+                // Stale browser timing during focus/blur after render. Safe to ignore.
+            }
+        }
+    }
+
     return el;
+}
+
+function isStaleDomClearError(error = null) {
+    const message = String(error?.message || error || "");
+    return /replaceChildren|no longer a child|blur event handler|node to be removed/i.test(message);
 }
 
 export function clear(target) {

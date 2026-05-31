@@ -1,0 +1,348 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Enemy Catalogue",
+    "catalogueKey": "enemyCatalogue",
+    "entryCount": 13,
+    "purpose": "Enemy names, death-cause meaning, History/Command Deck threat tags."
+  },
+  "entries": [
+    {
+      "key": "basic",
+      "label": "Basic",
+      "family": "Enemy / Common",
+      "meaning": "Standard/common enemy pressure.",
+      "tags": [
+        "common",
+        "baseline"
+      ],
+      "aliases": [
+        "Killed by: Basic",
+        "Total Basic"
+      ],
+      "battleReportLinks": [
+        "KilledBy",
+        "TotalBasic"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis",
+        "history filter"
+      ],
+      "notes": []
+    },
+    {
+      "key": "fast",
+      "label": "Fast",
+      "family": "Enemy / Common",
+      "meaning": "Faster common enemy; useful for speed/control pressure analysis.",
+      "tags": [
+        "common",
+        "speed"
+      ],
+      "aliases": [
+        "Killed by: Fast",
+        "Total Fast"
+      ],
+      "battleReportLinks": [
+        "KilledBy",
+        "TotalFast"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "death diagnosis",
+        "control warning"
+      ],
+      "notes": [
+        "Observed description says Fast is 2x faster than Basic and worth 2 base coins."
+      ]
+    },
+    {
+      "key": "tank",
+      "label": "Tank",
+      "family": "Enemy / Common",
+      "meaning": "High-health common enemy; useful for damage-scaling pressure analysis.",
+      "tags": [
+        "common",
+        "health"
+      ],
+      "aliases": [
+        "Killed by: Tank",
+        "Total Tank"
+      ],
+      "battleReportLinks": [
+        "KilledBy",
+        "TotalTank"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "damage warning"
+      ],
+      "notes": [
+        "Observed description says Tank has 50% speed and 5x health of Basic, worth 4 base coins."
+      ]
+    },
+    {
+      "key": "ranged",
+      "label": "Ranged",
+      "family": "Enemy / Common",
+      "meaning": "Ranged enemy pressure; relevant to range/survival/control failures.",
+      "tags": [
+        "common",
+        "range"
+      ],
+      "aliases": [
+        "Killed by: Ranged",
+        "Total Ranged"
+      ],
+      "battleReportLinks": [
+        "KilledBy",
+        "TotalRanged"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis"
+      ],
+      "notes": []
+    },
+    {
+      "key": "boss",
+      "label": "Boss",
+      "family": "Enemy / Boss",
+      "meaning": "Boss pressure and boss-wave survival; also connected to module/reroll shard rewards.",
+      "tags": [
+        "boss",
+        "survival"
+      ],
+      "aliases": [
+        "Killed by: Boss",
+        "Total Boss"
+      ],
+      "battleReportLinks": [
+        "KilledBy",
+        "TotalBoss"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis",
+        "module reward context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "protector",
+      "label": "Protector",
+      "family": "Enemy / Special",
+      "meaning": "Protector/shield pressure can interfere with knockback, shockwave and Black Hole damage.",
+      "tags": [
+        "special",
+        "shield",
+        "immunity"
+      ],
+      "aliases": [
+        "Protector",
+        "Total Protectors"
+      ],
+      "battleReportLinks": [
+        "TotalProtector"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "command deck warning",
+        "systems glossary"
+      ],
+      "notes": [
+        "Observed battle condition text: Protector shields can give immunity to knockback, shockwave and Black Hole damage."
+      ]
+    },
+    {
+      "key": "vampire",
+      "label": "Vampire",
+      "family": "Enemy / Elite",
+      "meaning": "Elite sustain pressure; useful for regen/sustain shutdown and cell-farming context.",
+      "tags": [
+        "elite",
+        "drain",
+        "sustain"
+      ],
+      "aliases": [
+        "Vampires",
+        "Total Vampires"
+      ],
+      "battleReportLinks": [
+        "TotalVampires"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis",
+        "elite pressure"
+      ],
+      "notes": [
+        "Observed Ultimate clue: Vampire drains faster."
+      ]
+    },
+    {
+      "key": "ray",
+      "label": "Ray",
+      "family": "Enemy / Elite",
+      "meaning": "Elite burst/beam pressure; useful for death-cause diagnosis and elite scaling.",
+      "tags": [
+        "elite",
+        "burst"
+      ],
+      "aliases": [
+        "Rays",
+        "Total Rays"
+      ],
+      "battleReportLinks": [
+        "TotalRays"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis",
+        "elite pressure"
+      ],
+      "notes": [
+        "Observed Ultimate clue: Ray shoots twice / faster."
+      ]
+    },
+    {
+      "key": "scatter",
+      "label": "Scatter",
+      "family": "Enemy / Elite",
+      "meaning": "Elite split/children pressure; useful for crowd and damage scaling diagnosis.",
+      "tags": [
+        "elite",
+        "split"
+      ],
+      "aliases": [
+        "Scatters",
+        "Total Scatters"
+      ],
+      "battleReportLinks": [
+        "TotalScatters"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "death diagnosis",
+        "elite pressure"
+      ],
+      "notes": [
+        "Observed Ultimate clue: Scatter splits once more; children can have more health."
+      ]
+    },
+    {
+      "key": "saboteur",
+      "label": "Saboteur",
+      "family": "Enemy / Fleet",
+      "meaning": "Fleet-style enemy observed in Battle Report schema; keep supported even if older reports do not show it.",
+      "tags": [
+        "fleet",
+        "future-report"
+      ],
+      "aliases": [
+        "Saboteur",
+        "Total Saboteurs"
+      ],
+      "battleReportLinks": [
+        "TotalSaboteurs"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "parser readiness",
+        "future report support"
+      ],
+      "notes": []
+    },
+    {
+      "key": "commander",
+      "label": "Commander",
+      "family": "Enemy / Fleet",
+      "meaning": "Fleet-style enemy observed in Battle Report schema; keep supported for future reports.",
+      "tags": [
+        "fleet",
+        "future-report"
+      ],
+      "aliases": [
+        "Commander",
+        "Total Commanders"
+      ],
+      "battleReportLinks": [
+        "TotalCommanders"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "parser readiness",
+        "future report support"
+      ],
+      "notes": []
+    },
+    {
+      "key": "overcharge",
+      "label": "Overcharge",
+      "family": "Enemy / Fleet",
+      "meaning": "Fleet-style enemy observed in Battle Report schema; keep supported for future reports.",
+      "tags": [
+        "fleet",
+        "future-report"
+      ],
+      "aliases": [
+        "Overcharge",
+        "Total Overcharges"
+      ],
+      "battleReportLinks": [
+        "TotalOvercharges"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "parser readiness",
+        "future report support"
+      ],
+      "notes": []
+    },
+    {
+      "key": "summoned_enemies",
+      "label": "Summoned Enemies",
+      "family": "Enemy / Summoned",
+      "meaning": "Additional/summoned enemy context for Battle Report counts.",
+      "tags": [
+        "summoned",
+        "count"
+      ],
+      "aliases": [
+        "Summoned Enemies"
+      ],
+      "battleReportLinks": [
+        "SummonedEnemies"
+      ],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [
+        "history grouping"
+      ],
+      "notes": []
+    }
+  ],
+  "battleReportRule": "Keep Hit By, Destroyed By, and Killed With Effect Active as separate meanings."
+}

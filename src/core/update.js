@@ -39,9 +39,12 @@ import {
 } from "../diagnostics/pipelineInspector.js";
 
 import {
-    splitBattleReports,
-    fingerprintReport
+    splitBattleReports
 } from "../utils/reportSplitter.js";
+
+import {
+    attachRawArchiveMetaToRun
+} from "../storage/rawReportArchiveStore.js";
 
 import {
     saveStorage
@@ -192,20 +195,19 @@ function buildRunFromReport(reportText, index = 0) {
         return null;
     }
 
-    computed.meta = {
-        ...(computed.meta || {}),
-        reportId: computed.meta?.reportId || fingerprintReport(reportText),
+    const rawReady = attachRawArchiveMetaToRun(computed, reportText, {
+        sourceIndex: index,
+        buildStyle: getState().ui?.buildStyle || "unknown"
+    });
+
+    rawReady.meta = {
+        ...(rawReady.meta || {}),
         sourceIndex: index,
         source: "battle_report",
         app: "Tower Battle Intel"
     };
 
-    computed.raw = {
-        ...(computed.raw || {}),
-        reportText
-    };
-
-    return { parsed, computed };
+    return { parsed, computed: rawReady };
 }
 
 function normaliseSlot(slot = "history") {

@@ -1,0 +1,186 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Card Mastery Catalogue",
+    "catalogueKey": "cardMasteryCatalogue",
+    "entryCount": 8,
+    "purpose": "Observed card mastery names and research prerequisite clues."
+  },
+  "entries": [
+    {
+      "key": "attack_speed_plus",
+      "label": "Attack Speed+",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "attack"
+      ],
+      "aliases": [
+        "Attack Speed+ card mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "health_regen_plus",
+      "label": "Health Regen+",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "defense"
+      ],
+      "aliases": [
+        "Health Regen+ card mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "slow_aura_plus",
+      "label": "Slow Aura+",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "control"
+      ],
+      "aliases": [
+        "Slow Aura+ card mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "double_crit_coin",
+      "label": "Double Crit Coin",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "economy"
+      ],
+      "aliases": [
+        "Double Crit Coin Mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "economy glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "double_wave_skip",
+      "label": "Double Wave Skip",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "wave"
+      ],
+      "aliases": [
+        "Double Wave Skip Mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "wave context"
+      ],
+      "notes": []
+    },
+    {
+      "key": "energy_converter",
+      "label": "Energy Converter",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery research prerequisite.",
+      "tags": [
+        "mastery",
+        "utility"
+      ],
+      "aliases": [
+        "Energy Converter Mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "death_ray_mastery",
+      "label": "Death Ray Mastery",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery/research related to Death Ray.",
+      "tags": [
+        "mastery",
+        "kill-source"
+      ],
+      "aliases": [
+        "Death Ray Mastery",
+        "Enhanced Ray"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "kills glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "coin_ray",
+      "label": "Coin Ray",
+      "family": "Card Mastery",
+      "meaning": "Observed mastery/research related to coin ray.",
+      "tags": [
+        "mastery",
+        "economy"
+      ],
+      "aliases": [
+        "Coin Ray Mastery"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "economy glossary"
+      ],
+      "notes": []
+    }
+  ]
+}

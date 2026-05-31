@@ -2,7 +2,7 @@
 
 /**
  * UI FORMAT ENGINE
- * One safe formatting layer for dashboard, history, modals and debug output.
+ * One safe formatting layer for dashboard, history, modals and diagnostics output.
  */
 
 import {

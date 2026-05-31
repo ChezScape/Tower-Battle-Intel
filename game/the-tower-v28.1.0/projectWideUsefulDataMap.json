@@ -1,0 +1,337 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Project-wide Useful Data Map",
+    "catalogueKey": "projectWideUsefulDataMap",
+    "entryCount": 16,
+    "purpose": "Prioritised roadmap of APK/XAPK data areas useful for TBI."
+  },
+  "categories": [
+    {
+      "key": "enemy_catalogue",
+      "label": "Enemy catalogue, death causes, and threat explanations",
+      "priorityForNextBuild": 1,
+      "hitCount": 2888,
+      "confidence": "High for names/descriptions; Medium for threat tags; Low for exact scaling.",
+      "recommendation": "Add enemyCatalogue v28.1.0 with official descriptions and TBI threat tags.",
+      "tbiUse": [
+        "Command Deck death diagnosis",
+        "History killed-by filters",
+        "Systems enemy glossary",
+        "Compare enemy pressure profile",
+        "Game Brain threat tags"
+      ],
+      "sourceCounts": {
+        "assets": 490,
+        "metadata": 1779,
+        "libil2cpp": 619
+      }
+    },
+    {
+      "key": "ultimate_weapons",
+      "label": "Ultimate Weapons and upgrade families",
+      "priorityForNextBuild": 2,
+      "hitCount": 455,
+      "confidence": "High for names/descriptions; Medium for linking stats; Low for exact cooldown/quantity values.",
+      "recommendation": "Add ultimateWeaponCatalogue with effects and linked Battle Report fields.",
+      "tbiUse": [
+        "Economy source explanations",
+        "Command Deck strategy tags",
+        "Compare UW contribution rows",
+        "Systems UW glossary"
+      ],
+      "sourceCounts": {
+        "assets": 199,
+        "metadata": 256
+      }
+    },
+    {
+      "key": "cards_masteries",
+      "label": "Cards, card effects, and card masteries",
+      "priorityForNextBuild": 3,
+      "hitCount": 419,
+      "confidence": "High for names/descriptions; Medium for strategic interpretation.",
+      "recommendation": "Add cardCatalogue + masteryCatalogue; useful before advanced coaching.",
+      "tbiUse": [
+        "History cards/no-cards context",
+        "Command Deck advice",
+        "Systems cards glossary",
+        "Compare explaining changed run style"
+      ],
+      "sourceCounts": {
+        "assets": 292,
+        "metadata": 127
+      }
+    },
+    {
+      "key": "workshop_upgrades",
+      "label": "Workshop upgrades and enhancements",
+      "priorityForNextBuild": 4,
+      "hitCount": 1384,
+      "confidence": "High for labels/descriptions; Low for exact upgrade cost formulas unless extracted later.",
+      "recommendation": "Build a workshopCatalogue with official labels/descriptions and families Attack/Defense/Utility/Economy.",
+      "tbiUse": [
+        "Systems glossary",
+        "Command Deck build weakness hints",
+        "History search aliases",
+        "Compare family grouping",
+        "future build planner"
+      ],
+      "sourceCounts": {
+        "assets": 533,
+        "metadata": 851
+      }
+    },
+    {
+      "key": "labs_research",
+      "label": "Labs / research catalogue",
+      "priorityForNextBuild": 5,
+      "hitCount": 512,
+      "confidence": "High for category names and labels; Low for full formula/cost tables.",
+      "recommendation": "Add labResearchCatalogue with category/source labels; do not estimate lab costs yet.",
+      "tbiUse": [
+        "Systems research glossary",
+        "Command Deck upgrade suggestions",
+        "Debug catalogue health",
+        "future priority planner"
+      ],
+      "sourceCounts": {
+        "assets": 182,
+        "metadata": 330
+      }
+    },
+    {
+      "key": "tournament_heat_leagues",
+      "label": "Tournament, Heat, leagues, battle conditions",
+      "priorityForNextBuild": 6,
+      "hitCount": 441,
+      "confidence": "High for condition names/descriptions and heat breakpoints; Medium/Low for current live rotations.",
+      "recommendation": "Add heat/league catalogue, but keep live tournament settings source-labelled unless pasted by user or confirmed.",
+      "tbiUse": [
+        "Tournament manual tag support",
+        "Heat warning overlay",
+        "league difficulty notes",
+        "Compare tournament vs farming separation",
+        "Command Deck risk notes"
+      ],
+      "sourceCounts": {
+        "assets": 191,
+        "metadata": 247,
+        "libil2cpp": 3
+      }
+    },
+    {
+      "key": "guardian",
+      "label": "Guardian and loot/shard tracking",
+      "priorityForNextBuild": 7,
+      "hitCount": 255,
+      "confidence": "High for report fields; Medium for coaching meaning.",
+      "recommendation": "Add guardianCatalogue and a Guardian report section. This is very useful because current TBI likely under-explains it.",
+      "tbiUse": [
+        "New History/Compare Guardian section",
+        "resource tracking",
+        "Command Deck \u201cis Guardian helping?\u201d verdict",
+        "Debug parser checks"
+      ],
+      "sourceCounts": {
+        "assets": 36,
+        "metadata": 219
+      }
+    },
+    {
+      "key": "modules",
+      "label": "Modules, rarities, substats, merge/shatter/reroll",
+      "priorityForNextBuild": 8,
+      "hitCount": 4973,
+      "confidence": "Medium-High for names/resources; Low for full unique effect tables without deeper extraction.",
+      "recommendation": "Add moduleCatalogue and moduleResourceCatalogue; keep effects descriptive first.",
+      "tbiUse": [
+        "Systems modules glossary",
+        "Guardian/module loot tracking",
+        "Command Deck upgrade notes",
+        "Debug schema grouping"
+      ],
+      "sourceCounts": {
+        "assets": 546,
+        "metadata": 4307,
+        "libil2cpp": 120
+      }
+    },
+    {
+      "key": "bots",
+      "label": "Bots and bot upgrades",
+      "priorityForNextBuild": 9,
+      "hitCount": 274,
+      "confidence": "High for names/labels; Medium for exact effect interpretation.",
+      "recommendation": "Add botCatalogue with known bot names/effects and Battle Report fields.",
+      "tbiUse": [
+        "Systems bot glossary",
+        "Compare bot economy/combat rows",
+        "Command Deck bot advice",
+        "History search aliases"
+      ],
+      "sourceCounts": {
+        "assets": 200,
+        "metadata": 69,
+        "libil2cpp": 5
+      }
+    },
+    {
+      "key": "perks_tradeoffs",
+      "label": "Perks and trade-off perks",
+      "priorityForNextBuild": 10,
+      "hitCount": 95,
+      "confidence": "High for text; Medium/Low for actual run state unless user records it.",
+      "recommendation": "Add perkGlossary and optional manual run tags; pasted Battle Reports may not include active perk state.",
+      "tbiUse": [
+        "Run context flags",
+        "History annotation",
+        "Command Deck explanation of weird run changes",
+        "future manual tags"
+      ],
+      "sourceCounts": {
+        "assets": 51,
+        "metadata": 44
+      }
+    },
+    {
+      "key": "resources_economy",
+      "label": "Resources and economy sources",
+      "priorityForNextBuild": 11,
+      "hitCount": 1373,
+      "confidence": "High for labels; Medium for causal interpretation.",
+      "recommendation": "Add resourceGlossary and economySourceMap linking Battle Report fields to source systems.",
+      "tbiUse": [
+        "Economy breakdown cards",
+        "Compare economy lead reasons",
+        "History resource filters",
+        "Command Deck farming advice"
+      ],
+      "sourceCounts": {
+        "assets": 430,
+        "metadata": 937,
+        "libil2cpp": 6
+      }
+    },
+    {
+      "key": "missions_events_relics",
+      "label": "Missions, events, relics, medals",
+      "priorityForNextBuild": 12,
+      "hitCount": 4658,
+      "confidence": "High for labels; Low for live event state.",
+      "recommendation": "Useful later, not first priority for Battle Report intelligence.",
+      "tbiUse": [
+        "Systems event glossary",
+        "future goal tracker",
+        "manual notes beside reports",
+        "source labels"
+      ],
+      "sourceCounts": {
+        "assets": 558,
+        "metadata": 4032,
+        "libil2cpp": 68
+      }
+    },
+    {
+      "key": "debug_dev_internal_names",
+      "label": "Internal names useful for diagnostics only",
+      "priorityForNextBuild": 13,
+      "hitCount": 627,
+      "confidence": "Medium. Useful for diagnostics, not player-facing wording.",
+      "recommendation": "Use internally only; do not expose ugly dev names in normal UI.",
+      "tbiUse": [
+        "Debug Panel health checks",
+        "internal audit naming",
+        "finding missing data wires"
+      ],
+      "sourceCounts": {
+        "assets": 8,
+        "metadata": 573,
+        "libil2cpp": 46
+      }
+    },
+    {
+      "key": "ui_localisation_aliases",
+      "label": "Official UI strings and aliases",
+      "priorityForNextBuild": 14,
+      "hitCount": 2190,
+      "confidence": "High for wording; not gameplay logic.",
+      "recommendation": "Use as a parser/search dictionary, not as strategy data.",
+      "tbiUse": [
+        "Parser aliases",
+        "search synonyms",
+        "tooltip wording",
+        "less guessy UI labels"
+      ],
+      "sourceCounts": {
+        "assets": 359,
+        "metadata": 1802,
+        "libil2cpp": 29
+      }
+    },
+    {
+      "key": "battle_report_schema",
+      "label": "Battle Report schema / parser dictionary",
+      "priorityForNextBuild": 15,
+      "hitCount": 65,
+      "confidence": "High for labels/schema names; Medium for exact meaning of fallback buckets such as Other.",
+      "recommendation": "Already started in z26. Next: wire field explanations into Save Report feedback and Debug Panel.",
+      "tbiUse": [
+        "Parser aliases",
+        "Save Report feedback",
+        "duplicate checks",
+        "History grouping",
+        "Compare datasheet rows",
+        "unknown-field warnings"
+      ],
+      "sourceCounts": {
+        "assets": 40,
+        "metadata": 25
+      }
+    },
+    {
+      "key": "wave_tier_milestones",
+      "label": "Waves, tiers, milestones, and run bands",
+      "priorityForNextBuild": 16,
+      "hitCount": 1018,
+      "confidence": "High for concept/labels; Medium for checkpoint logic; Low for hidden formula values.",
+      "recommendation": "Already started in z27. Next: show milestone context in Dashboard/History after saving a report.",
+      "tbiUse": [
+        "Game Brain next checkpoint",
+        "History milestone badges",
+        "Compare run-band context",
+        "Command Deck progression advice",
+        "Debug tier/wave validator"
+      ],
+      "sourceCounts": {
+        "assets": 247,
+        "metadata": 770,
+        "libil2cpp": 1
+      }
+    }
+  ],
+  "totalUsefulHits": 21627,
+  "safetyScope": "Static, read-only extraction of readable strings/metadata. No server access, bypassing, cheating, or app modification."
+}

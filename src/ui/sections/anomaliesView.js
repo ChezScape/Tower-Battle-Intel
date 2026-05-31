@@ -1,15 +1,19 @@
 "use strict";
 
-import { buildAnomalyList } from "./sideIntel.js";
+/**
+ * ANOMALIES BLANK RESET v4.11z35
+ * Intentionally cleared so Anomalies can be rebuilt cleanly.
+ */
+
+import { buildBlankWorkspace } from "./workspaceResetView.js";
 
 export function buildAnomaliesView(state = {}) {
-    return `
-        <div class="tbi-view-stack">
-            <section class="tbi-card tbi-view-intro danger-zone">
-                <h2>Anomalies</h2>
-                <p>Extreme deltas, strange values, missing data, and unusual run patterns.</p>
-            </section>
-            ${buildAnomalyList(state.anomalies, { full: true })}
-        </div>
-    `;
+    return buildBlankWorkspace({
+        key: "anomalies",
+        title: "Anomalies",
+        intro: "Anomalies has been cleared ready for a clean issue/alert rebuild.",
+        next: "Rebuild anomaly rules after parser/history are stable."
+    });
 }
+
+export default { buildAnomaliesView };

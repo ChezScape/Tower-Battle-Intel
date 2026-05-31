@@ -20,3 +20,9 @@ export * from "./reportSchema.js";
 export * from "./buildStyleProfiles.js";
 export * from "./metricPriorityRules.js";
 export * from "./unknownMetricLogger.js";
+export * from "./waveTierMilestoneCatalogue.js";
+
+export * from "./officialGameCatalogues.js";
+
+export * from "./gameUpdateAudit.js";
+export * from "./gameBrainKnowledgeBase.js";

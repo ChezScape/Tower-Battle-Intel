@@ -1,0 +1,268 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.1.0 Battle Report Official Schema",
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T19:25:50.138638+00:00",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z26_BattleReportOfficialSchema",
+    "baselineTarget": "v4.11z25 Mobile CSS blank module scaffold / desktop module split baseline",
+    "counts": {
+      "battleReportUiLabels": 70,
+      "battleHistoryEntryFields": 142,
+      "statValueTypeValues": 63,
+      "officialSectionLabels": 9,
+      "aliases": 375,
+      "families": 11,
+      "sections": 13,
+      "enemyRelatedFields": 41,
+      "guardianFields": 14
+    },
+    "protectionRules": [
+      "Keep dashboard visuals locked to v4.11x2 direction.",
+      "Keep Compare as bare restart until schema foundation is tested.",
+      "Keep mobile.css blank module scaffold untouched.",
+      "Use this catalogue for labels/schema/source confidence, not hidden formulas."
+    ]
+  },
+  "officialSectionLabels": [
+    "Currencies",
+    "Health Regenerated",
+    "Damage Blocked",
+    "Counts",
+    "Miscellaneous",
+    "Records",
+    "Enemies Hit By",
+    "Killed With Effect Active",
+    "Enemies Destroyed By"
+  ],
+  "derivedSections": [
+    {
+      "section": "Bots",
+      "fieldCount": 1,
+      "properties": [
+        "ThunderBotStuns"
+      ]
+    },
+    {
+      "section": "Currencies",
+      "fieldCount": 26,
+      "properties": [
+        "CoinsEarned",
+        "CashEarned",
+        "InterestEarned",
+        "GemsThisRound",
+        "GemBlocksTapped",
+        "AdGemsThisRound",
+        "CellsEarned",
+        "RerollShardsEarned",
+        "MostCoinsFromWaveSkip",
+        "MostCellsFromWaveSkip",
+        "MostCoinsFromGoldenCombo",
+        "CoinsFromDeathWave",
+        "CoinsFromGoldenTower",
+        "CoinsFromGoldenTowerPlus",
+        "CashFromGoldenTower",
+        "CoinsFromBlackHole",
+        "CoinsFromSpotlight",
+        "CoinsFromOrbs",
+        "CoinsFromCoinUpgrade",
+        "CoinsFromCoinBonuses",
+        "CoinsFromCritCoin",
+        "GoldenBotCoinsEarned",
+        "GuardianCoinsStolen",
+        "GuardianCoinsFetched",
+        "GuardianGems",
+        "GuardianRerollShards"
+      ]
+    },
+    {
+      "section": "Damage Blocked",
+      "fieldCount": 8,
+      "properties": [
+        "DefensePercentBlocked",
+        "DefenseAbsoluteBlocked",
+        "ChronoFieldBlocked",
+        "ChainThunderBlocked",
+        "FlameBotBlocked",
+        "PrimordialCollapseBlocked",
+        "MagicOrbBlocked",
+        "EnergyShieldHitsAbsorbed"
+      ]
+    },
+    {
+      "section": "Damage Output",
+      "fieldCount": 21,
+      "properties": [
+        "DamageGainFromBerserk",
+        "DamageDealt",
+        "ProjectilesDamage",
+        "ProjectilesCount",
+        "ThornDamage",
+        "OrbDamage",
+        "ElectronsDamage",
+        "LandMineDamage",
+        "LandMinesSpawned",
+        "RendArmorDamage",
+        "DeathRayDamage",
+        "SmartMissileDamage",
+        "InnerLandMineDamage",
+        "ChainLightningDamage",
+        "DeathWaveDamage",
+        "TaggedByDeathwave",
+        "SwampDamage",
+        "BlackHoleDamage",
+        "OrbHits",
+        "FlameBotDamage",
+        "GuardianDamage"
+      ]
+    },
+    {
+      "section": "Enemies Destroyed By",
+      "fieldCount": 13,
+      "properties": [
+        "DestroyedByOrbs",
+        "DestroyedByThorns",
+        "DestroyedByDeathRay",
+        "DestroyedByLandMine",
+        "DestroyedByProjectiles",
+        "DestroyedByChainLightning",
+        "DestroyedBySmartMissiles",
+        "DestroyedByInnerLandMines",
+        "DestroyedByPoisonSwamp",
+        "DestroyedByBlackHole",
+        "DestroyedByFlameBot",
+        "DestroyedByDeathPenalty",
+        "DestroyedByOther"
+      ]
+    },
+    {
+      "section": "Enemies Hit By",
+      "fieldCount": 14,
+      "properties": [
+        "EnemiesHitByProjectilesThisRound",
+        "EnemiesHitByThornsThisRound",
+        "EnemiesHitByDeathRayThisRound",
+        "EnemiesHitByChainLightningThisRound",
+        "EnemiesHitBySmartMissilesThisRound",
+        "EnemiesHitByInnerLandMinesThisRound",
+        "EnemiesHitByPoisonSwampThisRound",
+        "EnemiesHitByBlackHoleThisRound",
+        "EnemiesHitByChronoFieldThisRound",
+        "EnemiesHitByLandMineThisRound",
+        "EnemiesHitByThunderBotThisRound",
+        "EnemiesHitByFlameBotThisRound",
+        "EnemiesHitByAttackChipThisRound",
+        "EnemiesHitByOrbitalAugmentThisRound"
+      ]
+    },
+    {
+      "section": "Enemy Counts / Kills Breakdown",
+      "fieldCount": 14,
+      "properties": [
+        "TotalEnemies",
+        "TotalBasic",
+        "TotalFast",
+        "TotalTank",
+        "TotalRanged",
+        "TotalBoss",
+        "TotalProtector",
+        "TotalElites",
+        "TotalVampires",
+        "TotalRays",
+        "TotalScatters",
+        "TotalSaboteurs",
+        "TotalCommanders",
+        "TotalOvercharges"
+      ]
+    },
+    {
+      "section": "Guardian",
+      "fieldCount": 9,
+      "properties": [
+        "GuardianSummoned",
+        "GuardianCatches",
+        "GuardianMedals",
+        "GuardianCannonShards",
+        "GuardianArmorShards",
+        "GuardianGeneratorShards",
+        "GuardianCoreShards",
+        "GuardianCommonModules",
+        "GuardianRareModules"
+      ]
+    },
+    {
+      "section": "Health Regenerated",
+      "fieldCount": 3,
+      "properties": [
+        "Lifesteal",
+        "TowerHealthRegen",
+        "WallHealthRegen"
+      ]
+    },
+    {
+      "section": "Killed With Effect Active",
+      "fieldCount": 4,
+      "properties": [
+        "DestroyedInSpotlight",
+        "DestroyedInGoldenTower",
+        "DestroyedInAmplifyBot",
+        "DestroyedInGoldenBot"
+      ]
+    },
+    {
+      "section": "Miscellaneous",
+      "fieldCount": 6,
+      "properties": [
+        "DamageTaken",
+        "DamageTakenWall",
+        "DamageTakenWhileBerserked",
+        "DeathDefy",
+        "HealthFromDeathWaveThisRound",
+        "RecoveryPackages"
+      ]
+    },
+    {
+      "section": "Records / Utility / Counts",
+      "fieldCount": 14,
+      "properties": [
+        "WavesSkipped",
+        "NukesUsed",
+        "SecondWindsUsed",
+        "DemonModesUsed",
+        "LargestWaveSkip",
+        "HighestCPM",
+        "LargestSmartMissileStack",
+        "LargestGoldenCombo",
+        "LargestILMCharge",
+        "FreeAttackUpgrades",
+        "FreeDefenseUpgrades",
+        "FreeUtilityUpgrades",
+        "AttackLevelSkips",
+        "HealthLevelSkips"
+      ]
+    },
+    {
+      "section": "Run Header",
+      "fieldCount": 9,
+      "properties": [
+        "SelectedTower",
+        "BattleDate",
+        "GameTime",
+        "RealTime",
+        "IsTournament",
+        "Tier",
+        "Wave",
+        "KilledBy",
+        "DissonanceType"
+      ]
+    }
+  ],
+  "importantSemanticRule": {
+    "Enemies Hit By": "What touched/affected enemies. Not necessarily kills.",
+    "Enemies Destroyed By": "What actually killed enemies.",
+    "Killed With Effect Active": "Kills that happened while an effect was active. Not necessarily direct kills by that effect."
+  }
+}

@@ -1,0 +1,910 @@
+/* Tower Battle Intel desktop module: 04-history-rebuild.css
+   v4.11z52w29 proper History visual rebuild.
+   Owns only .tbi-history2* classes so old History CSS does not fight it.
+*/
+
+.tbi-history2 {
+    display: grid;
+    gap: 14px;
+    padding-bottom: 4px;
+}
+
+.tbi-history2 .tbi-card,
+.tbi-history2-hero,
+.tbi-history2-toolbar,
+.tbi-history2-list,
+.tbi-history2-inspector,
+.tbi-history2-empty {
+    border-color: rgba(29, 231, 255, 0.24);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(29, 231, 255, 0.10), transparent 36%),
+        radial-gradient(circle at 92% 6%, rgba(157, 91, 255, 0.09), transparent 34%),
+        linear-gradient(180deg, rgba(6, 18, 36, 0.96), rgba(2, 8, 20, 0.98));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025), 0 18px 46px rgba(0,0,0,0.20);
+}
+
+.tbi-history2-hero {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.72fr) minmax(420px, 1.28fr);
+    gap: 15px;
+    align-items: stretch;
+    padding: 16px;
+}
+
+.tbi-history2-hero-copy {
+    min-height: 100%;
+    display: grid;
+    align-content: center;
+    gap: 7px;
+    padding: 4px 4px 4px 0;
+}
+
+.tbi-history2-kicker,
+.tbi-history2-hero-copy span,
+.tbi-history2-section-head span,
+.tbi-history2-filter-status em,
+.tbi-history2-run-intel > span,
+.tbi-history2-library-intel > span,
+.tbi-history2-ab-controls > span {
+    color: var(--cyan, #1de7ff);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+.tbi-history2-hero-copy h2,
+.tbi-history2-inspector h3 {
+    margin: 0;
+    color: #fff;
+    font-weight: 1000;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 18px rgba(29, 231, 255, 0.20);
+}
+
+.tbi-history2-hero-copy h2 { font-size: clamp(28px, 3.4vw, 46px); }
+.tbi-history2-inspector h3 { font-size: 19px; }
+
+.tbi-history2-hero-copy p,
+.tbi-history2-inspector p,
+.tbi-history2-empty p {
+    margin: 0;
+    color: rgba(218, 238, 255, 0.76);
+    line-height: 1.45;
+}
+
+.tbi-history2-trust-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.tbi-history2-workflow,
+.tbi-history2-record-strip {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.tbi-history2-step,
+.tbi-history2-record,
+.tbi-history2-pill,
+.tbi-history2-metric,
+.tbi-history2-intel-row-small {
+    border: 1px solid rgba(29, 231, 255, 0.14);
+    border-radius: 13px;
+    background: rgba(1, 7, 18, 0.48);
+    box-shadow: inset 0 0 18px rgba(29, 231, 255, 0.035);
+}
+
+.tbi-history2-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 3px 9px;
+    align-items: center;
+    padding: 11px;
+}
+
+.tbi-history2-step b {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: #03111c;
+    background: linear-gradient(135deg, var(--cyan, #1de7ff), #9d5bff);
+    box-shadow: 0 0 18px rgba(29,231,255,.26);
+}
+
+.tbi-history2-step span,
+.tbi-history2-record span,
+.tbi-history2-metric span,
+.tbi-history2-select-control span,
+.tbi-history2-search span,
+.tbi-history2-mode span,
+.tbi-history2-archive-toggle span,
+.tbi-history2-pill small,
+.tbi-history2-intel-row-small span {
+    color: rgba(189, 214, 232, 0.72);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+.tbi-history2-step em,
+.tbi-history2-record em,
+.tbi-history2-intel-row-small em {
+    color: rgba(189, 214, 232, 0.62);
+    font-size: 11px;
+    font-style: normal;
+}
+
+.tbi-history2-record,
+.tbi-history2-metric {
+    display: grid;
+    gap: 4px;
+    padding: 10px 11px;
+    min-width: 0;
+}
+
+.tbi-history2-record strong,
+.tbi-history2-metric strong,
+.tbi-history2-pill b,
+.tbi-history2-intel-row-small strong {
+    color: #fff;
+    font-weight: 1000;
+    overflow-wrap: anywhere;
+}
+
+.tbi-history2-record.tone-good strong,
+.tbi-history2-metric.tone-good strong,
+.tbi-history2-pill.tone-good b { color: var(--green, #57ff57); }
+.tbi-history2-record.tone-gold strong,
+.tbi-history2-metric.tone-gold strong,
+.tbi-history2-pill.tone-gold b { color: var(--gold, #ffd329); }
+.tbi-history2-record.tone-watch strong,
+.tbi-history2-metric.tone-watch strong,
+.tbi-history2-pill.tone-watch b { color: var(--gold, #ffd329); }
+.tbi-history2-record.tone-info strong,
+.tbi-history2-metric.tone-info strong,
+.tbi-history2-pill.tone-info b { color: var(--cyan, #1de7ff); }
+.tbi-history2-pill.tone-run-a b { color: var(--cyan, #1de7ff); }
+.tbi-history2-pill.tone-run-b b { color: var(--gold, #ffd329); }
+.tbi-history2-pill.tone-quiet b,
+.tbi-history2-metric.tone-neutral strong { color: rgba(229,244,255,.86); }
+
+.tbi-history2-toolbar {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+}
+
+.tbi-history2-search-row {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(190px, 0.26fr);
+    gap: 10px;
+}
+
+.tbi-history2-search,
+.tbi-history2-select-control {
+    display: grid;
+    gap: 7px;
+}
+
+.tbi-history2-search input,
+.tbi-history2-select-control select {
+    min-height: 43px;
+    border: 1px solid rgba(29, 231, 255, 0.22);
+    border-radius: 12px;
+    color: #eef8ff;
+    background: rgba(1, 7, 18, 0.68);
+    padding: 0 13px;
+    font-weight: 800;
+}
+
+.tbi-history2-search input:focus,
+.tbi-history2-select-control select:focus {
+    outline: none;
+    border-color: rgba(29, 231, 255, 0.72);
+    box-shadow: 0 0 0 2px rgba(29,231,255,.10), 0 0 22px rgba(29,231,255,.16);
+}
+
+.tbi-history2-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    align-items: end;
+}
+
+.tbi-history2-mode,
+.tbi-history2-archive-toggle,
+.tbi-history2-btn {
+    min-height: 40px;
+    border: 1px solid rgba(29, 231, 255, 0.24);
+    border-radius: 11px;
+    color: #eaf9ff;
+    background: linear-gradient(180deg, rgba(29,231,255,.10), rgba(29,231,255,.025));
+    font-size: 11px;
+    font-weight: 1000;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.tbi-history2-mode,
+.tbi-history2-archive-toggle {
+    display: grid;
+    gap: 2px;
+    align-content: center;
+    text-align: left;
+    padding: 8px 12px;
+}
+
+.tbi-history2-mode b,
+.tbi-history2-archive-toggle b { color: #fff; }
+.tbi-history2-mode.active,
+.tbi-history2-archive-toggle.active,
+.tbi-history2-btn.active {
+    border-color: rgba(255,211,41,.58);
+    color: #fff5c8;
+    background: linear-gradient(180deg, rgba(255,211,41,.18), rgba(255,211,41,.05));
+    box-shadow: 0 0 18px rgba(255,211,41,.16);
+}
+
+.tbi-history2-btn:hover:not(:disabled),
+.tbi-history2-mode:hover:not(:disabled),
+.tbi-history2-archive-toggle:hover:not(:disabled) {
+    border-color: rgba(29, 231, 255, 0.70);
+    color: var(--cyan, #1de7ff);
+    box-shadow: 0 0 18px rgba(29, 231, 255, 0.15);
+}
+
+.tbi-history2-btn:disabled,
+.tbi-history2-btn.is-disabled { opacity: .45; cursor: not-allowed; }
+.tbi-history2-btn.danger { border-color: rgba(255,64,90,.40); color: #ffdbe2; }
+.tbi-history2-btn.slot-a { border-color: rgba(29,231,255,.38); }
+.tbi-history2-btn.slot-b { border-color: rgba(255,211,41,.38); }
+
+.tbi-history2-toolbar-footer {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) minmax(360px, 1fr);
+    gap: 12px;
+    align-items: center;
+}
+
+.tbi-history2-filter-status {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0 9px;
+    align-items: baseline;
+    padding: 9px 11px;
+    border: 1px solid rgba(29,231,255,.12);
+    border-radius: 12px;
+    background: rgba(1,7,18,.40);
+}
+
+.tbi-history2-filter-status strong { color: var(--cyan, #1de7ff); font-size: 22px; }
+.tbi-history2-filter-status span { color: rgba(229,244,255,.80); font-weight: 800; }
+.tbi-history2-filter-status em { grid-column: 1 / -1; font-style: normal; color: rgba(189,214,232,.66); }
+
+.tbi-history2-actions,
+.tbi-history2-card-actions,
+.tbi-history2-inspector-actions,
+.tbi-history2-ab-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.tbi-history2-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.34fr);
+    gap: 14px;
+    align-items: start;
+}
+
+.tbi-history2-list,
+.tbi-history2-inspector,
+.tbi-history2-empty {
+    padding: 14px;
+}
+
+.tbi-history2-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid rgba(29,231,255,.12);
+    margin-bottom: 12px;
+}
+
+.tbi-history2-section-head strong { color: #fff; }
+
+.tbi-history2-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.tbi-history2-run-card {
+    position: relative;
+    display: grid;
+    gap: 11px;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid rgba(29, 231, 255, 0.16);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(29,231,255,.08), transparent 38%),
+        linear-gradient(180deg, rgba(5,17,33,.92), rgba(1,7,18,.96));
+    overflow: hidden;
+}
+
+.tbi-history2-run-card.is-active {
+    border-color: rgba(255,211,41,.42);
+    box-shadow: 0 0 24px rgba(255,211,41,.11), inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.tbi-history2-run-card.is-archived {
+    opacity: .72;
+    filter: saturate(.74);
+}
+
+.tbi-history2-card-accent {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, rgba(29,231,255,.95), rgba(157,91,255,.72));
+    opacity: .70;
+}
+
+.tbi-history2-run-card.is-run-a .tbi-history2-card-accent { background: var(--cyan, #1de7ff); opacity: 1; }
+.tbi-history2-run-card.is-run-b .tbi-history2-card-accent { background: var(--gold, #ffd329); opacity: 1; }
+
+.tbi-history2-card-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: start;
+}
+
+.tbi-history2-card-head span {
+    color: var(--cyan, #1de7ff);
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+.tbi-history2-card-head strong {
+    display: block;
+    margin-top: 3px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 1000;
+    overflow-wrap: anywhere;
+}
+
+.tbi-history2-card-head em {
+    display: block;
+    margin-top: 4px;
+    color: rgba(218,238,255,.72);
+    font-size: 12px;
+    font-style: normal;
+}
+
+.tbi-history2-slot-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+.tbi-history2-slot-flags b,
+.tbi-history2-tag {
+    border: 1px solid rgba(29,231,255,.16);
+    border-radius: 999px;
+    padding: 5px 8px;
+    color: rgba(229,244,255,.86);
+    background: rgba(1,7,18,.52);
+    font-size: 10px;
+    font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.tbi-history2-slot-flags .slot-a { color: var(--cyan, #1de7ff); border-color: rgba(29,231,255,.45); }
+.tbi-history2-slot-flags .slot-b { color: var(--gold, #ffd329); border-color: rgba(255,211,41,.45); }
+.tbi-history2-slot-flags .slot-none { color: rgba(189,214,232,.72); }
+
+.tbi-history2-card-main,
+.tbi-history2-inspector-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tbi-history2-intel-row,
+.tbi-history2-source-row,
+.tbi-history2-inspector-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.tbi-history2-pill {
+    display: inline-grid;
+    gap: 2px;
+    min-width: 96px;
+    padding: 8px 9px;
+}
+
+.tbi-history2-card-note {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 9px 10px;
+    border: 1px solid rgba(29,231,255,.12);
+    border-radius: 11px;
+    color: rgba(229,244,255,.82);
+    background: rgba(1,7,18,.42);
+}
+.tbi-history2-card-note b { color: var(--gold, #ffd329); text-transform: uppercase; letter-spacing: .12em; font-size: 10px; }
+
+.tbi-history2-card-actions { justify-content: flex-start; padding-top: 2px; }
+.tbi-history2-card-actions .tbi-history2-btn { min-height: 34px; padding: 0 10px; }
+
+.tbi-history2-inspector {
+    position: sticky;
+    top: 16px;
+    display: grid;
+    gap: 12px;
+}
+
+.tbi-history2-inspector-head {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid rgba(29,231,255,.12);
+}
+
+.tbi-history2-inspector-actions { justify-content: flex-start; }
+.tbi-history2-inspector-actions .tbi-history2-btn { flex: 1 1 126px; }
+
+.tbi-history2-run-intel,
+.tbi-history2-library-intel,
+.tbi-history2-ab-controls {
+    display: grid;
+    gap: 9px;
+    padding: 12px;
+    border: 1px solid rgba(29,231,255,.14);
+    border-radius: 14px;
+    background: rgba(1,7,18,.46);
+}
+
+.tbi-history2-run-intel strong { color: #fff; line-height: 1.35; }
+.tbi-history2-run-intel ul { margin: 0; padding-left: 18px; color: rgba(229,244,255,.78); }
+.tbi-history2-run-intel li { margin: 4px 0; }
+
+.tbi-history2-intel-row-small {
+    display: grid;
+    gap: 3px;
+    padding: 9px 10px;
+}
+
+.tbi-history2-ab-controls { grid-template-columns: 1fr; }
+.tbi-history2-ab-controls > span { display: block; }
+.tbi-history2-ab-controls .tbi-history2-btn { width: 100%; }
+
+.tbi-history2-empty {
+    display: grid;
+    justify-items: start;
+    gap: 8px;
+    min-height: 240px;
+    align-content: center;
+}
+.tbi-history2-empty > span { color: var(--cyan, #1de7ff); text-transform: uppercase; letter-spacing: .16em; font-size: 10px; font-weight: 1000; }
+.tbi-history2-empty strong { color: #fff; font-size: 20px; }
+
+.tbi-history-search-no-results { display: none; }
+
+@media (max-width: 1500px) {
+    .tbi-history2-hero,
+    .tbi-history2-workspace,
+    .tbi-history2-toolbar-footer {
+        grid-template-columns: 1fr;
+    }
+    .tbi-history2-inspector { position: static; }
+    .tbi-history2-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 1120px) {
+    .tbi-history2-card-grid,
+    .tbi-history2-trust-strip,
+    .tbi-history2-workflow,
+    .tbi-history2-record-strip,
+    .tbi-history2-filter-grid,
+    .tbi-history2-search-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .tbi-history2-card-main,
+    .tbi-history2-inspector-metrics {
+        grid-template-columns: 1fr 1fr;
+    }
+    .tbi-history2-card-head {
+        grid-template-columns: 1fr;
+    }
+    .tbi-history2-slot-flags { justify-content: flex-start; }
+}
+
+/* v4.11z52w29 — rebuilt History search filters cards in-place so typing keeps focus. */
+.tbi-history-clean-view.tbi-history-search-empty .tbi-history-search-no-results {
+    display: grid;
+}
+
+/* v4.11z52w35 — History cards pagination + inspector density polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-filter-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 12px;
+    padding: 10px 11px;
+    border: 1px solid rgba(29, 231, 255, 0.13);
+    border-radius: 13px;
+    background: rgba(1, 7, 18, 0.42);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-bottom {
+    margin: 12px 0 0;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-copy {
+    display: grid;
+    gap: 2px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-copy strong {
+    color: #fff;
+    font-weight: 1000;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-copy span {
+    color: rgba(189, 214, 232, 0.68);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card {
+    cursor: pointer;
+    gap: 9px;
+    padding: 12px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card:focus-visible {
+    outline: none;
+    border-color: rgba(29, 231, 255, 0.72);
+    box-shadow: 0 0 0 2px rgba(29, 231, 255, 0.12), 0 0 24px rgba(29, 231, 255, 0.16);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card .tbi-history2-metric {
+    padding: 8px 9px;
+    min-height: 54px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card .tbi-history2-pill {
+    min-width: 82px;
+    padding: 7px 8px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card .tbi-history2-card-main {
+    gap: 7px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card .tbi-history2-card-actions {
+    gap: 6px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card .tbi-history2-card-actions .tbi-history2-btn {
+    min-height: 32px;
+    padding: 0 9px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-actions .tbi-history2-btn {
+    flex: 1 1 112px;
+    min-height: 37px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-compact {
+    display: grid;
+    gap: 7px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-compact .tbi-history2-intel-row-small {
+    grid-template-columns: minmax(110px, 0.42fr) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 9px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-compact .tbi-history2-intel-row-small em {
+    justify-self: end;
+}
+
+@media (max-width: 1500px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager {
+        grid-template-columns: 1fr;
+    }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-actions {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 760px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-filter-grid {
+        grid-template-columns: 1fr;
+    }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-compact .tbi-history2-intel-row-small {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* v4.11z52w35 — richer pager navigation for large History libraries. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 0 0 8px;
+    border-left: 1px solid rgba(29, 231, 255, 0.16);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-jump span {
+    color: rgba(189, 214, 232, 0.74);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-jump input {
+    width: 64px;
+    min-height: 38px;
+    padding: 8px 9px;
+    border: 1px solid rgba(29, 231, 255, 0.32);
+    border-radius: 10px;
+    background: rgba(1, 7, 18, 0.62);
+    color: #fff;
+    font-weight: 1000;
+    text-align: center;
+    outline: none;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-jump input:focus {
+    border-color: rgba(29, 231, 255, 0.84);
+    box-shadow: 0 0 0 2px rgba(29, 231, 255, 0.12);
+}
+
+@media (max-width: 1500px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-jump {
+        border-left: 0;
+        padding-left: 0;
+    }
+}
+
+/* v4.11z52w38 — pager navigation/action grouping polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-actions {
+    align-items: center;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-nav,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-actions {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-nav {
+    padding-right: 10px;
+    border-right: 1px solid rgba(29, 231, 255, 0.14);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-actions {
+    padding-left: 2px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-actions [data-history-page-archive] {
+    border-color: rgba(29, 231, 255, 0.38);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-page-actions [data-history-page-restore] {
+    border-color: rgba(78, 255, 118, 0.34);
+}
+
+@media (max-width: 1500px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pager-nav {
+        border-right: 0;
+        padding-right: 0;
+    }
+}
+
+/* v4.11z52w39 — selected-report inspector density + tied Library Intel polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-actions .tbi-history2-btn {
+    width: 100%;
+    min-height: 38px;
+    flex: unset;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-actions .tbi-history2-btn.is-wide {
+    grid-column: 1 / -1;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-metrics .tbi-history2-metric {
+    min-height: 62px;
+    padding: 9px 10px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-proof .tbi-history2-pill {
+    width: auto;
+    min-width: 0;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-inspector-proof .tbi-history2-pill:nth-child(3) {
+    grid-column: 1 / -1;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-intel {
+    padding: 11px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel ul {
+    display: grid;
+    gap: 3px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-library-compact .tbi-history2-intel-row-small {
+    grid-template-columns: minmax(104px, .42fr) minmax(0, 1fr) minmax(52px, auto);
+    min-height: 42px;
+}
+
+
+/* v4.11z52w43 — Run Intel Summary glance-feed polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-compact {
+    display: grid;
+    gap: 7px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row {
+    display: grid;
+    grid-template-columns: minmax(104px, .42fr) minmax(0, 1fr) minmax(78px, auto);
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 8px 9px;
+    border: 1px solid rgba(29, 231, 255, 0.13);
+    border-radius: 12px;
+    background: rgba(0, 8, 18, 0.42);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row span {
+    color: rgba(183, 210, 232, 0.78);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row strong {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 1000;
+    line-height: 1.15;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row em {
+    justify-self: end;
+    color: rgba(183, 210, 232, 0.66);
+    font-style: normal;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel > strong,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel > ul {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row {
+        grid-template-columns: 1fr;
+    }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-intel-row em {
+        justify-self: start;
+    }
+}
+
+/* v4.11z52w43 — Run A/B active-state visibility polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card.is-run-a {
+    border-color: rgba(29, 231, 255, 0.58);
+    box-shadow: 0 0 0 1px rgba(29, 231, 255, 0.16), 0 0 28px rgba(29, 231, 255, 0.14), inset 8px 0 0 rgba(29, 231, 255, 0.90);
+    background: linear-gradient(135deg, rgba(29, 231, 255, 0.10), rgba(2, 8, 20, 0.94) 36%, rgba(2, 8, 20, 0.98));
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card.is-run-b {
+    border-color: rgba(255, 211, 41, 0.60);
+    box-shadow: 0 0 0 1px rgba(255, 211, 41, 0.16), 0 0 28px rgba(255, 211, 41, 0.15), inset 8px 0 0 rgba(255, 211, 41, 0.95);
+    background: linear-gradient(135deg, rgba(255, 211, 41, 0.10), rgba(2, 8, 20, 0.94) 36%, rgba(2, 8, 20, 0.98));
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card.is-run-a .tbi-history2-slot-flags .slot-a,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-run-card.is-run-b .tbi-history2-slot-flags .slot-b {
+    font-weight: 1000;
+    box-shadow: 0 0 20px currentColor;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-btn.slot-a.active {
+    border-color: rgba(29, 231, 255, 0.84);
+    color: #eaffff;
+    background: linear-gradient(180deg, rgba(29, 231, 255, 0.24), rgba(29, 231, 255, 0.08));
+    box-shadow: 0 0 22px rgba(29, 231, 255, 0.22), inset 0 0 0 1px rgba(255,255,255,.045);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-btn.slot-b.active {
+    border-color: rgba(255, 211, 41, 0.88);
+    color: #fff7d6;
+    background: linear-gradient(180deg, rgba(255, 211, 41, 0.24), rgba(255, 211, 41, 0.08));
+    box-shadow: 0 0 22px rgba(255, 211, 41, 0.22), inset 0 0 0 1px rgba(255,255,255,.045);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pill.tone-run-a {
+    border-color: rgba(29, 231, 255, 0.50);
+    background: rgba(29, 231, 255, 0.09);
+    box-shadow: 0 0 22px rgba(29, 231, 255, 0.12);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-pill.tone-run-b {
+    border-color: rgba(255, 211, 41, 0.50);
+    background: rgba(255, 211, 41, 0.09);
+    box-shadow: 0 0 22px rgba(255, 211, 41, 0.12);
+}

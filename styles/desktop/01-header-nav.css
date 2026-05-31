@@ -1,0 +1,93 @@
+/* Tower Battle Intel desktop module: 01-header-nav.css
+   Desktop header, brand, navigation, base card/buttons/workspace.
+   v4.11z52i: Settings is the only settings entry point; version sits in the top-right utility area; theme toggle is intentionally removed.
+   Shared app-frame width is locked once in 10-responsive-foundation.css.
+*/
+select option { background: #061326; color: #ecfbff; }
+.tbi-shell { padding: 10px 0 0; }
+.tbi-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    width: min(1920px, calc(100% - 20px));
+    margin: 0 auto 12px;
+    padding: 12px 16px;
+    min-height: 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "brand actions"
+        "nav nav";
+    gap: 10px 14px;
+    align-items: center;
+    border: 1px solid rgba(29,231,255,.18);
+    border-radius: 0;
+    background: radial-gradient(circle at 10% 0%, rgba(29,231,255,.10), transparent 34%), radial-gradient(circle at 88% 8%, rgba(157,91,255,.12), transparent 34%), linear-gradient(180deg, rgba(2,8,18,.96), rgba(0,3,10,.92));
+    box-shadow: 0 18px 42px rgba(0,0,0,.38), inset 0 -1px 0 rgba(29,231,255,.13);
+    backdrop-filter: blur(10px);
+}
+.tbi-brand-block { grid-area: brand; display: flex; align-items: center; gap: 14px; min-width: 0; }
+.tbi-logo-mark { width: 52px; height: 52px; display: grid; place-items: center; color: var(--cyan); filter: drop-shadow(0 0 12px rgba(29,231,255,.72)); flex: 0 0 auto; }
+.tbi-logo-mark svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+.tbi-logo-mark circle { fill: currentColor; stroke: none; }
+.tbi-brand-title { font-size: clamp(22px, 1.48vw, 30px); line-height: .96; text-transform: uppercase; letter-spacing: .13em; font-weight: 1000; color: #f4fbff; text-shadow: 0 0 18px rgba(29,231,255,.32); white-space: nowrap; }
+.tbi-brand-subtitle { margin-top: 6px; font-size: clamp(9px, .62vw, 12px); text-transform: uppercase; letter-spacing: .20em; color: var(--cyan); font-weight: 1000; white-space: nowrap; }
+.tbi-desktop-nav { grid-area: nav; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); min-width: 0; width: 100%; height: 44px; align-items: stretch; border: 1px solid rgba(29,231,255,.27); border-radius: 7px; overflow: hidden; background: linear-gradient(180deg, rgba(3,12,24,.88), rgba(0,4,12,.74)); }
+.tbi-nav-button { border: 0; border-right: 1px solid rgba(126,172,210,.13); border-radius: 0; min-width: 0; min-height: 42px; color: #cbd8e7; background: transparent; text-transform: uppercase; letter-spacing: .12em; font-size: clamp(9px, .55vw, 11px); font-weight: 1000; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; overflow: hidden; }
+.tbi-nav-icon { flex: 0 0 auto; color: var(--cyan); font-size: .96em; line-height: 1; opacity: .9; filter: drop-shadow(0 0 8px rgba(29,231,255,.35)); }
+.tbi-nav-button span:not(.tbi-nav-icon) { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tbi-nav-button:last-child { border-right: 0; }
+.tbi-nav-button::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 0; height: 2px; background: transparent; }
+.tbi-nav-button:hover { color: #fff; background: rgba(29,231,255,.07); }
+.tbi-nav-button.active { color: #fff; background: linear-gradient(180deg, rgba(29,231,255,.17), rgba(29,231,255,.035)); text-shadow: 0 0 10px rgba(255,255,255,.24); }
+.tbi-nav-button.active::after { background: var(--cyan); box-shadow: 0 0 16px rgba(29,231,255,.9); }
+.tbi-header-actions { grid-area: actions; justify-self: end; display: flex; align-items: center; gap: 10px; }
+.tbi-version-pill { min-width: 100px; min-height: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; text-align: center; padding: 0 14px; border: 1px solid rgba(157,91,255,.58); border-radius: 9px; color: #f0e6ff; background: rgba(75,26,120,.18); font-size: 13px; font-weight: 1000; letter-spacing: .08em; box-shadow: 0 0 14px rgba(157,91,255,.16), inset 0 0 0 1px rgba(255,255,255,.035); white-space: nowrap; }
+
+
+/* Current rollback branch — deliberate desktop top-nav compact states.
+   Keeps the desktop shell stable and fits the full eight-tab workflow without hiding Settings. */
+@media (max-width: 1720px) {
+    html[data-device-mode="desktop"] .tbi-header { gap: 10px 12px; }
+    html[data-device-mode="desktop"] .tbi-logo-mark { width: 46px; height: 46px; }
+    html[data-device-mode="desktop"] .tbi-brand-title { font-size: clamp(18px, 1.32vw, 25px); letter-spacing: .12em; }
+    html[data-device-mode="desktop"] .tbi-brand-subtitle { font-size: clamp(8px, .56vw, 10px); letter-spacing: .18em; }
+    html[data-device-mode="desktop"] .tbi-nav-button { font-size: clamp(8px, .50vw, 10px); letter-spacing: .105em; padding-inline: 5px; }
+    html[data-device-mode="desktop"] .tbi-version-pill { min-width: 94px; padding-inline: 12px; }
+    html[data-device-mode="desktop"] .tbi-header-actions { gap: 8px; }
+}
+
+@media (max-width: 1380px) {
+    html[data-device-mode="desktop"] .tbi-header { gap: 8px; padding-inline: 10px; }
+    html[data-device-mode="desktop"] .tbi-brand-block { gap: 9px; }
+    html[data-device-mode="desktop"] .tbi-logo-mark { width: 40px; height: 40px; }
+    html[data-device-mode="desktop"] .tbi-brand-title { font-size: clamp(16px, 1.12vw, 20px); letter-spacing: .10em; }
+    html[data-device-mode="desktop"] .tbi-brand-subtitle { font-size: 8px; letter-spacing: .14em; }
+    html[data-device-mode="desktop"] .tbi-desktop-nav { height: 40px; }
+    html[data-device-mode="desktop"] .tbi-nav-button { min-height: 38px; font-size: 8px; letter-spacing: .075em; padding-inline: 3px; }
+    html[data-device-mode="desktop"] .tbi-version-pill { min-width: 88px; font-size: 11px; padding-inline: 10px; }
+    html[data-device-mode="desktop"] 
+}
+
+@media (max-width: 1180px) and (min-width: 861px) {
+    html[data-device-mode="desktop"] .tbi-header { align-items: stretch; }
+    html[data-device-mode="desktop"] .tbi-brand-block { justify-self: start; }
+    html[data-device-mode="desktop"] .tbi-desktop-nav { width: 100%; }
+    html[data-device-mode="desktop"] .tbi-header-actions { justify-self: end; }
+}
+
+.tbi-view { display: none; }
+.tbi-view.active { display: block; }
+.tbi-card, .wa-panel { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(29,231,255,.26); background: linear-gradient(180deg, rgba(5,16,31,.93), rgba(2,7,17,.95)); box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.022); }
+.tbi-card::before, .wa-panel::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(29,231,255,.09), transparent 18%, transparent 82%, rgba(255,75,226,.09)), radial-gradient(circle at 50% -20%, rgba(29,231,255,.055), transparent 48%); }
+.tbi-card > *, .wa-panel > * { position: relative; }
+.tbi-card { padding: 13px; }
+.tbi-card h2, .tbi-card h3 { margin: 0; color: var(--cyan); text-transform: uppercase; letter-spacing: .15em; font-weight: 1000; }
+.tbi-card h2 { font-size: 24px; }
+.tbi-card h3 { font-size: 15px; }
+.tbi-card p { color: #b6cadd; line-height: 1.42; }
+.tbi-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.compact-heading { margin-bottom: 8px; }
+.centered-heading { justify-content: center; text-align: center; margin-bottom: 6px; }
+.tbi-muted { color: var(--muted); }
+

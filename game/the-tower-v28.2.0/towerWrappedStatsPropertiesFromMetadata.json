@@ -1,0 +1,834 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.2.0 TowerWrappedStats Metadata Field Catalogue",
+    "game": "The Tower - Idle Tower Defense",
+    "package": "com.TechTreeGames.TheTower",
+    "version": "28.2.0",
+    "versionCode": "966",
+    "sourceFile": "The Tower - Idle Tower Defense_28.2.0_APKPure.xapk",
+    "extractionType": "read-only static strings + IL2CPP metadata names + existing parser schema cross-check",
+    "safePurpose": [
+      "Game Brain vocabulary",
+      "knowledge base",
+      "Battle Report parser confidence",
+      "Compare/Systems/Coach grouping"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "live server values",
+      "cloud-save access",
+      "APK patching",
+      "automation/cheats"
+    ],
+    "tbiBuild": "v4.11z52m"
+  },
+  "entryCount": 62,
+  "entries": [
+    {
+      "order": 1,
+      "property": "Year",
+      "displayLabel": "Year",
+      "family": "Account Stats / Other",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 2,
+      "property": "TournamentPromotionsAmount",
+      "displayLabel": "Tournament Promotions Amount",
+      "family": "Account Stats / Tournament",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 3,
+      "property": "TournamentDemotionsAmount",
+      "displayLabel": "Tournament Demotions Amount",
+      "family": "Account Stats / Tournament",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 4,
+      "property": "TournamentHighestLeague",
+      "displayLabel": "Tournament Highest League",
+      "family": "Account Stats / Tournament",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 5,
+      "property": "ChainLightningAmount",
+      "displayLabel": "Chain Lightning Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 6,
+      "property": "SmartMissilesAmount",
+      "displayLabel": "Smart Missiles Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 7,
+      "property": "SmartMissilsDamage",
+      "displayLabel": "Smart Missiles Damage",
+      "family": "Account Stats / Other",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 8,
+      "property": "DeathWaveAmount",
+      "displayLabel": "Death Wave Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 9,
+      "property": "ChronoFieldAmount",
+      "displayLabel": "Chrono Field Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 10,
+      "property": "ChronoFieldDuration",
+      "displayLabel": "Chrono Field Duration",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 11,
+      "property": "InnerLandMinesDamage",
+      "displayLabel": "Inner Land Mines Damage",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 12,
+      "property": "InnerLandMinesAmount",
+      "displayLabel": "Inner Land Mines Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 13,
+      "property": "GoldenTowerCashAmount",
+      "displayLabel": "Golden Tower Cash Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 14,
+      "property": "GoldenTowerCoinAmount",
+      "displayLabel": "Golden Tower Coin Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 15,
+      "property": "GoldenTowerDuration",
+      "displayLabel": "Golden Tower Duration",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 16,
+      "property": "PoisonSwampDamage",
+      "displayLabel": "Poison Swamp Damage",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 17,
+      "property": "PoisonSwampAmount",
+      "displayLabel": "Poison Swamp Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 18,
+      "property": "BlackHoleAmount",
+      "displayLabel": "Black Hole Amount",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 19,
+      "property": "BlackHoleAffected",
+      "displayLabel": "Black Hole Affected",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 20,
+      "property": "SpotlightDamage",
+      "displayLabel": "Spotlight Damage",
+      "family": "Account Stats / Ultimate Weapons",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 21,
+      "property": "ModulesBoughtAmount",
+      "displayLabel": "Modules Bought Amount",
+      "family": "Account Stats / Modules",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 22,
+      "property": "ModulesEarnedAmount",
+      "displayLabel": "Modules Earned Amount",
+      "family": "Account Stats / Modules",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 23,
+      "property": "ModulesShattered",
+      "displayLabel": "Modules Shattered",
+      "family": "Account Stats / Modules",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 24,
+      "property": "DiedToBasic",
+      "displayLabel": "Died To Basic",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 25,
+      "property": "DiedToFast",
+      "displayLabel": "Died To Fast",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 26,
+      "property": "DiedToRanged",
+      "displayLabel": "Died To Ranged",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 27,
+      "property": "DiedToTank",
+      "displayLabel": "Died To Tank",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 28,
+      "property": "DiedToProtector",
+      "displayLabel": "Died To Protector",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 29,
+      "property": "DiedToBoss",
+      "displayLabel": "Died To Boss",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 30,
+      "property": "DiedToVampire",
+      "displayLabel": "Died To Vampire",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 31,
+      "property": "DiedToRay",
+      "displayLabel": "Died To Ray",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 32,
+      "property": "DiedToScatterMain",
+      "displayLabel": "Died To Scatter Main",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 33,
+      "property": "DiedToScatterChild",
+      "displayLabel": "Died To Scatter Child",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 34,
+      "property": "DiedToSaboteur",
+      "displayLabel": "Died To Saboteur",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 35,
+      "property": "DiedToCommander",
+      "displayLabel": "Died To Commander",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 36,
+      "property": "DiedToOvercharge",
+      "displayLabel": "Died To Overcharge",
+      "family": "Account Stats / Death Causes",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 37,
+      "property": "KilledBasic",
+      "displayLabel": "Killed Basic",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 38,
+      "property": "KilledFast",
+      "displayLabel": "Killed Fast",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 39,
+      "property": "KilledRanged",
+      "displayLabel": "Killed Ranged",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 40,
+      "property": "KilledTank",
+      "displayLabel": "Killed Tank",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 41,
+      "property": "KilledProtector",
+      "displayLabel": "Killed Protector",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 42,
+      "property": "KilledBoss",
+      "displayLabel": "Killed Boss",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 43,
+      "property": "KilledVampire",
+      "displayLabel": "Killed Vampire",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 44,
+      "property": "KilledRay",
+      "displayLabel": "Killed Ray",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 45,
+      "property": "KilledScatterMain",
+      "displayLabel": "Killed Scatter Main",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 46,
+      "property": "KilledScatterChild",
+      "displayLabel": "Killed Scatter Child",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 47,
+      "property": "KilledSaboteur",
+      "displayLabel": "Killed Saboteur",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 48,
+      "property": "KilledCommander",
+      "displayLabel": "Killed Commander",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 49,
+      "property": "KilledOvercharge",
+      "displayLabel": "Killed Overcharge",
+      "family": "Account Stats / Enemy Kills",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 50,
+      "property": "GameBattlesStarted",
+      "displayLabel": "Game Battles Started",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 51,
+      "property": "GameBattlesSurrendered",
+      "displayLabel": "Game Battles Surrendered",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 52,
+      "property": "GameWavesSkippedCard",
+      "displayLabel": "Game Waves Skipped Card",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 53,
+      "property": "GameWavesSkippedIS",
+      "displayLabel": "Game Waves Skipped I S",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 54,
+      "property": "GameWavesCleared",
+      "displayLabel": "Game Waves Cleared",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 55,
+      "property": "GameTimeInBattle",
+      "displayLabel": "Game Time In Battle",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 56,
+      "property": "GameDeathDefyAmount",
+      "displayLabel": "Game Death Defy Amount",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 57,
+      "property": "GameSecondWindAmount",
+      "displayLabel": "Game Second Wind Amount",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 58,
+      "property": "GameDemonModeAmount",
+      "displayLabel": "Game Demon Mode Amount",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 59,
+      "property": "GameDemonModeDuration",
+      "displayLabel": "Game Demon Mode Duration",
+      "family": "Account Stats / Lifetime Battle Totals",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 60,
+      "property": "DailyMissionsCompleted",
+      "displayLabel": "Daily Missions Completed",
+      "family": "Account Stats / Missions and Cards",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 61,
+      "property": "EventMissionsCompleted",
+      "displayLabel": "Event Missions Completed",
+      "family": "Account Stats / Missions and Cards",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    },
+    {
+      "order": 62,
+      "property": "CardsPulledAmount",
+      "displayLabel": "Cards Pulled Amount",
+      "family": "Account Stats / Missions and Cards",
+      "sourceConfidence": "game-file-confirmed-metadata-name",
+      "useForTbi": [
+        "future account stats knowledge base",
+        "future History/account overview",
+        "future Systems glossary"
+      ],
+      "safeNote": "Metadata name only; not a live value and not a hidden formula."
+    }
+  ]
+}

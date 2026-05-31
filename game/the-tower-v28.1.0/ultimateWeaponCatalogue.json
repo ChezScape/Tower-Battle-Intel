@@ -1,0 +1,273 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Ultimate Weapon Catalogue",
+    "catalogueKey": "ultimateWeaponCatalogue",
+    "entryCount": 10,
+    "purpose": "Ultimate Weapon/effect vocabulary and report-source links."
+  },
+  "entries": [
+    {
+      "key": "golden_tower",
+      "label": "Golden Tower",
+      "family": "Ultimate Weapon / Economy",
+      "meaning": "Major economy source; useful for coin-source explanations.",
+      "tags": [
+        "uw",
+        "economy"
+      ],
+      "aliases": [
+        "GT",
+        "Coins From Golden Tower"
+      ],
+      "battleReportLinks": [
+        "CoinsFromGoldenTower"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "compare economy source",
+        "systems glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "black_hole",
+      "label": "Black Hole",
+      "family": "Ultimate Weapon / Control + Economy",
+      "meaning": "Enemy control and economy-linked source; do not assume hit equals kill.",
+      "tags": [
+        "uw",
+        "control",
+        "economy"
+      ],
+      "aliases": [
+        "BH",
+        "Coins From Black Hole",
+        "Enemies Hit By Black Hole"
+      ],
+      "battleReportLinks": [
+        "CoinsFromBlackHole",
+        "HitByBlackHole",
+        "DestroyedByBlackHole"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "compare source split",
+        "command deck"
+      ],
+      "notes": []
+    },
+    {
+      "key": "death_wave",
+      "label": "Death Wave",
+      "family": "Ultimate Weapon / Damage + Economy + Cells",
+      "meaning": "Effect Wave/Death Wave links to damage taken, bonus coins, and bonus cells depending on setup.",
+      "tags": [
+        "uw",
+        "damage",
+        "economy",
+        "cells"
+      ],
+      "aliases": [
+        "DW",
+        "Coins From Death Wave",
+        "Cells From Death Wave"
+      ],
+      "battleReportLinks": [
+        "CoinsFromDeathWave",
+        "CellsFromDeathWave",
+        "HitByDeathWave"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "economy source",
+        "cell source",
+        "damage explanation"
+      ],
+      "notes": []
+    },
+    {
+      "key": "spotlight",
+      "label": "Spotlight",
+      "family": "Ultimate Weapon / Damage + Economy",
+      "meaning": "Damage/economy multiplier source.",
+      "tags": [
+        "uw",
+        "damage",
+        "economy"
+      ],
+      "aliases": [
+        "SL",
+        "Coins From Spotlight"
+      ],
+      "battleReportLinks": [
+        "CoinsFromSpotlight",
+        "KilledWithSpotlightActive"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "compare economy source"
+      ],
+      "notes": []
+    },
+    {
+      "key": "smart_missiles",
+      "label": "Smart Missiles",
+      "family": "Ultimate Weapon / Damage",
+      "meaning": "Damage-focused missile source.",
+      "tags": [
+        "uw",
+        "damage",
+        "burst"
+      ],
+      "aliases": [
+        "SM",
+        "Smart Missiles"
+      ],
+      "battleReportLinks": [
+        "DestroyedBySmartMissiles"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "damage source glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "chain_lightning",
+      "label": "Chain Lightning",
+      "family": "Ultimate Weapon / Damage + Shock",
+      "meaning": "Chained-hit damage and Shock status source; useful for shock/damage taken explanations.",
+      "tags": [
+        "uw",
+        "damage",
+        "shock"
+      ],
+      "aliases": [
+        "CL",
+        "Shock"
+      ],
+      "battleReportLinks": [
+        "HitByChainLightning"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "systems glossary",
+        "command deck"
+      ],
+      "notes": []
+    },
+    {
+      "key": "chrono_field",
+      "label": "Chrono Field",
+      "family": "Ultimate Weapon / Control + Survival",
+      "meaning": "Control/slow and damage-reduction context.",
+      "tags": [
+        "uw",
+        "control",
+        "survival"
+      ],
+      "aliases": [
+        "CF",
+        "Chrono Field"
+      ],
+      "battleReportLinks": [
+        "KilledWithChronoFieldActive"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "survival explanation"
+      ],
+      "notes": []
+    },
+    {
+      "key": "inner_land_mines",
+      "label": "Inner Land Mines",
+      "family": "Ultimate Weapon / Damage + Control",
+      "meaning": "Mine-based damage/control source.",
+      "tags": [
+        "uw",
+        "damage",
+        "control"
+      ],
+      "aliases": [
+        "ILM",
+        "Inner Land Mines"
+      ],
+      "battleReportLinks": [
+        "DestroyedByInnerLandMines"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "damage source glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "poison_swamp",
+      "label": "Poison Swamp",
+      "family": "Ultimate Weapon / Damage + Control",
+      "meaning": "Poison/control source; can appear in destroyed/effect-active contexts.",
+      "tags": [
+        "uw",
+        "damage",
+        "control"
+      ],
+      "aliases": [
+        "PS",
+        "Poison Swamp"
+      ],
+      "battleReportLinks": [
+        "DestroyedByPoisonSwamp",
+        "KilledWithPoisonSwampActive"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "damage source glossary"
+      ],
+      "notes": []
+    },
+    {
+      "key": "synchronicity",
+      "label": "Synchronicity",
+      "family": "Ultimate Weapon / Research clue",
+      "meaning": "Observed UW-related term; keep as glossary/search alias until exact mechanic is needed.",
+      "tags": [
+        "uw",
+        "research",
+        "observed"
+      ],
+      "aliases": [
+        "Synchronicity"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [
+        "search alias"
+      ],
+      "notes": []
+    }
+  ]
+}

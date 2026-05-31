@@ -1,18 +1,21 @@
 "use strict";
 
+import { getOfficialBattleReportSchemaStatus } from "../game/battleReportOfficialSchema.js";
+import { auditOfficialCatalogues } from "../game/officialGameCatalogues.js";
+import { getWaveTierMilestoneStatus } from "../game/waveTierMilestoneCatalogue.js";
+
 /**
  * SYSTEM HEALTH SCAN
  * Full-system diagnostic scanner for Tower Battle Intel.
  *
  * This version treats normal idle/closed states properly:
  * - No A/B selected yet is not a failure
- * - Debug panel closed is not a warning
  * - Huge Tower-number deltas are informational, not broken
  * - Build style Unknown is informational, not a warning
  */
 
 const HEALTH_VERSION =
-    "system-health-scan-v4.9x";
+    "system-health-scan-v4.11z31";
 
 /* --------------------------------------------------
    MAIN SCAN
@@ -38,8 +41,8 @@ export function runSystemHealthScan(state = {}) {
     scanAICoach(add, state, context);
     scanStorage(add, state, context);
     scanUIRender(add, state, context);
-    scanDebugSystem(add, state, context);
     scanDiagnosticsFoundation(add, state, context);
+    scanGameBrainCatalogues(add, state, context);
 
     const summary =
         summariseChecks(checks);
@@ -98,9 +101,6 @@ function buildScanContext(state = {}) {
             ? state.history.length
             : 0;
 
-    const debugEnabled =
-        Boolean(state?.ui?.debug);
-
     let mode =
         "idle";
 
@@ -116,7 +116,6 @@ function buildScanContext(state = {}) {
         hasBothRuns,
         hasCompare,
         historyCount,
-        debugEnabled,
         mode
     };
 }
@@ -147,6 +146,78 @@ function createCheckAdder(checks) {
             data
         });
     };
+}
+
+/* --------------------------------------------------
+   GAME BRAIN / OFFICIAL CATALOGUES
+-------------------------------------------------- */
+
+function scanGameBrainCatalogues(add, state = {}, context = {}) {
+    const catalogues = auditOfficialCatalogues();
+    const schema = getOfficialBattleReportSchemaStatus();
+    const milestones = getWaveTierMilestoneStatus();
+    const currentRun = state?.runB || state?.currentRun || state?.runA || null;
+    const feedback = currentRun?.meta?.gameBrainFeedback || null;
+
+    add({
+        id: "GAMEBRAIN_001",
+        group: "Game Brain / Official Catalogues",
+        level: catalogues.ok ? "pass" : "warning",
+        title: "Official catalogue layer loaded",
+        message: catalogues.ok
+            ? `${catalogues.catalogueCount} catalogue(s), ${catalogues.totalEntries} curated entries loaded.`
+            : "Official catalogue layer is missing required catalogue data.",
+        fix: catalogues.ok ? "" : "Check src/game/officialGameCatalogues.js and game/the-tower-v28.1.0 catalogue files.",
+        data: {
+            gameVersion: catalogues.gameVersion,
+            catalogueCount: catalogues.catalogueCount,
+            totalEntries: catalogues.totalEntries,
+            missing: catalogues.missing
+        }
+    });
+
+    add({
+        id: "GAMEBRAIN_002",
+        group: "Game Brain / Official Catalogues",
+        level: schema.ok ? "pass" : "warning",
+        title: "Battle Report official schema loaded",
+        message: schema.ok
+            ? `${schema.fieldCount} Battle Report field(s), ${schema.aliasCount} alias candidate(s) loaded.`
+            : "Battle Report schema did not pass its catalogue checks.",
+        fix: schema.ok ? "" : "Check src/game/battleReportOfficialSchema.js and z26 schema files.",
+        data: schema
+    });
+
+    add({
+        id: "GAMEBRAIN_003",
+        group: "Game Brain / Official Catalogues",
+        level: milestones.ok ? "pass" : "warning",
+        title: "Wave/Tier milestone catalogue loaded",
+        message: milestones.ok
+            ? `${milestones.baseCheckpointCount} base checkpoint(s), ${milestones.heatCheckpointCount} Heat checkpoint(s) available.`
+            : "Wave/Tier milestone catalogue failed its runtime check.",
+        fix: milestones.ok ? "" : "Check src/game/waveTierMilestoneCatalogue.js and z27 milestone data.",
+        data: milestones
+    });
+
+    add({
+        id: "GAMEBRAIN_004",
+        group: "Game Brain / Official Catalogues",
+        level: feedback ? "pass" : context.historyCount ? "info" : "info",
+        title: "Current run has Game Brain parser feedback",
+        message: feedback
+            ? `Current run has ${feedback.labelCoverage?.knownOfficialLabels || 0}/${feedback.labelCoverage?.totalLabels || 0} official label matches.`
+            : "Parser feedback appears after a z30 report is saved or loaded into the current run.",
+        fix: "",
+        data: feedback
+            ? {
+                labelCoverage: feedback.labelCoverage,
+                milestone: feedback.milestone,
+                killedBy: feedback.killedBy,
+                warnings: feedback.warnings
+            }
+            : null
+    });
 }
 
 
@@ -244,7 +315,6 @@ function scanAppBoot(add) {
 
     addDomCheck(add, "BOOT_002", "App root exists", "#app", "critical");
     addDomCheck(add, "BOOT_003", "Dashboard root exists", "#dashboard", "critical");
-    addDomCheck(add, "BOOT_004", "Debug panel root exists", "#debugPanel", "info");
 }
 
 /* --------------------------------------------------
@@ -553,7 +623,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but the History search control is not rendered."
                 : "No saved runs yet; History search is not required.",
         fix: hasSavedRuns && !historySearch
-            ? "Check historyLayout.js and the history filter panel render path."
+            ? "Check historyView.js and the history filter panel render path."
             : ""
     });
 
@@ -577,7 +647,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no sort controls were found."
                 : "No saved runs yet; sort controls are not required.",
         fix: hasSavedRuns && !sortChoices.length
-            ? "Check historyFilters.js and historyLayout.js sort control rendering."
+            ? "Check historyFilters.js and historyView.js sort control rendering."
             : ""
     });
 
@@ -592,7 +662,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no build filter controls were found."
                 : "No saved runs yet; build filter controls are not required.",
         fix: hasSavedRuns && !buildChoices.length
-            ? "Check historyFilters.js and historyLayout.js build control rendering."
+            ? "Check historyFilters.js and historyView.js build control rendering."
             : ""
     });
 
@@ -623,7 +693,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but Show Archived toggle was not found."
                 : "No saved runs yet; Show Archived toggle is not required.",
         fix: hasSavedRuns && !showArchived
-            ? "Check historyLayout.js for the showArchived button render path."
+            ? "Check historyView.js for the showArchived button render path."
             : ""
     });
 
@@ -641,7 +711,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but Reset Filters button was not found."
                 : "No saved runs yet; Reset Filters button is not required.",
         fix: hasSavedRuns && !resetFilters
-            ? "Check historyLayout.js for the reset filter button."
+            ? "Check historyView.js for the reset filter button."
             : ""
     });
 
@@ -659,7 +729,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no Stats buttons were found."
                 : "No saved runs yet; Stats buttons are not required.",
         fix: hasSavedRuns && !statsButtons.length
-            ? "Check historyCard.js for data-history-stats-index."
+            ? "Check historyView.js for data-history-stats-index."
             : ""
     });
 
@@ -677,7 +747,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no Edit buttons were found."
                 : "No saved runs yet; Edit buttons are not required.",
         fix: hasSavedRuns && !editButtons.length
-            ? "Check historyCard.js for data-history-edit-index."
+            ? "Check historyView.js for data-history-edit-index."
             : ""
     });
 
@@ -695,7 +765,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no Archive/Restore buttons were found."
                 : "No saved runs yet; Archive/Restore buttons are not required.",
         fix: hasSavedRuns && !archiveButtons.length
-            ? "Check historyCard.js archive/restore button rendering."
+            ? "Check historyView.js archive/restore button rendering."
             : ""
     });
 
@@ -713,7 +783,7 @@ function scanPhase4Features(add, state, context) {
                 ? "Saved runs exist, but no per-run delete buttons were found."
                 : "No saved runs yet; per-run delete buttons are not required.",
         fix: hasSavedRuns && !deleteRunButtons.length
-            ? "Check historyCard.js for data-delete-history-index."
+            ? "Check historyView.js for data-delete-history-index."
             : ""
     });
 
@@ -758,7 +828,7 @@ function scanPhase4Features(add, state, context) {
             query(".history-stats-overlay") ||
             query(".history-edit-overlay") ||
             query(".history-modal-overlay") ||
-            query(".history-stats-modal") ||
+            query(".tbi-history2-stats-modal") ||
             query(".history-edit-modal")
         );
 
@@ -1474,21 +1544,6 @@ function scanUIRender(add, state, context) {
             : "History panel is not currently rendered. This can be normal before history exists."
     });
 
-    const overlay =
-        query(".debug-overlay");
-
-    add({
-        id: "UI_003",
-        group: "UI Render",
-        level: overlay || !context.debugEnabled ? "pass" : "info",
-        title: "Debug overlay rendered",
-        message: overlay
-            ? "Debug overlay found."
-            : context.debugEnabled
-                ? "Debug overlay is not currently in DOM. It may be created only while rendering debug output."
-                : "Debug panel is closed; overlay is not expected."
-    });
-
     const selected =
         state?.ui?.selectedSection;
 
@@ -1523,38 +1578,6 @@ function scanUIRender(add, state, context) {
 }
 
 /* --------------------------------------------------
-   DEBUG SYSTEM
--------------------------------------------------- */
-
-function scanDebugSystem(add, state, context) {
-
-    add({
-        id: "DEBUG_001",
-        group: "Debug System",
-        level: context.debugEnabled ? "pass" : "info",
-        title: "Debug enabled",
-        message: context.debugEnabled
-            ? "Debug mode is enabled."
-            : "Debug mode is disabled."
-    });
-
-    const output =
-        query("#debugOutput");
-
-    add({
-        id: "DEBUG_002",
-        group: "Debug System",
-        level: output || !context.debugEnabled ? "pass" : "info",
-        title: "Debug output exists",
-        message: output
-            ? "Debug output element found."
-            : context.debugEnabled
-                ? "Debug output is not currently in DOM. It may be created after the debug panel renders."
-                : "Debug panel is closed; output element is not expected."
-    });
-}
-
-/* --------------------------------------------------
    DOM HELPERS
 -------------------------------------------------- */
 
@@ -1585,7 +1608,6 @@ function inferDomGroup(id = "") {
     if (id.startsWith("INPUT")) return "Input System";
     if (id.startsWith("HISTORY")) return "History";
     if (id.startsWith("UI")) return "UI Render";
-    if (id.startsWith("DEBUG")) return "Debug System";
 
     return "DOM";
 }
@@ -1844,17 +1866,8 @@ export function buildTimeInfo(date = new Date()) {
         exportedAtUTC:
             date.toISOString(),
 
-        exportedAtUK:
-            formatDateTimeInZone(
-                date,
-                "Europe/London"
-            ),
-
         exportedAtLocal:
             formatDateTimeLocal(date),
-
-        ukTimezone:
-            "Europe/London",
 
         localTimezone:
             getLocalTimezone(),

@@ -1,0 +1,571 @@
+/* Tower Battle Intel desktop module: 02-command-deck.css
+   Command Deck desktop polish and Save Report feedback
+   Source: v4.11z23 desktop.css lines 600-708.
+*/
+html.desktop-polish .tbi-command-view.desktop-command-polish { grid-template-columns: minmax(0, 1.45fr) minmax(300px, 390px); align-items: stretch; gap: 12px; }
+html.desktop-polish .tbi-command-card,
+html.desktop-polish .tbi-command-status { min-height: 0; }
+html.desktop-polish .tbi-command-flow .tbi-card-heading,
+html.desktop-polish .desktop-command-status .tbi-card-heading { border-bottom: 1px solid rgba(29,231,255,.10); padding-bottom: 8px; margin-bottom: 10px; }
+html.desktop-polish .tbi-command-mode-pill { display: inline-flex; align-items: center; justify-content: center; min-height: 26px; padding: 4px 9px; border: 1px solid rgba(29,231,255,.24); border-radius: 999px; color: var(--cyan); background: rgba(29,231,255,.06); font-size: 10px; font-weight: 1000; text-transform: uppercase; letter-spacing: .12em; }
+html.desktop-polish .tbi-command-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 2px 0 10px; }
+html.desktop-polish .tbi-command-step { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 2px 8px; align-items: center; min-height: 70px; padding: 9px 10px; border: 1px solid rgba(29,231,255,.14); border-radius: 10px; background: rgba(1,7,17,.58); }
+html.desktop-polish .tbi-command-step span { grid-row: span 2; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid rgba(29,231,255,.34); border-radius: 999px; color: var(--cyan); background: rgba(29,231,255,.08); font-weight: 1000; }
+html.desktop-polish .tbi-command-step strong { color: #fff; text-transform: uppercase; letter-spacing: .10em; font-size: 11px; }
+html.desktop-polish .tbi-command-step em { color: var(--soft); font-style: normal; line-height: 1.35; font-size: 12px; }
+html.desktop-polish .desktop-command-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+html.desktop-polish .desktop-command-actions button { min-height: 38px; }
+html.desktop-polish .tbi-command-note { margin-top: 10px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.055); border-radius: 9px; color: var(--soft); background: rgba(1,7,17,.46); font-size: 12px; }
+html.desktop-polish .desktop-command-stats { grid-template-columns: 1fr; gap: 8px; }
+html.desktop-polish .desktop-command-status .tbi-mini-stat { min-height: 52px; padding: 9px 10px; }
+@media (max-width: 1180px) {
+html.desktop-polish .tbi-system-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+html.desktop-polish .tbi-command-view.desktop-command-polish { grid-template-columns: 1fr; }
+html.desktop-polish .desktop-command-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+html[data-device-mode="desktop"] #app { display: flex; flex-direction: column; }
+html[data-device-mode="desktop"] .layout { order: 20; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section { order: 30; margin-top: 0; margin-bottom: 24px; width: min(1600px, calc(100% - 32px)); max-width: 1600px; margin: 14px auto 28px; padding: 13px 14px 14px; gap: 10px; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .tbi-command-note { border-color: rgba(29,231,255,.24); color: var(--soft); }
+html.desktop-polish .desktop-command-dedup .desktop-command-actions,
+html[data-device-mode="desktop"] .desktop-command-dedup .desktop-command-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+html.desktop-polish .desktop-command-shortcuts button,
+html[data-device-mode="desktop"] .desktop-command-shortcuts button { min-height: 42px; border-color: rgba(29,231,255,.34); background: linear-gradient(180deg, rgba(29,231,255,.10), rgba(1,7,17,.74)); }
+html.desktop-polish .desktop-command-shortcuts button:hover,
+html[data-device-mode="desktop"] .desktop-command-shortcuts button:hover { border-color: rgba(29,231,255,.72); box-shadow: 0 0 18px rgba(29,231,255,.18); }
+html.desktop-polish .command-shortcut-steps .tbi-command-step,
+html[data-device-mode="desktop"] .command-shortcut-steps .tbi-command-step { min-height: 66px; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .layout { padding-inline: clamp(10px, .7vw, 16px); }
+html[data-device-mode="desktop"] .tbi-command-view.desktop-command-layout-a5,
+html.desktop-polish .tbi-command-view.desktop-command-layout-a5 { width: 100%; max-width: 1600px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); gap: 12px; align-items: stretch; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-card,
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-status,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-card,
+html.desktop-polish .desktop-command-layout-a5 .desktop-command-status { min-width: 0; min-height: 0; padding: 13px 14px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-card-heading,
+html.desktop-polish .desktop-command-layout-a5 .tbi-card-heading { margin-bottom: 8px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-card-heading p,
+html.desktop-polish .desktop-command-layout-a5 .tbi-card-heading p { max-width: 880px; margin: 4px 0 0; line-height: 1.35; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-steps,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 8px 0 10px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-step,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-step { min-height: 58px; padding: 8px 9px; grid-template-columns: 28px minmax(0, 1fr); }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-step span,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-step span { width: 25px; height: 25px; font-size: 12px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-step strong,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-step strong { font-size: 10px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-step em,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-step em { font-size: 11px; line-height: 1.25; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-actions,
+html.desktop-polish .desktop-command-layout-a5 .desktop-command-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-shortcuts button,
+html.desktop-polish .desktop-command-layout-a5 .desktop-command-shortcuts button { min-height: 36px; padding-block: 8px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-note,
+html.desktop-polish .desktop-command-layout-a5 .tbi-command-note { margin-top: 8px; padding: 7px 9px; font-size: 11px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-stats,
+html.desktop-polish .desktop-command-layout-a5 .desktop-command-stats { grid-template-columns: 1fr; gap: 8px; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-status .tbi-mini-stat,
+html.desktop-polish .desktop-command-layout-a5 .desktop-command-status .tbi-mini-stat { min-height: 48px; padding: 8px 10px; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section .input-header { display: grid; gap: 3px; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section .section-subtitle { max-width: 1120px; line-height: 1.35; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section #input { min-height: 108px; max-height: 210px; }
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section .input-actions { gap: 10px; }
+@media (min-width: 1500px) {
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section #input { min-height: 118px; }
+}
+@media (max-width: 1180px) {
+html[data-device-mode="desktop"] .tbi-command-view.desktop-command-layout-a5,
+    html.desktop-polish .tbi-command-view.desktop-command-layout-a5 { grid-template-columns: 1fr; }
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-stats,
+    html.desktop-polish .desktop-command-layout-a5 .desktop-command-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 980px) {
+html[data-device-mode="desktop"] .desktop-command-layout-a5 .tbi-command-steps,
+    html.desktop-polish .desktop-command-layout-a5 .tbi-command-steps,
+    html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-actions,
+    html.desktop-polish .desktop-command-layout-a5 .desktop-command-actions,
+    html[data-device-mode="desktop"] .desktop-command-layout-a5 .desktop-command-stats,
+    html.desktop-polish .desktop-command-layout-a5 .desktop-command-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.save-report-feedback { display: grid; gap: 3px; margin-top: 12px; padding: 10px 12px; border: 1px solid rgba(29, 231, 255, .28); border-radius: 12px; background: rgba(2, 10, 22, .78); color: var(--text, #eef8ff); box-shadow: inset 0 0 18px rgba(29, 231, 255, .035); }
+.save-report-feedback strong { color: var(--cyan, #1de7ff); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.save-report-feedback span { color: var(--soft, #a7c2d8); font-size: 13px; line-height: 1.35; }
+.save-report-feedback.good { border-color: rgba(87, 255, 87, .46); box-shadow: inset 0 0 18px rgba(87, 255, 87, .045), 0 0 14px rgba(87, 255, 87, .08); }
+.save-report-feedback.good strong { color: var(--green, #57ff57); }
+.save-report-feedback.warn { border-color: rgba(255, 211, 41, .48); box-shadow: inset 0 0 18px rgba(255, 211, 41, .045), 0 0 14px rgba(255, 211, 41, .08); }
+.save-report-feedback.warn strong { color: var(--gold, #ffd329); }
+.save-report-feedback.bad { border-color: rgba(255, 64, 90, .52); box-shadow: inset 0 0 18px rgba(255, 64, 90, .045), 0 0 14px rgba(255, 64, 90, .08); }
+.save-report-feedback.bad strong { color: var(--red, #ff405a); }
+.save-report-toast-mount { position: fixed; right: 18px; bottom: 18px; z-index: 1000012; pointer-events: none; }
+.save-report-toast { display: grid; gap: 4px; width: min(520px, calc(100vw - 36px)); padding: 13px 15px; border: 1px solid rgba(29, 231, 255, .44); border-radius: 14px; background: linear-gradient(180deg, rgba(4, 18, 32, .97), rgba(1, 6, 15, .985)); color: #eef8ff; box-shadow: 0 16px 44px rgba(0,0,0,.56), 0 0 18px rgba(29,231,255,.16); }
+.save-report-toast strong { color: var(--cyan, #1de7ff); font-size: 12px; letter-spacing: .11em; text-transform: uppercase; }
+.save-report-toast span { color: var(--text, #eef8ff); font-size: 13px; line-height: 1.35; }
+.save-report-toast.good { border-color: rgba(87, 255, 87, .5); }
+.save-report-toast.good strong { color: var(--green, #57ff57); }
+.save-report-toast.warn { border-color: rgba(255, 211, 41, .55); }
+.save-report-toast.warn strong { color: var(--gold, #ffd329); }
+.save-report-toast.bad { border-color: rgba(255, 64, 90, .56); }
+.save-report-toast.bad strong { color: var(--red, #ff405a); }
+
+/* v4.11z30 Game Brain Save Report polish. Desktop-only; dashboard/mobile untouched. */
+.save-report-feedback-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.save-report-feedback-head em { font-style: normal; color: rgba(238,248,255,.72); font-size: 11px; letter-spacing: .08em; padding: 4px 8px; border: 1px solid rgba(255,255,255,.10); border-radius: 999px; background: rgba(255,255,255,.04); }
+.save-report-feedback-main { display: block; }
+.save-report-gamebrain { display: grid; gap: 8px; margin-top: 8px; padding: 10px; border: 1px solid rgba(29,231,255,.18); border-radius: 12px; background: rgba(2,12,24,.58); }
+.save-report-gamebrain-title { color: var(--cyan, #1de7ff); font-size: 10px; font-weight: 1000; letter-spacing: .14em; text-transform: uppercase; }
+.save-report-gamebrain p { margin: 0; color: rgba(238,248,255,.86); font-size: 12px; line-height: 1.35; }
+.save-report-gamebrain-facts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.save-report-gamebrain-fact { display: grid; gap: 3px; min-width: 0; padding: 7px 8px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: rgba(255,255,255,.035); }
+.save-report-gamebrain-fact small { color: rgba(167,194,216,.82); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.save-report-gamebrain-fact b { color: #eef8ff; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.save-report-gamebrain-fact.good b { color: var(--green, #57ff57); }
+.save-report-gamebrain-fact.watch b,
+.save-report-gamebrain-fact.warn b { color: var(--gold, #ffd329); }
+.save-report-gamebrain-fact.bad b { color: var(--red, #ff405a); }
+.save-report-gamebrain-lines { margin: 0; padding-left: 18px; color: rgba(238,248,255,.78); font-size: 12px; line-height: 1.35; }
+.save-report-toast-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.save-report-toast-facts span { width: auto; padding: 4px 7px; border: 1px solid rgba(255,255,255,.10); border-radius: 999px; background: rgba(255,255,255,.04); color: rgba(238,248,255,.84); font-size: 11px; }
+.save-report-toast-facts b { color: #fff; }
+@media (max-width: 980px) {
+    .save-report-gamebrain-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — Command Deck Clear Input Fix
+   Dashboard-style control room. Desktop-only; mobile CSS untouched.
+-------------------------------------------------- */
+
+.tbi-command-clean-view {
+    width: min(1600px, calc(100% - 32px));
+    margin: 0 auto 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+    gap: 14px;
+    align-items: start;
+}
+
+.tbi-command-clean-main,
+.tbi-command-clean-side {
+    display: grid;
+    gap: 14px;
+    min-width: 0;
+}
+
+.tbi-command-clean-side {
+    position: sticky;
+    top: 86px;
+}
+
+.tbi-command-clean-view .tbi-card {
+    min-width: 0;
+}
+
+.tbi-command-hero-card,
+.tbi-command-intake-card,
+.tbi-command-result-card,
+.tbi-command-next-card,
+.tbi-command-side-card {
+    border-color: rgba(29,231,255,.28);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(29,231,255,.11), transparent 34%),
+        radial-gradient(circle at 92% 12%, rgba(157,91,255,.10), transparent 30%),
+        linear-gradient(180deg, rgba(5,18,35,.94), rgba(1,7,17,.96));
+    box-shadow: var(--shadow), inset 0 0 24px rgba(29,231,255,.035);
+}
+
+.tbi-command-hero-card {
+    display: grid;
+    gap: 14px;
+    border-color: rgba(29,231,255,.40);
+    box-shadow: var(--shadow), var(--glow-cyan);
+}
+
+.tbi-command-kicker,
+.tbi-command-source-pill,
+.tbi-command-mode-pill {
+    color: var(--cyan);
+    font-family: Consolas, "Roboto Mono", monospace;
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.tbi-command-hero-top,
+.tbi-command-section-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.tbi-command-hero-top h2,
+.tbi-command-side-card h3 {
+    margin: 0;
+    color: var(--text);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.tbi-command-hero-top h2 {
+    font-size: clamp(24px, 2vw, 36px);
+    line-height: 1;
+}
+
+.tbi-command-hero-top p,
+.tbi-command-section-heading p {
+    margin: 6px 0 0;
+    color: var(--soft);
+    line-height: 1.42;
+}
+
+.tbi-command-section-heading h3 {
+    margin: 0;
+    color: var(--cyan);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.tbi-command-mode-pill,
+.tbi-command-source-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-height: 28px;
+    padding: 5px 10px;
+    border: 1px solid rgba(29,231,255,.28);
+    border-radius: 999px;
+    background: rgba(29,231,255,.07);
+}
+
+.tbi-command-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tbi-command-mission-step {
+    min-height: 76px;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 3px 8px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgba(29,231,255,.16);
+    border-radius: 12px;
+    background: rgba(1,7,17,.72);
+}
+
+.tbi-command-mission-step span {
+    grid-row: span 2;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(29,231,255,.35);
+    border-radius: 999px;
+    color: var(--cyan);
+    background: rgba(29,231,255,.08);
+    font-weight: 1000;
+}
+
+.tbi-command-mission-step strong {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .10em;
+    font-size: 11px;
+}
+
+.tbi-command-mission-step em {
+    color: var(--soft);
+    font-style: normal;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.tbi-command-hero-stats,
+.tbi-command-result-empty-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(29,231,255,.14);
+}
+
+.tbi-command-hero-stats > div,
+.tbi-command-result-empty-grid > span {
+    display: grid;
+    gap: 4px;
+    padding: 10px 11px;
+    background: rgba(1,7,17,.88);
+}
+
+.tbi-command-hero-stats span,
+.tbi-command-result-empty-grid small {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-command-hero-stats strong,
+.tbi-command-result-empty-grid b {
+    min-width: 0;
+    color: #fff;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tbi-command-report-input {
+    width: 100%;
+    min-height: 220px;
+    max-height: 420px;
+    resize: vertical;
+    padding: 14px;
+    border: 1px solid rgba(29,231,255,.36);
+    border-radius: 14px;
+    background:
+        linear-gradient(180deg, rgba(5,18,36,.96), rgba(1,7,17,.985));
+    color: var(--text);
+    font-family: Consolas, "Roboto Mono", monospace;
+    font-size: 12px;
+    line-height: 1.35;
+    box-shadow: inset 0 0 22px rgba(29,231,255,.06), 0 0 18px rgba(29,231,255,.08);
+}
+
+.tbi-command-report-input:focus {
+    outline: none;
+    border-color: rgba(29,231,255,.82);
+    box-shadow: 0 0 0 2px rgba(29,231,255,.16), 0 0 24px rgba(29,231,255,.22), inset 0 0 22px rgba(29,231,255,.06);
+}
+
+.tbi-command-intake-toolbar {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 10px;
+    align-items: stretch;
+}
+
+.tbi-command-build-select {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.tbi-command-build-select span {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-command-build-select select {
+    min-height: 46px;
+}
+
+.tbi-command-action-row,
+.tbi-command-next-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tbi-command-next-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tbi-command-action-button,
+.tbi-command-route-button {
+    min-height: 46px;
+    display: grid;
+    gap: 3px;
+    align-content: center;
+    text-align: left;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(29,231,255,.12), rgba(1,7,17,.70));
+}
+
+.tbi-command-action-button.primary {
+    border-color: rgba(87,255,87,.38);
+    background: linear-gradient(180deg, rgba(87,255,87,.15), rgba(1,7,17,.70));
+}
+
+.tbi-command-action-button strong,
+.tbi-command-route-button strong {
+    color: #fff;
+    font-size: 11px;
+}
+
+.tbi-command-action-button span,
+.tbi-command-route-button span {
+    color: var(--soft);
+    font-size: 10px;
+    letter-spacing: .03em;
+    text-transform: none;
+    font-weight: 700;
+}
+
+.tbi-command-result-card .save-report-feedback {
+    margin-top: 0;
+    border-radius: 14px;
+}
+
+.tbi-command-result-card .command-result-placeholder {
+    min-height: 154px;
+}
+
+.tbi-command-side-card {
+    display: grid;
+    gap: 12px;
+}
+
+.tbi-command-side-stat-grid,
+.tbi-command-readiness-list {
+    display: grid;
+    gap: 8px;
+}
+
+.tbi-command-side-stat,
+.tbi-command-readiness-row {
+    display: grid;
+    gap: 5px;
+    padding: 10px 11px;
+    border: 1px solid rgba(29,231,255,.16);
+    border-radius: 10px;
+    background: rgba(1,7,17,.76);
+}
+
+.tbi-command-readiness-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+}
+
+.tbi-command-side-stat span,
+.tbi-command-readiness-row span {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-command-side-stat strong,
+.tbi-command-readiness-row strong {
+    min-width: 0;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tbi-command-side-stat.good strong,
+.tbi-command-readiness-row.good strong {
+    color: var(--green);
+}
+
+.tbi-command-readiness-row.info strong {
+    color: var(--cyan);
+}
+
+.tbi-command-rule-list {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--soft);
+    line-height: 1.45;
+}
+
+@media (max-width: 1280px) {
+    .tbi-command-clean-view {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-command-clean-side {
+        position: static;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 980px) {
+    .tbi-command-mission-grid,
+    .tbi-command-hero-stats,
+    .tbi-command-action-row,
+    .tbi-command-next-grid,
+    .tbi-command-clean-side,
+    .tbi-command-result-empty-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tbi-command-intake-toolbar {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — Command Deck Visual Tidy
+   Dashboard locked. Command Deck wording/empty-state polish only.
+-------------------------------------------------- */
+
+.tbi-command-result-card .tbi-command-source-pill {
+    border-color: rgba(29,231,255,.34);
+    background: rgba(29,231,255,.09);
+}
+
+.tbi-command-result-empty-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tbi-command-result-empty-grid b {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.25;
+}
+
+.tbi-command-report-input {
+    min-height: 190px;
+}
+
+.tbi-command-next-grid .tbi-command-route-button strong {
+    letter-spacing: .08em;
+}
+
+.tbi-command-readiness-row strong {
+    white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+    .tbi-command-result-empty-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* v4.11z52w43 — Current Loadout Run A/B visibility polish. */
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-command-side-stat.run-a {
+    border-color: rgba(29, 231, 255, 0.48);
+    background: linear-gradient(135deg, rgba(29, 231, 255, 0.12), rgba(1, 7, 17, 0.78));
+    box-shadow: 0 0 24px rgba(29, 231, 255, 0.13), inset 4px 0 0 rgba(29, 231, 255, 0.72);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-command-side-stat.run-b {
+    border-color: rgba(255, 211, 41, 0.50);
+    background: linear-gradient(135deg, rgba(255, 211, 41, 0.12), rgba(1, 7, 17, 0.78));
+    box-shadow: 0 0 24px rgba(255, 211, 41, 0.13), inset 4px 0 0 rgba(255, 211, 41, 0.72);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-command-side-stat.run-a strong { color: var(--cyan, #1de7ff); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-command-side-stat.run-b strong { color: var(--gold, #ffd329); }
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-command-side-stat em {
+    color: rgba(197, 224, 244, 0.62);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}

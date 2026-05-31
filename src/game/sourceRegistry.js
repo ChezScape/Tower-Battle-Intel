@@ -1,6 +1,6 @@
 "use strict";
 
-export const KNOWLEDGE_CHECKED_AT = "2026-05-21";
+export const KNOWLEDGE_CHECKED_AT = "2026-05-27";
 
 export const SOURCE_REGISTRY = Object.freeze({
     official: Object.freeze([
@@ -9,7 +9,9 @@ export const SOURCE_REGISTRY = Object.freeze({
         source("official_app_store", "Apple App Store listing", "store_listing", "official_store", "https://apps.apple.com/app/the-tower-idle-tower-defense/id1575590830", "Official iOS listing."),
         source("official_web_store", "The Tower Web Store", "official_store", "official", "https://store.techtreegames.com/thetower/", "Official web store categories such as gems, stones, packs and passes."),
         source("official_discord_invite", "The Tower official Discord invite", "official_discord_invite", "official_access_point_only", "https://discord.com/invite/thetowerdefense", "Public invite page only; private Discord content not accessed."),
-        source("patch_v28_1_reddit", "V28.1 patch notes - May 11 2026", "patch_notes", "patch_notes_high", "https://www.reddit.com/r/TheTowerGame/comments/1tabrix/v281_patch_notes_may_11_2026/", "Used for current description/encyclopedia direction.")
+        source("patch_v28_1_reddit", "V28.1 patch notes - May 11 2026", "patch_notes", "patch_notes_high", "https://www.reddit.com/r/TheTowerGame/comments/1tabrix/v281_patch_notes_may_11_2026/", "Used for current description/encyclopedia direction."),
+        source("local_xapk_v28_2_0_static_audit", "The Tower 28.2.0 uploaded XAPK static audit", "local_game_file_audit", "game_file_observed", "local://game/the-tower-v28.2.0", "Read-only static strings/resources audit from Andrew's uploaded 28.2.0 XAPK; no APK patching or hidden formulas."),
+        source("wiki_v28_history", "Community wiki v28 version history", "community_patch_index", "community_wiki_medium", "https://the-tower-idle-tower-defense.fandom.com/wiki/Version_History/V0.28", "Cross-check only; local APK strings remain higher confidence for extracted wording.")
     ]),
     community: Object.freeze([
         source("wiki_home", "The Tower Wiki home", "community_wiki", "community_wiki_medium", "https://the-tower-idle-tower-defense.fandom.com/wiki/The_Tower_-_Idle_Tower_Defense_Wiki", "Community maintained index."),

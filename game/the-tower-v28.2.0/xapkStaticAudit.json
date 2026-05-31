@@ -1,0 +1,624 @@
+{
+  "sourceFile": "The Tower - Idle Tower Defense_28.2.0_APKPure.xapk",
+  "xapkSha256": "311d5a319509f1f86964c51a0292aeb1d8eceeed9eb017583d207c114b6959a6",
+  "xapkSizeBytes": 190437739,
+  "baseApk": {
+    "file": "com.TechTreeGames.TheTower.apk",
+    "sizeBytes": 155328914,
+    "sha256": "5534dda02ddcc71e9f3fc7983ce143067e46ba06e91bc07b5d3de0ce2c383215"
+  },
+  "splitApks": [
+    {
+      "file": "config.arm64_v8a.apk",
+      "sizeBytes": 35067984,
+      "sha256": "571fe6ec2109a9397009a3a2af076a82afca67b9fb44f0cdfbafda06e8edc89e"
+    }
+  ],
+  "manifest": {
+    "xapk_version": 2,
+    "package_name": "com.TechTreeGames.TheTower",
+    "name": "The Tower",
+    "locales_name": {
+      "af": "The Tower",
+      "am": "The Tower",
+      "ar": "The Tower",
+      "as": "The Tower",
+      "az": "The Tower",
+      "be": "The Tower",
+      "bg": "The Tower",
+      "bn": "The Tower",
+      "bs": "The Tower",
+      "ca": "The Tower",
+      "cs": "The Tower",
+      "da": "The Tower",
+      "de": "The Tower",
+      "el": "The Tower",
+      "en": "The Tower",
+      "en-AU": "The Tower",
+      "en-CA": "The Tower",
+      "en-GB": "The Tower",
+      "en-IN": "The Tower",
+      "en-XC": "The Tower",
+      "es": "The Tower",
+      "es-US": "The Tower",
+      "et": "The Tower",
+      "eu": "The Tower",
+      "fa": "The Tower",
+      "fi": "The Tower",
+      "fr": "The Tower",
+      "fr-CA": "The Tower",
+      "gl": "The Tower",
+      "gu": "The Tower",
+      "hi": "The Tower",
+      "hr": "The Tower",
+      "hu": "The Tower",
+      "hy": "The Tower",
+      "in": "The Tower",
+      "is": "The Tower",
+      "it": "The Tower",
+      "iw": "The Tower",
+      "ja": "The Tower",
+      "ka": "The Tower",
+      "kk": "The Tower",
+      "km": "The Tower",
+      "kn": "The Tower",
+      "ko": "The Tower",
+      "ky": "The Tower",
+      "lo": "The Tower",
+      "lt": "The Tower",
+      "lv": "The Tower",
+      "mk": "The Tower",
+      "ml": "The Tower",
+      "mn": "The Tower",
+      "mr": "The Tower",
+      "ms": "The Tower",
+      "my": "The Tower",
+      "nb": "The Tower",
+      "ne": "The Tower",
+      "nl": "The Tower",
+      "or": "The Tower",
+      "pa": "The Tower",
+      "pl": "The Tower",
+      "pt": "The Tower",
+      "pt-BR": "The Tower",
+      "pt-PT": "The Tower",
+      "ro": "The Tower",
+      "ru": "The Tower",
+      "si": "The Tower",
+      "sk": "The Tower",
+      "sl": "The Tower",
+      "sq": "The Tower",
+      "sr": "The Tower",
+      "sr-Latn": "The Tower",
+      "sv": "The Tower",
+      "sw": "The Tower",
+      "ta": "The Tower",
+      "te": "The Tower",
+      "th": "The Tower",
+      "tl": "The Tower",
+      "tr": "The Tower",
+      "uk": "The Tower",
+      "ur": "The Tower",
+      "uz": "The Tower",
+      "vi": "The Tower",
+      "zh": "The Tower",
+      "zh-CN": "The Tower",
+      "zh-HK": "The Tower",
+      "zh-MO": "The Tower",
+      "zh-TW": "The Tower",
+      "zu": "The Tower"
+    },
+    "version_code": "966",
+    "version_name": "28.2.0",
+    "min_sdk_version": "27",
+    "target_sdk_version": "35",
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+      "android.permission.VIBRATE",
+      "com.google.android.gms.permission.AD_ID",
+      "com.android.vending.CHECK_LICENSE",
+      "android.permission.ACCESS_WIFI_STATE",
+      "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+      "com.samsung.android.mapsagent.permission.READ_APP_INFO",
+      "com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA",
+      "android.permission.WAKE_LOCK",
+      "android.permission.ACCESS_ADSERVICES_AD_ID",
+      "android.permission.POST_NOTIFICATIONS",
+      "com.google.android.c2dm.permission.RECEIVE",
+      "com.android.vending.BILLING",
+      "android.permission.ACCESS_ADSERVICES_TOPICS",
+      "com.TechTreeGames.TheTower.permission.C2D_MESSAGE",
+      "com.google.android.providers.gsf.permission.READ_GSERVICES",
+      "android.permission.FOREGROUND_SERVICE",
+      "com.TechTreeGames.TheTower.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "split_configs": [
+      "config.arm64_v8a"
+    ],
+    "total_size": 190396898,
+    "icon": "icon.png",
+    "split_apks": [
+      {
+        "file": "com.TechTreeGames.TheTower.apk",
+        "id": "base"
+      },
+      {
+        "file": "config.arm64_v8a.apk",
+        "id": "config.arm64_v8a"
+      }
+    ],
+    "tbiBuild": "v4.11z52m"
+  },
+  "stringExtraction": {
+    "uniqueStrings": 1326257,
+    "method": "ASCII/UTF-16LE static strings over extracted Unity/APK assets"
+  },
+  "observedUpdateThemes": [
+    {
+      "key": "dissonance",
+      "label": "Dissonance",
+      "family": "Dissonance / Tier modifier",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "dissonant_run",
+      "label": "Dissonant Run",
+      "family": "Dissonance / Tier modifier",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "dissonant_boosts",
+      "label": "Dissonant Boosts",
+      "family": "Dissonance / Tier rewards",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "dissonant_echo",
+      "label": "Dissonant Echo",
+      "family": "Labs / Dissonance carry-over",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "overheat",
+      "label": "Overheat",
+      "family": "Run pressure / high-wave difficulty",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "enemy_skip_decay",
+      "label": "Enemy Skip Decay",
+      "family": "Overheat condition",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "damage_decay",
+      "label": "Damage Decay",
+      "family": "Tournament overheat condition",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "health_decay",
+      "label": "Health Decay",
+      "family": "Tournament overheat condition",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "more_fleets",
+      "label": "More Fleets",
+      "family": "Tournament overheat condition",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "more_elites",
+      "label": "More Elites",
+      "family": "Tournament overheat condition",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "bot_bot",
+      "label": "Bot Bot",
+      "family": "Bots",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "bot_plus",
+      "label": "Bot+",
+      "family": "Bots",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "wildfire",
+      "label": "Wildfire",
+      "family": "Bot+ ability",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "titan_shock",
+      "label": "Titan Shock",
+      "family": "Bot+ ability",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "bonus_cells",
+      "label": "Bonus Cells",
+      "family": "Bot+ ability",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "echoing_shot",
+      "label": "Echoing Shot",
+      "family": "Bot+ ability",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "maximum_power",
+      "label": "Maximum Power",
+      "family": "Bot+ ability",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "synchronicity",
+      "label": "Synchronicity",
+      "family": "Bot pathing",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "golden_tower_vfx_toggle",
+      "label": "Golden Tower VFX toggle",
+      "family": "Toggles menu",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "largest_wave_skip",
+      "label": "Largest Wave Skip",
+      "family": "Battle Report record/stat",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "largest_golden_combo",
+      "label": "Largest Golden Combo",
+      "family": "Battle Report record/stat",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "new_stats_categories",
+      "label": "New stats and stat categories",
+      "family": "Battle Report / stat grouping",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "tournament_battle_conditions",
+      "label": "Tournament Battle Conditions",
+      "family": "Tournaments",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "legends_conditions_adjustment",
+      "label": "Legends",
+      "family": "Tournament League",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "auto_reroll_condition_stop",
+      "label": "Auto-reroll",
+      "family": "Modules / reroll QoL",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "overcharge_wall_invincibility",
+      "label": "Overcharge",
+      "family": "Wall / survival fix",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "black_hole_ranged_enemy_fix",
+      "label": "Black Hole Disables Ranged Enemies",
+      "family": "Ultimate Weapon / enemy behaviour",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "spotlight_summoned_enemies_fix",
+      "label": "Spotlight",
+      "family": "Ultimate Weapon / summoned enemy fix",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "lab_gold_boxing",
+      "label": "Lab Gold Boxing",
+      "family": "Lab UI",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    },
+    {
+      "key": "event_relic_store",
+      "label": "Relic section",
+      "family": "Event Store",
+      "presentInV28_2_0XapkStrings": true,
+      "sourceConfidence": "game-file-observed",
+      "safePurpose": [
+        "official wording",
+        "TBI glossary",
+        "parser/search aliases",
+        "Compare/Systems/Coach context"
+      ]
+    }
+  ],
+  "battleReportSchemaRecheck": {
+    "baseline": "game/the-tower-v28.1.0/battleReportFields.json",
+    "baselineFieldCount": 142,
+    "propertyNamesFoundInV28_2_0": 142,
+    "propertyNamesMissingInV28_2_0": [],
+    "displayLabelsFoundInV28_2_0": 79,
+    "displayLabelsMissingInStaticStringPass": [
+      "Selected Tower",
+      "Gems This Round",
+      "Defense Percent Blocked",
+      "Defense Absolute Blocked",
+      "Chrono Field Blocked",
+      "Chain Thunder Blocked",
+      "Flame Bot Blocked",
+      "Primordial Collapse Blocked",
+      "Magic Orb Blocked",
+      "Enemies Tagged By Death Wave",
+      "Destroyed In Golden Tower",
+      "Destroyed In Amplify Bot",
+      "Enemies Hit By Projectiles",
+      "Enemies Hit By Thorns",
+      "Enemies Hit By Death Ray",
+      "Enemies Hit By Chain Lightning",
+      "Enemies Hit By Smart Missiles",
+      "Enemies Hit By Inner Land Mines",
+      "Enemies Hit By Poison Swamp",
+      "Enemies Hit By Black Hole",
+      "Enemies Hit By Chrono Field",
+      "Enemies Hit By Land Mine",
+      "Enemies Hit By Thunder Bot",
+      "Enemies Hit By Attack Chip",
+      "Enemies Hit By Orbital Augment",
+      "Nukes Used",
+      "Second Winds Used",
+      "Demon Modes Used",
+      "Attack Level Skips",
+      "Health Level Skips",
+      "Coins From Golden Tower Plus",
+      "Coins From Coin Bonus Upgrade",
+      "Total Basic",
+      "Total Fast",
+      "Total Tank",
+      "Total Ranged",
+      "Total Boss",
+      "Total Protector",
+      "Total Vampires",
+      "Total Rays",
+      "Total Scatters",
+      "Total Saboteurs",
+      "Total Commanders",
+      "Total Overcharges",
+      "Destroyed By Projectiles",
+      "Destroyed By Chain Lightning",
+      "Destroyed By Smart Missiles",
+      "Destroyed By Inner Land Mines",
+      "Destroyed By Poison Swamp",
+      "Destroyed By Black Hole",
+      "Destroyed By Flame Bot",
+      "Destroyed By Death Penalty",
+      "Guardian Summoned",
+      "Guardian Coins Fetched",
+      "Guardian Gems",
+      "Guardian Medals",
+      "Guardian Reroll Shards",
+      "Guardian Cannon Shards",
+      "Guardian Armor Shards",
+      "Guardian Generator Shards",
+      "Guardian Core Shards",
+      "Guardian Common Modules",
+      "Guardian Rare Modules"
+    ],
+    "conclusion": "No BattleHistoryEntry property-name break detected in the 28.2.0 static string pass. Display labels are not all present as plain strings, which is normal for localized/inferred labels."
+  },
+  "patchTextExcerpt": "<size=46><b>Dissonance Update</b></size> <size=36><b>Hey Tower Defenders!</b></size> We are excited to share our v28 update with all of you. Here is a look at the changes: <size=40><b>Dissonant Runs</b></size> Introducing: Dissonance! This is a new layer to Tier gameplay that presents a fun challenge, and a bonus to help push for further milestones. Dissonant Runs represent a new difficulty setting that can be applied to a Tier. Doing so disables a selected workshop tab (Attack, Defense, Utility, or Ultimate Weapons). Based on how far you progress, the related stat is boosted for that specific tier. The stats are: Attack Workshop: Attack Defense Workshop: Health Utility Workshop: Coins Ultimate Weapon Workshop: UW Damage Dissonance is unlocked at Tier 4 Wave 90. Once unlocked, you will have access to select this modifier for all unlocked Tiers. At Tier 17, Wave 60, you'll unlock four Dissonant Echo labs for each workshop type (Attack, Defense, Utility, Ultimate Weapon). These labs apply a percent of each tier's Dissonant Boost to your Tower. Unlocking Dissonance rewards you with a starting 0.5% Echo boost. Click on the Dissonant Boosts section on the Battle menu for an expanded panel. <size=40><b>Bots</b></size> Bots are getting a lot of attention this update! To start, we have moved the Bots menu to its own tab in the Events page. This allows us more space to expand the feature, like so: <size=32><b>New Bot: Bot Bot</b></size> A new Bot has entered the arena: Bot Bot! This new bot increases the effects of other bot effects within the radius, and has four stats: Range, Cooldown, % Increase, and Duration. <size=32><b>Bot+</b></size> Bots are getting an upgrade! The Bot+ feature gives each bot a new specialized ability. Bot+ is available when all Bots are unlocked. Each bot has its own Bot+ ability, which requires a one-time purchase using stones to unlock. Once the ability is unlocked, it can be upgraded further using medals. If you opt to respec your bots, all medals will be returned as usual, even if invested in the Bot+ stats. Unlocking the bot again will give you access to your Bot+ ability (without needing the stone purchase again). The five new Bot+ abilities are Wildfire, Titan Shock, Bonus Cells, Echoing Shot, and Maximum Power. Descriptions can be found in the Changelog below. <size=32><b>Synchronicity</b></size> Unlocking all five Bot+ abilities grants you access to Synchronicity, a stone upgrade that allows you to assign bots to have synchronized pathing. Unlocking Synchronicity grants you two slots, with each additional slot costing stones. Bots can be freely assigned into these slots so long as you have them unlocked. <size=40><b>Overheat</b></size> We have added in a new mechanic that amps up the difficulty of your run at higher waves. When you have successfully cleared Wave 4500 on any Tier, you will see an Overheat button on your Battle screen. This panel will define when the Overheat conditions will occur, and what the Overheat conditions are. This feature is designed to reduce the overall duration of a run in tiers and tournaments. This isn't a \"game end\" state when reaching this wave, but be prepared to face the heat! For normal tiers, the only change is that the Enemy Skip Decay Overheat condition kicks in at a defined wave. The panel will appear once you've cleared Wave 4500, but won't go into effect until much later in your run. Check the Heat button on each Tier more information. Overheat will appear in tournament runs as well, and can be viewed in the existing Heat button. We have added 4 new Overheat Conditions that will only appear in tournaments: Damage Decay: Tower Damage is reduced every 10 waves Health Decay: Tower Health is reduced every 10 waves More Fleets: An additional Fleet spawns every 100 waves More Elites: An additional Elite spawns every 5 waves <size=40><b>Expanded Event Store</b></size> We will be introducing a new Relic section in the Event Store starting on April 14th, 2026. This section will feature older relics from previous runs. Each week will feature four relics: two Rare and two Epic. These relics cost gems: 600 gems for Rare relics, and 1200 gems for Epic relics. This section of the Event Store will feature free and premium event relics earned from completing event missions, excluding most relics earned via medals. After a period of time, event relics will be added into the pool of options. Note: This section rotates every week, so make sure to check it at the beginning and middle of an active event! <size=40><b>Changelog</b></size> <size=32><b>Gameplay</b></size> Added 5 new Bot+ abilities: Wildfire: Enemies hit by Flame Bot become Enflamed in addition to Burned, receiving {0}x extra damage. Duration of the damage amplification depends on current Flame Bot damage. Titan Shock: Enemies struck by Thunder Bot have a permanent {0}% decreased attack speed. This value is multiplied by the number of digits in the enemy's mass. Bonus Cells: Elites killed in Golden Bot range grant {0}x more Cells. Echoing Shot: Tower Bullets within Range count as {0} bullets. Ultimate Weapon projectiles are also boosted, but by 1/3. Maximum Power: Boosts the Bot+ abilities of other bots by {0}x. Bot's move speed is no longer dependent on its cooldown, and they now move while active 3 new levels to Golden and Amplify Bot Range Improved the in-run stats to make the values more intuitive and player friendly Added new stats and stat categories Simplified the Battle Report to focus on time (Game and Real time), Coins, Coins per hour, Cells, and Cells per hour, and recategorized Included more \"fun\" stats, including records like Largest Wave Skip and Largest Golden Combo Added Golden Tower VFX toggle to the Toggles menu Damage reduction from Flame Bot now correctly applies to Tanks The process to pick Tournament Battle Conditions for Legends has been slightly adjusted Death Defy no longer rolls if the tower is already invincible (i.e. During Demon Mode) Fixed an issue where medals not claimed from an Event were sometimes not doubled by the Event Boost Fixed a bug where auto-reroll would fail to stop the re-rolling process when multiple conditions are selected, causing unintentional Reroll shards to be spent We've added a check to auto-reroll where it will automatically stop once any of the selected conditions are met Fixed an issue where Overcharge ignores Wall invincibility Fixed an issue where Ranged enemies failed to attack the Tower within the Black Hole for players without the \"Black Hole Disables Ranged Enemies\" research completed Fixed Spotlight not affecting all enemies (specifically all summoned enemies) Fixed an issue where standard perk bonuses did not apply to Cash or Absolute Defense perks Fixed an issue where the Module level up screen shows a different Coin rounding logic for the Coin display <size=32><b>Miscellaneous</b></size> Demon Mode now accurately states that it provides a 300x boost to projectiles during its period of invincibi"
+}

@@ -1,0 +1,880 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.2.0 Deep Static Useful Game Brain Extraction",
+    "game": "The Tower - Idle Tower Defense",
+    "package": "com.TechTreeGames.TheTower",
+    "version": "28.2.0",
+    "versionCode": "966",
+    "sourceFile": "The Tower - Idle Tower Defense_28.2.0_APKPure.xapk",
+    "extractionType": "read-only static strings + IL2CPP metadata names + existing parser schema cross-check",
+    "safePurpose": [
+      "Game Brain vocabulary",
+      "knowledge base",
+      "Battle Report parser confidence",
+      "Compare/Systems/Coach grouping"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "live server values",
+      "cloud-save access",
+      "APK patching",
+      "automation/cheats"
+    ],
+    "tbiBuild": "v4.11z52m"
+  },
+  "entryCount": 142,
+  "entries": [
+    {
+      "order": 1,
+      "property": "SelectedTower",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 2,
+      "property": "BattleDate",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 3,
+      "property": "GameTime",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 4,
+      "property": "RealTime",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 5,
+      "property": "IsTournament",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 6,
+      "property": "Tier",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 7,
+      "property": "Wave",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 8,
+      "property": "KilledBy",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 9,
+      "property": "CoinsEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 10,
+      "property": "CashEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 11,
+      "property": "InterestEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 12,
+      "property": "GemsThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 13,
+      "property": "GemBlocksTapped",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 14,
+      "property": "AdGemsThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 15,
+      "property": "CellsEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 16,
+      "property": "RerollShardsEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 17,
+      "property": "DamageTaken",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 18,
+      "property": "DamageTakenWall",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 19,
+      "property": "DamageTakenWhileBerserked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 20,
+      "property": "DamageGainFromBerserk",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 21,
+      "property": "DeathDefy",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 22,
+      "property": "Lifesteal",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 23,
+      "property": "TowerHealthRegen",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 24,
+      "property": "WallHealthRegen",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 25,
+      "property": "DefensePercentBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 26,
+      "property": "DefenseAbsoluteBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 27,
+      "property": "ChronoFieldBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 28,
+      "property": "ChainThunderBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 29,
+      "property": "FlameBotBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 30,
+      "property": "PrimordialCollapseBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 31,
+      "property": "MagicOrbBlocked",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 32,
+      "property": "EnergyShieldHitsAbsorbed",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 33,
+      "property": "HealthFromDeathWaveThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 34,
+      "property": "DamageDealt",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 35,
+      "property": "ProjectilesDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 36,
+      "property": "ProjectilesCount",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 37,
+      "property": "ThornDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 38,
+      "property": "OrbDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 39,
+      "property": "ElectronsDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 40,
+      "property": "LandMineDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 41,
+      "property": "LandMinesSpawned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 42,
+      "property": "RendArmorDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 43,
+      "property": "DeathRayDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 44,
+      "property": "SmartMissileDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 45,
+      "property": "InnerLandMineDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 46,
+      "property": "ChainLightningDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 47,
+      "property": "DeathWaveDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 48,
+      "property": "TaggedByDeathwave",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 49,
+      "property": "SwampDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 50,
+      "property": "BlackHoleDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 51,
+      "property": "DestroyedInSpotlight",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 52,
+      "property": "DestroyedInGoldenTower",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 53,
+      "property": "DestroyedInAmplifyBot",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 54,
+      "property": "DestroyedInGoldenBot",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 55,
+      "property": "OrbHits",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 56,
+      "property": "EnemiesHitByProjectilesThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 57,
+      "property": "EnemiesHitByThornsThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 58,
+      "property": "EnemiesHitByDeathRayThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 59,
+      "property": "EnemiesHitByChainLightningThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 60,
+      "property": "EnemiesHitBySmartMissilesThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 61,
+      "property": "EnemiesHitByInnerLandMinesThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 62,
+      "property": "EnemiesHitByPoisonSwampThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 63,
+      "property": "EnemiesHitByBlackHoleThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 64,
+      "property": "EnemiesHitByChronoFieldThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 65,
+      "property": "EnemiesHitByLandMineThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 66,
+      "property": "EnemiesHitByThunderBotThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 67,
+      "property": "EnemiesHitByFlameBotThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 68,
+      "property": "EnemiesHitByAttackChipThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 69,
+      "property": "EnemiesHitByOrbitalAugmentThisRound",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 70,
+      "property": "WavesSkipped",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 71,
+      "property": "NukesUsed",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 72,
+      "property": "SecondWindsUsed",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 73,
+      "property": "DemonModesUsed",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 74,
+      "property": "LargestWaveSkip",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 75,
+      "property": "MostCoinsFromWaveSkip",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 76,
+      "property": "MostCellsFromWaveSkip",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 77,
+      "property": "MostCoinsFromGoldenCombo",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 78,
+      "property": "HighestCPM",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 79,
+      "property": "LargestSmartMissileStack",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 80,
+      "property": "LargestGoldenCombo",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 81,
+      "property": "LargestILMCharge",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 82,
+      "property": "RecoveryPackages",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 83,
+      "property": "FreeAttackUpgrades",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 84,
+      "property": "FreeDefenseUpgrades",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 85,
+      "property": "FreeUtilityUpgrades",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 86,
+      "property": "AttackLevelSkips",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 87,
+      "property": "HealthLevelSkips",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 88,
+      "property": "CoinsFromDeathWave",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 89,
+      "property": "CoinsFromGoldenTower",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 90,
+      "property": "CoinsFromGoldenTowerPlus",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 91,
+      "property": "CashFromGoldenTower",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 92,
+      "property": "CoinsFromBlackHole",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 93,
+      "property": "CoinsFromSpotlight",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 94,
+      "property": "CoinsFromOrbs",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 95,
+      "property": "CoinsFromCoinUpgrade",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 96,
+      "property": "CoinsFromCoinBonuses",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 97,
+      "property": "CoinsFromCritCoin",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 98,
+      "property": "TotalEnemies",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 99,
+      "property": "TotalBasic",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 100,
+      "property": "TotalFast",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 101,
+      "property": "TotalTank",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 102,
+      "property": "TotalRanged",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 103,
+      "property": "TotalBoss",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 104,
+      "property": "TotalProtector",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 105,
+      "property": "TotalElites",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 106,
+      "property": "TotalVampires",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 107,
+      "property": "TotalRays",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 108,
+      "property": "TotalScatters",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 109,
+      "property": "TotalSaboteurs",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 110,
+      "property": "TotalCommanders",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 111,
+      "property": "TotalOvercharges",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 112,
+      "property": "DestroyedByOrbs",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 113,
+      "property": "DestroyedByThorns",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 114,
+      "property": "DestroyedByDeathRay",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 115,
+      "property": "DestroyedByLandMine",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 116,
+      "property": "DestroyedByProjectiles",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 117,
+      "property": "DestroyedByChainLightning",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 118,
+      "property": "DestroyedBySmartMissiles",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 119,
+      "property": "DestroyedByInnerLandMines",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 120,
+      "property": "DestroyedByPoisonSwamp",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 121,
+      "property": "DestroyedByBlackHole",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 122,
+      "property": "DestroyedByFlameBot",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 123,
+      "property": "DestroyedByDeathPenalty",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 124,
+      "property": "DestroyedByOther",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 125,
+      "property": "FlameBotDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 126,
+      "property": "ThunderBotStuns",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 127,
+      "property": "GoldenBotCoinsEarned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 128,
+      "property": "GuardianDamage",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 129,
+      "property": "GuardianSummoned",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 130,
+      "property": "GuardianCoinsStolen",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 131,
+      "property": "GuardianCoinsFetched",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 132,
+      "property": "GuardianCatches",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 133,
+      "property": "GuardianGems",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 134,
+      "property": "GuardianMedals",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 135,
+      "property": "GuardianRerollShards",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 136,
+      "property": "GuardianCannonShards",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 137,
+      "property": "GuardianArmorShards",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 138,
+      "property": "GuardianGeneratorShards",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 139,
+      "property": "GuardianCoreShards",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 140,
+      "property": "GuardianCommonModules",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 141,
+      "property": "GuardianRareModules",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    },
+    {
+      "order": 142,
+      "property": "DissonanceType",
+      "presentInV28_2_0Metadata": true,
+      "sourceConfidence": "game-file-confirmed-metadata-name"
+    }
+  ]
+}

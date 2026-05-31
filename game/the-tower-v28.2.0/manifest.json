@@ -1,0 +1,24 @@
+{
+  "catalogueName": "The Tower v28.2.0 Static APK Audit",
+  "game": "The Tower - Idle Tower Defense",
+  "package": "com.TechTreeGames.TheTower",
+  "version": "28.2.0",
+  "versionCode": "966",
+  "sourceFile": "The Tower - Idle Tower Defense_28.2.0_APKPure.xapk",
+  "sourceType": "uploaded XAPK, read-only static string/resource audit",
+  "generatedAt": "2026-05-27T20:20:00Z",
+  "tbiBuild": "v4.11z52m",
+  "notSafePurpose": [
+    "hidden formulas",
+    "live server values",
+    "APK patching",
+    "automated gameplay"
+  ],
+  "safePurpose": [
+    "official wording",
+    "catalogue freshness",
+    "Battle Report schema recheck",
+    "Game Brain/Compare/Systems glossary"
+  ],
+  "auditDepth": "deep static Game Brain knowledge-base foundation"
+}

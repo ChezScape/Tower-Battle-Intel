@@ -5,11 +5,11 @@
  * Central diagnostic snapshot and trace collector.
  *
  * This file is intentionally data-only. It does not touch the DOM and it does
- * not perform UI actions. The UI/debug panel can safely read the returned
+ * not perform UI actions. Diagnostics and UI health views can safely read the returned
  * object without causing extra pipeline work.
  */
 
-const PIPELINE_INSPECTOR_VERSION = "pipeline-inspector-v4.9x";
+const PIPELINE_INSPECTOR_VERSION = "pipeline-inspector-v4.11z31";
 const MAX_TRACE_ENTRIES = 300;
 const traceLog = [];
 
@@ -115,7 +115,8 @@ function inspectParsed(parsed = null) {
             confidence: 0,
             core: null,
             unknownFieldCount: 0,
-            schema: null
+            schema: null,
+            gameBrain: null
         };
     }
 
@@ -133,7 +134,8 @@ function inspectParsed(parsed = null) {
             cells: Number(parsed.core?.cells || 0)
         },
         unknownFieldCount: getUnknownFieldCount(parsed),
-        schema: parsed.meta?.schema || null
+        schema: parsed.meta?.reportSchema || parsed.meta?.schema || null,
+        gameBrain: parsed.meta?.gameBrainFeedback || null
     };
 }
 
@@ -144,7 +146,8 @@ function inspectRun(run = null) {
             sectionCount: 0,
             core: null,
             stats: null,
-            reportId: null
+            reportId: null,
+            gameBrain: null
         };
     }
 
@@ -164,7 +167,8 @@ function inspectRun(run = null) {
             realTimeSeconds: Number(run.stats?.realTimeSeconds || 0),
             gameTimeSeconds: Number(run.stats?.gameTimeSeconds || 0)
         },
-        reportId: run.meta?.reportId || null
+        reportId: run.meta?.reportId || null,
+        gameBrain: run.meta?.gameBrainFeedback || null
     };
 }
 

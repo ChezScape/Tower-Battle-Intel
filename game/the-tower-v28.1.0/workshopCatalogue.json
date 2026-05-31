@@ -1,0 +1,601 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Workshop Catalogue",
+    "catalogueKey": "workshopCatalogue",
+    "entryCount": 30,
+    "purpose": "Workshop upgrade labels and build-family grouping for Systems/Command Deck."
+  },
+  "entries": [
+    {
+      "key": "damage",
+      "label": "Damage",
+      "family": "Workshop / Attack",
+      "meaning": "Core damage scaling upgrade.",
+      "tags": [
+        "workshop",
+        "attack"
+      ],
+      "aliases": [
+        "Damage"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "attack_speed",
+      "label": "Attack Speed",
+      "family": "Workshop / Attack",
+      "meaning": "Core fire-rate scaling upgrade.",
+      "tags": [
+        "workshop",
+        "attack"
+      ],
+      "aliases": [
+        "Attack Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "critical_chance",
+      "label": "Critical Chance",
+      "family": "Workshop / Attack",
+      "meaning": "Critical hit chance context.",
+      "tags": [
+        "workshop",
+        "attack",
+        "crit"
+      ],
+      "aliases": [
+        "Critical Chance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "critical_factor",
+      "label": "Critical Factor",
+      "family": "Workshop / Attack",
+      "meaning": "Critical damage factor context.",
+      "tags": [
+        "workshop",
+        "attack",
+        "crit"
+      ],
+      "aliases": [
+        "Critical Factor"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "range",
+      "label": "Range",
+      "family": "Workshop / Attack",
+      "meaning": "Tower range context; can alter build behaviour.",
+      "tags": [
+        "workshop",
+        "attack",
+        "range"
+      ],
+      "aliases": [
+        "Range"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "damage_per_meter",
+      "label": "Damage / Meter",
+      "family": "Workshop / Attack",
+      "meaning": "Range-based damage scaling context.",
+      "tags": [
+        "workshop",
+        "attack",
+        "range"
+      ],
+      "aliases": [
+        "Damage/Meter",
+        "Damage per Meter"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "super_crit",
+      "label": "Super Crit",
+      "family": "Workshop / Attack",
+      "meaning": "Higher-tier critical damage context.",
+      "tags": [
+        "workshop",
+        "attack",
+        "crit"
+      ],
+      "aliases": [
+        "Super Crit"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "health",
+      "label": "Health",
+      "family": "Workshop / Defense",
+      "meaning": "Core EHP/survival scaling upgrade.",
+      "tags": [
+        "workshop",
+        "defense"
+      ],
+      "aliases": [
+        "Health"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "health_regen",
+      "label": "Health Regen",
+      "family": "Workshop / Defense",
+      "meaning": "Regeneration/sustain scaling; vulnerable to Vampire-style pressure.",
+      "tags": [
+        "workshop",
+        "defense",
+        "regen"
+      ],
+      "aliases": [
+        "Health Regen"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "defense_percent",
+      "label": "Defense %",
+      "family": "Workshop / Defense",
+      "meaning": "Damage reduction context.",
+      "tags": [
+        "workshop",
+        "defense"
+      ],
+      "aliases": [
+        "Defense %",
+        "Defense Percent"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "defense_absolute",
+      "label": "Defense Absolute",
+      "family": "Workshop / Defense",
+      "meaning": "Flat damage reduction context.",
+      "tags": [
+        "workshop",
+        "defense"
+      ],
+      "aliases": [
+        "Defense Absolute"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "thorn_damage",
+      "label": "Thorn Damage",
+      "family": "Workshop / Defense",
+      "meaning": "Thorns kill/return-damage context.",
+      "tags": [
+        "workshop",
+        "defense",
+        "thorns"
+      ],
+      "aliases": [
+        "Thorn Damage",
+        "Thorns"
+      ],
+      "battleReportLinks": [
+        "DestroyedByThorns"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "lifesteal",
+      "label": "Lifesteal",
+      "family": "Workshop / Defense",
+      "meaning": "Damage-to-healing sustain context.",
+      "tags": [
+        "workshop",
+        "defense",
+        "sustain"
+      ],
+      "aliases": [
+        "Lifesteal"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "knockback",
+      "label": "Knockback",
+      "family": "Workshop / Control",
+      "meaning": "Crowd-control pushback context.",
+      "tags": [
+        "workshop",
+        "control"
+      ],
+      "aliases": [
+        "Knockback"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "orbs",
+      "label": "Orbs",
+      "family": "Workshop / Control + Kills",
+      "meaning": "Orb kill/control source.",
+      "tags": [
+        "workshop",
+        "control",
+        "kill-source"
+      ],
+      "aliases": [
+        "Orbs",
+        "Extra Orbs"
+      ],
+      "battleReportLinks": [
+        "DestroyedByOrbs"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "orb_speed",
+      "label": "Orb Speed",
+      "family": "Workshop / Control",
+      "meaning": "Orb speed context.",
+      "tags": [
+        "workshop",
+        "control"
+      ],
+      "aliases": [
+        "Orb Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "shockwave",
+      "label": "Shockwave",
+      "family": "Workshop / Control",
+      "meaning": "Shockwave hit/debuff context.",
+      "tags": [
+        "workshop",
+        "control"
+      ],
+      "aliases": [
+        "Shockwave"
+      ],
+      "battleReportLinks": [
+        "HitByShockwave"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "land_mine",
+      "label": "Land Mine",
+      "family": "Workshop / Damage",
+      "meaning": "Land Mine kill/damage source.",
+      "tags": [
+        "workshop",
+        "damage",
+        "kill-source"
+      ],
+      "aliases": [
+        "Land Mine",
+        "Land Mines"
+      ],
+      "battleReportLinks": [
+        "DestroyedByLandMine"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "cash_bonus",
+      "label": "Cash Bonus",
+      "family": "Workshop / Economy",
+      "meaning": "In-run cash income multiplier context.",
+      "tags": [
+        "workshop",
+        "economy",
+        "cash"
+      ],
+      "aliases": [
+        "Cash Bonus"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "cash_per_wave",
+      "label": "Cash / Wave",
+      "family": "Workshop / Economy",
+      "meaning": "Wave-based in-run cash context.",
+      "tags": [
+        "workshop",
+        "economy",
+        "cash"
+      ],
+      "aliases": [
+        "Cash/Wave",
+        "Cash Per Wave"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coins_per_kill",
+      "label": "Coins / Kill",
+      "family": "Workshop / Economy",
+      "meaning": "Coins per enemy kill context.",
+      "tags": [
+        "workshop",
+        "economy",
+        "coins"
+      ],
+      "aliases": [
+        "Coins/Kill",
+        "Coins Per Kill"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coins_per_wave",
+      "label": "Coins / Wave",
+      "family": "Workshop / Economy",
+      "meaning": "Wave-based coin context.",
+      "tags": [
+        "workshop",
+        "economy",
+        "coins"
+      ],
+      "aliases": [
+        "Coins/Wave",
+        "Coins Per Wave"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "free_attack_upgrade",
+      "label": "Free Attack Upgrade",
+      "family": "Workshop / Utility",
+      "meaning": "Free upgrade chance at wave end.",
+      "tags": [
+        "workshop",
+        "utility",
+        "free-upgrade"
+      ],
+      "aliases": [
+        "Free Attack Upgrade"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "free_defense_upgrade",
+      "label": "Free Defense Upgrade",
+      "family": "Workshop / Utility",
+      "meaning": "Free defense upgrade chance at wave end.",
+      "tags": [
+        "workshop",
+        "utility",
+        "free-upgrade"
+      ],
+      "aliases": [
+        "Free Defense Upgrade"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "free_utility_upgrade",
+      "label": "Free Utility Upgrade",
+      "family": "Workshop / Utility",
+      "meaning": "Free utility upgrade chance at wave end.",
+      "tags": [
+        "workshop",
+        "utility",
+        "free-upgrade"
+      ],
+      "aliases": [
+        "Free Utility Upgrade"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "interest",
+      "label": "Interest",
+      "family": "Workshop / Utility",
+      "meaning": "Observed workshop prerequisite for research.",
+      "tags": [
+        "workshop",
+        "utility",
+        "cash"
+      ],
+      "aliases": [
+        "Interest"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "recovery_packages",
+      "label": "Recovery Packages",
+      "family": "Workshop / Survival",
+      "meaning": "Recovery package spawn/sustain context.",
+      "tags": [
+        "workshop",
+        "survival",
+        "recovery"
+      ],
+      "aliases": [
+        "Recovery Packages"
+      ],
+      "battleReportLinks": [
+        "RecoveryPackages"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "enemy_attack_level_skip",
+      "label": "Enemy Attack Level Skip",
+      "family": "Workshop / Scaling Defense",
+      "meaning": "EALS context; skips enemy attack scaling levels.",
+      "tags": [
+        "workshop",
+        "scaling",
+        "survival"
+      ],
+      "aliases": [
+        "Enemy Attack Levels Skipped",
+        "EALS"
+      ],
+      "battleReportLinks": [
+        "EnemyAttackLevelsSkipped"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "enemy_health_level_skip",
+      "label": "Enemy Health Level Skip",
+      "family": "Workshop / Scaling Damage",
+      "meaning": "EHLS context; skips enemy health scaling levels.",
+      "tags": [
+        "workshop",
+        "scaling",
+        "damage"
+      ],
+      "aliases": [
+        "Enemy Health Levels Skipped",
+        "EHLS"
+      ],
+      "battleReportLinks": [
+        "EnemyHealthLevelsSkipped"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "wall",
+      "label": "Wall",
+      "family": "Workshop / Survival",
+      "meaning": "Wall/EHP build context and wall damage reporting.",
+      "tags": [
+        "workshop",
+        "survival",
+        "wall"
+      ],
+      "aliases": [
+        "Wall",
+        "Damage Taken Wall"
+      ],
+      "battleReportLinks": [
+        "DamageTakenWall"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    }
+  ],
+  "families": [
+    "Attack",
+    "Defense",
+    "Utility",
+    "Economy",
+    "Control",
+    "Survival",
+    "Scaling"
+  ]
+}

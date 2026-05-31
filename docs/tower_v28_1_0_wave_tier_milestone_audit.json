@@ -1,0 +1,298 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.1.0 Wave/Tier/Milestone Static Audit",
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T19:50:00Z",
+    "counts": {
+      "candidateHits": 1558
+    },
+    "safety": "Use for official wording, schema clues, thresholds observed in strings, and TBI milestone heuristics. Do not claim hidden exact formulas."
+  },
+  "confirmedConcepts": [
+    {
+      "concept": "Wave",
+      "meaning": "Primary in-run progression measure. Each wave spawns a set amount of enemies and progressively scales Enemy Health & Damage.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings lines 36346-36357"
+    },
+    {
+      "concept": "Tier",
+      "meaning": "Global difficulty level. Higher tiers scale enemy difficulty faster, grant higher coin multipliers, and unlock exclusive milestone rewards.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings lines 36317-36344"
+    },
+    {
+      "concept": "Milestones",
+      "meaning": "Specific wave targets within each tier; reaching them unlocks one-time permanent rewards, Relics, and new game features.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings lines 36257-36274"
+    },
+    {
+      "concept": "Labs unlock by Tier milestones",
+      "meaning": "Labs unlock research by completing Tier milestones.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings line 32832"
+    },
+    {
+      "concept": "Highest Wave",
+      "meaning": "Battle/end-game and history metric used as progression record.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings lines 1531-1539 and 33391"
+    },
+    {
+      "concept": "Max Wave",
+      "meaning": "Battle history/report list metric for the best wave in a context.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings line 31211"
+    },
+    {
+      "concept": "Dissonance boost uses selected Workshop and highest wave reached for that tier",
+      "meaning": "Dissonance logic has per-tier wave records and bonuses linked to highest wave reached.",
+      "sourceConfidence": "game-file-confirmed-label + game-file-observed",
+      "source": "asset strings line 35004; metadata DissonanceBoost / WaveReached symbols"
+    },
+    {
+      "concept": "Wave Info panel calculates enemy values",
+      "meaning": "The app has a Wave Info panel with chance, health, damage, speed, and mass text plus CalculateEnemyValues.",
+      "sourceConfidence": "game-file-observed",
+      "source": "metadata lines 17561-17580"
+    },
+    {
+      "concept": "Difficulty tier calculations",
+      "meaning": "Runtime has DifficultyTierCalcs plus GetWaveBaseDamage and GetWaveBaseHealth methods.",
+      "sourceConfidence": "game-file-observed",
+      "source": "metadata lines 7382-7401"
+    },
+    {
+      "concept": "Wave milestone analytics exist",
+      "meaning": "Runtime has CheckAndPostWave100PerTier and CheckAndPostWaveMilestonesPerTier with wave20, wave40, wave60, tier2Unlock, tier3Unlock event clues.",
+      "sourceConfidence": "game-file-observed-medium-high",
+      "source": "metadata lines 2412-2423"
+    },
+    {
+      "concept": "Tournament Heat increase waves",
+      "meaning": "Tournament Heat level increases at explicit wave breakpoints previously extracted from game strings/data.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "prior static audit/XAPK strings"
+    },
+    {
+      "concept": "Overheat at very high waves",
+      "meaning": "Overheat conditions add extra challenge at very high waves and can be reviewed as active/upcoming in Heat panel.",
+      "sourceConfidence": "game-file-confirmed-label",
+      "source": "asset strings lines 33054-33056"
+    }
+  ],
+  "observedThresholdsAndTemplates": [
+    {
+      "id": "wave_20_40_60_analytics",
+      "type": "early-wave event clues",
+      "values": [
+        20,
+        40,
+        60
+      ],
+      "meaning": "Observed analytics/event keys for early wave milestone posting; useful as light Game Brain early-run checkpoints, not reward milestone table.",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "id": "wave_100_per_tier",
+      "type": "per-tier progress event clue",
+      "values": [
+        100
+      ],
+      "meaning": "Observed CheckAndPostWave100PerTier. Useful as a standard first serious per-tier milestone/checkpoint.",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "id": "heat_increase_waves",
+      "type": "tournament heat breakpoints",
+      "values": [
+        20,
+        40,
+        60,
+        80,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "meaning": "Use as tournament heat milestone overlay when report is tagged Tournament.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "damage_health_decay_interval",
+      "type": "battle condition interval",
+      "values": [
+        "every 10 waves"
+      ],
+      "meaning": "Damage Decay and Health Decay battle conditions reduce tower damage/health levels every 10 waves. Useful for warning if a tagged battle condition exists.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "intro_sprint_jump",
+      "type": "card/effect wave jump",
+      "values": [
+        "10 waves at a time",
+        "first {0} waves",
+        "capped at Highest Wave",
+        "boss every wave",
+        "no coins during Intro Sprint"
+      ],
+      "meaning": "Intro Sprint changes early wave progression and should be noted when interpreting low/no-coin early waves.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "wave_skip_reward",
+      "type": "card/effect economy",
+      "values": [
+        "1.1x previous Wave Cash & Coins"
+      ],
+      "meaning": "Wave Skip rewards cash and coins based on previous wave; useful for explaining Largest Wave Skip / wave skip economy.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "recovery_package_wave_chance",
+      "type": "survival spawn metric",
+      "values": [
+        "chance each wave"
+      ],
+      "meaning": "Recovery Package spawn chance is per-wave; useful for survival/recovery interpretation.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "event_mission_any_tier_wave",
+      "type": "mission template",
+      "values": [
+        "Reach wave {0} on any tier"
+      ],
+      "meaning": "Game has generic wave-target mission wording; useful for aliasing manual goals.",
+      "sourceConfidence": "game-file-confirmed-label"
+    },
+    {
+      "id": "event_mission_max_tier_no_cards",
+      "type": "mission template",
+      "values": [
+        "Reach wave {0} on your max tier without any card equipped"
+      ],
+      "meaning": "Game tracks max-tier wave challenge logic. Useful for future manual challenge tagging.",
+      "sourceConfidence": "game-file-confirmed-label"
+    }
+  ],
+  "gameBrainMilestoneModel": {
+    "safePurpose": "Give TBI readable wave milestone context and next-checkpoint hints from parsed Tier/Wave without claiming hidden formulas.",
+    "baseCheckpoints": [
+      20,
+      40,
+      60,
+      80,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000,
+      4500,
+      5000,
+      6000,
+      7000,
+      8000,
+      9000,
+      10000
+    ],
+    "earlyRunCheckpoints": [
+      20,
+      40,
+      60,
+      100
+    ],
+    "milestoneCategories": [
+      {
+        "range": "1-99",
+        "label": "Early setup / unlock pressure",
+        "interpretation": "Use for fresh tiers, low progression, and early analytics wave markers."
+      },
+      {
+        "range": "100-499",
+        "label": "First sustained tier push",
+        "interpretation": "Wave 100+ is a meaningful per-tier checkpoint from app analytics clues; 150/200/250/300/350/400/450 align with Heat-style checkpoint cadence."
+      },
+      {
+        "range": "500-999",
+        "label": "Mid-run pressure band",
+        "interpretation": "Use 500/600/700/800/900 as clean progress anchors; Heat overlay also uses these bands."
+      },
+      {
+        "range": "1000-4999",
+        "label": "Long push band",
+        "interpretation": "Use 1000 then 500-wave increments for next-goal guidance; do not claim official rewards unless milestone reward data is added later."
+      },
+      {
+        "range": "5000+",
+        "label": "Deep run / farming endurance band",
+        "interpretation": "Use 1000-wave blocks, rate stability, and death cause trends; overlay Overheat/high-wave warnings where relevant."
+      }
+    ],
+    "nextMilestoneAlgorithm": "Given parsed Wave, choose the next greater checkpoint from baseCheckpoints. If Wave exceeds known list, round up to the next 1000-wave boundary. If report is Tournament-tagged, also show next Heat breakpoint from heat_increase_waves until 1000.",
+    "sourceConfidence": "tbi-inferred from game-file confirmed/observed concepts"
+  },
+  "tbiUses": [
+    {
+      "area": "Dashboard",
+      "use": "Show parsed Tier/Wave plus next milestone chip, e.g. Next checkpoint: Wave 8000; Last checkpoint: Wave 7000."
+    },
+    {
+      "area": "History",
+      "use": "Group run records by tier and wave bands so Andrew can see progression milestones by tier."
+    },
+    {
+      "area": "Compare",
+      "use": "Compare Run A/B not just by final wave but by crossing checkpoints and efficiency per milestone band."
+    },
+    {
+      "area": "Command Deck",
+      "use": "Explain whether death happened before/after a clean milestone and recommend the next push target."
+    },
+    {
+      "area": "Debug Panel",
+      "use": "Report whether wave/tier catalogue is loaded and whether parsed reports have valid Tier/Wave fields."
+    },
+    {
+      "area": "Tournament analysis",
+      "use": "Overlay Heat increase waves if Andrew manually tags a run as Tournament."
+    }
+  ],
+  "notConfirmedYet": [
+    "Exact official reward milestone table per tier was not extracted as a clean readable table.",
+    "Exact enemy health/damage scaling formulas were not extracted; only method names and UI meaning were observed.",
+    "Exact tier unlock thresholds beyond observed tier2Unlock/tier3Unlock symbols were not confirmed by static strings alone.",
+    "Live server tournament settings may change and should not be hard-coded from a static APK without confidence labels."
+  ]
+}

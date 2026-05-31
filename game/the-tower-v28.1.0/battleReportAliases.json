@@ -1,0 +1,3812 @@
+{
+  "manifest": {
+    "catalogueName": "The Tower v28.1.0 Battle Report Official Schema",
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T19:25:50.138638+00:00",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z26_BattleReportOfficialSchema",
+    "baselineTarget": "v4.11z25 Mobile CSS blank module scaffold / desktop module split baseline",
+    "counts": {
+      "battleReportUiLabels": 70,
+      "battleHistoryEntryFields": 142,
+      "statValueTypeValues": 63,
+      "officialSectionLabels": 9,
+      "aliases": 375,
+      "families": 11,
+      "sections": 13,
+      "enemyRelatedFields": 41,
+      "guardianFields": 14
+    },
+    "protectionRules": [
+      "Keep dashboard visuals locked to v4.11x2 direction.",
+      "Keep Compare as bare restart until schema foundation is tested.",
+      "Keep mobile.css blank module scaffold untouched.",
+      "Use this catalogue for labels/schema/source confidence, not hidden formulas."
+    ]
+  },
+  "normalization": {
+    "method": "lowercase; ampersand becomes and; punctuation/slashes collapsed; multiple spaces trimmed",
+    "example": {
+      "input": "Cells / Hour",
+      "aliasKey": "cells hour"
+    }
+  },
+  "aliases": [
+    {
+      "alias": "Ad Gems",
+      "aliasKey": "ad gems",
+      "property": "AdGemsThisRound",
+      "key": "ad_gems_this_round",
+      "displayLabel": "Ad Gems",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ad_gems_this_round",
+      "aliasKey": "ad gems this round",
+      "property": "AdGemsThisRound",
+      "key": "ad_gems_this_round",
+      "displayLabel": "Ad Gems",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "AdGemsThisRound",
+      "aliasKey": "adgemsthisround",
+      "property": "AdGemsThisRound",
+      "key": "ad_gems_this_round",
+      "displayLabel": "Ad Gems",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "attack level skips",
+      "aliasKey": "attack level skips",
+      "property": "AttackLevelSkips",
+      "key": "attack_level_skips",
+      "displayLabel": "Attack Level Skips",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "AttackLevelSkips",
+      "aliasKey": "attacklevelskips",
+      "property": "AttackLevelSkips",
+      "key": "attack_level_skips",
+      "displayLabel": "Attack Level Skips",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Battle Date",
+      "aliasKey": "battle date",
+      "property": "BattleDate",
+      "key": "battle_date",
+      "displayLabel": "Battle Date",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "BattleDate",
+      "aliasKey": "battledate",
+      "property": "BattleDate",
+      "key": "battle_date",
+      "displayLabel": "Battle Date",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Date",
+      "aliasKey": "date",
+      "property": "BattleDate",
+      "key": "battle_date",
+      "displayLabel": "Battle Date",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Run Date",
+      "aliasKey": "run date",
+      "property": "BattleDate",
+      "key": "battle_date",
+      "displayLabel": "Battle Date",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "black hole damage",
+      "aliasKey": "black hole damage",
+      "property": "BlackHoleDamage",
+      "key": "black_hole_damage",
+      "displayLabel": "Black Hole Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "BlackHoleDamage",
+      "aliasKey": "blackholedamage",
+      "property": "BlackHoleDamage",
+      "key": "black_hole_damage",
+      "displayLabel": "Black Hole Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Cash",
+      "aliasKey": "cash",
+      "property": "CashEarned",
+      "key": "cash_earned",
+      "displayLabel": "Cash Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "cash_earned",
+      "aliasKey": "cash earned",
+      "property": "CashEarned",
+      "key": "cash_earned",
+      "displayLabel": "Cash Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CashEarned",
+      "aliasKey": "cashearned",
+      "property": "CashEarned",
+      "key": "cash_earned",
+      "displayLabel": "Cash Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Total Cash",
+      "aliasKey": "total cash",
+      "property": "CashEarned",
+      "key": "cash_earned",
+      "displayLabel": "Cash Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "cash from golden tower",
+      "aliasKey": "cash from golden tower",
+      "property": "CashFromGoldenTower",
+      "key": "cash_from_golden_tower",
+      "displayLabel": "Cash From Golden Tower",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CashFromGoldenTower",
+      "aliasKey": "cashfromgoldentower",
+      "property": "CashFromGoldenTower",
+      "key": "cash_from_golden_tower",
+      "displayLabel": "Cash From Golden Tower",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Cells",
+      "aliasKey": "cells",
+      "property": "CellsEarned",
+      "key": "cells_earned",
+      "displayLabel": "Cells Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Cells Earned",
+      "aliasKey": "cells earned",
+      "property": "CellsEarned",
+      "key": "cells_earned",
+      "displayLabel": "Cells Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Cells Total",
+      "aliasKey": "cells total",
+      "property": "CellsEarned",
+      "key": "cells_earned",
+      "displayLabel": "Cells Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CellsEarned",
+      "aliasKey": "cellsearned",
+      "property": "CellsEarned",
+      "key": "cells_earned",
+      "displayLabel": "Cells Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "chain lightning damage",
+      "aliasKey": "chain lightning damage",
+      "property": "ChainLightningDamage",
+      "key": "chain_lightning_damage",
+      "displayLabel": "Chain Lightning Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ChainLightningDamage",
+      "aliasKey": "chainlightningdamage",
+      "property": "ChainLightningDamage",
+      "key": "chain_lightning_damage",
+      "displayLabel": "Chain Lightning Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Chain Thunder Blocked",
+      "aliasKey": "chain thunder blocked",
+      "property": "ChainThunderBlocked",
+      "key": "chain_thunder_blocked",
+      "displayLabel": "Chain Thunder Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ChainThunderBlocked",
+      "aliasKey": "chainthunderblocked",
+      "property": "ChainThunderBlocked",
+      "key": "chain_thunder_blocked",
+      "displayLabel": "Chain Thunder Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Chrono Field Blocked",
+      "aliasKey": "chrono field blocked",
+      "property": "ChronoFieldBlocked",
+      "key": "chrono_field_blocked",
+      "displayLabel": "Chrono Field Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ChronoFieldBlocked",
+      "aliasKey": "chronofieldblocked",
+      "property": "ChronoFieldBlocked",
+      "key": "chrono_field_blocked",
+      "displayLabel": "Chrono Field Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Coins",
+      "aliasKey": "coins",
+      "property": "CoinsEarned",
+      "key": "coins_earned",
+      "displayLabel": "Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins earned",
+      "aliasKey": "coins earned",
+      "property": "CoinsEarned",
+      "key": "coins_earned",
+      "displayLabel": "Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsEarned",
+      "aliasKey": "coinsearned",
+      "property": "CoinsEarned",
+      "key": "coins_earned",
+      "displayLabel": "Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Total Coins",
+      "aliasKey": "total coins",
+      "property": "CoinsEarned",
+      "key": "coins_earned",
+      "displayLabel": "Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins_from_black_hole",
+      "aliasKey": "coins from black hole",
+      "property": "CoinsFromBlackHole",
+      "key": "coins_from_black_hole",
+      "displayLabel": "Coins From Black Hole",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromBlackHole",
+      "aliasKey": "coinsfromblackhole",
+      "property": "CoinsFromBlackHole",
+      "key": "coins_from_black_hole",
+      "displayLabel": "Coins From Black Hole",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins_from_coin_bonuses",
+      "aliasKey": "coins from coin bonuses",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromCoinBonuses",
+      "aliasKey": "coinsfromcoinbonuses",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Misc Coin Bonuses",
+      "aliasKey": "misc coin bonuses",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "alias": "Other Coin Bonus",
+      "aliasKey": "other coin bonus",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "alias": "other coin bonuses",
+      "aliasKey": "other coin bonuses",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Other Coins",
+      "aliasKey": "other coins",
+      "property": "CoinsFromCoinBonuses",
+      "key": "coins_from_coin_bonuses",
+      "displayLabel": "Other Coin Bonuses",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "alias": "coins from coin bonus upgrade",
+      "aliasKey": "coins from coin bonus upgrade",
+      "property": "CoinsFromCoinUpgrade",
+      "key": "coins_from_coin_upgrade",
+      "displayLabel": "Coins From Coin Bonus Upgrade",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins_from_coin_upgrade",
+      "aliasKey": "coins from coin upgrade",
+      "property": "CoinsFromCoinUpgrade",
+      "key": "coins_from_coin_upgrade",
+      "displayLabel": "Coins From Coin Bonus Upgrade",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromCoinUpgrade",
+      "aliasKey": "coinsfromcoinupgrade",
+      "property": "CoinsFromCoinUpgrade",
+      "key": "coins_from_coin_upgrade",
+      "displayLabel": "Coins From Coin Bonus Upgrade",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins_from_crit_coin",
+      "aliasKey": "coins from crit coin",
+      "property": "CoinsFromCritCoin",
+      "key": "coins_from_crit_coin",
+      "displayLabel": "Coins From Critical Coin",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins from critical coin",
+      "aliasKey": "coins from critical coin",
+      "property": "CoinsFromCritCoin",
+      "key": "coins_from_crit_coin",
+      "displayLabel": "Coins From Critical Coin",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromCritCoin",
+      "aliasKey": "coinsfromcritcoin",
+      "property": "CoinsFromCritCoin",
+      "key": "coins_from_crit_coin",
+      "displayLabel": "Coins From Critical Coin",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins from death wave",
+      "aliasKey": "coins from death wave",
+      "property": "CoinsFromDeathWave",
+      "key": "coins_from_death_wave",
+      "displayLabel": "Coins From Death Wave",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromDeathWave",
+      "aliasKey": "coinsfromdeathwave",
+      "property": "CoinsFromDeathWave",
+      "key": "coins_from_death_wave",
+      "displayLabel": "Coins From Death Wave",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins from golden tower",
+      "aliasKey": "coins from golden tower",
+      "property": "CoinsFromGoldenTower",
+      "key": "coins_from_golden_tower",
+      "displayLabel": "Coins From Golden Tower",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromGoldenTower",
+      "aliasKey": "coinsfromgoldentower",
+      "property": "CoinsFromGoldenTower",
+      "key": "coins_from_golden_tower",
+      "displayLabel": "Coins From Golden Tower",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins from golden tower plus",
+      "aliasKey": "coins from golden tower plus",
+      "property": "CoinsFromGoldenTowerPlus",
+      "key": "coins_from_golden_tower_plus",
+      "displayLabel": "Coins From Golden Tower Plus",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromGoldenTowerPlus",
+      "aliasKey": "coinsfromgoldentowerplus",
+      "property": "CoinsFromGoldenTowerPlus",
+      "key": "coins_from_golden_tower_plus",
+      "displayLabel": "Coins From Golden Tower Plus",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "coins_from_orbs",
+      "aliasKey": "coins from orbs",
+      "property": "CoinsFromOrbs",
+      "key": "coins_from_orbs",
+      "displayLabel": "Coins From Orbs",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromOrbs",
+      "aliasKey": "coinsfromorbs",
+      "property": "CoinsFromOrbs",
+      "key": "coins_from_orbs",
+      "displayLabel": "Coins From Orbs",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Coins From Spotlight",
+      "aliasKey": "coins from spotlight",
+      "property": "CoinsFromSpotlight",
+      "key": "coins_from_spotlight",
+      "displayLabel": "Coins From Spotlight",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "CoinsFromSpotlight",
+      "aliasKey": "coinsfromspotlight",
+      "property": "CoinsFromSpotlight",
+      "key": "coins_from_spotlight",
+      "displayLabel": "Coins From Spotlight",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "damage_dealt",
+      "aliasKey": "damage dealt",
+      "property": "DamageDealt",
+      "key": "damage_dealt",
+      "displayLabel": "Damage Dealt",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Damage Output",
+      "aliasKey": "damage output",
+      "property": "DamageDealt",
+      "key": "damage_dealt",
+      "displayLabel": "Damage Dealt",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DamageDealt",
+      "aliasKey": "damagedealt",
+      "property": "DamageDealt",
+      "key": "damage_dealt",
+      "displayLabel": "Damage Dealt",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Total Damage Dealt",
+      "aliasKey": "total damage dealt",
+      "property": "DamageDealt",
+      "key": "damage_dealt",
+      "displayLabel": "Damage Dealt",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "damage gain from berserk",
+      "aliasKey": "damage gain from berserk",
+      "property": "DamageGainFromBerserk",
+      "key": "damage_gain_from_berserk",
+      "displayLabel": "Damage Gain From Berserk",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DamageGainFromBerserk",
+      "aliasKey": "damagegainfromberserk",
+      "property": "DamageGainFromBerserk",
+      "key": "damage_gain_from_berserk",
+      "displayLabel": "Damage Gain From Berserk",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "damage taken",
+      "aliasKey": "damage taken",
+      "property": "DamageTaken",
+      "key": "damage_taken",
+      "displayLabel": "Damage Taken",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DamageTaken",
+      "aliasKey": "damagetaken",
+      "property": "DamageTaken",
+      "key": "damage_taken",
+      "displayLabel": "Damage Taken",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Damage Taken By Wall",
+      "aliasKey": "damage taken by wall",
+      "property": "DamageTakenWall",
+      "key": "damage_taken_wall",
+      "displayLabel": "Damage Taken Wall",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "damage_taken_wall",
+      "aliasKey": "damage taken wall",
+      "property": "DamageTakenWall",
+      "key": "damage_taken_wall",
+      "displayLabel": "Damage Taken Wall",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DamageTakenWall",
+      "aliasKey": "damagetakenwall",
+      "property": "DamageTakenWall",
+      "key": "damage_taken_wall",
+      "displayLabel": "Damage Taken Wall",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Wall Damage Taken",
+      "aliasKey": "wall damage taken",
+      "property": "DamageTakenWall",
+      "key": "damage_taken_wall",
+      "displayLabel": "Damage Taken Wall",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "damage_taken_while_berserked",
+      "aliasKey": "damage taken while berserked",
+      "property": "DamageTakenWhileBerserked",
+      "key": "damage_taken_while_berserked",
+      "displayLabel": "Damage Taken While Berserked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DamageTakenWhileBerserked",
+      "aliasKey": "damagetakenwhileberserked",
+      "property": "DamageTakenWhileBerserked",
+      "key": "damage_taken_while_berserked",
+      "displayLabel": "Damage Taken While Berserked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "death_defy",
+      "aliasKey": "death defy",
+      "property": "DeathDefy",
+      "key": "death_defy",
+      "displayLabel": "Death Defy",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DeathDefy",
+      "aliasKey": "deathdefy",
+      "property": "DeathDefy",
+      "key": "death_defy",
+      "displayLabel": "Death Defy",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "death ray damage",
+      "aliasKey": "death ray damage",
+      "property": "DeathRayDamage",
+      "key": "death_ray_damage",
+      "displayLabel": "Death Ray Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DeathRayDamage",
+      "aliasKey": "deathraydamage",
+      "property": "DeathRayDamage",
+      "key": "death_ray_damage",
+      "displayLabel": "Death Ray Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "death_wave_damage",
+      "aliasKey": "death wave damage",
+      "property": "DeathWaveDamage",
+      "key": "death_wave_damage",
+      "displayLabel": "Death Wave Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DeathWaveDamage",
+      "aliasKey": "deathwavedamage",
+      "property": "DeathWaveDamage",
+      "key": "death_wave_damage",
+      "displayLabel": "Death Wave Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "defense absolute blocked",
+      "aliasKey": "defense absolute blocked",
+      "property": "DefenseAbsoluteBlocked",
+      "key": "defense_absolute_blocked",
+      "displayLabel": "Defense Absolute Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DefenseAbsoluteBlocked",
+      "aliasKey": "defenseabsoluteblocked",
+      "property": "DefenseAbsoluteBlocked",
+      "key": "defense_absolute_blocked",
+      "displayLabel": "Defense Absolute Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Defense Percent Blocked",
+      "aliasKey": "defense percent blocked",
+      "property": "DefensePercentBlocked",
+      "key": "defense_percent_blocked",
+      "displayLabel": "Defense Percent Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DefensePercentBlocked",
+      "aliasKey": "defensepercentblocked",
+      "property": "DefensePercentBlocked",
+      "key": "defense_percent_blocked",
+      "displayLabel": "Defense Percent Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "demon_modes_used",
+      "aliasKey": "demon modes used",
+      "property": "DemonModesUsed",
+      "key": "demon_modes_used",
+      "displayLabel": "Demon Modes Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DemonModesUsed",
+      "aliasKey": "demonmodesused",
+      "property": "DemonModesUsed",
+      "key": "demon_modes_used",
+      "displayLabel": "Demon Modes Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed By Black Hole",
+      "aliasKey": "destroyed by black hole",
+      "property": "DestroyedByBlackHole",
+      "key": "destroyed_by_black_hole",
+      "displayLabel": "Destroyed By Black Hole",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByBlackHole",
+      "aliasKey": "destroyedbyblackhole",
+      "property": "DestroyedByBlackHole",
+      "key": "destroyed_by_black_hole",
+      "displayLabel": "Destroyed By Black Hole",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_by_chain_lightning",
+      "aliasKey": "destroyed by chain lightning",
+      "property": "DestroyedByChainLightning",
+      "key": "destroyed_by_chain_lightning",
+      "displayLabel": "Destroyed By Chain Lightning",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByChainLightning",
+      "aliasKey": "destroyedbychainlightning",
+      "property": "DestroyedByChainLightning",
+      "key": "destroyed_by_chain_lightning",
+      "displayLabel": "Destroyed By Chain Lightning",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed By Death Penalty",
+      "aliasKey": "destroyed by death penalty",
+      "property": "DestroyedByDeathPenalty",
+      "key": "destroyed_by_death_penalty",
+      "displayLabel": "Destroyed By Death Penalty",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByDeathPenalty",
+      "aliasKey": "destroyedbydeathpenalty",
+      "property": "DestroyedByDeathPenalty",
+      "key": "destroyed_by_death_penalty",
+      "displayLabel": "Destroyed By Death Penalty",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_by_death_ray",
+      "aliasKey": "destroyed by death ray",
+      "property": "DestroyedByDeathRay",
+      "key": "destroyed_by_death_ray",
+      "displayLabel": "Destroyed By Death Ray",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByDeathRay",
+      "aliasKey": "destroyedbydeathray",
+      "property": "DestroyedByDeathRay",
+      "key": "destroyed_by_death_ray",
+      "displayLabel": "Destroyed By Death Ray",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed By Flame Bot",
+      "aliasKey": "destroyed by flame bot",
+      "property": "DestroyedByFlameBot",
+      "key": "destroyed_by_flame_bot",
+      "displayLabel": "Destroyed By Flame Bot",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByFlameBot",
+      "aliasKey": "destroyedbyflamebot",
+      "property": "DestroyedByFlameBot",
+      "key": "destroyed_by_flame_bot",
+      "displayLabel": "Destroyed By Flame Bot",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed by inner land mines",
+      "aliasKey": "destroyed by inner land mines",
+      "property": "DestroyedByInnerLandMines",
+      "key": "destroyed_by_inner_land_mines",
+      "displayLabel": "Destroyed By Inner Land Mines",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByInnerLandMines",
+      "aliasKey": "destroyedbyinnerlandmines",
+      "property": "DestroyedByInnerLandMines",
+      "key": "destroyed_by_inner_land_mines",
+      "displayLabel": "Destroyed By Inner Land Mines",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed By Land Mine",
+      "aliasKey": "destroyed by land mine",
+      "property": "DestroyedByLandMine",
+      "key": "destroyed_by_land_mine",
+      "displayLabel": "Destroyed By Land Mine",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed by Land Mines",
+      "aliasKey": "destroyed by land mines",
+      "property": "DestroyedByLandMine",
+      "key": "destroyed_by_land_mine",
+      "displayLabel": "Destroyed By Land Mine",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByLandMine",
+      "aliasKey": "destroyedbylandmine",
+      "property": "DestroyedByLandMine",
+      "key": "destroyed_by_land_mine",
+      "displayLabel": "Destroyed By Land Mine",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed by Orb",
+      "aliasKey": "destroyed by orb",
+      "property": "DestroyedByOrbs",
+      "key": "destroyed_by_orbs",
+      "displayLabel": "Destroyed By Orbs",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_by_orbs",
+      "aliasKey": "destroyed by orbs",
+      "property": "DestroyedByOrbs",
+      "key": "destroyed_by_orbs",
+      "displayLabel": "Destroyed By Orbs",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByOrbs",
+      "aliasKey": "destroyedbyorbs",
+      "property": "DestroyedByOrbs",
+      "key": "destroyed_by_orbs",
+      "displayLabel": "Destroyed By Orbs",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_by_other",
+      "aliasKey": "destroyed by other",
+      "property": "DestroyedByOther",
+      "key": "destroyed_by_other",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByOther",
+      "aliasKey": "destroyedbyother",
+      "property": "DestroyedByOther",
+      "key": "destroyed_by_other",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Destroyed By Other",
+      "aliasKey": "enemies destroyed by other",
+      "property": "DestroyedByOther",
+      "key": "destroyed_by_other",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "alias": "other",
+      "aliasKey": "other",
+      "property": "DestroyedByOther",
+      "key": "destroyed_by_other",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Other Kills",
+      "aliasKey": "other kills",
+      "property": "DestroyedByOther",
+      "key": "destroyed_by_other",
+      "displayLabel": "Other",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed-medium-high"
+    },
+    {
+      "alias": "destroyed_by_poison_swamp",
+      "aliasKey": "destroyed by poison swamp",
+      "property": "DestroyedByPoisonSwamp",
+      "key": "destroyed_by_poison_swamp",
+      "displayLabel": "Destroyed By Poison Swamp",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByPoisonSwamp",
+      "aliasKey": "destroyedbypoisonswamp",
+      "property": "DestroyedByPoisonSwamp",
+      "key": "destroyed_by_poison_swamp",
+      "displayLabel": "Destroyed By Poison Swamp",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_by_projectiles",
+      "aliasKey": "destroyed by projectiles",
+      "property": "DestroyedByProjectiles",
+      "key": "destroyed_by_projectiles",
+      "displayLabel": "Destroyed By Projectiles",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByProjectiles",
+      "aliasKey": "destroyedbyprojectiles",
+      "property": "DestroyedByProjectiles",
+      "key": "destroyed_by_projectiles",
+      "displayLabel": "Destroyed By Projectiles",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed by smart missiles",
+      "aliasKey": "destroyed by smart missiles",
+      "property": "DestroyedBySmartMissiles",
+      "key": "destroyed_by_smart_missiles",
+      "displayLabel": "Destroyed By Smart Missiles",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedBySmartMissiles",
+      "aliasKey": "destroyedbysmartmissiles",
+      "property": "DestroyedBySmartMissiles",
+      "key": "destroyed_by_smart_missiles",
+      "displayLabel": "Destroyed By Smart Missiles",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed by Thorn",
+      "aliasKey": "destroyed by thorn",
+      "property": "DestroyedByThorns",
+      "key": "destroyed_by_thorns",
+      "displayLabel": "Destroyed By Thorns",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Destroyed by Thorns",
+      "aliasKey": "destroyed by thorns",
+      "property": "DestroyedByThorns",
+      "key": "destroyed_by_thorns",
+      "displayLabel": "Destroyed By Thorns",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedByThorns",
+      "aliasKey": "destroyedbythorns",
+      "property": "DestroyedByThorns",
+      "key": "destroyed_by_thorns",
+      "displayLabel": "Destroyed By Thorns",
+      "family": "Enemies Destroyed By",
+      "section": "Enemies Destroyed By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed in amplify bot",
+      "aliasKey": "destroyed in amplify bot",
+      "property": "DestroyedInAmplifyBot",
+      "key": "destroyed_in_amplify_bot",
+      "displayLabel": "Destroyed In Amplify Bot",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedInAmplifyBot",
+      "aliasKey": "destroyedinamplifybot",
+      "property": "DestroyedInAmplifyBot",
+      "key": "destroyed_in_amplify_bot",
+      "displayLabel": "Destroyed In Amplify Bot",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_in_golden_bot",
+      "aliasKey": "destroyed in golden bot",
+      "property": "DestroyedInGoldenBot",
+      "key": "destroyed_in_golden_bot",
+      "displayLabel": "Destroyed In Golden Bot",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedInGoldenBot",
+      "aliasKey": "destroyedingoldenbot",
+      "property": "DestroyedInGoldenBot",
+      "key": "destroyed_in_golden_bot",
+      "displayLabel": "Destroyed In Golden Bot",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_in_golden_tower",
+      "aliasKey": "destroyed in golden tower",
+      "property": "DestroyedInGoldenTower",
+      "key": "destroyed_in_golden_tower",
+      "displayLabel": "Destroyed In Golden Tower",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedInGoldenTower",
+      "aliasKey": "destroyedingoldentower",
+      "property": "DestroyedInGoldenTower",
+      "key": "destroyed_in_golden_tower",
+      "displayLabel": "Destroyed In Golden Tower",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "destroyed_in_spotlight",
+      "aliasKey": "destroyed in spotlight",
+      "property": "DestroyedInSpotlight",
+      "key": "destroyed_in_spotlight",
+      "displayLabel": "Destroyed In Spotlight",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DestroyedInSpotlight",
+      "aliasKey": "destroyedinspotlight",
+      "property": "DestroyedInSpotlight",
+      "key": "destroyed_in_spotlight",
+      "displayLabel": "Destroyed In Spotlight",
+      "family": "Killed With Effect Active",
+      "section": "Killed With Effect Active",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "dissonance_type",
+      "aliasKey": "dissonance type",
+      "property": "DissonanceType",
+      "key": "dissonance_type",
+      "displayLabel": "Dissonance Type",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "DissonanceType",
+      "aliasKey": "dissonancetype",
+      "property": "DissonanceType",
+      "key": "dissonance_type",
+      "displayLabel": "Dissonance Type",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "electrons damage",
+      "aliasKey": "electrons damage",
+      "property": "ElectronsDamage",
+      "key": "electrons_damage",
+      "displayLabel": "Electrons Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ElectronsDamage",
+      "aliasKey": "electronsdamage",
+      "property": "ElectronsDamage",
+      "key": "electrons_damage",
+      "displayLabel": "Electrons Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies hit by attack chip",
+      "aliasKey": "enemies hit by attack chip",
+      "property": "EnemiesHitByAttackChipThisRound",
+      "key": "enemies_hit_by_attack_chip_this_round",
+      "displayLabel": "Enemies Hit By Attack Chip",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_attack_chip_this_round",
+      "aliasKey": "enemies hit by attack chip this round",
+      "property": "EnemiesHitByAttackChipThisRound",
+      "key": "enemies_hit_by_attack_chip_this_round",
+      "displayLabel": "Enemies Hit By Attack Chip",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByAttackChipThisRound",
+      "aliasKey": "enemieshitbyattackchipthisround",
+      "property": "EnemiesHitByAttackChipThisRound",
+      "key": "enemies_hit_by_attack_chip_this_round",
+      "displayLabel": "Enemies Hit By Attack Chip",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Black Hole",
+      "aliasKey": "enemies hit by black hole",
+      "property": "EnemiesHitByBlackHoleThisRound",
+      "key": "enemies_hit_by_black_hole_this_round",
+      "displayLabel": "Enemies Hit By Black Hole",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_black_hole_this_round",
+      "aliasKey": "enemies hit by black hole this round",
+      "property": "EnemiesHitByBlackHoleThisRound",
+      "key": "enemies_hit_by_black_hole_this_round",
+      "displayLabel": "Enemies Hit By Black Hole",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByBlackHoleThisRound",
+      "aliasKey": "enemieshitbyblackholethisround",
+      "property": "EnemiesHitByBlackHoleThisRound",
+      "key": "enemies_hit_by_black_hole_this_round",
+      "displayLabel": "Enemies Hit By Black Hole",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Chain Lightning",
+      "aliasKey": "enemies hit by chain lightning",
+      "property": "EnemiesHitByChainLightningThisRound",
+      "key": "enemies_hit_by_chain_lightning_this_round",
+      "displayLabel": "Enemies Hit By Chain Lightning",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_chain_lightning_this_round",
+      "aliasKey": "enemies hit by chain lightning this round",
+      "property": "EnemiesHitByChainLightningThisRound",
+      "key": "enemies_hit_by_chain_lightning_this_round",
+      "displayLabel": "Enemies Hit By Chain Lightning",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByChainLightningThisRound",
+      "aliasKey": "enemieshitbychainlightningthisround",
+      "property": "EnemiesHitByChainLightningThisRound",
+      "key": "enemies_hit_by_chain_lightning_this_round",
+      "displayLabel": "Enemies Hit By Chain Lightning",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies hit by chrono field",
+      "aliasKey": "enemies hit by chrono field",
+      "property": "EnemiesHitByChronoFieldThisRound",
+      "key": "enemies_hit_by_chrono_field_this_round",
+      "displayLabel": "Enemies Hit By Chrono Field",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_chrono_field_this_round",
+      "aliasKey": "enemies hit by chrono field this round",
+      "property": "EnemiesHitByChronoFieldThisRound",
+      "key": "enemies_hit_by_chrono_field_this_round",
+      "displayLabel": "Enemies Hit By Chrono Field",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByChronoFieldThisRound",
+      "aliasKey": "enemieshitbychronofieldthisround",
+      "property": "EnemiesHitByChronoFieldThisRound",
+      "key": "enemies_hit_by_chrono_field_this_round",
+      "displayLabel": "Enemies Hit By Chrono Field",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Death Ray",
+      "aliasKey": "enemies hit by death ray",
+      "property": "EnemiesHitByDeathRayThisRound",
+      "key": "enemies_hit_by_death_ray_this_round",
+      "displayLabel": "Enemies Hit By Death Ray",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_death_ray_this_round",
+      "aliasKey": "enemies hit by death ray this round",
+      "property": "EnemiesHitByDeathRayThisRound",
+      "key": "enemies_hit_by_death_ray_this_round",
+      "displayLabel": "Enemies Hit By Death Ray",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByDeathRayThisRound",
+      "aliasKey": "enemieshitbydeathraythisround",
+      "property": "EnemiesHitByDeathRayThisRound",
+      "key": "enemies_hit_by_death_ray_this_round",
+      "displayLabel": "Enemies Hit By Death Ray",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_flame_bot",
+      "aliasKey": "enemies hit by flame bot",
+      "property": "EnemiesHitByFlameBotThisRound",
+      "key": "enemies_hit_by_flame_bot_this_round",
+      "displayLabel": "Enemies Hit By Flame Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_flame_bot_this_round",
+      "aliasKey": "enemies hit by flame bot this round",
+      "property": "EnemiesHitByFlameBotThisRound",
+      "key": "enemies_hit_by_flame_bot_this_round",
+      "displayLabel": "Enemies Hit By Flame Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByFlameBotThisRound",
+      "aliasKey": "enemieshitbyflamebotthisround",
+      "property": "EnemiesHitByFlameBotThisRound",
+      "key": "enemies_hit_by_flame_bot_this_round",
+      "displayLabel": "Enemies Hit By Flame Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_inner_land_mines",
+      "aliasKey": "enemies hit by inner land mines",
+      "property": "EnemiesHitByInnerLandMinesThisRound",
+      "key": "enemies_hit_by_inner_land_mines_this_round",
+      "displayLabel": "Enemies Hit By Inner Land Mines",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_inner_land_mines_this_round",
+      "aliasKey": "enemies hit by inner land mines this round",
+      "property": "EnemiesHitByInnerLandMinesThisRound",
+      "key": "enemies_hit_by_inner_land_mines_this_round",
+      "displayLabel": "Enemies Hit By Inner Land Mines",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByInnerLandMinesThisRound",
+      "aliasKey": "enemieshitbyinnerlandminesthisround",
+      "property": "EnemiesHitByInnerLandMinesThisRound",
+      "key": "enemies_hit_by_inner_land_mines_this_round",
+      "displayLabel": "Enemies Hit By Inner Land Mines",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies hit by land mine",
+      "aliasKey": "enemies hit by land mine",
+      "property": "EnemiesHitByLandMineThisRound",
+      "key": "enemies_hit_by_land_mine_this_round",
+      "displayLabel": "Enemies Hit By Land Mine",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_land_mine_this_round",
+      "aliasKey": "enemies hit by land mine this round",
+      "property": "EnemiesHitByLandMineThisRound",
+      "key": "enemies_hit_by_land_mine_this_round",
+      "displayLabel": "Enemies Hit By Land Mine",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByLandMineThisRound",
+      "aliasKey": "enemieshitbylandminethisround",
+      "property": "EnemiesHitByLandMineThisRound",
+      "key": "enemies_hit_by_land_mine_this_round",
+      "displayLabel": "Enemies Hit By Land Mine",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies hit by orbital augment",
+      "aliasKey": "enemies hit by orbital augment",
+      "property": "EnemiesHitByOrbitalAugmentThisRound",
+      "key": "enemies_hit_by_orbital_augment_this_round",
+      "displayLabel": "Enemies Hit By Orbital Augment",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_orbital_augment_this_round",
+      "aliasKey": "enemies hit by orbital augment this round",
+      "property": "EnemiesHitByOrbitalAugmentThisRound",
+      "key": "enemies_hit_by_orbital_augment_this_round",
+      "displayLabel": "Enemies Hit By Orbital Augment",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByOrbitalAugmentThisRound",
+      "aliasKey": "enemieshitbyorbitalaugmentthisround",
+      "property": "EnemiesHitByOrbitalAugmentThisRound",
+      "key": "enemies_hit_by_orbital_augment_this_round",
+      "displayLabel": "Enemies Hit By Orbital Augment",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_poison_swamp",
+      "aliasKey": "enemies hit by poison swamp",
+      "property": "EnemiesHitByPoisonSwampThisRound",
+      "key": "enemies_hit_by_poison_swamp_this_round",
+      "displayLabel": "Enemies Hit By Poison Swamp",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_poison_swamp_this_round",
+      "aliasKey": "enemies hit by poison swamp this round",
+      "property": "EnemiesHitByPoisonSwampThisRound",
+      "key": "enemies_hit_by_poison_swamp_this_round",
+      "displayLabel": "Enemies Hit By Poison Swamp",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByPoisonSwampThisRound",
+      "aliasKey": "enemieshitbypoisonswampthisround",
+      "property": "EnemiesHitByPoisonSwampThisRound",
+      "key": "enemies_hit_by_poison_swamp_this_round",
+      "displayLabel": "Enemies Hit By Poison Swamp",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_projectiles",
+      "aliasKey": "enemies hit by projectiles",
+      "property": "EnemiesHitByProjectilesThisRound",
+      "key": "enemies_hit_by_projectiles_this_round",
+      "displayLabel": "Enemies Hit By Projectiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_projectiles_this_round",
+      "aliasKey": "enemies hit by projectiles this round",
+      "property": "EnemiesHitByProjectilesThisRound",
+      "key": "enemies_hit_by_projectiles_this_round",
+      "displayLabel": "Enemies Hit By Projectiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByProjectilesThisRound",
+      "aliasKey": "enemieshitbyprojectilesthisround",
+      "property": "EnemiesHitByProjectilesThisRound",
+      "key": "enemies_hit_by_projectiles_this_round",
+      "displayLabel": "Enemies Hit By Projectiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Smart Missiles",
+      "aliasKey": "enemies hit by smart missiles",
+      "property": "EnemiesHitBySmartMissilesThisRound",
+      "key": "enemies_hit_by_smart_missiles_this_round",
+      "displayLabel": "Enemies Hit By Smart Missiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_smart_missiles_this_round",
+      "aliasKey": "enemies hit by smart missiles this round",
+      "property": "EnemiesHitBySmartMissilesThisRound",
+      "key": "enemies_hit_by_smart_missiles_this_round",
+      "displayLabel": "Enemies Hit By Smart Missiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitBySmartMissilesThisRound",
+      "aliasKey": "enemieshitbysmartmissilesthisround",
+      "property": "EnemiesHitBySmartMissilesThisRound",
+      "key": "enemies_hit_by_smart_missiles_this_round",
+      "displayLabel": "Enemies Hit By Smart Missiles",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Thorns",
+      "aliasKey": "enemies hit by thorns",
+      "property": "EnemiesHitByThornsThisRound",
+      "key": "enemies_hit_by_thorns_this_round",
+      "displayLabel": "Enemies Hit By Thorns",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_thorns_this_round",
+      "aliasKey": "enemies hit by thorns this round",
+      "property": "EnemiesHitByThornsThisRound",
+      "key": "enemies_hit_by_thorns_this_round",
+      "displayLabel": "Enemies Hit By Thorns",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByThornsThisRound",
+      "aliasKey": "enemieshitbythornsthisround",
+      "property": "EnemiesHitByThornsThisRound",
+      "key": "enemies_hit_by_thorns_this_round",
+      "displayLabel": "Enemies Hit By Thorns",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Enemies Hit By Thunder Bot",
+      "aliasKey": "enemies hit by thunder bot",
+      "property": "EnemiesHitByThunderBotThisRound",
+      "key": "enemies_hit_by_thunder_bot_this_round",
+      "displayLabel": "Enemies Hit By Thunder Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_hit_by_thunder_bot_this_round",
+      "aliasKey": "enemies hit by thunder bot this round",
+      "property": "EnemiesHitByThunderBotThisRound",
+      "key": "enemies_hit_by_thunder_bot_this_round",
+      "displayLabel": "Enemies Hit By Thunder Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnemiesHitByThunderBotThisRound",
+      "aliasKey": "enemieshitbythunderbotthisround",
+      "property": "EnemiesHitByThunderBotThisRound",
+      "key": "enemies_hit_by_thunder_bot_this_round",
+      "displayLabel": "Enemies Hit By Thunder Bot",
+      "family": "Enemies Hit By",
+      "section": "Enemies Hit By",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "energy_shield_hits_absorbed",
+      "aliasKey": "energy shield hits absorbed",
+      "property": "EnergyShieldHitsAbsorbed",
+      "key": "energy_shield_hits_absorbed",
+      "displayLabel": "Hits Absorbed By Energy Shield",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "EnergyShieldHitsAbsorbed",
+      "aliasKey": "energyshieldhitsabsorbed",
+      "property": "EnergyShieldHitsAbsorbed",
+      "key": "energy_shield_hits_absorbed",
+      "displayLabel": "Hits Absorbed By Energy Shield",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "hits absorbed by energy shield",
+      "aliasKey": "hits absorbed by energy shield",
+      "property": "EnergyShieldHitsAbsorbed",
+      "key": "energy_shield_hits_absorbed",
+      "displayLabel": "Hits Absorbed By Energy Shield",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Flame Bot Blocked",
+      "aliasKey": "flame bot blocked",
+      "property": "FlameBotBlocked",
+      "key": "flame_bot_blocked",
+      "displayLabel": "Flame Bot Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "FlameBotBlocked",
+      "aliasKey": "flamebotblocked",
+      "property": "FlameBotBlocked",
+      "key": "flame_bot_blocked",
+      "displayLabel": "Flame Bot Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Flame Bot Damage",
+      "aliasKey": "flame bot damage",
+      "property": "FlameBotDamage",
+      "key": "flame_bot_damage",
+      "displayLabel": "Flame Bot Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "FlameBotDamage",
+      "aliasKey": "flamebotdamage",
+      "property": "FlameBotDamage",
+      "key": "flame_bot_damage",
+      "displayLabel": "Flame Bot Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "free attack upgrades",
+      "aliasKey": "free attack upgrades",
+      "property": "FreeAttackUpgrades",
+      "key": "free_attack_upgrades",
+      "displayLabel": "Free Attack Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "FreeAttackUpgrades",
+      "aliasKey": "freeattackupgrades",
+      "property": "FreeAttackUpgrades",
+      "key": "free_attack_upgrades",
+      "displayLabel": "Free Attack Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "free_defense_upgrades",
+      "aliasKey": "free defense upgrades",
+      "property": "FreeDefenseUpgrades",
+      "key": "free_defense_upgrades",
+      "displayLabel": "Free Defense Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "FreeDefenseUpgrades",
+      "aliasKey": "freedefenseupgrades",
+      "property": "FreeDefenseUpgrades",
+      "key": "free_defense_upgrades",
+      "displayLabel": "Free Defense Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "free utility upgrades",
+      "aliasKey": "free utility upgrades",
+      "property": "FreeUtilityUpgrades",
+      "key": "free_utility_upgrades",
+      "displayLabel": "Free Utility Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "FreeUtilityUpgrades",
+      "aliasKey": "freeutilityupgrades",
+      "property": "FreeUtilityUpgrades",
+      "key": "free_utility_upgrades",
+      "displayLabel": "Free Utility Upgrades",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "game time",
+      "aliasKey": "game time",
+      "property": "GameTime",
+      "key": "game_time",
+      "displayLabel": "Game Time",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GameTime",
+      "aliasKey": "gametime",
+      "property": "GameTime",
+      "key": "game_time",
+      "displayLabel": "Game Time",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Gem Blocks Tapped",
+      "aliasKey": "gem blocks tapped",
+      "property": "GemBlocksTapped",
+      "key": "gem_blocks_tapped",
+      "displayLabel": "Gem Blocks Tapped",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GemBlocksTapped",
+      "aliasKey": "gemblockstapped",
+      "property": "GemBlocksTapped",
+      "key": "gem_blocks_tapped",
+      "displayLabel": "Gem Blocks Tapped",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Gems This Round",
+      "aliasKey": "gems this round",
+      "property": "GemsThisRound",
+      "key": "gems_this_round",
+      "displayLabel": "Gems This Round",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GemsThisRound",
+      "aliasKey": "gemsthisround",
+      "property": "GemsThisRound",
+      "key": "gems_this_round",
+      "displayLabel": "Gems This Round",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "golden_bot_coins_earned",
+      "aliasKey": "golden bot coins earned",
+      "property": "GoldenBotCoinsEarned",
+      "key": "golden_bot_coins_earned",
+      "displayLabel": "Golden Bot Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GoldenBotCoinsEarned",
+      "aliasKey": "goldenbotcoinsearned",
+      "property": "GoldenBotCoinsEarned",
+      "key": "golden_bot_coins_earned",
+      "displayLabel": "Golden Bot Coins Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Armor Shards",
+      "aliasKey": "guardian armor shards",
+      "property": "GuardianArmorShards",
+      "key": "guardian_armor_shards",
+      "displayLabel": "Guardian Armor Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianArmorShards",
+      "aliasKey": "guardianarmorshards",
+      "property": "GuardianArmorShards",
+      "key": "guardian_armor_shards",
+      "displayLabel": "Guardian Armor Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian cannon shards",
+      "aliasKey": "guardian cannon shards",
+      "property": "GuardianCannonShards",
+      "key": "guardian_cannon_shards",
+      "displayLabel": "Guardian Cannon Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCannonShards",
+      "aliasKey": "guardiancannonshards",
+      "property": "GuardianCannonShards",
+      "key": "guardian_cannon_shards",
+      "displayLabel": "Guardian Cannon Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Catches",
+      "aliasKey": "guardian catches",
+      "property": "GuardianCatches",
+      "key": "guardian_catches",
+      "displayLabel": "Guardian Catches",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCatches",
+      "aliasKey": "guardiancatches",
+      "property": "GuardianCatches",
+      "key": "guardian_catches",
+      "displayLabel": "Guardian Catches",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Coins Fetched",
+      "aliasKey": "guardian coins fetched",
+      "property": "GuardianCoinsFetched",
+      "key": "guardian_coins_fetched",
+      "displayLabel": "Guardian Coins Fetched",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCoinsFetched",
+      "aliasKey": "guardiancoinsfetched",
+      "property": "GuardianCoinsFetched",
+      "key": "guardian_coins_fetched",
+      "displayLabel": "Guardian Coins Fetched",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Coins Stolen",
+      "aliasKey": "guardian coins stolen",
+      "property": "GuardianCoinsStolen",
+      "key": "guardian_coins_stolen",
+      "displayLabel": "Guardian Coins Stolen",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCoinsStolen",
+      "aliasKey": "guardiancoinsstolen",
+      "property": "GuardianCoinsStolen",
+      "key": "guardian_coins_stolen",
+      "displayLabel": "Guardian Coins Stolen",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian common modules",
+      "aliasKey": "guardian common modules",
+      "property": "GuardianCommonModules",
+      "key": "guardian_common_modules",
+      "displayLabel": "Guardian Common Modules",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCommonModules",
+      "aliasKey": "guardiancommonmodules",
+      "property": "GuardianCommonModules",
+      "key": "guardian_common_modules",
+      "displayLabel": "Guardian Common Modules",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian_core_shards",
+      "aliasKey": "guardian core shards",
+      "property": "GuardianCoreShards",
+      "key": "guardian_core_shards",
+      "displayLabel": "Guardian Core Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianCoreShards",
+      "aliasKey": "guardiancoreshards",
+      "property": "GuardianCoreShards",
+      "key": "guardian_core_shards",
+      "displayLabel": "Guardian Core Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian damage",
+      "aliasKey": "guardian damage",
+      "property": "GuardianDamage",
+      "key": "guardian_damage",
+      "displayLabel": "Guardian Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianDamage",
+      "aliasKey": "guardiandamage",
+      "property": "GuardianDamage",
+      "key": "guardian_damage",
+      "displayLabel": "Guardian Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian gems",
+      "aliasKey": "guardian gems",
+      "property": "GuardianGems",
+      "key": "guardian_gems",
+      "displayLabel": "Guardian Gems",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianGems",
+      "aliasKey": "guardiangems",
+      "property": "GuardianGems",
+      "key": "guardian_gems",
+      "displayLabel": "Guardian Gems",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian generator shards",
+      "aliasKey": "guardian generator shards",
+      "property": "GuardianGeneratorShards",
+      "key": "guardian_generator_shards",
+      "displayLabel": "Guardian Generator Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianGeneratorShards",
+      "aliasKey": "guardiangeneratorshards",
+      "property": "GuardianGeneratorShards",
+      "key": "guardian_generator_shards",
+      "displayLabel": "Guardian Generator Shards",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian_medals",
+      "aliasKey": "guardian medals",
+      "property": "GuardianMedals",
+      "key": "guardian_medals",
+      "displayLabel": "Guardian Medals",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianMedals",
+      "aliasKey": "guardianmedals",
+      "property": "GuardianMedals",
+      "key": "guardian_medals",
+      "displayLabel": "Guardian Medals",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Rare Modules",
+      "aliasKey": "guardian rare modules",
+      "property": "GuardianRareModules",
+      "key": "guardian_rare_modules",
+      "displayLabel": "Guardian Rare Modules",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianRareModules",
+      "aliasKey": "guardianraremodules",
+      "property": "GuardianRareModules",
+      "key": "guardian_rare_modules",
+      "displayLabel": "Guardian Rare Modules",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Guardian Reroll Shards",
+      "aliasKey": "guardian reroll shards",
+      "property": "GuardianRerollShards",
+      "key": "guardian_reroll_shards",
+      "displayLabel": "Guardian Reroll Shards",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianRerollShards",
+      "aliasKey": "guardianrerollshards",
+      "property": "GuardianRerollShards",
+      "key": "guardian_reroll_shards",
+      "displayLabel": "Guardian Reroll Shards",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "guardian_summoned",
+      "aliasKey": "guardian summoned",
+      "property": "GuardianSummoned",
+      "key": "guardian_summoned",
+      "displayLabel": "Guardian Summoned",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "GuardianSummoned",
+      "aliasKey": "guardiansummoned",
+      "property": "GuardianSummoned",
+      "key": "guardian_summoned",
+      "displayLabel": "Guardian Summoned",
+      "family": "Guardian",
+      "section": "Guardian",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Bonus Health From Death Wave",
+      "aliasKey": "bonus health from death wave",
+      "property": "HealthFromDeathWaveThisRound",
+      "key": "health_from_death_wave_this_round",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Health From Death Wave",
+      "aliasKey": "health from death wave",
+      "property": "HealthFromDeathWaveThisRound",
+      "key": "health_from_death_wave_this_round",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "health_from_death_wave_this_round",
+      "aliasKey": "health from death wave this round",
+      "property": "HealthFromDeathWaveThisRound",
+      "key": "health_from_death_wave_this_round",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "HealthFromDeathWaveThisRound",
+      "aliasKey": "healthfromdeathwavethisround",
+      "property": "HealthFromDeathWaveThisRound",
+      "key": "health_from_death_wave_this_round",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "HP From Death Wave",
+      "aliasKey": "hp from death wave",
+      "property": "HealthFromDeathWaveThisRound",
+      "key": "health_from_death_wave_this_round",
+      "displayLabel": "HP From Death Wave",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "health level skips",
+      "aliasKey": "health level skips",
+      "property": "HealthLevelSkips",
+      "key": "health_level_skips",
+      "displayLabel": "Health Level Skips",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "HealthLevelSkips",
+      "aliasKey": "healthlevelskips",
+      "property": "HealthLevelSkips",
+      "key": "health_level_skips",
+      "displayLabel": "Health Level Skips",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Highest Coins / Minute",
+      "aliasKey": "highest coins minute",
+      "property": "HighestCPM",
+      "key": "highest_cpm",
+      "displayLabel": "Highest Coins / Minute",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "highest_cpm",
+      "aliasKey": "highest cpm",
+      "property": "HighestCPM",
+      "key": "highest_cpm",
+      "displayLabel": "Highest Coins / Minute",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "HighestCPM",
+      "aliasKey": "highestcpm",
+      "property": "HighestCPM",
+      "key": "highest_cpm",
+      "displayLabel": "Highest Coins / Minute",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "inner land mine damage",
+      "aliasKey": "inner land mine damage",
+      "property": "InnerLandMineDamage",
+      "key": "inner_land_mine_damage",
+      "displayLabel": "Inner Land Mine Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "InnerLandMineDamage",
+      "aliasKey": "innerlandminedamage",
+      "property": "InnerLandMineDamage",
+      "key": "inner_land_mine_damage",
+      "displayLabel": "Inner Land Mine Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "interest_earned",
+      "aliasKey": "interest earned",
+      "property": "InterestEarned",
+      "key": "interest_earned",
+      "displayLabel": "Interest Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "InterestEarned",
+      "aliasKey": "interestearned",
+      "property": "InterestEarned",
+      "key": "interest_earned",
+      "displayLabel": "Interest Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Is Tournament",
+      "aliasKey": "is tournament",
+      "property": "IsTournament",
+      "key": "is_tournament",
+      "displayLabel": "Is Tournament",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "IsTournament",
+      "aliasKey": "istournament",
+      "property": "IsTournament",
+      "key": "is_tournament",
+      "displayLabel": "Is Tournament",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "killed by",
+      "aliasKey": "killed by",
+      "property": "KilledBy",
+      "key": "killed_by",
+      "displayLabel": "Killed By",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "KilledBy",
+      "aliasKey": "killedby",
+      "property": "KilledBy",
+      "key": "killed_by",
+      "displayLabel": "Killed By",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Land Mine Damage",
+      "aliasKey": "land mine damage",
+      "property": "LandMineDamage",
+      "key": "land_mine_damage",
+      "displayLabel": "Land Mine Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LandMineDamage",
+      "aliasKey": "landminedamage",
+      "property": "LandMineDamage",
+      "key": "land_mine_damage",
+      "displayLabel": "Land Mine Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "land_mines_spawned",
+      "aliasKey": "land mines spawned",
+      "property": "LandMinesSpawned",
+      "key": "land_mines_spawned",
+      "displayLabel": "Land Mines Spawned",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LandMinesSpawned",
+      "aliasKey": "landminesspawned",
+      "property": "LandMinesSpawned",
+      "key": "land_mines_spawned",
+      "displayLabel": "Land Mines Spawned",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Largest Golden Combo",
+      "aliasKey": "largest golden combo",
+      "property": "LargestGoldenCombo",
+      "key": "largest_golden_combo",
+      "displayLabel": "Largest Golden Combo",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LargestGoldenCombo",
+      "aliasKey": "largestgoldencombo",
+      "property": "LargestGoldenCombo",
+      "key": "largest_golden_combo",
+      "displayLabel": "Largest Golden Combo",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "largest_ilm_charge",
+      "aliasKey": "largest ilm charge",
+      "property": "LargestILMCharge",
+      "key": "largest_ilm_charge",
+      "displayLabel": "Largest Inner Landmine Charge",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Largest Inner Landmine Charge",
+      "aliasKey": "largest inner landmine charge",
+      "property": "LargestILMCharge",
+      "key": "largest_ilm_charge",
+      "displayLabel": "Largest Inner Landmine Charge",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LargestILMCharge",
+      "aliasKey": "largestilmcharge",
+      "property": "LargestILMCharge",
+      "key": "largest_ilm_charge",
+      "displayLabel": "Largest Inner Landmine Charge",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "largest smart missile stack",
+      "aliasKey": "largest smart missile stack",
+      "property": "LargestSmartMissileStack",
+      "key": "largest_smart_missile_stack",
+      "displayLabel": "Largest Smart Missile Stack",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LargestSmartMissileStack",
+      "aliasKey": "largestsmartmissilestack",
+      "property": "LargestSmartMissileStack",
+      "key": "largest_smart_missile_stack",
+      "displayLabel": "Largest Smart Missile Stack",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Largest Wave Skip",
+      "aliasKey": "largest wave skip",
+      "property": "LargestWaveSkip",
+      "key": "largest_wave_skip",
+      "displayLabel": "Largest Wave Skip",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "LargestWaveSkip",
+      "aliasKey": "largestwaveskip",
+      "property": "LargestWaveSkip",
+      "key": "largest_wave_skip",
+      "displayLabel": "Largest Wave Skip",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "lifesteal",
+      "aliasKey": "lifesteal",
+      "property": "Lifesteal",
+      "key": "lifesteal",
+      "displayLabel": "Lifesteal",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Health Regenerated",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "magic orb blocked",
+      "aliasKey": "magic orb blocked",
+      "property": "MagicOrbBlocked",
+      "key": "magic_orb_blocked",
+      "displayLabel": "Magic Orb Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "MagicOrbBlocked",
+      "aliasKey": "magicorbblocked",
+      "property": "MagicOrbBlocked",
+      "key": "magic_orb_blocked",
+      "displayLabel": "Magic Orb Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Most Cells From Wave Skip",
+      "aliasKey": "most cells from wave skip",
+      "property": "MostCellsFromWaveSkip",
+      "key": "most_cells_from_wave_skip",
+      "displayLabel": "Most Cells From Wave Skip",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "MostCellsFromWaveSkip",
+      "aliasKey": "mostcellsfromwaveskip",
+      "property": "MostCellsFromWaveSkip",
+      "key": "most_cells_from_wave_skip",
+      "displayLabel": "Most Cells From Wave Skip",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "most coins from golden combo",
+      "aliasKey": "most coins from golden combo",
+      "property": "MostCoinsFromGoldenCombo",
+      "key": "most_coins_from_golden_combo",
+      "displayLabel": "Most Coins From Golden Combo",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "MostCoinsFromGoldenCombo",
+      "aliasKey": "mostcoinsfromgoldencombo",
+      "property": "MostCoinsFromGoldenCombo",
+      "key": "most_coins_from_golden_combo",
+      "displayLabel": "Most Coins From Golden Combo",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "most coins from wave skip",
+      "aliasKey": "most coins from wave skip",
+      "property": "MostCoinsFromWaveSkip",
+      "key": "most_coins_from_wave_skip",
+      "displayLabel": "Most Coins From Wave Skip",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "MostCoinsFromWaveSkip",
+      "aliasKey": "mostcoinsfromwaveskip",
+      "property": "MostCoinsFromWaveSkip",
+      "key": "most_coins_from_wave_skip",
+      "displayLabel": "Most Coins From Wave Skip",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Nukes Used",
+      "aliasKey": "nukes used",
+      "property": "NukesUsed",
+      "key": "nukes_used",
+      "displayLabel": "Nukes Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "NukesUsed",
+      "aliasKey": "nukesused",
+      "property": "NukesUsed",
+      "key": "nukes_used",
+      "displayLabel": "Nukes Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Orb Damage",
+      "aliasKey": "orb damage",
+      "property": "OrbDamage",
+      "key": "orb_damage",
+      "displayLabel": "Orb Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "OrbDamage",
+      "aliasKey": "orbdamage",
+      "property": "OrbDamage",
+      "key": "orb_damage",
+      "displayLabel": "Orb Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "orb_hits",
+      "aliasKey": "orb hits",
+      "property": "OrbHits",
+      "key": "orb_hits",
+      "displayLabel": "Orb Hits",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "OrbHits",
+      "aliasKey": "orbhits",
+      "property": "OrbHits",
+      "key": "orb_hits",
+      "displayLabel": "Orb Hits",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "primordial collapse blocked",
+      "aliasKey": "primordial collapse blocked",
+      "property": "PrimordialCollapseBlocked",
+      "key": "primordial_collapse_blocked",
+      "displayLabel": "Primordial Collapse Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "PrimordialCollapseBlocked",
+      "aliasKey": "primordialcollapseblocked",
+      "property": "PrimordialCollapseBlocked",
+      "key": "primordial_collapse_blocked",
+      "displayLabel": "Primordial Collapse Blocked",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Damage Blocked",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "projectiles_count",
+      "aliasKey": "projectiles count",
+      "property": "ProjectilesCount",
+      "key": "projectiles_count",
+      "displayLabel": "Projectiles Count",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ProjectilesCount",
+      "aliasKey": "projectilescount",
+      "property": "ProjectilesCount",
+      "key": "projectiles_count",
+      "displayLabel": "Projectiles Count",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "projectiles_damage",
+      "aliasKey": "projectiles damage",
+      "property": "ProjectilesDamage",
+      "key": "projectiles_damage",
+      "displayLabel": "Projectiles Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ProjectilesDamage",
+      "aliasKey": "projectilesdamage",
+      "property": "ProjectilesDamage",
+      "key": "projectiles_damage",
+      "displayLabel": "Projectiles Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "real time",
+      "aliasKey": "real time",
+      "property": "RealTime",
+      "key": "real_time",
+      "displayLabel": "Real Time",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "RealTime",
+      "aliasKey": "realtime",
+      "property": "RealTime",
+      "key": "real_time",
+      "displayLabel": "Real Time",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Recovery Packages",
+      "aliasKey": "recovery packages",
+      "property": "RecoveryPackages",
+      "key": "recovery_packages",
+      "displayLabel": "Recovery Packages",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "RecoveryPackages",
+      "aliasKey": "recoverypackages",
+      "property": "RecoveryPackages",
+      "key": "recovery_packages",
+      "displayLabel": "Recovery Packages",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Miscellaneous",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Rend Armor Damage",
+      "aliasKey": "rend armor damage",
+      "property": "RendArmorDamage",
+      "key": "rend_armor_damage",
+      "displayLabel": "Rend Armor Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "RendArmorDamage",
+      "aliasKey": "rendarmordamage",
+      "property": "RendArmorDamage",
+      "key": "rend_armor_damage",
+      "displayLabel": "Rend Armor Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "reroll shards earned",
+      "aliasKey": "reroll shards earned",
+      "property": "RerollShardsEarned",
+      "key": "reroll_shards_earned",
+      "displayLabel": "Reroll Shards Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "RerollShardsEarned",
+      "aliasKey": "rerollshardsearned",
+      "property": "RerollShardsEarned",
+      "key": "reroll_shards_earned",
+      "displayLabel": "Reroll Shards Earned",
+      "family": "Currencies / Rewards",
+      "section": "Currencies",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "second winds used",
+      "aliasKey": "second winds used",
+      "property": "SecondWindsUsed",
+      "key": "second_winds_used",
+      "displayLabel": "Second Winds Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "SecondWindsUsed",
+      "aliasKey": "secondwindsused",
+      "property": "SecondWindsUsed",
+      "key": "second_winds_used",
+      "displayLabel": "Second Winds Used",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "selected_tower",
+      "aliasKey": "selected tower",
+      "property": "SelectedTower",
+      "key": "selected_tower",
+      "displayLabel": "Selected Tower",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "SelectedTower",
+      "aliasKey": "selectedtower",
+      "property": "SelectedTower",
+      "key": "selected_tower",
+      "displayLabel": "Selected Tower",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "smart missile damage",
+      "aliasKey": "smart missile damage",
+      "property": "SmartMissileDamage",
+      "key": "smart_missile_damage",
+      "displayLabel": "Smart Missile Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "SmartMissileDamage",
+      "aliasKey": "smartmissiledamage",
+      "property": "SmartMissileDamage",
+      "key": "smart_missile_damage",
+      "displayLabel": "Smart Missile Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Swamp Damage",
+      "aliasKey": "swamp damage",
+      "property": "SwampDamage",
+      "key": "swamp_damage",
+      "displayLabel": "Swamp Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "SwampDamage",
+      "aliasKey": "swampdamage",
+      "property": "SwampDamage",
+      "key": "swamp_damage",
+      "displayLabel": "Swamp Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "enemies_tagged_by_death_wave",
+      "aliasKey": "enemies tagged by death wave",
+      "property": "TaggedByDeathwave",
+      "key": "tagged_by_deathwave",
+      "displayLabel": "Enemies Tagged By Death Wave",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "tagged_by_deathwave",
+      "aliasKey": "tagged by deathwave",
+      "property": "TaggedByDeathwave",
+      "key": "tagged_by_deathwave",
+      "displayLabel": "Enemies Tagged By Death Wave",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TaggedByDeathwave",
+      "aliasKey": "taggedbydeathwave",
+      "property": "TaggedByDeathwave",
+      "key": "tagged_by_deathwave",
+      "displayLabel": "Enemies Tagged By Death Wave",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "thorn_damage",
+      "aliasKey": "thorn damage",
+      "property": "ThornDamage",
+      "key": "thorn_damage",
+      "displayLabel": "Thorn Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ThornDamage",
+      "aliasKey": "thorndamage",
+      "property": "ThornDamage",
+      "key": "thorn_damage",
+      "displayLabel": "Thorn Damage",
+      "family": "Damage Output",
+      "section": "Damage Output",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Thunder Bot Stuns",
+      "aliasKey": "thunder bot stuns",
+      "property": "ThunderBotStuns",
+      "key": "thunder_bot_stuns",
+      "displayLabel": "Thunder Bot Stuns",
+      "family": "Bots",
+      "section": "Bots",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "ThunderBotStuns",
+      "aliasKey": "thunderbotstuns",
+      "property": "ThunderBotStuns",
+      "key": "thunder_bot_stuns",
+      "displayLabel": "Thunder Bot Stuns",
+      "family": "Bots",
+      "section": "Bots",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Tier",
+      "aliasKey": "tier",
+      "property": "Tier",
+      "key": "tier",
+      "displayLabel": "Tier",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Basic",
+      "aliasKey": "basic",
+      "property": "TotalBasic",
+      "key": "total_basic",
+      "displayLabel": "Total Basic",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Basic Enemies",
+      "aliasKey": "basic enemies",
+      "property": "TotalBasic",
+      "key": "total_basic",
+      "displayLabel": "Total Basic",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total basic",
+      "aliasKey": "total basic",
+      "property": "TotalBasic",
+      "key": "total_basic",
+      "displayLabel": "Total Basic",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalBasic",
+      "aliasKey": "totalbasic",
+      "property": "TotalBasic",
+      "key": "total_basic",
+      "displayLabel": "Total Basic",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Boss",
+      "aliasKey": "boss",
+      "property": "TotalBoss",
+      "key": "total_boss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Boss Enemies",
+      "aliasKey": "boss enemies",
+      "property": "TotalBoss",
+      "key": "total_boss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Bosses",
+      "aliasKey": "bosses",
+      "property": "TotalBoss",
+      "key": "total_boss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total boss",
+      "aliasKey": "total boss",
+      "property": "TotalBoss",
+      "key": "total_boss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalBoss",
+      "aliasKey": "totalboss",
+      "property": "TotalBoss",
+      "key": "total_boss",
+      "displayLabel": "Total Boss",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Commander",
+      "aliasKey": "commander",
+      "property": "TotalCommanders",
+      "key": "total_commanders",
+      "displayLabel": "Total Commanders",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Commanders",
+      "aliasKey": "commanders",
+      "property": "TotalCommanders",
+      "key": "total_commanders",
+      "displayLabel": "Total Commanders",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_commanders",
+      "aliasKey": "total commanders",
+      "property": "TotalCommanders",
+      "key": "total_commanders",
+      "displayLabel": "Total Commanders",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalCommanders",
+      "aliasKey": "totalcommanders",
+      "property": "TotalCommanders",
+      "key": "total_commanders",
+      "displayLabel": "Total Commanders",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Total Elites",
+      "aliasKey": "total elites",
+      "property": "TotalElites",
+      "key": "total_elites",
+      "displayLabel": "Total Elites",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalElites",
+      "aliasKey": "totalelites",
+      "property": "TotalElites",
+      "key": "total_elites",
+      "displayLabel": "Total Elites",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total enemies",
+      "aliasKey": "total enemies",
+      "property": "TotalEnemies",
+      "key": "total_enemies",
+      "displayLabel": "Total Enemies",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalEnemies",
+      "aliasKey": "totalenemies",
+      "property": "TotalEnemies",
+      "key": "total_enemies",
+      "displayLabel": "Total Enemies",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Fast",
+      "aliasKey": "fast",
+      "property": "TotalFast",
+      "key": "total_fast",
+      "displayLabel": "Total Fast",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Fast Enemies",
+      "aliasKey": "fast enemies",
+      "property": "TotalFast",
+      "key": "total_fast",
+      "displayLabel": "Total Fast",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_fast",
+      "aliasKey": "total fast",
+      "property": "TotalFast",
+      "key": "total_fast",
+      "displayLabel": "Total Fast",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalFast",
+      "aliasKey": "totalfast",
+      "property": "TotalFast",
+      "key": "total_fast",
+      "displayLabel": "Total Fast",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Overcharge",
+      "aliasKey": "overcharge",
+      "property": "TotalOvercharges",
+      "key": "total_overcharges",
+      "displayLabel": "Total Overcharges",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Overcharges",
+      "aliasKey": "overcharges",
+      "property": "TotalOvercharges",
+      "key": "total_overcharges",
+      "displayLabel": "Total Overcharges",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_overcharges",
+      "aliasKey": "total overcharges",
+      "property": "TotalOvercharges",
+      "key": "total_overcharges",
+      "displayLabel": "Total Overcharges",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalOvercharges",
+      "aliasKey": "totalovercharges",
+      "property": "TotalOvercharges",
+      "key": "total_overcharges",
+      "displayLabel": "Total Overcharges",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Protector",
+      "aliasKey": "protector",
+      "property": "TotalProtector",
+      "key": "total_protector",
+      "displayLabel": "Total Protector",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Protectors",
+      "aliasKey": "protectors",
+      "property": "TotalProtector",
+      "key": "total_protector",
+      "displayLabel": "Total Protector",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Total Protector",
+      "aliasKey": "total protector",
+      "property": "TotalProtector",
+      "key": "total_protector",
+      "displayLabel": "Total Protector",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalProtector",
+      "aliasKey": "totalprotector",
+      "property": "TotalProtector",
+      "key": "total_protector",
+      "displayLabel": "Total Protector",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Ranged",
+      "aliasKey": "ranged",
+      "property": "TotalRanged",
+      "key": "total_ranged",
+      "displayLabel": "Total Ranged",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Ranged Enemies",
+      "aliasKey": "ranged enemies",
+      "property": "TotalRanged",
+      "key": "total_ranged",
+      "displayLabel": "Total Ranged",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_ranged",
+      "aliasKey": "total ranged",
+      "property": "TotalRanged",
+      "key": "total_ranged",
+      "displayLabel": "Total Ranged",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalRanged",
+      "aliasKey": "totalranged",
+      "property": "TotalRanged",
+      "key": "total_ranged",
+      "displayLabel": "Total Ranged",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Ray",
+      "aliasKey": "ray",
+      "property": "TotalRays",
+      "key": "total_rays",
+      "displayLabel": "Total Rays",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Rays",
+      "aliasKey": "rays",
+      "property": "TotalRays",
+      "key": "total_rays",
+      "displayLabel": "Total Rays",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total rays",
+      "aliasKey": "total rays",
+      "property": "TotalRays",
+      "key": "total_rays",
+      "displayLabel": "Total Rays",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalRays",
+      "aliasKey": "totalrays",
+      "property": "TotalRays",
+      "key": "total_rays",
+      "displayLabel": "Total Rays",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Saboteur",
+      "aliasKey": "saboteur",
+      "property": "TotalSaboteurs",
+      "key": "total_saboteurs",
+      "displayLabel": "Total Saboteurs",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Saboteurs",
+      "aliasKey": "saboteurs",
+      "property": "TotalSaboteurs",
+      "key": "total_saboteurs",
+      "displayLabel": "Total Saboteurs",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_saboteurs",
+      "aliasKey": "total saboteurs",
+      "property": "TotalSaboteurs",
+      "key": "total_saboteurs",
+      "displayLabel": "Total Saboteurs",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalSaboteurs",
+      "aliasKey": "totalsaboteurs",
+      "property": "TotalSaboteurs",
+      "key": "total_saboteurs",
+      "displayLabel": "Total Saboteurs",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Scatter",
+      "aliasKey": "scatter",
+      "property": "TotalScatters",
+      "key": "total_scatters",
+      "displayLabel": "Total Scatters",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Scatters",
+      "aliasKey": "scatters",
+      "property": "TotalScatters",
+      "key": "total_scatters",
+      "displayLabel": "Total Scatters",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_scatters",
+      "aliasKey": "total scatters",
+      "property": "TotalScatters",
+      "key": "total_scatters",
+      "displayLabel": "Total Scatters",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalScatters",
+      "aliasKey": "totalscatters",
+      "property": "TotalScatters",
+      "key": "total_scatters",
+      "displayLabel": "Total Scatters",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Tank",
+      "aliasKey": "tank",
+      "property": "TotalTank",
+      "key": "total_tank",
+      "displayLabel": "Total Tank",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Tank Enemies",
+      "aliasKey": "tank enemies",
+      "property": "TotalTank",
+      "key": "total_tank",
+      "displayLabel": "Total Tank",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total tank",
+      "aliasKey": "total tank",
+      "property": "TotalTank",
+      "key": "total_tank",
+      "displayLabel": "Total Tank",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalTank",
+      "aliasKey": "totaltank",
+      "property": "TotalTank",
+      "key": "total_tank",
+      "displayLabel": "Total Tank",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "total_vampires",
+      "aliasKey": "total vampires",
+      "property": "TotalVampires",
+      "key": "total_vampires",
+      "displayLabel": "Total Vampires",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TotalVampires",
+      "aliasKey": "totalvampires",
+      "property": "TotalVampires",
+      "key": "total_vampires",
+      "displayLabel": "Total Vampires",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Vampire",
+      "aliasKey": "vampire",
+      "property": "TotalVampires",
+      "key": "total_vampires",
+      "displayLabel": "Total Vampires",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Vampires",
+      "aliasKey": "vampires",
+      "property": "TotalVampires",
+      "key": "total_vampires",
+      "displayLabel": "Total Vampires",
+      "family": "Enemy Counts / Kills Breakdown",
+      "section": "Enemy Counts / Kills Breakdown",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "tower health regen",
+      "aliasKey": "tower health regen",
+      "property": "TowerHealthRegen",
+      "key": "tower_health_regen",
+      "displayLabel": "Tower Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Health Regenerated",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "TowerHealthRegen",
+      "aliasKey": "towerhealthregen",
+      "property": "TowerHealthRegen",
+      "key": "tower_health_regen",
+      "displayLabel": "Tower Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Health Regenerated",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "wall_health_regen",
+      "aliasKey": "wall health regen",
+      "property": "WallHealthRegen",
+      "key": "wall_health_regen",
+      "displayLabel": "Wall Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Health Regenerated",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "WallHealthRegen",
+      "aliasKey": "wallhealthregen",
+      "property": "WallHealthRegen",
+      "key": "wall_health_regen",
+      "displayLabel": "Wall Health Regen",
+      "family": "Survival / Damage Blocked / Regen",
+      "section": "Health Regenerated",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Wave",
+      "aliasKey": "wave",
+      "property": "Wave",
+      "key": "wave",
+      "displayLabel": "Wave",
+      "family": "Run Header / Identity",
+      "section": "Run Header",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "waves skipped",
+      "aliasKey": "waves skipped",
+      "property": "WavesSkipped",
+      "key": "waves_skipped",
+      "displayLabel": "Waves Skipped",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "WavesSkipped",
+      "aliasKey": "wavesskipped",
+      "property": "WavesSkipped",
+      "key": "waves_skipped",
+      "displayLabel": "Waves Skipped",
+      "family": "Records / Utility / Counts",
+      "section": "Records / Utility / Counts",
+      "sourceConfidence": "game-file-observed"
+    },
+    {
+      "alias": "Attack Chip",
+      "aliasKey": "attack chip",
+      "property": null,
+      "key": null,
+      "displayLabel": "Attack Chip",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3327
+    },
+    {
+      "alias": "Battle Report",
+      "aliasKey": "battle report",
+      "property": null,
+      "key": null,
+      "displayLabel": "Battle Report",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1006
+    },
+    {
+      "alias": "Bonus Health Gained",
+      "aliasKey": "bonus health gained",
+      "property": null,
+      "key": null,
+      "displayLabel": "Bonus Health Gained",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3321
+    },
+    {
+      "alias": "Cash Earning Rate",
+      "aliasKey": "cash earning rate",
+      "property": null,
+      "key": null,
+      "displayLabel": "Cash Earning Rate",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1010
+    },
+    {
+      "alias": "Cells Earned Per Hour",
+      "aliasKey": "cells earned per hour",
+      "property": null,
+      "key": null,
+      "displayLabel": "Cells Earned Per Hour",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3316
+    },
+    {
+      "alias": "Cells Per Hour",
+      "aliasKey": "cells per hour",
+      "property": null,
+      "key": null,
+      "displayLabel": "Cells Per Hour",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3320
+    },
+    {
+      "alias": "Coins Earning Rate",
+      "aliasKey": "coins earning rate",
+      "property": null,
+      "key": null,
+      "displayLabel": "Coins Earning Rate",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1009
+    },
+    {
+      "alias": "Combat",
+      "aliasKey": "combat",
+      "property": null,
+      "key": null,
+      "displayLabel": "Combat",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1005
+    },
+    {
+      "alias": "Counts",
+      "aliasKey": "counts",
+      "property": null,
+      "key": null,
+      "displayLabel": "Counts",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3309
+    },
+    {
+      "alias": "Currencies",
+      "aliasKey": "currencies",
+      "property": null,
+      "key": null,
+      "displayLabel": "Currencies",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3314
+    },
+    {
+      "alias": "Damage Blocked",
+      "aliasKey": "damage blocked",
+      "property": null,
+      "key": null,
+      "displayLabel": "Damage Blocked",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3308
+    },
+    {
+      "alias": "Damage Dealt Rate",
+      "aliasKey": "damage dealt rate",
+      "property": null,
+      "key": null,
+      "displayLabel": "Damage Dealt Rate",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1012
+    },
+    {
+      "alias": "Damage from Amp Bot",
+      "aliasKey": "damage from amp bot",
+      "property": null,
+      "key": null,
+      "displayLabel": "Damage from Amp Bot",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1046
+    },
+    {
+      "alias": "Enemies Destroyed",
+      "aliasKey": "enemies destroyed",
+      "property": null,
+      "key": null,
+      "displayLabel": "Enemies Destroyed",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1032
+    },
+    {
+      "alias": "Enemies Destroyed By",
+      "aliasKey": "enemies destroyed by",
+      "property": null,
+      "key": null,
+      "displayLabel": "Enemies Destroyed By",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3315
+    },
+    {
+      "alias": "Enemies Hit By",
+      "aliasKey": "enemies hit by",
+      "property": null,
+      "key": null,
+      "displayLabel": "Enemies Hit By",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3312
+    },
+    {
+      "alias": "From Death Wave",
+      "aliasKey": "from death wave",
+      "property": null,
+      "key": null,
+      "displayLabel": "From Death Wave",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3328
+    },
+    {
+      "alias": "Health Regenerated",
+      "aliasKey": "health regenerated",
+      "property": null,
+      "key": null,
+      "displayLabel": "Health Regenerated",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3307
+    },
+    {
+      "alias": "Killed With Effect Active",
+      "aliasKey": "killed with effect active",
+      "property": null,
+      "key": null,
+      "displayLabel": "Killed With Effect Active",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3313
+    },
+    {
+      "alias": "Miscellaneous",
+      "aliasKey": "miscellaneous",
+      "property": null,
+      "key": null,
+      "displayLabel": "Miscellaneous",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3310
+    },
+    {
+      "alias": "Note: You will resume battle when the last Boss or Fleet enemy spawned.",
+      "aliasKey": "note you will resume battle when the last boss or fleet enemy spawned",
+      "property": null,
+      "key": null,
+      "displayLabel": "Note: You will resume battle when the last Boss or Fleet enemy spawned.",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3326
+    },
+    {
+      "alias": "Records",
+      "aliasKey": "records",
+      "property": null,
+      "key": null,
+      "displayLabel": "Records",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 3311
+    },
+    {
+      "alias": "Utility",
+      "aliasKey": "utility",
+      "property": null,
+      "key": null,
+      "displayLabel": "Utility",
+      "family": "UI Label / Section / Candidate",
+      "section": "UI Label",
+      "sourceConfidence": "game-file-confirmed-label",
+      "locId": 1024
+    }
+  ]
+}

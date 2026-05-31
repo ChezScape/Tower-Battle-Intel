@@ -1,0 +1,375 @@
+/* Tower Battle Intel desktop module: 04-history-stats-modal.css
+   v4.11z52w33 Stats modal clarity/button-layout polish. Uses device-desktop/data-device-mode selectors so the modal is a real overlay even when desktopPolishGuard is not loaded.
+   Scoped to .tbi-history2-stats-* so old .history-stats-* modal rules cannot fight it. */
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 26px;
+    background: radial-gradient(circle at 50% 18%, rgba(29,231,255,.16), rgba(2,6,14,.82) 42%, rgba(0,0,0,.92));
+    backdrop-filter: blur(16px);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-card {
+    width: min(1180px, calc(100vw - 72px));
+    max-height: calc(100dvh - 72px);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+    border: 1px solid rgba(29,231,255,.24);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(5,16,34,.98), rgba(4,8,19,.96));
+    box-shadow: 0 28px 90px rgba(0,0,0,.62), 0 0 38px rgba(29,231,255,.12);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-hero,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-actionbar,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-trust-row,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-tabs,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-footer {
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(29,231,255,.10);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 16px;
+    align-items: center;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-title-block {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-title-block .tbi-history2-kicker,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel h3,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section header span,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-search-panel span,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip small,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-metric span,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-delta span,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-dl dt,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-row span {
+    text-transform: uppercase;
+    letter-spacing: .10em;
+    color: rgba(205,226,244,.68);
+    font-size: 10px;
+    font-weight: 900;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-title-block strong {
+    color: #fff;
+    font-size: clamp(21px, 2.1vw, 30px);
+    letter-spacing: .02em;
+    overflow-wrap: anywhere;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-title-block em {
+    color: rgba(225,244,255,.76);
+    font-style: normal;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source {
+    display: grid;
+    justify-items: end;
+    gap: 5px;
+    min-width: 170px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source b,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(29,231,255,.18);
+    color: #eafaff;
+    background: rgba(8,24,48,.74);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .08em;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source .source-good { border-color: rgba(34,197,94,.42); color: #bfffd4; background: rgba(34,197,94,.10); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source .source-warn { border-color: rgba(251,191,36,.42); color: #ffe7a6; background: rgba(251,191,36,.10); }
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-close {
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid rgba(29,231,255,.30);
+    border-radius: 12px;
+    background: rgba(29,231,255,.09);
+    color: #e8fbff;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-actionbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(90deg, rgba(29,231,255,.06), rgba(255,211,41,.03));
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-actionbar .tbi-history2-btn {
+    min-width: 126px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-actionbar .slot-a { border-color: rgba(29,231,255,.45); background: rgba(29,231,255,.10); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-actionbar .slot-b { border-color: rgba(255,211,41,.45); background: rgba(255,211,41,.10); }
+
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-trust-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-metric,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-delta {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    border: 1px solid rgba(29,231,255,.13);
+    border-radius: 14px;
+    padding: 10px 11px;
+    background: rgba(7,18,38,.66);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip b,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-metric strong,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-delta strong {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 1000;
+    overflow-wrap: anywhere;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip.tone-good,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-metric.tone-good,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-delta.tone-good { border-color: rgba(34,197,94,.32); background: rgba(34,197,94,.08); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip.tone-warn,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-metric.tone-warn { border-color: rgba(251,191,36,.32); background: rgba(251,191,36,.08); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip.tone-a { border-color: rgba(29,231,255,.45); background: rgba(29,231,255,.10); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-chip.tone-b { border-color: rgba(255,211,41,.45); background: rgba(255,211,41,.10); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-delta.tone-bad { border-color: rgba(239,68,68,.32); background: rgba(239,68,68,.08); }
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-tabs button {
+    min-height: 34px;
+    padding: 0 13px;
+    border: 1px solid rgba(29,231,255,.18);
+    border-radius: 999px;
+    background: rgba(6,18,38,.82);
+    color: rgba(231,248,255,.82);
+    font-weight: 1000;
+    letter-spacing: .06em;
+    cursor: pointer;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-tabs button.active {
+    border-color: rgba(29,231,255,.62);
+    background: linear-gradient(135deg, rgba(29,231,255,.18), rgba(255,211,41,.08));
+    color: #fff;
+    box-shadow: 0 0 22px rgba(29,231,255,.14);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-body {
+    min-height: 0;
+    overflow: auto;
+    padding: 16px 18px 18px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-view { display: none; }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-view.active { display: grid; gap: 14px; }
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-summary-grid,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 10px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel-grid.raw-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-search-panel,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-empty {
+    border: 1px solid rgba(29,231,255,.13);
+    border-radius: 16px;
+    padding: 13px;
+    background: rgba(3,13,29,.58);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel h3,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section header strong {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-dl {
+    display: grid;
+    gap: 8px;
+    margin: 10px 0 0;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-dl div,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border: 1px solid rgba(29,231,255,.10);
+    border-radius: 11px;
+    padding: 8px 10px;
+    background: rgba(8,24,48,.50);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-dl dd {
+    margin: 0;
+    color: #fff;
+    font-weight: 900;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-context-note,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-note,
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-empty {
+    color: rgba(225,244,255,.72);
+    line-height: 1.5;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-search-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: end;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-search-panel label { display: grid; gap: 6px; }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-search-panel input {
+    min-height: 38px;
+    border: 1px solid rgba(29,231,255,.24);
+    border-radius: 12px;
+    padding: 8px 11px;
+    background: rgba(0,0,0,.30);
+    color: #fff;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section {
+    display: grid;
+    gap: 10px;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section header div { display: grid; gap: 3px; }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-section header b {
+    border: 1px solid rgba(255,211,41,.40);
+    border-radius: 999px;
+    padding: 3px 8px;
+    color: #fff1b6;
+    background: rgba(255,211,41,.10);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-table { display: grid; gap: 6px; }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-row strong {
+    color: #fff;
+    font-weight: 950;
+    text-align: right;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-raw {
+    max-height: 46vh;
+    overflow: auto;
+    margin: 10px 0 0;
+    border: 1px solid rgba(29,231,255,.16);
+    border-radius: 13px;
+    padding: 12px;
+    background: rgba(0,0,0,.36);
+    color: #e8fbff;
+    font: 12px/1.45 Consolas, "Courier New", monospace;
+    white-space: pre-wrap;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: flex-end;
+    border-top: 1px solid rgba(29,231,255,.10);
+    border-bottom: none;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-footer .slot-a { border-color: rgba(29,231,255,.38); }
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-footer .slot-b { border-color: rgba(255,211,41,.38); }
+
+@media (max-width: 980px) {
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-card { width: calc(100vw - 32px); max-height: calc(100dvh - 32px); }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-hero { grid-template-columns: 1fr; }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-source { justify-items: start; min-width: 0; }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-trust-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel-grid,
+    :where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-panel-grid.raw-grid { grid-template-columns: 1fr; }
+}
+
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-context-note {
+    margin: 8px 0 10px;
+    border: 1px solid rgba(255,211,41,.16);
+    border-radius: 12px;
+    padding: 8px 10px;
+    background: rgba(255,211,41,.06);
+    color: rgba(225,244,255,.78);
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-context-note b {
+    color: #ffe7a6;
+}
+
+:where(html.desktop-polish, html.device-desktop, html[data-device-mode="desktop"]) .tbi-history2-stats-footer-note {
+    align-self: center;
+    margin-right: auto;
+    color: rgba(205,226,244,.62);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+}

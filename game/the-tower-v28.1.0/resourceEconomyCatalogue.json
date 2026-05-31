@@ -1,0 +1,314 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Resource / Economy Catalogue",
+    "catalogueKey": "resourceEconomyCatalogue",
+    "entryCount": 14,
+    "purpose": "Resources, rates, and coin/cell source families for parser/Compare."
+  },
+  "entries": [
+    {
+      "key": "cash",
+      "label": "Cash",
+      "family": "Resource / In-run",
+      "meaning": "In-run upgrade currency, separate from permanent coins.",
+      "tags": [
+        "resource",
+        "cash"
+      ],
+      "aliases": [
+        "Cash"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coins",
+      "label": "Coins",
+      "family": "Resource / Permanent Economy",
+      "meaning": "Main permanent currency; report shows earned and per-hour rates.",
+      "tags": [
+        "resource",
+        "coins"
+      ],
+      "aliases": [
+        "Coins Earned",
+        "Coins Per Hour"
+      ],
+      "battleReportLinks": [
+        "CoinsEarned",
+        "CoinsPerHour"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "cells",
+      "label": "Cells",
+      "family": "Resource / Elite Economy",
+      "meaning": "Elite Cell income; report shows earned and per-hour rates.",
+      "tags": [
+        "resource",
+        "cells"
+      ],
+      "aliases": [
+        "Cells Earned",
+        "Cells Per Hour"
+      ],
+      "battleReportLinks": [
+        "CellsEarned",
+        "CellsPerHour"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "gems",
+      "label": "Gems",
+      "family": "Resource / Premium",
+      "meaning": "Gem resource and Guardian/event rewards.",
+      "tags": [
+        "resource",
+        "gems"
+      ],
+      "aliases": [
+        "Gems"
+      ],
+      "battleReportLinks": [
+        "GuardianGems"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "stones",
+      "label": "Stones / Power Stones",
+      "family": "Resource / Ultimate Weapons",
+      "meaning": "Ultimate Weapon unlock/upgrade resource vocabulary.",
+      "tags": [
+        "resource",
+        "stones",
+        "uw"
+      ],
+      "aliases": [
+        "Power Stones",
+        "Stones"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "medals",
+      "label": "Medals",
+      "family": "Resource / Event",
+      "meaning": "Event/Guardian medal resource.",
+      "tags": [
+        "resource",
+        "medals",
+        "event"
+      ],
+      "aliases": [
+        "Medals"
+      ],
+      "battleReportLinks": [
+        "GuardianMedals"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "reroll_shards",
+      "label": "Reroll Shards",
+      "family": "Resource / Modules",
+      "meaning": "Module reroll resource.",
+      "tags": [
+        "resource",
+        "modules"
+      ],
+      "aliases": [
+        "Reroll Shards"
+      ],
+      "battleReportLinks": [
+        "RerollShardsEarned",
+        "GuardianRerollShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "module_shards",
+      "label": "Module Shards",
+      "family": "Resource / Modules",
+      "meaning": "Cannon/Armor/Generator/Core shard families.",
+      "tags": [
+        "resource",
+        "modules",
+        "shards"
+      ],
+      "aliases": [
+        "Cannon Shards",
+        "Armor Shards",
+        "Generator Shards",
+        "Core Shards"
+      ],
+      "battleReportLinks": [
+        "CannonShards",
+        "ArmorShards",
+        "GeneratorShards",
+        "CoreShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "golden_tower_coins",
+      "label": "Golden Tower Coins",
+      "family": "Economy Source / UW",
+      "meaning": "Coins credited to Golden Tower.",
+      "tags": [
+        "economy-source",
+        "uw"
+      ],
+      "aliases": [
+        "Coins From Golden Tower"
+      ],
+      "battleReportLinks": [
+        "CoinsFromGoldenTower"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "black_hole_coins",
+      "label": "Black Hole Coins",
+      "family": "Economy Source / UW",
+      "meaning": "Coins credited to Black Hole.",
+      "tags": [
+        "economy-source",
+        "uw"
+      ],
+      "aliases": [
+        "Coins From Black Hole"
+      ],
+      "battleReportLinks": [
+        "CoinsFromBlackHole"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "death_wave_coins",
+      "label": "Death Wave Coins",
+      "family": "Economy Source / UW",
+      "meaning": "Coins credited to Death Wave/effect waves.",
+      "tags": [
+        "economy-source",
+        "uw"
+      ],
+      "aliases": [
+        "Coins From Death Wave"
+      ],
+      "battleReportLinks": [
+        "CoinsFromDeathWave"
+      ],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "spotlight_coins",
+      "label": "Spotlight Coins",
+      "family": "Economy Source / UW",
+      "meaning": "Coins credited to Spotlight.",
+      "tags": [
+        "economy-source",
+        "uw"
+      ],
+      "aliases": [
+        "Coins From Spotlight"
+      ],
+      "battleReportLinks": [
+        "CoinsFromSpotlight"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coin_bot_coins",
+      "label": "Bot Coins",
+      "family": "Economy Source / Bot",
+      "meaning": "Coin output from bot source.",
+      "tags": [
+        "economy-source",
+        "bot"
+      ],
+      "aliases": [
+        "Coins From Golden Bot"
+      ],
+      "battleReportLinks": [
+        "CoinsFromGoldenBot"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "other_coin_bonuses",
+      "label": "Other Coin Bonuses",
+      "family": "Economy Source / Misc",
+      "meaning": "Miscellaneous coin bonus bucket; keep separate from Other kills.",
+      "tags": [
+        "economy-source",
+        "misc"
+      ],
+      "aliases": [
+        "Other Coin Bonuses"
+      ],
+      "battleReportLinks": [
+        "CoinsFromCoinBonuses"
+      ],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [
+        "parser explanation"
+      ],
+      "notes": [
+        "Do not confuse with DestroyedByOther."
+      ]
+    }
+  ]
+}

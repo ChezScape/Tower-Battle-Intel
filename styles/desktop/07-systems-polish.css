@@ -1,0 +1,15 @@
+/* Tower Battle Intel desktop module: 07-systems-polish.css
+   v4.11z52q — intentionally light. Main Systems Knowledge Base ownership is in 07-systems.css.
+*/
+
+html.desktop-polish .tbi-systems-knowledge {
+    gap: 8px;
+}
+
+html.desktop-polish .tbi-systems-module-panel,
+html.desktop-polish .tbi-systems-knowledge-panel,
+html.desktop-polish .tbi-systems-family-panel,
+html.desktop-polish .tbi-systems-boundary-panel,
+html.desktop-polish .tbi-systems-control-panel {
+    padding: 10px;
+}

@@ -1,0 +1,135 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Perk Catalogue",
+    "catalogueKey": "perkCatalogue",
+    "entryCount": 6,
+    "purpose": "Perk/trade-off vocabulary useful for manual run context."
+  },
+  "entries": [
+    {
+      "key": "perks",
+      "label": "Perks",
+      "family": "Perk / System",
+      "meaning": "Perk system vocabulary for run context.",
+      "tags": [
+        "perk"
+      ],
+      "aliases": [
+        "Perks"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "tradeoff_perks",
+      "label": "Trade-off Perks",
+      "family": "Perk / Trade-off",
+      "meaning": "Trade-off perk vocabulary for explaining changed run behaviour.",
+      "tags": [
+        "perk",
+        "trade-off"
+      ],
+      "aliases": [
+        "Trade-off Perks",
+        "Tradeoff Perks"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "cash_multiplier",
+      "label": "Cash Multiplier",
+      "family": "Perk / Economy",
+      "meaning": "Cash multiplier context including wave bonus.",
+      "tags": [
+        "perk",
+        "economy"
+      ],
+      "aliases": [
+        "Cash Multiplier"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coin_bonus",
+      "label": "Coin Bonus",
+      "family": "Perk / Economy",
+      "meaning": "Coin bonus context; separate from specific UW coin sources.",
+      "tags": [
+        "perk",
+        "economy"
+      ],
+      "aliases": [
+        "Coin Bonus"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "damage_tradeoff",
+      "label": "Damage Trade-off",
+      "family": "Perk / Combat",
+      "meaning": "Manual context for damage-altering trade-offs.",
+      "tags": [
+        "perk",
+        "damage"
+      ],
+      "aliases": [
+        "Damage"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "health_tradeoff",
+      "label": "Health Trade-off",
+      "family": "Perk / Survival",
+      "meaning": "Manual context for health/survival-altering trade-offs.",
+      "tags": [
+        "perk",
+        "survival"
+      ],
+      "aliases": [
+        "Health"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [],
+      "notes": []
+    }
+  ]
+}

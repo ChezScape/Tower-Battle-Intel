@@ -1,0 +1,24 @@
+/* Tower Battle Intel desktop module: 04-history-base.css
+   History tab base panels, choices, run cards
+   Source: v4.11z23 desktop.css lines 175-194.
+*/
+.history-panel { padding: 18px; }
+.history-collapsible { border: 1px solid rgba(29,231,255,.18); border-radius: 12px; background: rgba(1,7,17,.54); overflow: visible; }
+.history-collapsible > summary { cursor: pointer; padding: 13px 15px; display: flex; justify-content: space-between; color: var(--cyan); text-transform: uppercase; letter-spacing: .12em; font-weight: 1000; }
+.history-filter-body, .history-panel-actions, .history-summary-grid, .history-list { padding: 14px; }
+.history-panel-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.history-choice-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.history-choice-menu { position: relative; isolation: isolate; }
+.history-choice-trigger { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) auto 18px; align-items: center; gap: 10px; width: 100%; min-height: 42px; padding: 10px 12px; border: 1px solid rgba(29,231,255,.28); border-radius: 13px; background: linear-gradient(180deg, rgba(9,27,54,.94), rgba(3,10,24,.98)); color: var(--cyan); cursor: pointer; }
+.history-choice-trigger::-webkit-details-marker, .history-choice-trigger::marker { display: none; content: ""; }
+.history-choice-trigger::after { content: "⌄"; color: var(--gold); font-weight: 950; }
+.history-choice-menu[open] > .history-choice-trigger::after { transform: rotate(180deg); }
+.history-choice-options { position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 80; display: grid; gap: 7px; max-height: min(360px, 48vh); overflow: auto; padding: 10px; border: 1px solid rgba(29,231,255,.34); border-radius: 15px; background: linear-gradient(180deg, rgba(8,23,48,.98), rgba(2,7,18,.99)); box-shadow: 0 18px 44px rgba(0,0,0,.62), 0 0 28px rgba(29,231,255,.20); }
+.history-choice-option { width: 100%; min-height: 36px; text-align: left; }
+.history-choice-option.active, .history-choice-option[aria-pressed="true"] { color: #fff7d6; border-color: rgba(255,211,41,.68); background: rgba(255,211,41,.16); }
+.history-summary-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.history-summary-card, .history-run-card { border: 1px solid rgba(29,231,255,.18); border-radius: 12px; background: rgba(1,7,17,.62); padding: 13px; }
+.history-list { display: grid; gap: 12px; }
+.history-run-main, .history-run-meta, .history-run-actions, .history-run-badges, .history-run-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.history-run-title { color: #fff; font-weight: 1000; }
+.history-run-score { margin-left: auto; color: var(--green); border: 1px solid rgba(87,255,87,.3); border-radius: 999px; padding: 5px 9px; }

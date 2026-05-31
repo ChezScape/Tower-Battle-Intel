@@ -1,0 +1,5 @@
+/* Tower Battle Intel desktop module: 08-anomalies.css
+   Anomalies list base layout
+   Source: v4.11z23 desktop.css lines 173-173.
+*/
+.tbi-anomaly-list { display: grid; gap: 8px; }

@@ -1,0 +1,8 @@
+/* Tower Battle Intel desktop module: 06-coach.css
+   Coach/advice base rows shared with anomaly rows
+   Source: v4.11z23 desktop.css lines 169-172.
+*/
+.tbi-advice-list { display: grid; gap: 10px; }
+.tbi-advice-item, .tbi-anomaly-row { padding: 12px; border: 1px solid rgba(29,231,255,.18); border-radius: 10px; background: rgba(1,7,17,.72); }
+.tbi-advice-item strong, .tbi-anomaly-row strong { display: block; color: #fff; margin-bottom: 4px; }
+.tbi-advice-item p, .tbi-anomaly-row span { margin: 0; color: #bdd3e3; line-height: 1.4; }

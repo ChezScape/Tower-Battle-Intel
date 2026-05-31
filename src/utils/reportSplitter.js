@@ -1,13 +1,21 @@
 "use strict";
 
 /**
- * REPORT SPLITTER v4.10b
+ * REPORT SPLITTER v4.11z52w47
  * Handles pasted input containing one or more Battle Reports.
+ *
+ * Batch separators such as --- are paste wrappers, not game report data.
+ * Manual markers such as Tournament-- are converted into metadata for the
+ * next Battle Report block instead of being stored inside raw source text.
  */
 
 const REPORT_MARKER = "Battle Report";
 
 export function splitBattleReports(rawText = "") {
+    return splitBattleReportEntries(rawText).map(entry => entry.rawText);
+}
+
+export function splitBattleReportEntries(rawText = "") {
     const text = normaliseLineEndings(rawText).trim();
 
     if (!text) {
@@ -17,15 +25,37 @@ export function splitBattleReports(rawText = "") {
     const starts = findReportStarts(text);
 
     if (!starts.length) {
-        return [text];
+        const cleaned = cleanBattleReportBlock(text);
+        return cleaned.rawText ? [{
+            rawText: cleaned.rawText,
+            markers: detectManualMarkers(text),
+            runType: runTypeFromMarkers(detectManualMarkers(text)),
+            sourcePrelude: ""
+        }] : [];
     }
 
-    return starts
-        .map((start, index) => {
-            const end = starts[index + 1] ?? text.length;
-            return text.slice(start, end).trim();
-        })
-        .filter(Boolean);
+    const entries = [];
+    let pendingMarkers = detectManualMarkers(text.slice(0, starts[0]));
+
+    starts.forEach((start, index) => {
+        const end = starts[index + 1] ?? text.length;
+        const slice = text.slice(start, end);
+        const cleaned = cleanBattleReportBlock(slice);
+        const markers = uniqueMarkers(pendingMarkers);
+
+        if (cleaned.rawText) {
+            entries.push({
+                rawText: cleaned.rawText,
+                markers,
+                runType: runTypeFromMarkers(markers),
+                sourcePrelude: cleaned.removedTrailer.join("\n")
+            });
+        }
+
+        pendingMarkers = cleaned.nextMarkers;
+    });
+
+    return entries;
 }
 
 export function getFirstBattleReport(rawText = "") {
@@ -60,6 +90,85 @@ export function normaliseLineEndings(rawText = "") {
         .replace(/\u00a0/g, " ");
 }
 
+export function isBatchSeparatorLine(line = "") {
+    const text = String(line || "").trim();
+    if (!text) return true;
+
+    return /^(?:-{3,}|={3,}|_{3,}|\*{3,}|~{3,}|•{3,}|—{3,}|–{3,})$/.test(text);
+}
+
+export function detectManualMarkers(text = "") {
+    return uniqueMarkers(
+        normaliseLineEndings(text)
+            .split("\n")
+            .map(line => normaliseManualMarker(line))
+            .filter(Boolean)
+    );
+}
+
+function cleanBattleReportBlock(block = "") {
+    const lines = normaliseLineEndings(block).split("\n");
+    const removedTrailer = [];
+    const nextMarkers = [];
+
+    while (lines.length) {
+        const line = lines[lines.length - 1];
+        const marker = normaliseManualMarker(line);
+
+        if (marker) {
+            removedTrailer.unshift(line);
+            nextMarkers.unshift(marker);
+            lines.pop();
+            continue;
+        }
+
+        if (isBatchSeparatorLine(line)) {
+            removedTrailer.unshift(line);
+            lines.pop();
+            continue;
+        }
+
+        break;
+    }
+
+    const rawText = lines.join("\n").trim();
+
+    return {
+        rawText,
+        nextMarkers: uniqueMarkers(nextMarkers),
+        removedTrailer
+    };
+}
+
+function normaliseManualMarker(line = "") {
+    const text = String(line || "").trim().toLowerCase().replace(/[:\-\s]+$/g, "");
+
+    if (!text) return "";
+    if (["tournament", "tourny", "tourney"].includes(text)) return "tournament";
+    if (["farming", "farm"].includes(text)) return "farming";
+    if (text === "milestone") return "milestone";
+    if (text === "test") return "test";
+    if (["event", "mission"].includes(text)) return "event";
+
+    return "";
+}
+
+function runTypeFromMarkers(markers = []) {
+    const list = uniqueMarkers(markers);
+    if (list.includes("tournament")) return "tournament";
+    if (list.includes("farming")) return "farming";
+    if (list.includes("milestone")) return "milestone";
+    if (list.includes("event")) return "event";
+    if (list.includes("test")) return "test";
+    return "normal";
+}
+
+function uniqueMarkers(values = []) {
+    return Array.from(new Set((Array.isArray(values) ? values : [])
+        .map(value => String(value || "").trim().toLowerCase())
+        .filter(Boolean)));
+}
+
 function findReportStarts(text = "") {
     const starts = [];
     const regex = new RegExp(`(^|\\n)\\s*${REPORT_MARKER}\\b`, "gi");
@@ -86,10 +195,13 @@ function hashString(input = "") {
 
 export default {
     splitBattleReports,
+    splitBattleReportEntries,
     getFirstBattleReport,
     hasMultipleReports,
     countBattleReports,
     fingerprintReport,
     normaliseReportText,
-    normaliseLineEndings
+    normaliseLineEndings,
+    isBatchSeparatorLine,
+    detectManualMarkers
 };

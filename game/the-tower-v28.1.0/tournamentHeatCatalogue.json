@@ -1,0 +1,504 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Tournament / Heat Catalogue",
+    "catalogueKey": "tournamentHeatCatalogue",
+    "entryCount": 22,
+    "purpose": "Tournament, Heat, league, and battle-condition vocabulary."
+  },
+  "entries": [
+    {
+      "key": "orb_resistance",
+      "label": "Orb Resistance",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Orbs deal enemy-health damage instead of instantly destroying enemies.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Orb Resistance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "death_ray_resistance",
+      "label": "Death Ray Resistance",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Death Ray deals enemy-health damage instead of instantly destroying enemies.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Death Ray Resistance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "knockback_resistance",
+      "label": "Knockback Resistance",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Knockback force is reduced.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Knockback Resistance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "enemy_speed",
+      "label": "Enemy Speed",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Enemies move faster.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Enemy Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "armored_enemies",
+      "label": "Armored Enemies",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Enemy armor/reduction pressure is active.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Armored Enemies"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "enemy_attack_speed",
+      "label": "Enemy Attack Speed",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Enemies attack faster.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Enemy Attack Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "more_enemies",
+      "label": "More Enemies",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Extra enemies spawn.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "More Enemies"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "one_enemy_type",
+      "label": "One Enemy Type",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Only one enemy type spawns besides bosses.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "One Enemy Type"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "thorns_resistance",
+      "label": "Thorns Resistance",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Thorns deal reduced normal damage.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Thorns Resistance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "plasma_cannon_resistance",
+      "label": "Plasma Cannon Resistance",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Plasma Cannon deals reduced normal damage.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Plasma Cannon Resistance"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "wave_jumps",
+      "label": "Wave Jumps",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Waves increase by more than 1.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Wave Jumps"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "more_bosses",
+      "label": "More Bosses",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Bosses spawn more often.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "More Bosses"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "enemy_level_skip",
+      "label": "Enemy Level Skip",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Enemy health/attack level skip chances are reduced.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Enemy Level Skip"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "protectors_ultimate",
+      "label": "Protector's Ultimate",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Protector shields can add immunity to knockback, shockwave and Black Hole damage.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Protector's Ultimate"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "elite_ultimate",
+      "label": "Elite's Ultimate",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Ray, Scatter and Vampire get stronger elite behaviour.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Elite's Ultimate"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "tanks_ultimate",
+      "label": "Tank's Ultimate",
+      "family": "Tournament / Heat Condition",
+      "meaning": "Tanks can behave like bosses and stop moving inside tower range.",
+      "tags": [
+        "tournament",
+        "heat",
+        "condition"
+      ],
+      "aliases": [
+        "Tank's Ultimate"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [
+        "tournament tagging",
+        "command deck warning"
+      ],
+      "notes": []
+    },
+    {
+      "key": "copper",
+      "label": "Copper",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Copper"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    },
+    {
+      "key": "silver",
+      "label": "Silver",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Silver"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    },
+    {
+      "key": "gold",
+      "label": "Gold",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Gold"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    },
+    {
+      "key": "platinum",
+      "label": "Platinum",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Platinum"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    },
+    {
+      "key": "champion",
+      "label": "Champion",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Champion"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    },
+    {
+      "key": "legend",
+      "label": "Legend",
+      "family": "Tournament / League",
+      "meaning": "Observed tournament league vocabulary; practical scaling should remain source-labelled.",
+      "tags": [
+        "tournament",
+        "league"
+      ],
+      "aliases": [
+        "Legend"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [
+        "manual tournament tagging"
+      ],
+      "notes": []
+    }
+  ],
+  "heatIncreaseWaves": [
+    20,
+    40,
+    60,
+    80,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000
+  ],
+  "rule": "Use manual/report context for tournament tagging; do not rely on user-added markers such as Tournament--."
+}

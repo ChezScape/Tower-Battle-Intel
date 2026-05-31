@@ -1,0 +1,32 @@
+{
+  "game-file-confirmed-label": {
+    "meaning": "Readable UI/localization label extracted from the uploaded The Tower v28.1.0 XAPK.",
+    "safeUse": "Use as official vocabulary/wording.",
+    "notSafeUse": "Do not infer formulas from wording alone."
+  },
+  "game-file-observed": {
+    "meaning": "BattleHistoryEntry/metadata field name observed in Unity/IL2CPP metadata from the uploaded v28.1.0 XAPK.",
+    "safeUse": "Use as schema, parser, grouping, and debug clue.",
+    "notSafeUse": "Do not claim exact numeric formulas or all hidden source inclusions."
+  },
+  "game-file-observed-medium-high": {
+    "meaning": "Observed field mapping plus nearby Battle Report/stat naming gives a strong practical interpretation, but no full formula body was extracted.",
+    "safeUse": "Use for TBI explanations with a confidence label.",
+    "notSafeUse": "Do not list every exact included sub-source unless separately confirmed."
+  },
+  "community-or-google": {
+    "meaning": "External web/community info, not taken from the uploaded game file.",
+    "safeUse": "Use as guidance with visible source confidence.",
+    "notSafeUse": "Do not treat as official baseline."
+  },
+  "tbi-inferred": {
+    "meaning": "Derived by Tower Battle Intel from parsed reports, trends, and heuristics.",
+    "safeUse": "Use for recommendations and analysis, clearly labelled.",
+    "notSafeUse": "Do not present as game-file-confirmed."
+  },
+  "manual-user-tag": {
+    "meaning": "A tag Andrew manually applies, such as Tournament, sample report, or Dissonance context.",
+    "safeUse": "Use for saved report filtering/comparison when the pasted report does not include official internal flags.",
+    "notSafeUse": "Do not assume all real exports include Andrew’s manual marker text."
+  }
+}

@@ -1,0 +1,15 @@
+/* Tower Battle Intel desktop module: 02-command-input.css
+   Command Deck report input shell and form controls
+   Source: v4.11z23 desktop.css lines 20-30.
+*/
+.desktop-topbar, .hero-banner, .tbi-mobile-top-nav, .tbi-mobile-bottom-nav, .mobile-report-fab, .mobile-command-rail, .mobile-sheet-backdrop { display: none !important; }
+.input-section { display: none; width: min(1320px, calc(100% - 32px)); margin: 0 auto 16px; padding: 16px; border: 1px solid rgba(29,231,255,.27); border-radius: 16px; background: radial-gradient(circle at 50% 0%, rgba(29,231,255,.10), transparent 42%), linear-gradient(180deg, rgba(6,18,34,.98), rgba(2,7,17,.98)); box-shadow: var(--shadow), var(--glow-cyan); }
+body[data-dashboard-tab="command"] .input-section { display: flex; flex-direction: column; gap: 12px; }
+.section-title, .wa-title { color: var(--cyan); text-transform: uppercase; letter-spacing: .18em; font-weight: 1000; font-size: 13px; }
+.section-subtitle, .wa-sub { color: var(--muted); font-size: 13px; }
+#input, input, textarea, select, .history-search { border: 1px solid rgba(29,231,255,.28); border-radius: 12px; background: radial-gradient(circle at 14% 0%, rgba(29,231,255,.10), transparent 36%), linear-gradient(180deg, rgba(8,23,48,.94), rgba(2,8,18,.98)); color: var(--text); box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), inset 0 0 18px rgba(29,231,255,.04), 0 0 16px rgba(29,231,255,.06); }
+#input { width: 100%; min-height: 120px; max-height: 260px; resize: vertical; padding: 14px; font-family: Consolas, "Courier New", monospace; font-size: 12px; }
+#input:focus, input:focus, textarea:focus, select:focus { outline: none; border-color: rgba(29,231,255,.78); box-shadow: 0 0 0 2px rgba(29,231,255,.16), 0 0 22px rgba(29,231,255,.26); }
+.input-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.build-style-wrap { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 900; }
+select { appearance: none; -webkit-appearance: none; min-height: 40px; padding: 0 40px 0 12px; background-image: linear-gradient(45deg, transparent 50%, var(--cyan) 50%), linear-gradient(135deg, var(--cyan) 50%, transparent 50%), linear-gradient(180deg, rgba(8,23,48,.96), rgba(2,8,18,.98)); background-position: calc(100% - 22px) 50%, calc(100% - 15px) 50%, center; background-size: 7px 7px, 7px 7px, 100% 100%; background-repeat: no-repeat; }

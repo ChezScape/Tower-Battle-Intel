@@ -12,12 +12,10 @@ const DEFAULT_HISTORY_DRAWERS = Object.freeze({
 
 const DEFAULT_UI_STATE = Object.freeze({
     selectedSection: null,
-    debug: false,
     activeView: "dashboard",
     viewMode: "default",
-    dashboardTab: "overview",
+    dashboardTab: "command",
     buildStyle: "unknown",
-    quietDisplay: false,
     historyFilters: {
         query: "",
         sort: "newest",
@@ -51,8 +49,8 @@ export function resetUIState() {
     return uiState;
 }
 
-export function normaliseDashboardTab(tab = "overview") {
-    const value = String(tab || "overview").trim().toLowerCase();
+export function normaliseDashboardTab(tab = "command") {
+    const value = String(tab || "command").trim().toLowerCase();
     const aliases = {
         dashboard: "overview",
         intel: "compare",
@@ -62,7 +60,7 @@ export function normaliseDashboardTab(tab = "overview") {
         commanddeck: "command"
     };
     const normalised = aliases[value] || value;
-    return allowedTabs().has(normalised) ? normalised : "overview";
+    return allowedTabs().has(normalised) ? normalised : "command";
 }
 
 export function allowedTabs() {
@@ -97,8 +95,6 @@ function mergeUI(partial = {}) {
 
     next.dashboardTab = normaliseDashboardTab(next.dashboardTab);
     next.selectedSection = next.selectedSection || null;
-    next.debug = Boolean(next.debug);
-    next.quietDisplay = Boolean(next.quietDisplay);
     next.buildStyle = String(next.buildStyle || "unknown");
     next.viewMode = String(next.viewMode || "default");
     next.activeView = String(next.activeView || "dashboard");
@@ -107,6 +103,7 @@ function mergeUI(partial = {}) {
     next.historyFilters.build = String(next.historyFilters.build || "all");
     next.historyFilters.tag = String(next.historyFilters.tag || "all");
     next.historyFilters.showArchived = Boolean(next.historyFilters.showArchived);
+    next.historyFilters.mode = String(next.historyFilters.mode || "normal").toLowerCase() === "deep" ? "deep" : "normal";
 
     Object.assign(uiState, next);
 }

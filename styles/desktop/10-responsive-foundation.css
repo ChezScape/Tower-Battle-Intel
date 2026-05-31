@@ -1,0 +1,137 @@
+/* Tower Battle Intel desktop module: 10-responsive-foundation.css
+   Shared responsive foundation breakpoints.
+   v4.11z52i: one app-frame owner for all desktop tabs plus current header grid areas.
+*/
+@media (max-width: 1500px) {
+    .tbi-desktop-grid { grid-template-columns: 1fr; }
+    .tbi-side-column { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1280px) {
+    .tbi-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tbi-run-strip { grid-template-columns: 1fr; }
+    .tbi-vs-core { min-height: auto; grid-template-columns: 92px 1fr; display: grid; justify-content: start; text-align: left; }
+    .tbi-diff-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    .layout { padding-inline: 8px; }
+    .tbi-grid-2, .tbi-grid-4, .tbi-side-column, .tbi-command-view { grid-template-columns: 1fr; }
+    .tbi-diff-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .history-choice-groups, .history-panel-actions, .history-summary-grid, .tbi-status-footer { grid-template-columns: 1fr; }
+}
+
+/* v4.11z52i — single app frame lock plus clean header utility layout.
+   Header, desktop workspace frame, and every active tab use one width.
+   The Settings tab owns settings; the header utility area only keeps version only. */
+html[data-device-mode="desktop"] .layout {
+    width: min(1920px, calc(100% - 20px)) !important;
+    max-width: 1920px !important;
+    margin-inline: auto !important;
+    padding-inline: clamp(10px, .7vw, 16px) !important;
+}
+
+html[data-device-mode="desktop"] .tbi-desktop-workspace,
+html[data-device-mode="desktop"] .wa-dashboard-panel.active {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: auto !important;
+}
+
+html[data-device-mode="desktop"] .tbi-header {
+    width: min(1920px, calc(100% - 20px)) !important;
+    max-width: 1920px !important;
+    margin: 0 auto 12px !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+        "brand actions"
+        "nav nav" !important;
+    align-items: center !important;
+    gap: 10px 14px !important;
+    padding: clamp(10px, .78vw, 16px) !important;
+}
+
+html[data-device-mode="desktop"] .tbi-brand-block {
+    grid-area: brand !important;
+    justify-self: start !important;
+    max-width: 100% !important;
+}
+
+html[data-device-mode="desktop"] .tbi-desktop-nav {
+    grid-area: nav !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    align-self: stretch !important;
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+}
+
+html[data-device-mode="desktop"] .tbi-header-actions {
+    grid-area: actions !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+}
+
+html[data-device-mode="desktop"] .tbi-header-actions > * {
+    flex: 0 0 auto !important;
+}
+
+html[data-device-mode="desktop"] .tbi-version-pill {
+    white-space: nowrap !important;
+}
+
+@media (max-width: 1120px) and (min-width: 861px) {
+    html[data-device-mode="desktop"] .layout,
+    html[data-device-mode="desktop"] .tbi-header {
+        width: min(1920px, calc(100% - 16px)) !important;
+    }
+
+    html[data-device-mode="desktop"] .layout {
+        padding-inline: 8px !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-header {
+        gap: 8px !important;
+        padding: 8px !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-brand-title {
+        font-size: clamp(16px, 2.1vw, 22px) !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-brand-subtitle {
+        font-size: clamp(7px, 1.05vw, 9px) !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-nav-button {
+        min-height: 36px !important;
+        font-size: clamp(7px, 1.05vw, 9px) !important;
+        letter-spacing: .065em !important;
+        padding-inline: 2px !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-header-actions {
+        justify-self: end !important;
+        gap: 6px !important;
+    }
+
+    html[data-device-mode="desktop"] .tbi-version-pill,
+
+    html[data-device-mode="desktop"] .tbi-version-pill {
+        min-width: 84px !important;
+        font-size: 10px !important;
+        padding-inline: 8px !important;
+    }
+}
+
+@media (max-width: 940px) and (min-width: 861px) {
+    html[data-device-mode="desktop"] .tbi-nav-button span:not(.tbi-nav-icon) {
+        letter-spacing: .035em !important;
+    }
+}

@@ -49,7 +49,7 @@ const inspection = pipelineInspector({
     history: []
 });
 
-assert.equal(inspection.version, "pipeline-inspector-v4.9x");
+assert.equal(inspection.version, "pipeline-inspector-v4.11z31");
 assert.equal(inspection.parser.success, true);
 assert.equal(inspection.compute.success, true);
 assert.equal(Array.isArray(inspection.warnings), true);
@@ -60,7 +60,7 @@ const health = runSystemHealthScan({
     history: []
 });
 
-assert.equal(health.scanVersion, "system-health-scan-v4.9x");
+assert.equal(health.scanVersion, "system-health-scan-v4.11z31");
 assert.equal(Array.isArray(health.checks), true);
 assert.equal(health.checks.some(check => check.id === "DIAG_001"), true);
 assert.equal(health.checks.some(check => check.id === "DIAG_005"), true);

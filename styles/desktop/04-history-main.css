@@ -1,0 +1,1345 @@
+/* Tower Battle Intel desktop module: 04-history-main.css
+   History full desktop layout, import controls, stats/edit modals
+   Source: v4.11z23 desktop.css lines 236-482.
+*/
+.history-panel { display: grid; gap: 14px; padding: 18px; border-color: rgba(36, 231, 255, 0.28); background: radial-gradient(circle at 10% 0%, rgba(36, 231, 255, 0.11), transparent 34%),
+        radial-gradient(circle at 92% 8%, rgba(255, 73, 220, 0.11), transparent 36%),
+        linear-gradient(180deg, rgba(5, 16, 31, 0.96), rgba(4, 9, 22, 0.96)); }
+.history-panel-header { display: grid; grid-template-columns: minmax(0, 420px) minmax(520px, 1fr); gap: 16px; align-items: stretch; }
+.history-tools-bar,
+.history-collapsible { border: 1px solid rgba(36, 231, 255, 0.22); border-radius: 14px; background: linear-gradient(180deg, rgba(7, 21, 42, 0.92), rgba(2, 8, 20, 0.94)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+        0 0 20px rgba(36, 231, 255, 0.08); overflow: visible; }
+.history-tools-bar { display: grid; gap: 12px; padding: 13px; }
+.history-tools-title,
+.history-collapsible > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 1000; }
+.history-tools-title span,
+.history-collapsible > summary span { color: var(--cyan); text-shadow: 0 0 12px rgba(36, 231, 255, 0.36); }
+.history-tools-title em,
+.history-collapsible > summary em { color: rgba(189, 214, 232, 0.72); font-size: 10px; font-style: normal; letter-spacing: 0.12em; }
+.history-collapsible > summary { min-height: 48px; padding: 13px 15px; cursor: pointer; }
+.history-collapsible > summary::-webkit-details-marker,
+.history-collapsible > summary::marker { display: none; content: ""; }
+.history-collapsible > summary::after { content: "⌄"; color: var(--gold); text-shadow: 0 0 10px rgba(255, 211, 41, 0.44); transition: transform 160ms ease; }
+.history-collapsible[open] > summary::after { transform: rotate(180deg); }
+.history-panel-actions { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; padding: 0; }
+.history-panel-actions button { min-height: 40px; white-space: nowrap; }
+.history-filter-body { display: grid; gap: 12px; padding: 14px; border-top: 1px solid rgba(36, 231, 255, 0.10); }
+.history-filter-search-row { display: grid; }
+.history-search-wrap { display: grid; gap: 7px; color: rgba(189, 214, 232, 0.72); text-transform: uppercase; font-size: 10px; font-weight: 1000; letter-spacing: 0.13em; }
+.history-search { width: 100%; min-height: 44px; border-radius: 12px; padding: 0 14px; }
+.history-choice-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.history-filter-row.compact { display: grid; grid-template-columns: auto auto minmax(160px, 1fr); gap: 10px; align-items: center; }
+.history-toggle-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.history-toggle-box { width: 17px; height: 17px; border-radius: 5px; border: 1px solid rgba(36, 231, 255, 0.38); display: inline-grid; place-items: center; color: var(--gold); }
+.history-filter-count { justify-self: end; color: rgba(189, 214, 232, 0.72); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 900; }
+.history-summary-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; padding: 14px; border-top: 1px solid rgba(36, 231, 255, 0.10); }
+.history-summary-tile { min-height: 76px; padding: 12px; border: 1px solid rgba(36, 231, 255, 0.17); border-radius: 12px; background: rgba(1, 7, 18, 0.72); display: grid; align-content: center; gap: 5px; }
+.history-summary-tile span { color: rgba(189, 214, 232, 0.76); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; font-weight: 1000; }
+.history-summary-tile strong { color: var(--cyan); font-size: 22px; line-height: 1; }
+.history-summary-tile em { color: rgba(189, 214, 232, 0.68); font-style: normal; font-size: 11px; }
+.history-timeline { display: grid; gap: 13px; }
+.history-entry-card { position: relative; display: grid; gap: 11px; padding: 14px 14px 14px 18px; border: 1px solid rgba(36, 231, 255, 0.22); border-radius: 16px; background: radial-gradient(circle at 0% 0%, rgba(36, 231, 255, 0.10), transparent 32%),
+        radial-gradient(circle at 100% 12%, rgba(255, 211, 41, 0.06), transparent 30%),
+        linear-gradient(180deg, rgba(5, 18, 34, 0.94), rgba(2, 7, 18, 0.96)); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02); overflow: hidden; }
+.history-entry-card.active { border-color: rgba(255, 211, 41, 0.50); box-shadow: 0 0 24px rgba(255, 211, 41, 0.12),
+        0 14px 34px rgba(0, 0, 0, 0.38); }
+.history-entry-card.archived { opacity: 0.68; filter: saturate(0.75); }
+.history-entry-side-light { position: absolute; left: 0; top: 12px; bottom: 12px; width: 4px; border-radius: 99px; background: var(--cyan); box-shadow: 0 0 18px rgba(36, 231, 255, 0.65); }
+.history-entry-card.active .history-entry-side-light { background: var(--gold); box-shadow: 0 0 18px rgba(255, 211, 41, 0.7); }
+.history-entry-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start; }
+.history-entry-title-block { display: grid; gap: 4px; }
+.history-entry-kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 0.13em; font-size: 11px; font-weight: 1000; }
+.history-entry-title-block strong { color: #fff; font-size: 17px; line-height: 1.1; }
+.history-entry-title-block em { color: rgba(189, 214, 232, 0.72); font-style: normal; font-size: 12px; }
+.history-entry-score { min-width: 92px; padding: 8px 10px; border: 1px solid rgba(36, 231, 255, 0.20); border-radius: 999px; background: rgba(1, 7, 18, 0.72); display: grid; justify-items: center; gap: 2px; }
+.history-entry-score span { color: rgba(189, 214, 232, 0.72); text-transform: uppercase; letter-spacing: 0.12em; font-size: 9px; font-weight: 1000; }
+.history-entry-score strong { color: var(--green); font-size: 13px; }
+.history-entry-score.score-low strong { color: var(--red); }
+.history-entry-score.score-ok strong { color: var(--gold); }
+.history-badges,
+.history-tag-line,
+.history-prev-delta { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+.history-badge,
+.history-tag-line span,
+.history-prev-delta strong { min-height: 24px; padding: 5px 9px; border: 1px solid rgba(36, 231, 255, 0.24); border-radius: 999px; background: rgba(1, 7, 18, 0.60); color: #dff8ff; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 1000; }
+.history-badge.good,
+.history-prev-delta strong.good { border-color: rgba(87, 255, 87, 0.32); color: var(--green); }
+.history-badge.gold,
+.history-badge.b,
+.history-prev-delta strong.flat { border-color: rgba(255, 211, 41, 0.32); color: var(--gold); }
+.history-badge.a,
+.history-badge.cyan,
+.history-badge.info { border-color: rgba(36, 231, 255, 0.32); color: var(--cyan); }
+.history-prev-delta strong.bad { border-color: rgba(255, 64, 90, 0.32); color: var(--red); }
+.history-entry-metrics,
+.history-more-intel-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.history-more-intel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 10px; padding: 0 12px; }
+.history-metric-tile { min-height: 62px; padding: 10px; border: 1px solid rgba(36, 231, 255, 0.15); border-radius: 11px; background: rgba(1, 7, 18, 0.66); display: grid; align-content: center; gap: 5px; }
+.history-metric-tile span { color: rgba(189, 214, 232, 0.70); text-transform: uppercase; letter-spacing: 0.12em; font-size: 9px; font-weight: 1000; }
+.history-metric-tile strong { color: #fff; font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; }
+.history-metric-tile.cyan strong { color: var(--cyan); }
+.history-metric-tile.gold strong { color: var(--gold); }
+.history-metric-tile.green strong { color: var(--green); }
+.history-metric-tile.danger strong { color: var(--red); }
+.history-entry-controls { display: grid; grid-template-columns: minmax(250px, 0.52fr) minmax(360px, 1fr); gap: 10px; align-items: stretch; }
+.history-slot-actions,
+.history-card-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 9px; border: 1px solid rgba(36, 231, 255, 0.14); border-radius: 12px; background: rgba(1, 7, 18, 0.50); }
+.history-slot-actions > span,
+.history-card-actions > span { color: rgba(189, 214, 232, 0.72); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; font-weight: 1000; margin-right: auto; }
+.history-slot-actions .icon-btn,
+.history-card-actions .icon-btn { min-width: 44px; min-height: 36px; padding: 8px 10px; }
+.history-slot-actions .slot.active { border-color: rgba(255, 211, 41, 0.68); color: #fff7d6; background: rgba(255, 211, 41, 0.16); box-shadow: 0 0 18px rgba(255, 211, 41, 0.18); }
+.history-card-actions .stats { border-color: rgba(36, 231, 255, 0.36); }
+.history-card-actions .edit { border-color: rgba(157, 91, 255, 0.38); }
+.history-card-actions .archive,
+.history-card-actions .restore { border-color: rgba(255, 211, 41, 0.36); color: #fff2b8; }
+.history-card-actions .danger { border-color: rgba(255, 64, 90, 0.42); color: #ffd9df; }
+.history-more-intel { border: 1px solid rgba(36, 231, 255, 0.12); border-radius: 12px; background: rgba(1, 7, 18, 0.34); padding: 0; }
+.history-more-intel > summary { min-height: 40px; padding: 10px 12px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; font-weight: 1000; }
+.history-more-intel > summary em { color: rgba(189, 214, 232, 0.62); font-style: normal; font-size: 10px; }
+.history-more-intel > summary::-webkit-details-marker,
+.history-more-intel > summary::marker { display: none; content: ""; }
+.history-more-intel > summary::after { content: "⌄"; color: var(--gold); }
+.history-more-intel[open] > summary::after { transform: rotate(180deg); }
+.history-notes-line,
+.history-prev-delta { margin: 10px 12px 0; }
+.history-notes-line { padding: 10px 12px; border: 1px solid rgba(36, 231, 255, 0.13); border-radius: 10px; color: rgba(229, 244, 255, 0.88); background: rgba(1, 7, 18, 0.42); }
+.history-notes-line span,
+.history-prev-delta > span { color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; font-weight: 1000; margin-right: 8px; }
+.history-more-intel .history-tag-line,
+.history-more-intel .history-prev-delta { padding: 0 12px 12px; }
+@media (max-width: 1400px) {
+.history-panel-header { grid-template-columns: 1fr; }
+.history-panel-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.history-summary-grid,
+    .history-entry-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.history-entry-controls { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+.history-panel-actions,
+    .history-choice-groups,
+    .history-summary-grid,
+    .history-entry-metrics,
+    .history-more-intel-grid,
+    .history-filter-row.compact { grid-template-columns: 1fr; }
+.history-filter-count { justify-self: start; }
+}
+.history-import-input { position: absolute !important; inline-size: 1px !important; block-size: 1px !important; opacity: 0 !important; pointer-events: none !important; clip-path: inset(50%) !important; overflow: hidden !important; }
+.history-import-label { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(36, 231, 255, 0.25); border-radius: 9px; padding: 9px 13px; color: #dff8ff; background: linear-gradient(180deg, rgba(29,231,255,.10), rgba(29,231,255,.025)); font-weight: 1000; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; cursor: pointer; user-select: none; }
+.history-import-label:hover,
+.history-import-label:focus-visible { outline: none; border-color: var(--cyan); box-shadow: var(--glow-cyan); }
+.history-native-select-group { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; min-height: 58px; padding: 10px 12px; border: 1px solid rgba(36, 231, 255, 0.24); border-radius: 13px; background: radial-gradient(circle at 12% 0%, rgba(36, 231, 255, 0.10), transparent 36%),
+        linear-gradient(180deg, rgba(6, 18, 36, 0.92), rgba(2, 8, 20, 0.96)); box-shadow: inset 0 0 16px rgba(36, 231, 255, 0.035); }
+.history-native-select-group .history-choice-title { min-width: 78px; color: rgba(229, 244, 255, 0.76); text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; font-weight: 1000; }
+.history-choice-select { width: 100%; min-height: 38px; border: 0; border-left: 1px solid rgba(36, 231, 255, 0.14); border-radius: 0; padding: 0 36px 0 16px; color: var(--cyan); background-color: transparent; font-size: 15px; font-weight: 1000; letter-spacing: 0.03em; text-align-last: right; }
+.history-choice-select:focus { outline: none; color: #fff7d6; text-shadow: 0 0 10px rgba(255, 211, 41, 0.28); }
+.history-choice-select option { background: #061326; color: #ecfbff; }
+.confirm-card { max-width: 640px; }
+.confirm-warning strong[data-confirm-required-phrase] { color: var(--gold); text-shadow: 0 0 12px rgba(255, 211, 41, 0.35); letter-spacing: 0.08em; }
+body[data-app-version]::before { content: ""; }
+.tbi-action-disabled,
+button[aria-disabled="true"] { opacity: 0.48; pointer-events: none; }
+.native-file-input { position: fixed !important; left: -10000px !important; top: 0 !important; width: 1px !important; height: 1px !important; opacity: 0.001 !important; pointer-events: auto !important; }
+.history-import-label,
+.history-action-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; border: 1px solid rgba(29,231,255,.34); border-radius: 10px; background: linear-gradient(180deg, rgba(8,23,48,.94), rgba(2,8,18,.98)); color: var(--text, #eef8ff); cursor: pointer; user-select: none; text-transform: uppercase; letter-spacing: .12em; font-weight: 1000; font-size: 11px; }
+.history-import-label:hover,
+.history-action-button:hover { border-color: rgba(29,231,255,.74); color: var(--cyan, #1de7ff); box-shadow: 0 0 18px rgba(29,231,255,.18); }
+button,
+label[for],
+select,
+summary,
+[data-ui-action],
+[data-dashboard-tab],
+[data-history-import-trigger],
+[data-export-history],
+.health-tone-good strong { color: var(--green, #57ff57); }
+.health-tone-bad strong { color: var(--red, #ff405a); }
+.health-tone-warn strong { color: var(--gold, #ffd329); }
+.health-tone-info strong { color: var(--cyan, #1de7ff); }
+.history-stats-modal,
+.history-edit-modal { position: fixed; inset: 0; z-index: 1000002; display: grid; place-items: center; padding: 22px; background: rgba(0,0,0,.72); backdrop-filter: blur(7px); }
+.history-stats-card,
+.history-edit-card { width: min(1180px, calc(100vw - 44px)); max-height: min(860px, calc(100dvh - 44px)); overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(29,231,255,.34); border-radius: 20px; background: linear-gradient(180deg, rgba(5,18,34,.98), rgba(1,7,17,.99)); box-shadow: 0 24px 80px rgba(0,0,0,.72), var(--glow-cyan); color: var(--text); }
+.history-stats-header,
+.history-edit-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 16px 18px; border-bottom: 1px solid rgba(29,231,255,.18); }
+.history-stats-kicker,
+.history-edit-kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .16em; font-weight: 1000; font-size: 11px; }
+.history-stats-title,
+.history-edit-title { color: #fff; font-size: 20px; font-weight: 1000; margin-top: 5px; }
+.history-stats-subtitle,
+.history-edit-subtitle { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.history-stats-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 18px; border-bottom: 1px solid rgba(29,231,255,.10); }
+.history-stats-tabs,
+.history-stats-actions,
+.history-edit-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.history-stats-body,
+.history-edit-body { overflow: auto; padding: 16px 18px 18px; min-height: 0; }
+.history-stats-view { display: none; }
+.history-stats-view.active { display: grid; gap: 12px; }
+.history-stats-section,
+.history-edit-section { border: 1px solid rgba(29,231,255,.18); border-radius: 14px; padding: 13px; background: rgba(1,7,17,.62); margin-bottom: 12px; }
+.history-stats-section-title,
+.history-edit-section-title { color: var(--cyan); text-transform: uppercase; letter-spacing: .12em; font-weight: 1000; font-size: 12px; margin-bottom: 10px; }
+.history-stats-grid,
+.history-stats-mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 9px; }
+.history-stats-tile,
+.history-stats-delta,
+.history-stats-row { border: 1px solid rgba(29,231,255,.12); border-radius: 11px; padding: 10px; background: rgba(8,23,48,.54); }
+.history-stats-tile span,
+.history-stats-delta span,
+.history-stats-row span { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 1000; }
+.history-stats-tile strong,
+.history-stats-delta strong,
+.history-stats-row strong { display: block; color: #fff; margin-top: 5px; font-size: 15px; }
+.history-stats-table { display: grid; gap: 6px; }
+.history-stats-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.history-stats-json { max-height: 48vh; overflow: auto; border: 1px solid rgba(29,231,255,.16); border-radius: 12px; padding: 12px; background: rgba(0,0,0,.35); color: #e8f7ff; font-family: Consolas, "Courier New", monospace; font-size: 12px; }
+.history-stats-search,
+.history-edit-card input,
+.history-edit-card textarea { width: 100%; }
+@media (max-width: 900px) {
+.history-stats-toolbar { align-items: stretch; flex-direction: column; }
+.history-stats-card,
+    .history-edit-card { width: calc(100vw - 18px); max-height: calc(100dvh - 18px); }
+}
+
+
+/* v4.11z31 — History Game Brain usefulness pass */
+.history-gamebrain-drawer summary span { color: var(--gold, #ffd329); }
+.history-gamebrain-panel { display: grid; gap: 12px; padding: 12px 2px 2px; }
+.history-gamebrain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 10px; }
+.history-gamebrain-tile { border: 1px solid rgba(255, 211, 41, 0.18); border-radius: 14px; padding: 12px; background: radial-gradient(circle at 16% 0%, rgba(255, 211, 41, 0.10), transparent 38%), linear-gradient(180deg, rgba(10, 22, 42, 0.88), rgba(2, 8, 18, 0.94)); box-shadow: inset 0 0 18px rgba(255, 211, 41, 0.035); }
+.history-gamebrain-tile span,
+.history-gamebrain-mini-title span,
+.history-gamebrain-killed-by span,
+.history-gamebrain-hints span { display: block; color: rgba(255, 211, 41, 0.86); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; font-weight: 1000; }
+.history-gamebrain-tile strong { display: block; margin-top: 6px; color: #fff; font-size: 16px; font-weight: 1000; }
+.history-gamebrain-tile em { display: block; margin-top: 4px; color: var(--muted, #9fb8cf); font-size: 11px; font-style: normal; }
+.history-gamebrain-note { border: 1px solid rgba(29, 231, 255, 0.12); border-radius: 12px; padding: 10px 12px; background: rgba(3, 12, 24, 0.58); color: var(--soft, #a7c2d8); font-size: 12px; }
+.history-gamebrain-hints { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.history-gamebrain-hints span { margin-right: 2px; color: var(--cyan, #1de7ff); }
+.history-gamebrain-hints em { border: 1px solid rgba(29, 231, 255, 0.20); border-radius: 999px; padding: 6px 9px; background: rgba(29, 231, 255, 0.055); color: #dff8ff; font-size: 11px; font-style: normal; font-weight: 800; }
+.history-gamebrain-mini { display: grid; gap: 10px; margin-top: 12px; padding: 12px; border: 1px solid rgba(255, 211, 41, 0.16); border-radius: 15px; background: radial-gradient(circle at 20% 0%, rgba(255, 211, 41, 0.09), transparent 40%), rgba(1, 7, 17, 0.56); }
+.history-gamebrain-mini-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.history-gamebrain-mini-title em { color: var(--muted, #9fb8cf); font-size: 11px; font-style: normal; text-transform: uppercase; letter-spacing: 0.10em; }
+.history-gamebrain-mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 8px; }
+.history-gamebrain-killed-by { border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 9px; }
+.history-gamebrain-killed-by strong { display: block; margin-top: 5px; color: #eef8ff; font-size: 12px; line-height: 1.45; }
+@media (max-width: 760px) {
+    .history-gamebrain-grid,
+    .history-gamebrain-mini-grid { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — History Clean Library rebuild
+   Dashboard and Command Deck remain protected.
+-------------------------------------------------- */
+
+.tbi-history-clean-view {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto 28px;
+    display: grid;
+    gap: 14px;
+}
+
+.tbi-history-clean-view .tbi-card {
+    border-color: rgba(29, 231, 255, .22);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(29, 231, 255, .10), transparent 32%),
+        radial-gradient(circle at 92% 10%, rgba(255, 211, 41, .06), transparent 34%),
+        linear-gradient(180deg, rgba(5, 18, 34, .96), rgba(2, 7, 17, .96));
+}
+
+.tbi-history-hero {
+    display: grid;
+    grid-template-columns: minmax(300px, .8fr) minmax(0, 1.4fr);
+    gap: 16px;
+    padding: 18px;
+    align-items: stretch;
+}
+
+.tbi-history-hero-main {
+    display: grid;
+    gap: 8px;
+    align-content: center;
+}
+
+.tbi-history-kicker,
+.tbi-history-section-heading > span,
+.tbi-history-gamebrain-detail > span,
+.tbi-history-insight-panel > span {
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 1000;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.tbi-history-hero h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    letter-spacing: .08em;
+    line-height: .95;
+    text-transform: uppercase;
+    text-shadow: 0 0 22px rgba(29, 231, 255, .22);
+}
+
+.tbi-history-hero p,
+.tbi-history-empty-state p,
+.tbi-history-insight-panel p,
+.tbi-history-gamebrain-detail li,
+.tbi-history-more li,
+.tbi-history-more p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.tbi-history-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tbi-history-summary-tile,
+.tbi-history-metric-tile,
+.tbi-history-gb-chip,
+.tbi-history-insight-row,
+.tbi-history-detail-hero > div,
+.tbi-history-detail-facts > span {
+    border: 1px solid rgba(29, 231, 255, .16);
+    border-radius: 14px;
+    background: rgba(1, 7, 18, .62);
+    box-shadow: inset 0 0 18px rgba(29, 231, 255, .035);
+}
+
+.tbi-history-summary-tile {
+    display: grid;
+    gap: 5px;
+    min-height: 84px;
+    align-content: center;
+    padding: 12px;
+}
+
+.tbi-history-summary-tile span,
+.tbi-history-metric-tile span,
+.tbi-history-gb-chip small,
+.tbi-history-detail-hero span,
+.tbi-history-detail-facts small,
+.tbi-history-insight-row span,
+.tbi-history-search-box span,
+.tbi-history-select-control span,
+.tbi-history-filter-status span {
+    color: rgba(189, 214, 232, .76);
+    font-family: var(--mono);
+    font-size: .66rem;
+    font-weight: 1000;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.tbi-history-summary-tile strong {
+    color: var(--cyan);
+    font-size: 1.28rem;
+    line-height: 1;
+}
+
+.tbi-history-summary-tile em,
+.tbi-history-insight-row em,
+.tbi-history-filter-status em {
+    color: rgba(189, 214, 232, .68);
+    font-size: .72rem;
+    font-style: normal;
+}
+
+.tbi-history-summary-tile.tone-good strong,
+.tbi-history-metric-tile.tone-good strong,
+.tbi-history-gb-chip.tone-good b,
+.tbi-history-detail-facts .tone-good b { color: var(--green); }
+.tbi-history-summary-tile.tone-gold strong,
+.tbi-history-metric-tile.tone-gold strong,
+.tbi-history-gb-chip.tone-gold b,
+.tbi-history-detail-facts .tone-gold b { color: var(--gold); }
+.tbi-history-summary-tile.tone-watch strong,
+.tbi-history-metric-tile.tone-watch strong,
+.tbi-history-gb-chip.tone-watch b,
+.tbi-history-detail-facts .tone-watch b { color: var(--gold); }
+.tbi-history-summary-tile.tone-info strong,
+.tbi-history-metric-tile.tone-info strong,
+.tbi-history-gb-chip.tone-info b,
+.tbi-history-detail-facts .tone-info b { color: var(--cyan); }
+
+.tbi-history-toolbar {
+    display: grid;
+    gap: 12px;
+    padding: 15px;
+}
+
+.tbi-history-toolbar-top {
+    display: grid;
+    grid-template-columns: minmax(320px, .75fr) minmax(0, 1.25fr);
+    gap: 12px;
+    align-items: end;
+}
+
+.tbi-history-search-box,
+.tbi-history-select-control,
+.tbi-history-check {
+    display: grid;
+    gap: 7px;
+}
+
+.tbi-history-search-input,
+.tbi-history-select-control select {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 13px;
+    background: rgba(1, 7, 18, .68);
+    color: var(--text);
+    font-weight: 900;
+}
+
+.tbi-history-search-input {
+    padding: 0 14px;
+}
+
+.tbi-history-select-control select {
+    padding: 0 12px;
+}
+
+.tbi-history-filter-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    gap: 10px;
+    align-items: end;
+}
+
+.tbi-history-check {
+    min-height: 42px;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 13px;
+    background: rgba(1, 7, 18, .48);
+    color: var(--muted);
+    font-size: .74rem;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.tbi-history-toolbar-bottom {
+    display: grid;
+    grid-template-columns: minmax(220px, .65fr) minmax(0, 1.35fr);
+    gap: 12px;
+    align-items: center;
+}
+
+.tbi-history-filter-status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px 10px;
+    color: var(--muted);
+}
+
+.tbi-history-filter-status strong {
+    color: var(--cyan);
+    font-size: 1.35rem;
+}
+
+.tbi-history-actions,
+.tbi-history-run-actions,
+.tbi-history-detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.tbi-compact-btn,
+.tbi-history-slot-btn {
+    min-height: 36px;
+    border: 1px solid rgba(29, 231, 255, .28);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: linear-gradient(180deg, rgba(11, 34, 62, .9), rgba(2, 8, 18, .96));
+    color: var(--text);
+    font-size: .72rem;
+    font-weight: 1000;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.tbi-compact-btn:hover,
+.tbi-history-slot-btn:hover,
+.tbi-compact-btn.active,
+.tbi-history-slot-btn.active {
+    border-color: rgba(29, 231, 255, .70);
+    color: var(--cyan);
+    box-shadow: 0 0 18px rgba(29, 231, 255, .14);
+}
+
+.tbi-compact-btn.danger,
+.tbi-history-slot-btn.danger {
+    border-color: rgba(255, 95, 120, .32);
+    color: #ffd7df;
+}
+
+.tbi-history-clean-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(360px, .75fr);
+    gap: 14px;
+    align-items: start;
+}
+
+.tbi-history-list-card,
+.tbi-history-detail-card {
+    display: grid;
+    gap: 13px;
+    padding: 15px;
+}
+
+.tbi-history-detail-card {
+    position: sticky;
+    top: 88px;
+}
+
+.tbi-history-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.tbi-history-section-heading strong {
+    color: #fff;
+    font-size: .95rem;
+    letter-spacing: .04em;
+}
+
+.tbi-history-run-list {
+    display: grid;
+    gap: 12px;
+}
+
+.tbi-history-run-card {
+    position: relative;
+    display: grid;
+    gap: 11px;
+    padding: 14px 14px 14px 18px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(29, 231, 255, .09), transparent 34%),
+        linear-gradient(180deg, rgba(5, 18, 34, .94), rgba(1, 7, 18, .96));
+}
+
+.tbi-history-run-card.is-active {
+    border-color: rgba(255, 211, 41, .48);
+    box-shadow: 0 0 24px rgba(255, 211, 41, .10), inset 0 0 0 1px rgba(255, 211, 41, .08);
+}
+
+.tbi-history-run-card.is-archived {
+    opacity: .70;
+}
+
+.tbi-history-run-accent {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--cyan), var(--gold));
+    opacity: .82;
+}
+
+.tbi-history-run-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: start;
+}
+
+.tbi-history-run-head span {
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .66rem;
+    font-weight: 1000;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+
+.tbi-history-run-head strong {
+    display: block;
+    color: #fff;
+    margin-top: 4px;
+    font-size: 1.02rem;
+}
+
+.tbi-history-run-head em {
+    display: block;
+    color: var(--muted);
+    font-size: .78rem;
+    font-style: normal;
+    margin-top: 4px;
+}
+
+.tbi-history-slot-flags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 6px;
+}
+
+.tbi-history-slot-flags b {
+    border: 1px solid rgba(255, 211, 41, .42);
+    border-radius: 999px;
+    padding: 5px 8px;
+    color: var(--gold);
+    font-size: .66rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-history-metric-grid,
+.tbi-history-detail-metrics {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tbi-history-detail-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tbi-history-metric-tile {
+    display: grid;
+    gap: 4px;
+    min-height: 62px;
+    padding: 10px;
+    align-content: center;
+}
+
+.tbi-history-metric-tile strong,
+.tbi-history-gb-chip b,
+.tbi-history-detail-facts b {
+    color: #fff;
+    font-size: .94rem;
+    overflow-wrap: anywhere;
+}
+
+.tbi-history-gamebrain-row,
+.tbi-history-detail-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tbi-history-gb-chip,
+.tbi-history-detail-facts > span {
+    display: grid;
+    gap: 4px;
+    padding: 9px 10px;
+    min-height: 58px;
+    align-content: center;
+}
+
+.tbi-history-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tbi-history-tags span {
+    color: var(--gold);
+    border: 1px solid rgba(255, 211, 41, .22);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: rgba(255, 211, 41, .07);
+    font-size: .72rem;
+    font-weight: 900;
+}
+
+.tbi-history-more {
+    border: 1px solid rgba(29, 231, 255, .12);
+    border-radius: 14px;
+    background: rgba(1, 7, 18, .42);
+    overflow: hidden;
+}
+
+.tbi-history-more summary {
+    cursor: pointer;
+    color: var(--cyan);
+    font-size: .7rem;
+    font-weight: 1000;
+    letter-spacing: .14em;
+    padding: 10px 12px;
+    text-transform: uppercase;
+}
+
+.tbi-history-more > div {
+    display: grid;
+    gap: 8px;
+    padding: 0 12px 12px;
+}
+
+.tbi-history-more ul,
+.tbi-history-gamebrain-detail ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 18px;
+}
+
+.tbi-history-detail-hero {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tbi-history-detail-hero > div {
+    display: grid;
+    gap: 6px;
+    padding: 13px;
+}
+
+.tbi-history-detail-hero strong {
+    color: #fff;
+    font-size: 1.16rem;
+}
+
+.tbi-history-gamebrain-detail,
+.tbi-history-insight-panel,
+.tbi-history-empty-state {
+    display: grid;
+    gap: 11px;
+    border: 1px solid rgba(29, 231, 255, .15);
+    border-radius: 16px;
+    padding: 13px;
+    background: rgba(1, 7, 18, .54);
+}
+
+.tbi-history-gamebrain-detail h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.35;
+}
+
+.tbi-history-insight-panel > div {
+    display: grid;
+    gap: 8px;
+}
+
+.tbi-history-insight-row {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+    gap: 6px 10px;
+    padding: 9px 10px;
+}
+
+.tbi-history-insight-row em {
+    grid-column: 1 / -1;
+}
+
+.tbi-history-empty-state {
+    min-height: 180px;
+    align-content: center;
+    justify-items: start;
+}
+
+.tbi-history-empty-state.compact {
+    min-height: 110px;
+}
+
+.tbi-history-empty-state strong {
+    color: #fff;
+    font-size: 1.06rem;
+}
+
+@media (max-width: 1360px) {
+    .tbi-history-hero,
+    .tbi-history-toolbar-top,
+    .tbi-history-toolbar-bottom,
+    .tbi-history-clean-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-history-detail-card {
+        position: static;
+    }
+
+    .tbi-history-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 980px) {
+    .tbi-history-filter-row,
+    .tbi-history-summary-grid,
+    .tbi-history-metric-grid,
+    .tbi-history-gamebrain-row,
+    .tbi-history-detail-facts,
+    .tbi-history-detail-metrics,
+    .tbi-history-detail-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-history-actions,
+    .tbi-history-run-actions,
+    .tbi-history-detail-actions {
+        justify-content: stretch;
+    }
+
+    .tbi-compact-btn,
+    .tbi-history-slot-btn {
+        flex: 1 1 auto;
+    }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — History controls + inspector polish
+   Keeps Dashboard and Command Deck protected.
+-------------------------------------------------- */
+
+.tbi-history-archive-toggle {
+    min-height: 42px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 13px;
+    background: linear-gradient(180deg, rgba(9, 27, 54, .82), rgba(2, 8, 18, .96));
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.tbi-history-archive-toggle span {
+    color: rgba(218, 241, 255, .88);
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-history-archive-toggle b {
+    min-width: 34px;
+    justify-self: end;
+    border: 1px solid rgba(29, 231, 255, .20);
+    border-radius: 999px;
+    padding: 4px 7px;
+    color: var(--muted);
+    font-size: .64rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tbi-history-archive-toggle:hover,
+.tbi-history-archive-toggle.active {
+    border-color: rgba(255, 211, 41, .52);
+    box-shadow: 0 0 18px rgba(255, 211, 41, .10);
+}
+
+.tbi-history-archive-toggle.active b {
+    border-color: rgba(255, 211, 41, .36);
+    color: var(--gold);
+}
+
+.tbi-history-action-deck {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, auto);
+    gap: 10px;
+    align-items: stretch;
+}
+
+.tbi-history-action-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 9px;
+    border: 1px solid rgba(29, 231, 255, .12);
+    border-radius: 14px;
+    background: rgba(1, 7, 18, .36);
+}
+
+.tbi-history-action-group > span {
+    align-self: center;
+    margin-right: auto;
+    color: rgba(189, 214, 232, .66);
+    font-family: var(--mono);
+    font-size: .62rem;
+    font-weight: 1000;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.tbi-history-action-group.danger-zone {
+    border-color: rgba(255, 95, 120, .18);
+    background: radial-gradient(circle at 0% 0%, rgba(255, 64, 90, .08), transparent 48%), rgba(1, 7, 18, .36);
+}
+
+.tbi-history-run-actions .tbi-history-slot-btn:first-child,
+.tbi-history-run-actions .tbi-history-slot-btn:nth-child(2) {
+    border-radius: 12px;
+    min-width: 64px;
+}
+
+.tbi-history-detail-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    justify-content: stretch;
+}
+
+.tbi-history-detail-action-note {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid rgba(29, 231, 255, .12);
+    border-radius: 13px;
+    background: rgba(1, 7, 18, .40);
+    color: rgba(189, 214, 232, .78);
+    font-size: .78rem;
+    line-height: 1.42;
+}
+
+.tbi-history-detail-actions .tbi-compact-btn {
+    border-radius: 13px;
+    min-height: 40px;
+}
+
+.tbi-compact-btn:disabled,
+.tbi-history-slot-btn:disabled,
+.tbi-compact-btn.is-disabled {
+    cursor: not-allowed;
+    opacity: .48;
+    filter: saturate(.72);
+    box-shadow: none;
+}
+
+.tbi-history-search-input:focus,
+.tbi-history-select-control select:focus,
+.tbi-history-archive-toggle:focus-visible {
+    outline: none;
+    border-color: rgba(29, 231, 255, .72);
+    box-shadow: 0 0 0 1px rgba(29, 231, 255, .24), 0 0 24px rgba(29, 231, 255, .12);
+}
+
+.history-stats-row {
+    background: rgba(5, 18, 34, .62);
+}
+
+.history-stats-row strong {
+    color: #eef8ff;
+}
+
+@media (max-width: 1360px) {
+    .tbi-history-action-deck {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 980px) {
+    .tbi-history-action-group,
+    .tbi-history-action-group.danger-zone {
+        justify-content: stretch;
+    }
+
+    .tbi-history-action-group > span {
+        flex-basis: 100%;
+    }
+
+    .tbi-history-detail-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — History archive-toggle clarity polish
+-------------------------------------------------- */
+
+.tbi-history-run-card {
+    gap: 10px;
+    padding: 13px 13px 13px 17px;
+}
+
+.tbi-history-metric-tile {
+    min-height: 56px;
+    padding: 9px 10px;
+}
+
+.tbi-history-gb-chip,
+.tbi-history-detail-facts > span {
+    min-height: 52px;
+    padding: 8px 10px;
+}
+
+.tbi-history-more summary {
+    padding: 9px 12px;
+}
+
+.tbi-history-more > div {
+    gap: 6px;
+    padding: 0 12px 10px;
+}
+
+.tbi-history-more p,
+.tbi-history-gamebrain-detail h3 {
+    color: rgba(221, 245, 255, .92);
+    font-size: .92rem;
+    line-height: 1.35;
+}
+
+.tbi-history-more li,
+.tbi-history-gamebrain-detail li {
+    line-height: 1.35;
+}
+
+/* --------------------------------------------------
+   v4.11z52 — History Run Intel panel polish
+   Calms the selected-run Game Brain readout without changing History logic.
+-------------------------------------------------- */
+
+.tbi-history-run-intel-summary > span {
+    color: var(--cyan);
+}
+
+.tbi-history-run-intel-summary h3 {
+    color: rgba(221, 245, 255, .92);
+    font-size: clamp(.88rem, .86vw, 1rem);
+    font-weight: 850;
+    letter-spacing: .02em;
+    line-height: 1.4;
+    text-transform: none;
+}
+
+.tbi-history-run-intel-summary .tbi-history-detail-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tbi-history-run-intel-summary .tbi-history-detail-facts > span {
+    min-height: 50px;
+    padding: 8px 10px;
+}
+
+.tbi-history-run-intel-summary .tbi-history-detail-facts small {
+    letter-spacing: .1em;
+}
+
+.tbi-history-run-intel-summary ul {
+    gap: 5px;
+    padding-left: 16px;
+}
+
+.tbi-history-run-intel-summary li {
+    color: rgba(189, 214, 232, .82);
+    line-height: 1.34;
+}
+
+@media (max-width: 980px) {
+    .tbi-history-run-intel-summary .tbi-history-detail-facts {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------
+   v4.11z52 — History nav + final readability polish
+   Keeps History function intact while making long libraries breathe better.
+-------------------------------------------------- */
+
+.tbi-history-run-card {
+    gap: 8px;
+    padding: 12px 12px 12px 16px;
+}
+
+.tbi-history-run-head strong {
+    font-size: .98rem;
+}
+
+.tbi-history-run-head em {
+    margin-top: 2px;
+}
+
+.tbi-history-metric-grid,
+.tbi-history-gamebrain-row {
+    gap: 7px;
+}
+
+.tbi-history-metric-tile,
+.tbi-history-gb-chip {
+    min-height: 50px;
+    padding: 8px 9px;
+}
+
+.tbi-history-more summary {
+    padding: 8px 10px;
+}
+
+.tbi-history-more > div {
+    padding: 0 10px 9px;
+}
+
+.tbi-history-gamebrain-detail {
+    gap: 9px;
+}
+
+.tbi-history-run-intel-summary h3 {
+    margin-bottom: 1px;
+    line-height: 1.32;
+}
+
+.tbi-history-run-intel-summary .tbi-history-detail-facts > span {
+    min-height: 46px;
+}
+
+.tbi-history-insight-panel p {
+    color: rgba(189, 214, 232, .86);
+    line-height: 1.4;
+}
+
+/* --------------------------------------------------
+   v4.11z52a — History Run A/B accent-only patch
+   Rollback-safe: keeps v4.11z52 layout/behaviour and only clarifies A/B colour identity.
+-------------------------------------------------- */
+
+.tbi-history-run-card.is-active {
+    border-color: rgba(29, 231, 255, .42);
+    box-shadow: 0 0 22px rgba(29, 231, 255, .09), inset 0 0 0 1px rgba(29, 231, 255, .05);
+}
+
+.tbi-history-run-card.is-run-a {
+    border-color: rgba(29, 231, 255, .54);
+    box-shadow: 0 0 24px rgba(29, 231, 255, .13), inset 0 0 0 1px rgba(29, 231, 255, .08);
+}
+
+.tbi-history-run-card.is-run-b {
+    border-color: rgba(255, 211, 41, .50);
+    box-shadow: 0 0 24px rgba(255, 211, 41, .11), inset 0 0 0 1px rgba(255, 211, 41, .08);
+}
+
+.tbi-history-run-card.is-run-a.is-run-b {
+    border-color: rgba(126, 241, 255, .58);
+    box-shadow: 0 0 22px rgba(29, 231, 255, .12), 0 0 20px rgba(255, 211, 41, .08), inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+.tbi-history-run-card.is-run-a .tbi-history-run-accent {
+    background: linear-gradient(180deg, var(--cyan), rgba(29, 231, 255, .25));
+    box-shadow: 0 0 18px rgba(29, 231, 255, .52);
+}
+
+.tbi-history-run-card.is-run-b .tbi-history-run-accent {
+    background: linear-gradient(180deg, var(--gold), rgba(255, 211, 41, .22));
+    box-shadow: 0 0 18px rgba(255, 211, 41, .46);
+}
+
+.tbi-history-run-card.is-run-a.is-run-b .tbi-history-run-accent {
+    background: linear-gradient(180deg, var(--cyan), var(--gold));
+}
+
+.tbi-history-slot-flags b.slot-a {
+    border-color: rgba(29, 231, 255, .48);
+    color: var(--cyan);
+    background: rgba(29, 231, 255, .08);
+}
+
+.tbi-history-slot-flags b.slot-b {
+    border-color: rgba(255, 211, 41, .48);
+    color: var(--gold);
+    background: rgba(255, 211, 41, .08);
+}
+
+.tbi-history-slot-btn.slot-a.active {
+    border-color: rgba(29, 231, 255, .72);
+    color: var(--cyan);
+    background: linear-gradient(180deg, rgba(29, 231, 255, .14), rgba(2, 8, 18, .96));
+    box-shadow: 0 0 18px rgba(29, 231, 255, .16);
+}
+
+.tbi-history-slot-btn.slot-b.active {
+    border-color: rgba(255, 211, 41, .70);
+    color: var(--gold);
+    background: linear-gradient(180deg, rgba(255, 211, 41, .14), rgba(2, 8, 18, .96));
+    box-shadow: 0 0 18px rgba(255, 211, 41, .14);
+}
+
+.tbi-history-run-card.is-archived .tbi-history-slot-btn.slot-a,
+.tbi-history-run-card.is-archived .tbi-history-slot-btn.slot-b {
+    opacity: .44;
+}
+
+/* v4.11z52q — History uses global DOM search so typing does not re-render/fight focus. */
+.tbi-history-search-no-results {
+    display: none;
+    border: 1px dashed rgba(29, 231, 255, .28);
+    border-radius: 16px;
+    padding: 20px;
+    background: rgba(3, 12, 26, .72);
+    color: rgba(189, 214, 232, .86);
+    gap: 6px;
+}
+
+.tbi-history-search-no-results strong {
+    color: var(--text);
+    letter-spacing: .05em;
+}
+
+.tbi-history-search-empty .tbi-history-search-no-results {
+    display: grid;
+}
+
+/* v4.11z52q — History search scope toggle: normal search stays user-facing; deep search is explicit. */
+.tbi-history-deep-search-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(5, 18, 34, .82), rgba(2, 8, 18, .88));
+    color: rgba(219, 244, 255, .82);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tbi-history-deep-search-toggle input {
+    accent-color: var(--cyan);
+}
+
+.tbi-history-deep-search-toggle b {
+    color: rgba(167, 139, 250, .86);
+    font-size: 10px;
+    letter-spacing: .12em;
+}
+
+.tbi-history-deep-search-active .tbi-history-deep-search-toggle {
+    border-color: rgba(167, 139, 250, .56);
+    box-shadow: inset 0 0 18px rgba(167, 139, 250, .08), 0 0 18px rgba(167, 139, 250, .12);
+}
+
+.tbi-history-deep-search-active .tbi-history-deep-search-toggle b {
+    color: var(--cyan);
+}
+
+/* --------------------------------------------------
+   v4.11z52r — current History search pane owner
+   Keeps the old organised toolbar shape while making Normal / Deep Search clear.
+-------------------------------------------------- */
+
+.tbi-history-search-pane {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(230px, auto);
+    gap: 12px;
+    align-items: end;
+}
+
+.tbi-history-toolbar .tbi-history-filter-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(160px, auto);
+}
+
+.tbi-history-toolbar-footer {
+    display: grid;
+    grid-template-columns: minmax(260px, .62fr) minmax(0, 1.38fr);
+    gap: 12px;
+    align-items: stretch;
+}
+
+.tbi-history-toolbar-footer .tbi-history-filter-status {
+    min-height: 54px;
+    padding: 10px 12px;
+    border: 1px solid rgba(29, 231, 255, .12);
+    border-radius: 14px;
+    background: rgba(1, 7, 18, .34);
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle {
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 13px;
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle span {
+    color: rgba(232, 246, 255, .92);
+}
+
+.tbi-history-deep-search-active .tbi-history-search-pane .tbi-history-deep-search-toggle span {
+    color: var(--cyan);
+}
+
+@media (max-width: 1360px) {
+    .tbi-history-search-pane,
+    .tbi-history-toolbar-footer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 980px) {
+    .tbi-history-toolbar .tbi-history-filter-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* v4.11z52w — Deep Report Search is now an Archive-style on/off button. */
+.tbi-history-search-pane .tbi-history-deep-search-toggle {
+    min-height: 42px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid rgba(29, 231, 255, .24);
+    border-radius: 13px;
+    background: linear-gradient(180deg, rgba(9, 27, 54, .82), rgba(2, 8, 18, .96));
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle span {
+    color: rgba(218, 241, 255, .88);
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle b {
+    min-width: 34px;
+    justify-self: end;
+    border: 1px solid rgba(29, 231, 255, .20);
+    border-radius: 999px;
+    padding: 4px 7px;
+    color: var(--muted);
+    font-size: .64rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle:hover,
+.tbi-history-search-pane .tbi-history-deep-search-toggle.active {
+    border-color: rgba(255, 211, 41, .52);
+    box-shadow: 0 0 18px rgba(255, 211, 41, .10);
+}
+
+.tbi-history-search-pane .tbi-history-deep-search-toggle.active b {
+    border-color: rgba(255, 211, 41, .36);
+    color: var(--gold);
+}

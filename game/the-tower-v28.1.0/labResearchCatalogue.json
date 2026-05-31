@@ -1,0 +1,245 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Lab Research Catalogue",
+    "catalogueKey": "labResearchCatalogue",
+    "entryCount": 12,
+    "purpose": "Research names, prerequisites and family tags; no cost/time formulas."
+  },
+  "entries": [
+    {
+      "key": "lab_speed",
+      "label": "Lab Speed",
+      "family": "Labs / Core",
+      "meaning": "Research speed context and future planner category.",
+      "tags": [
+        "lab",
+        "core"
+      ],
+      "aliases": [
+        "Lab Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "game_speed",
+      "label": "Game Speed",
+      "family": "Labs / Core",
+      "meaning": "Game speed/run time context.",
+      "tags": [
+        "lab",
+        "core",
+        "speed"
+      ],
+      "aliases": [
+        "Game Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "attack_speed",
+      "label": "Attack Speed Research",
+      "family": "Labs / Attack",
+      "meaning": "Attack speed research context.",
+      "tags": [
+        "lab",
+        "attack"
+      ],
+      "aliases": [
+        "Attack Speed"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "damage",
+      "label": "Damage Research",
+      "family": "Labs / Attack",
+      "meaning": "Damage research context.",
+      "tags": [
+        "lab",
+        "attack"
+      ],
+      "aliases": [
+        "Damage"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "health",
+      "label": "Health Research",
+      "family": "Labs / Defense",
+      "meaning": "Health research context.",
+      "tags": [
+        "lab",
+        "defense"
+      ],
+      "aliases": [
+        "Health"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "health_regen",
+      "label": "Health Regen Research",
+      "family": "Labs / Defense",
+      "meaning": "Health regen research context.",
+      "tags": [
+        "lab",
+        "defense",
+        "regen"
+      ],
+      "aliases": [
+        "Health Regen"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "coins_per_kill",
+      "label": "Coins/Kill Research",
+      "family": "Labs / Economy",
+      "meaning": "Coins per kill research context.",
+      "tags": [
+        "lab",
+        "economy"
+      ],
+      "aliases": [
+        "Coins/Kill"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "black_hole_research",
+      "label": "Black Hole Research",
+      "family": "Labs / Ultimate Weapon",
+      "meaning": "UW research gated by Black Hole.",
+      "tags": [
+        "lab",
+        "uw",
+        "black-hole"
+      ],
+      "aliases": [
+        "You need the Black Hole Ultimate Weapon to research this"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "spotlight_research",
+      "label": "Spotlight Research",
+      "family": "Labs / Ultimate Weapon",
+      "meaning": "UW research gated by Spotlight.",
+      "tags": [
+        "lab",
+        "uw",
+        "spotlight"
+      ],
+      "aliases": [
+        "You need the Spotlight Ultimate Weapon to research this"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "death_wave_research",
+      "label": "Death Wave Research",
+      "family": "Labs / Ultimate Weapon",
+      "meaning": "UW research gated by Death Wave.",
+      "tags": [
+        "lab",
+        "uw",
+        "death-wave"
+      ],
+      "aliases": [
+        "You need the Death Wave Ultimate Weapon to research this"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "enemy_reduction_labs",
+      "label": "Enemy Reduction Labs",
+      "family": "Labs / Enemy",
+      "meaning": "Observed labs reduce Ray/Vampire/Scatter attack/health at all waves.",
+      "tags": [
+        "lab",
+        "enemy",
+        "elite"
+      ],
+      "aliases": [
+        "Ray Enemy Attack",
+        "Vampire Enemy Health",
+        "Scatter Enemy Attack"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "card_mastery_research",
+      "label": "Card Mastery Research",
+      "family": "Labs / Card Mastery",
+      "meaning": "Observed card mastery prerequisite texts.",
+      "tags": [
+        "lab",
+        "card-mastery"
+      ],
+      "aliases": [
+        "You need the ... card mastery to research this"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    }
+  ]
+}

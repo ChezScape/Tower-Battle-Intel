@@ -1,12 +1,10 @@
 "use strict";
 
-import { buildHistory } from "../layouts/historyLayout.js";
+/**
+ * HISTORY VIEW WRAPPER v4.11z52w47
+ * The real rebuilt History workspace lives in src/ui/sections/history/.
+ * This wrapper preserves the old import path used by tests and desktopView.
+ */
 
-export function buildHistoryView(state = {}) {
-    return buildHistory({
-        history: state.history,
-        runA: state.runA,
-        runB: state.runB,
-        ui: state.ui || {}
-    });
-}
+export { buildHistoryView } from "./history/historyView.js";
+export { default } from "./history/historyView.js";

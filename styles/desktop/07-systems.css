@@ -1,0 +1,437 @@
+/* Tower Battle Intel desktop module: 07-systems.css
+   v4.11z52w — Systems / Game Brain tabbed Knowledge Base + search.
+   Replaces the z52m foundation rules in-place instead of stacking another override.
+*/
+
+.tbi-systems-knowledge {
+    gap: 10px;
+}
+
+.tbi-systems-hero,
+.tbi-systems-control-panel,
+.tbi-systems-module-panel,
+.tbi-systems-knowledge-panel,
+.tbi-systems-family-panel,
+.tbi-systems-boundary-panel {
+    border-color: rgba(29, 231, 255, .20);
+}
+
+.tbi-systems-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 320px);
+    gap: 12px;
+    align-items: stretch;
+    padding: 14px;
+    background:
+        radial-gradient(circle at 18% 0%, rgba(29, 231, 255, .14), transparent 36%),
+        linear-gradient(180deg, rgba(7, 18, 34, .94), rgba(2, 8, 18, .94));
+}
+
+.tbi-systems-hero h2 {
+    margin: 4px 0 6px;
+    font-size: clamp(24px, 2.2vw, 40px);
+    letter-spacing: -.03em;
+}
+
+.tbi-systems-hero p {
+    margin: 0;
+    max-width: 940px;
+    color: rgba(219, 244, 255, .78);
+    line-height: 1.55;
+}
+
+.tbi-systems-trust-card {
+    display: grid;
+    align-content: center;
+    gap: 5px;
+    padding: 14px;
+    border: 1px solid rgba(167, 139, 250, .34);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(88, 54, 170, .22), rgba(4, 9, 20, .76));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
+}
+
+.tbi-systems-trust-card span,
+.tbi-systems-section-head span,
+.tbi-systems-module-card span,
+.tbi-systems-knowledge-card span,
+.tbi-systems-visual-card span,
+.tbi-system-tile span,
+.tbi-systems-search-box span {
+    color: rgba(191, 234, 255, .78);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.tbi-systems-trust-card strong {
+    color: #e9ddff;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.tbi-systems-trust-card em {
+    color: rgba(219, 244, 255, .7);
+    font-style: normal;
+    font-size: 12px;
+}
+
+.tbi-systems-control-panel {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(520px, 1.35fr);
+    gap: 10px;
+    align-items: end;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(4, 13, 29, .92), rgba(2, 8, 18, .94));
+}
+
+.tbi-systems-search-box {
+    display: grid;
+    gap: 6px;
+}
+
+.tbi-systems-search-box input {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid rgba(29, 231, 255, .28);
+    border-radius: 12px;
+    padding: 0 14px;
+    color: var(--text, #e8f7ff);
+    background:
+        radial-gradient(circle at 14% 0%, rgba(29,231,255,.10), transparent 36%),
+        linear-gradient(180deg, rgba(8,23,48,.94), rgba(2,8,18,.98));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 0 16px rgba(29,231,255,.05);
+}
+
+.tbi-systems-search-box input:focus {
+    outline: none;
+    border-color: rgba(29, 231, 255, .68);
+    box-shadow: 0 0 0 3px rgba(29, 231, 255, .12), inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.tbi-systems-tab-row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.tbi-systems-tab {
+    min-height: 42px;
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 12px;
+    padding: 0 10px;
+    color: rgba(219,244,255,.76);
+    background: linear-gradient(180deg, rgba(8,20,34,.82), rgba(2,8,17,.90));
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .04em;
+    cursor: pointer;
+}
+
+.tbi-systems-tab:hover,
+.tbi-systems-tab:focus-visible {
+    border-color: rgba(29, 231, 255, .48);
+    color: #ffffff;
+}
+
+.tbi-systems-tab.active {
+    color: #06101b;
+    border-color: rgba(29, 231, 255, .76);
+    background: linear-gradient(180deg, rgba(125, 246, 255, .98), rgba(29, 231, 255, .82));
+    box-shadow: 0 0 18px rgba(29, 231, 255, .14);
+}
+
+.tbi-systems-search-status {
+    grid-column: 1 / -1;
+    min-height: 24px;
+    color: rgba(219,244,255,.62);
+    font-size: 11px;
+}
+
+.tbi-systems-tab-panel {
+    display: none;
+    gap: 10px;
+}
+
+.tbi-systems-tab-panel.active {
+    display: grid;
+}
+
+.tbi-systems-status-grid,
+.tbi-systems-module-grid,
+.tbi-systems-family-grid,
+.tbi-systems-knowledge-grid,
+.tbi-systems-visual-grid {
+    display: grid;
+    gap: 8px;
+}
+
+.tbi-systems-status-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tbi-system-tile,
+.tbi-system-status-tile {
+    min-height: 78px;
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid rgba(29,231,255,.24);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(7,25,38,.88), rgba(1,7,17,.88));
+}
+
+.tbi-system-tile strong {
+    color: #ffffff;
+    font-size: clamp(19px, 1.65vw, 28px);
+    line-height: 1;
+}
+
+.tbi-systems-module-panel,
+.tbi-systems-knowledge-panel,
+.tbi-systems-family-panel,
+.tbi-systems-boundary-panel {
+    padding: 12px;
+}
+
+.tbi-systems-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.tbi-systems-section-head h3 {
+    margin: 3px 0 0;
+    font-size: 18px;
+}
+
+.tbi-systems-section-head small {
+    max-width: 620px;
+    color: rgba(219, 244, 255, .58);
+    text-align: right;
+    line-height: 1.35;
+}
+
+.tbi-systems-module-grid,
+.tbi-systems-family-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tbi-systems-knowledge-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tbi-systems-visual-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tbi-systems-module-card,
+.tbi-systems-family-card,
+.tbi-systems-knowledge-card,
+.tbi-systems-visual-card {
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 14px;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(8, 20, 34, .84), rgba(2, 8, 17, .86));
+}
+
+.tbi-systems-module-card strong {
+    display: block;
+    margin-top: 8px;
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+}
+
+.tbi-systems-module-card small,
+.tbi-systems-family-card small {
+    color: rgba(219,244,255,.58);
+}
+
+.tbi-systems-knowledge-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 8px;
+    min-height: 178px;
+    border-color: rgba(251, 191, 36, .18);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(251, 191, 36, .12), transparent 38%),
+        linear-gradient(180deg, rgba(19, 16, 9, .66), rgba(2, 8, 17, .88));
+}
+
+.tbi-systems-knowledge-card h4,
+.tbi-systems-visual-card h4 {
+    margin: 4px 0 0;
+    color: #fff6dc;
+    font-size: 16px;
+}
+
+.tbi-systems-knowledge-card p,
+.tbi-systems-visual-card p {
+    margin: 0;
+    color: rgba(219,244,255,.72);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.tbi-systems-knowledge-card footer,
+.tbi-systems-visual-card footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    color: rgba(219,244,255,.62);
+    font-size: 10.5px;
+}
+
+.tbi-systems-knowledge-card footer em,
+.tbi-systems-knowledge-card footer strong,
+.tbi-systems-visual-card footer {
+    font-style: normal;
+    font-weight: 800;
+}
+
+.tbi-systems-visual-card {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    gap: 10px;
+    min-height: 160px;
+    border-color: rgba(167, 139, 250, .24);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(167, 139, 250, .16), transparent 36%),
+        linear-gradient(180deg, rgba(13, 11, 31, .78), rgba(2, 8, 17, .90));
+}
+
+.tbi-systems-visual-card footer {
+    grid-column: 1 / -1;
+}
+
+.tbi-systems-visual-emblem {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(29,231,255,.34);
+    border-radius: 18px;
+    color: #dffbff;
+    font-size: 20px;
+    font-weight: 1000;
+    letter-spacing: -.04em;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(29,231,255,.24), transparent 42%),
+        linear-gradient(180deg, rgba(10, 31, 53, .95), rgba(2, 8, 18, .96));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 0 22px rgba(29,231,255,.10);
+}
+
+.tbi-systems-family-card {
+    display: grid;
+    gap: 7px;
+    min-height: 96px;
+}
+
+.tbi-systems-family-card strong {
+    color: #dff8ff;
+    font-size: 13px;
+}
+
+.tbi-systems-family-card span {
+    color: #fbbf24;
+    font-weight: 900;
+}
+
+.tbi-systems-boundary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tbi-systems-boundary-grid > div {
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px;
+    background: rgba(255,255,255,.035);
+}
+
+.tbi-systems-boundary-grid strong {
+    color: #fff;
+}
+
+.tbi-systems-boundary-grid ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    color: rgba(219,244,255,.72);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.tbi-systems-no-match {
+    display: none;
+    padding: 16px;
+    border: 1px solid rgba(251, 191, 36, .22);
+    border-radius: 14px;
+    color: rgba(255, 246, 220, .82);
+    background: rgba(251, 191, 36, .06);
+}
+
+.tbi-systems-search-empty .tbi-systems-no-match {
+    display: block;
+}
+
+[data-systems-search-card].is-hidden-by-systems-search {
+    display: none !important;
+}
+
+@media (max-width: 1320px) {
+    .tbi-systems-control-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-systems-tab-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .tbi-systems-knowledge-grid,
+    .tbi-systems-module-grid,
+    .tbi-systems-family-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .tbi-systems-visual-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1180px) {
+    .tbi-systems-hero,
+    .tbi-systems-boundary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-systems-status-grid,
+    .tbi-systems-knowledge-grid,
+    .tbi-systems-module-grid,
+    .tbi-systems-family-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .tbi-systems-tab-row,
+    .tbi-systems-status-grid,
+    .tbi-systems-knowledge-grid,
+    .tbi-systems-module-grid,
+    .tbi-systems-family-grid,
+    .tbi-systems-visual-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tbi-systems-visual-card {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,14 @@
+/* Tower Battle Intel desktop module: 00-desktop-isolation.css
+   Desktop/mobile isolation and desktop minimums
+   Source: v4.11z23 desktop.css lines 559-568.
+*/
+html[data-device-mode="desktop"] [data-device-only="mobile"],
+body[data-device-mode="desktop"] [data-device-only="mobile"],
+html[data-device-mode="desktop"] .mobile-input-sheet-handle,
+html[data-device-mode="desktop"] .mobile-command-rail,
+html[data-device-mode="desktop"] .mobile-report-fab,
+html[data-device-mode="desktop"] .mobile-sheet-backdrop { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+html[data-device-mode="desktop"] body,
+body[data-device-mode="desktop"] { min-width: 800px; }
+html[data-device-mode="desktop"] #app { min-height: 680px; }
+html.desktop-polish .tbi-card-heading p { margin: 4px 0 0; }

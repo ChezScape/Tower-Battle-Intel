@@ -1,0 +1,261 @@
+{
+  "manifest": {
+    "game": "The Tower - Idle Tower Defense",
+    "version": "28.1.0",
+    "package": "com.TechTreeGames.TheTower",
+    "sourceFile": "The Tower - Idle Tower Defense_28.1.0_APKPure.xapk",
+    "extractionType": "Static readable strings + Unity/IL2CPP metadata names only",
+    "generatedAt": "2026-05-25T20:10:00Z",
+    "recommendedTbiBuild": "Tower-Battle-Intel_v4.11z30_GameBrainOfficialCatalogues_FullBuild",
+    "sourceConfidence": "mixed: game-file-confirmed-label / game-file-observed / tbi-curated-linkage",
+    "safePurpose": [
+      "official vocabulary",
+      "parser/search aliases",
+      "Game Brain explanations",
+      "History grouping",
+      "Systems glossary",
+      "Command Deck wording",
+      "Debug catalogue health"
+    ],
+    "notSafePurpose": [
+      "hidden formulas",
+      "exact scaling maths",
+      "live server/tournament settings",
+      "automated gameplay/cheats"
+    ],
+    "catalogueName": "The Tower v28.1.0 Module Catalogue",
+    "catalogueKey": "moduleCatalogue",
+    "entryCount": 11,
+    "purpose": "Module types, rarity/resource vocabulary, and useful effect aliases."
+  },
+  "entries": [
+    {
+      "key": "cannon",
+      "label": "Cannon",
+      "family": "Module / Type",
+      "meaning": "Attack-focused module family.",
+      "tags": [
+        "module",
+        "type",
+        "attack"
+      ],
+      "aliases": [
+        "Cannon Module",
+        "Cannon Shards"
+      ],
+      "battleReportLinks": [
+        "CannonShards",
+        "GuardianCannonShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "armor",
+      "label": "Armor",
+      "family": "Module / Type",
+      "meaning": "Defense-focused module family.",
+      "tags": [
+        "module",
+        "type",
+        "defense"
+      ],
+      "aliases": [
+        "Armor Module",
+        "Armor Shards"
+      ],
+      "battleReportLinks": [
+        "ArmorShards",
+        "GuardianArmorShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "generator",
+      "label": "Generator",
+      "family": "Module / Type",
+      "meaning": "Utility/economy module family.",
+      "tags": [
+        "module",
+        "type",
+        "utility"
+      ],
+      "aliases": [
+        "Generator Module",
+        "Generator Shards"
+      ],
+      "battleReportLinks": [
+        "GeneratorShards",
+        "GuardianGeneratorShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "core",
+      "label": "Core",
+      "family": "Module / Type",
+      "meaning": "Ultimate Weapon module family.",
+      "tags": [
+        "module",
+        "type",
+        "uw"
+      ],
+      "aliases": [
+        "Core Module",
+        "Core Shards"
+      ],
+      "battleReportLinks": [
+        "CoreShards",
+        "GuardianCoreShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "reroll_shards",
+      "label": "Reroll Shards",
+      "family": "Module / Resource",
+      "meaning": "Reroll resource for module sub-stats.",
+      "tags": [
+        "module",
+        "resource"
+      ],
+      "aliases": [
+        "Reroll Shards"
+      ],
+      "battleReportLinks": [
+        "RerollShardsEarned",
+        "GuardianRerollShards"
+      ],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "shatter",
+      "label": "Shatter",
+      "family": "Module / Action",
+      "meaning": "Module shatter/auto-shatter vocabulary.",
+      "tags": [
+        "module",
+        "action"
+      ],
+      "aliases": [
+        "Shatter",
+        "Auto Shatter"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-description",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "merge",
+      "label": "Merge",
+      "family": "Module / Action",
+      "meaning": "Module merge/rarity progression vocabulary.",
+      "tags": [
+        "module",
+        "action"
+      ],
+      "aliases": [
+        "Merge"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "substats",
+      "label": "Substats",
+      "family": "Module / Stats",
+      "meaning": "Module sub-stat/reroll context.",
+      "tags": [
+        "module",
+        "substat"
+      ],
+      "aliases": [
+        "Substats",
+        "Effects"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-confirmed-label",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "death_penalty",
+      "label": "Death Penalty",
+      "family": "Module / Effect",
+      "meaning": "Observed module/effect source in killed-with-effect-active or destroyed-by contexts.",
+      "tags": [
+        "module",
+        "effect",
+        "kill-source"
+      ],
+      "aliases": [
+        "Death Penalty"
+      ],
+      "battleReportLinks": [
+        "KilledWithDeathPenaltyActive",
+        "DestroyedByDeathPenalty"
+      ],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "negative_mass_projector",
+      "label": "Negative Mass Projector",
+      "family": "Module / Effect",
+      "meaning": "Observed advanced module/effect vocabulary.",
+      "tags": [
+        "module",
+        "effect",
+        "defense"
+      ],
+      "aliases": [
+        "Negative Mass Projector"
+      ],
+      "battleReportLinks": [],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [],
+      "notes": []
+    },
+    {
+      "key": "orbital_augment",
+      "label": "Orbital Augment",
+      "family": "Module / Effect",
+      "meaning": "Observed module/effect source linked to enemy hit counts.",
+      "tags": [
+        "module",
+        "effect",
+        "orbs"
+      ],
+      "aliases": [
+        "Orbital Augment"
+      ],
+      "battleReportLinks": [
+        "HitByOrbitalAugment"
+      ],
+      "sourceConfidence": "game-file-observed",
+      "tbiUses": [],
+      "notes": []
+    }
+  ],
+  "rarityVocabulary": [
+    "Common",
+    "Rare",
+    "Epic",
+    "Legendary",
+    "Mythic",
+    "Ancestral"
+  ]
+}

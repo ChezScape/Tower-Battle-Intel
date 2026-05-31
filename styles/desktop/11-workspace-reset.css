@@ -1,0 +1,246 @@
+/* --------------------------------------------------
+   v4.11z52h — Blank workspace reset shells.
+   Shared desktop app frame remains protected.
+-------------------------------------------------- */
+
+.tbi-workspace-reset {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto 28px;
+}
+
+.tbi-workspace-reset-card {
+    max-width: 1180px;
+    margin-inline: auto;
+    display: grid;
+    gap: 16px;
+    padding: 24px;
+    min-height: 360px;
+    align-content: start;
+    border-style: dashed;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(29, 231, 255, .12), transparent 34%),
+        linear-gradient(180deg, rgba(6, 18, 34, .96), rgba(2, 7, 17, .96));
+}
+
+.tbi-reset-kicker {
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .76rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+}
+
+.tbi-workspace-reset-card h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(1.7rem, 2.2vw, 2.5rem);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.tbi-workspace-reset-card p {
+    margin: 0;
+    max-width: 760px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.tbi-reset-status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.tbi-reset-status-grid > div {
+    border: 1px solid rgba(29, 231, 255, .18);
+    border-radius: 14px;
+    padding: 13px 14px;
+    background: rgba(2, 8, 18, .72);
+}
+
+.tbi-reset-status-grid span {
+    display: block;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+}
+
+.tbi-reset-status-grid strong {
+    color: var(--text);
+    font-size: .95rem;
+}
+
+.tbi-reset-note-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding-left: 18px;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.tbi-reset-route-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.tbi-reset-route-button {
+    min-height: 72px;
+}
+
+/* Command Deck is intentionally blank in z35, so the old static input console is hidden. */
+html[data-device-mode="desktop"] body[data-dashboard-tab="command"] .input-section {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .tbi-reset-status-grid,
+    .tbi-reset-route-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------
+   v4.11z52w9 — Visual shell action map + parked feedback.
+-------------------------------------------------- */
+
+.tbi-reset-action-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tbi-reset-shell-action {
+    display: grid;
+    gap: 5px;
+    min-height: 74px;
+    padding: 12px 14px;
+    border: 1px solid rgba(29, 231, 255, .22);
+    border-radius: 14px;
+    color: var(--text);
+    background: linear-gradient(180deg, rgba(29, 231, 255, .10), rgba(4, 12, 26, .84));
+    box-shadow: inset 0 0 18px rgba(29, 231, 255, .05);
+    text-align: left;
+    cursor: default;
+}
+
+.tbi-reset-shell-action strong {
+    color: var(--text);
+    font-size: .88rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.tbi-reset-shell-action span {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-reset-shell-action[data-shell-parked-clicked="true"] {
+    border-color: rgba(251, 191, 36, .55);
+    box-shadow: 0 0 22px rgba(251, 191, 36, .12), inset 0 0 18px rgba(251, 191, 36, .06);
+}
+
+.tbi-ui-shell-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 12px 16px;
+    border: 1px solid rgba(29, 231, 255, .35);
+    border-radius: 14px;
+    color: var(--text);
+    background: rgba(4, 12, 26, .94);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .38), 0 0 22px rgba(29, 231, 255, .14);
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+}
+
+.tbi-ui-shell-toast[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1100px) {
+    .tbi-reset-action-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .tbi-reset-action-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* v4.11z52w24 — temporary Browser Click Truth Probe for rebuild verification. */
+.tbi-click-truth-probe {
+    position: fixed;
+    left: 14px;
+    bottom: 14px;
+    z-index: 1000020;
+    width: min(560px, calc(100vw - 28px));
+    max-height: 38vh;
+    overflow: auto;
+    padding: 10px 12px;
+    border: 1px solid rgba(29, 231, 255, .42);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(2, 13, 28, .97), rgba(2, 7, 17, .98));
+    color: #dff8ff;
+    box-shadow: 0 20px 55px rgba(0,0,0,.58), 0 0 22px rgba(29,231,255,.16);
+    font-family: var(--mono, monospace);
+    font-size: 10px;
+    line-height: 1.35;
+    pointer-events: none;
+}
+
+.tbi-click-truth-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+    color: #53f3ff;
+    font-weight: 1000;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.tbi-click-truth-title b {
+    color: #ffd95a;
+    font-weight: 1000;
+}
+
+.tbi-click-truth-grid {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 4px 8px;
+}
+
+.tbi-click-truth-grid span {
+    color: rgba(190, 215, 230, .74);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.tbi-click-truth-grid strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: #eef8ff;
+    font-weight: 850;
+}
+
+.tbi-click-truth-grid strong.is-bad {
+    color: #ff9ca8;
+}
