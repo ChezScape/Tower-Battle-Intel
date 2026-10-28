@@ -1,4 +1,4 @@
-`archived`
+`archived` `shelved`
 
 # Tower Battle Intel
 
